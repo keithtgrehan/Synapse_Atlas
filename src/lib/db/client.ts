@@ -2,6 +2,7 @@ import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 
 import { type EnvironmentInput, parseServerEnvironment } from "../env";
+import { databaseSchema } from "./schema";
 
 export function createDatabase(environment: EnvironmentInput = process.env) {
   const { DATABASE_URL } = parseServerEnvironment(environment);
@@ -9,6 +10,6 @@ export function createDatabase(environment: EnvironmentInput = process.env) {
 
   return {
     client,
-    database: drizzle(client),
+    database: drizzle(client, { schema: databaseSchema }),
   };
 }
