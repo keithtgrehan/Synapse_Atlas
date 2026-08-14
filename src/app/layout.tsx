@@ -4,7 +4,10 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Synapse Atlas",
+  title: {
+    default: "Synapse Atlas",
+    template: "%s",
+  },
   description:
     "Evidence-governed neuropsychiatric drug-development intelligence.",
 };
