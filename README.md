@@ -103,6 +103,26 @@ official source
 
 Do not build infrastructure in anticipation of hypothetical scale.
 
+## Local foundation
+
+The S1-01 foundation uses Node.js 22 and pnpm. Copy `.env.example` to a local
+`.env` file, replace `DATABASE_URL` with the intended Postgres connection, then
+run:
+
+```bash
+pnpm install
+pnpm dev
+```
+
+The readiness endpoint is `GET /api/health`. Validate the foundation with:
+
+```bash
+pnpm lint
+pnpm typecheck
+pnpm test
+pnpm build
+```
+
 ## Data and research policy
 
 Private use does not cancel copyright, database rights, contractual terms, robots directives or privacy law.
@@ -137,5 +157,5 @@ biology and scientific reasoning
 
 - Canonical repository selected: **complete**
 - Project operating system: **initialized**
-- Product scaffold: **next**
+- Product scaffold: **implemented in S1-01; awaiting review and merge**
 - Current sprint target: **private v0.1 by 27 August 2026**
