@@ -11,6 +11,7 @@ export default function Home() {
           starting with registered study facts from the official source.
         </p>
         <div className="button-row">
+          <Link className="button" href="/programs">Explore Programmes</Link>
           <Link className="button" href="/trials">Explore registered trials</Link>
           <a className="button button-secondary" href="/api/health">Check system health</a>
         </div>

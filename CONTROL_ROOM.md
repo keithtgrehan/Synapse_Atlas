@@ -24,7 +24,7 @@ active_sprint:
   id: S1
   dates: 2026-08-14/2026-08-27
   wip_limit: 3
-  current_task: S1-03
+  current_task: S1-04
 operating_rules:
   one_active_goal: true
   new_scope_requires_tradeoff: true
@@ -40,11 +40,13 @@ last_completed:
   - Automatic Vercel Git deployments from main are disabled by tested version-controlled policy; pull-request Preview deployments remain enabled.
   - PR #3 merged the S1-01 post-merge closeout at 290ca358c86ffd9fd7cfaae61534eec9427115e8.
   - PR #4 merged S1-02 at 3b83f8f92b925c791430950a8ed5c22e1d5915b2.
+  - PR #5 merged S1-03 at b7305dae739841a23c769e264fa4a84cee6db47c with successful GitHub CI and Vercel Preview checks.
 next_action:
-  task: S1-03
-  instruction: Review the S1-03 draft PR; do not merge without Keith's explicit approval and do not start S1-04.
+  task: S1-04
+  instruction: Review the S1-04 draft PR and explicitly approve, reject, or amend each pending mapping row; do not merge without Keith's explicit approval and do not start S1-05.
 blockers:
   - No approved Postgres connection is configured, so the S1-02 migration remains unapplied and S1-03 live normalized records are not persisted.
+  - All three S1-04 mapping assertions remain PENDING and UNRESOLVED until Keith makes an explicit human mapping decision.
 ```
 
 ---
@@ -275,7 +277,7 @@ Acceptance:
 ### S1-03 — ClinicalTrials.gov vertical slice
 
 **Owner:** Data + Product/UI  
-**Status:** In review — current
+**Status:** Complete — merged in PR #5 at `b7305dae739841a23c769e264fa4a84cee6db47c`
 
 Acceptance:
 
@@ -288,13 +290,27 @@ Acceptance:
 - fixture and integration tests;
 - no AI dependency.
 
+### S1-04 — Program and compound resolution
+
+**Owner:** Data + Scientific Review + Product/UI
+**Status:** In review — current
+
+Acceptance:
+
+- version-controlled, runtime-validated mapping candidates;
+- exact `SRC-CTG` v1 snapshots and provenance;
+- canonical labels and raw aliases;
+- conservative deterministic resolver with explicit unresolved/conflict states;
+- only approved mappings may resolve;
+- programme list/search/detail UI with linked registered trials and official evidence;
+- pending human review packet;
+- no database migration, AI, fuzzy matching, or new source.
+
 ## Next
 
-### S1-04 — Program and compound resolution
-**Status:** Unstarted — blocked by S1-03 review and merge
-Manual reviewed mapping first; aliases and conflicts preserved.
-
 ### S1-05 — Program comparison
+**Status:** Blocked and unstarted — requires explicit S1-04 merge and post-merge verification
+
 Two-to-four comparison using deterministic registered facts.
 
 ### S1-06 — PubChem enrichment
@@ -765,6 +781,7 @@ AI extraction, ChEMBL enrichment and publication polish are cut before the relea
 | 2026-08-14 | No vector DB or custom training in v0.1 | No validated need; major scope risk | After user evidence |
 | 2026-08-14 | Three control files at root | Maximum discoverability for Codex/GPT and minimal documentation sprawl | After v0.1 |
 | 2026-08-14 | Disable automatic Vercel Git deployments from `main` | Keep Synapse Atlas Preview-only until a future human-approved Production action | Before an explicitly approved Production release |
+| 2026-08-14 | Keep S1-04 mapping candidates version-controlled, pending, and resolver-gated | ClinicalTrials.gov supports registry observations but not company identity, ownership, focal intervention, or approved programme/compound relationships | After Keith reviews each mapping row |
 
 ---
 
@@ -783,6 +800,8 @@ Append one compact row per completed work package.
 | 2026-08-14 | S1-02 source registry and evidence schema | Added the deny-by-default `SRC-CTG` policy, seven-table provenance schema, baseline migration/approved-policy bootstrap, runtime invariants and migration drift checks on the feature branch | `pnpm check`; 7 test files/41 tests; build; Drizzle check and no-drift regeneration; smoke, diff and secret review | Review the draft PR; keep S1-03 blocked and unstarted |
 | 2026-08-14 | PR #4 — S1-02 source registry and evidence schema | Merged the reviewed source-policy, evidence, schema and migration foundation as `3b83f8f92b925c791430950a8ed5c22e1d5915b2` | Local, origin/main, live GitHub, CI and protected Preview verification; Vercel Production remained empty | S1-03 ClinicalTrials.gov vertical slice |
 | 2026-08-14 | S1-03 ClinicalTrials.gov vertical slice | Added the bounded official API client, normalized trial records, live list/filter/detail UI, explicit freshness/provenance, and fail-closed states on the feature branch | `pnpm check`; 10 test files/65 tests; production build; live API and desktop/mobile browser journey; diff, secret and scope review | Review the draft PR; keep S1-04 unstarted |
+| 2026-08-14 | PR #5 — S1-03 ClinicalTrials.gov vertical slice | Merged the reviewed registered-trial explorer as `b7305dae739841a23c769e264fa4a84cee6db47c` | Local, origin/main, live GitHub, CI and Vercel Preview verification; no open PR remained | S1-04 program and compound resolution |
+| 2026-08-14 | S1-04 program and compound resolution | Added three evidence-bound pending mapping candidates, deterministic approval-gated resolution, offline programme search/detail, and exact registry snapshot provenance | `pnpm check`; 13 test files/85 tests; audit clean; migration and Vercel policy unchanged; production smoke and desktop/390 px browser journey | Review the draft PR and decide each pending mapping row; keep S1-05 blocked |
 
 Detailed handovers may be placed below.
 
@@ -852,7 +871,7 @@ Detailed handovers may be placed below.
 
 **Goal:** G1 — Ship private v0.1
 
-**Completed:** Implemented a server-only ClinicalTrials.gov client that constructs one approved request shape, rechecks `SRC-CTG` before every attempt, rejects redirects, sends no credentials or cookies, and bounds term length, status, page token, URL, timeout, retry, response bytes and page size. Added Zod runtime validation, partial-date precision, exact-byte SHA-256 provenance, normalized trial records with explicit reported/not-reported/not-requested states, stable field locators, and deterministic freshness based on retrieval time. Added live `/trials` search/status/pagination and `/trials/[nctId]` detail views with loading, empty, redacted error and not-found states. S1-03 remains In review until its draft PR is explicitly merged.
+**Completed:** Implemented a server-only ClinicalTrials.gov client that constructs one approved request shape, rechecks `SRC-CTG` before every attempt, rejects redirects, sends no credentials or cookies, and bounds term length, status, page token, URL, timeout, retry, response bytes and page size. Added Zod runtime validation, partial-date precision, exact-byte SHA-256 provenance, normalized trial records with explicit reported/not-reported/not-requested states, stable field locators, and deterministic freshness based on retrieval time. Added live `/trials` search/status/pagination and `/trials/[nctId]` detail views with loading, empty, redacted error and not-found states. S1-03 was merged in PR #5 at `b7305dae739841a23c769e264fa4a84cee6db47c`; GitHub CI and Vercel Preview checks succeeded.
 
 **Files changed:** Official API client and normalized trial domain modules under `src/lib/`; trial list, detail and state views under `src/app/trials/`; the minimal landing page and shared styles; fixture partial-date validation; deterministic unit/integration tests; `README.md`; and this control room. No database table, migration, source policy, dependency, background job or unrelated product entity was added.
 
@@ -864,9 +883,39 @@ Detailed handovers may be placed below.
 
 **Known risks:** The product depends on live ClinicalTrials.gov availability. The S1-02 migration has not been applied to real Postgres, and S1-03 records are not yet persisted or database-integration-tested. A future persistence task must use the existing source/version/claim model and preserve the current provenance semantics.
 
-**Blocked:** No blocker to reviewing S1-03. Database persistence remains blocked on a separately approved Postgres connection. S1-04 is unstarted and must not begin before S1-03 is explicitly merged.
+**Blocked:** S1-03 has no remaining review blocker and is Complete. Database persistence remains blocked on a separately approved Postgres connection.
 
-**Next highest-impact task:** Review and explicitly merge the S1-03 draft PR if it passes; only then start S1-04 as a separate work package.
+**Next highest-impact task:** S1-04 program and compound resolution as a separate review-gated work package.
+
+### 2026-08-14 — S1-04
+
+**Goal:** G1 — Ship private v0.1
+
+**Completed:** Added a strict version `1.0.0` programme-mapping dataset containing three bounded candidates; exact ClinicalTrials.gov snapshots and metadata for `NCT05711940` and `NCT06605105`; reuse of the existing `NCT03866174` fixture; canonical programme, compound, and reported sponsor-organisation records; exact raw aliases and source locators; pending human-inference mapping assertions; a pure conservative resolver; deterministic offline search; `/programs` and `/programs/[slug]`; Home navigation; loading, empty, partial/unknown, redacted error, and not-found states. Only approved synthetic test mappings resolve; collisions retain every approved candidate and select no winner. Production mappings remain `PENDING` and `UNRESOLVED` without reviewer identity or timestamp. S1-04 remains In review until its draft PR is explicitly merged and post-merge verified.
+
+**Files changed:** Versioned data under `data/program-mappings/`; two additional exact `data/fixtures/clinicaltrials.gov/` responses and metadata envelopes; programme domain, resolver, runtime dataset, and fixture validation modules under `src/lib/`; programme list/detail/state UI under `src/app/programs/`; the Home CTA and bounded shared styles; focused unit/integration tests; `README.md`; and this control room. `AGENTS.md`, the durable roadmap, dependencies, database schema, Drizzle migration history, source policy, CI, and `vercel.json` remain unchanged.
+
+**Tests/checks:** `pnpm install --frozen-lockfile`; focused programme suite (3 files/20 tests); `pnpm check` (lint, strict typecheck, 13 test files/85 tests, `pnpm db:check`, production build); `pnpm audit --prod` (no known vulnerabilities); exact migration/schema no-drift diff against `b7305dae739841a23c769e264fa4a84cee6db47c`; unchanged `vercel.json`; `git diff --check`; targeted credential/secret scan. Production-mode local smoke returned `/` 200, `/programs` 200, `/programs/comp360-treatment-resistant-depression` 200, an unknown programme 404, and `/api/health` the expected degraded 503 without a database.
+
+**Browser verification:** Desktop and 390 px checks completed through the in-app browser against the production-mode local server. Home → Programmes, canonical-label search, alias search, candidate detail, linked live `NCT05711940` trial, and the correct official source link were verified. The no-results, repeated-parameter redacted error, pending/unknown status, status-key conflict vocabulary, and programme not-found states were verified. Semantic headings/lists/description lists, the labelled GET form, keyboard-visible 3 px focus outline, descriptive links, source timestamps/hash/locators, and responsive layout were present. No console warnings/errors, framework overlay, blank state, or horizontal overflow appeared on the list or detail page.
+
+**Source/legal evidence:** `SRC-CTG` version `1` remains the sole source. The retained NCT records are `NCT03866174` (Usona Institute; Psilocybin, Niacin, and Set and Setting protocol; major depressive disorder), `NCT05711940` (COMPASS Pathways; Psilocybin; treatment-resistant depression), and `NCT06605105` (Cybin IRL Limited; CYB003; major depressive disorder). Each record preserves the exact API request URL, official human-readable study URL, retrieval time, later/equal local processing time, separate registry update date, exact retained-byte SHA-256, attribution, and field locators. Raw registry observations are `STRUCTURED_EXTRACTION`; programme, alias, sponsor-organisation, and compound relationships are `HUMAN_INFERENCE`. No other API, scraping, Firecrawl, authentication, paywall, restricted content, AI, embeddings, or fuzzy matching was used.
+
+**Mapping review table:**
+
+| Mapping ID | Programme candidate | Reported sponsor organisation | Candidate compound | NCT | Review | Resolution | Human decision required |
+|---|---|---|---|---|---|---|---|
+| `mapping-usona-psilocybin-mdd` | Usona psilocybin for major depressive disorder | Usona Institute | Psilocybin | `NCT03866174` | `PENDING` | `UNRESOLVED` | Approve, reject, or amend the grouping and proposed focal compound; the registry reports three interventions. |
+| `mapping-comp360-trd` | COMP360 for treatment-resistant depression | COMPASS Pathways | Psilocybin | `NCT05711940` | `PENDING` | `UNRESOLVED` | Approve, reject, or amend the COMP360 ↔ Psilocybin programme mapping. |
+| `mapping-cyb003-mdd` | CYB003 for major depressive disorder | Cybin IRL Limited | CYB003 | `NCT06605105` | `PENDING` | `UNRESOLVED` | Approve, reject, or amend the CYB003 programme mapping. |
+
+**Decisions:** The first slice ships three candidates because all three can be represented without leaving the approved registry boundary or claiming approval. Reported sponsor organisations are not treated as companies, owners, controllers, or developers. Company identity, asset rights, programme-level phase/status, mechanism, efficacy, safety, and superiority remain explicitly unknown. Search may expose a pending candidate but never turns that candidate into a resolved mapping. The checked-in programme pages are snapshots; linked trial pages remain the live official-API view.
+
+**Known risks:** Human mapping approval is outstanding. `NCT03866174` has multiple reported interventions, so its focal compound is especially review-sensitive. ClinicalTrials.gov alone does not establish company identity or asset ownership/control. The existing S1-02 migration remains unapplied and S1-03 live records remain request-scoped because no approved Postgres connection exists. The linked trial page still depends on live ClinicalTrials.gov availability.
+
+**Blocked:** No blocker to reviewing the S1-04 draft PR. Merge is blocked on Keith's explicit review decision for the three mapping rows and explicit merge approval. S1-05 is blocked and unstarted.
+
+**Next highest-impact task:** Review the S1-04 draft PR, record an explicit approve/reject/amend decision for each mapping row in the same branch, rerun checks if mappings change, then explicitly merge and post-merge verify before starting S1-05.
 
 ## Handover template
 
@@ -905,7 +954,8 @@ Use these commands in a project conversation or Codex:
 ```text
 S1-01 is Complete.
 S1-02 is Complete and merged in PR #4 at 3b83f8f92b925c791430950a8ed5c22e1d5915b2.
-S1-03 is In review/current.
-Review its draft PR; never merge without Keith's explicit instruction.
-S1-04 remains blocked and unstarted until S1-03 is explicitly merged.
+S1-03 is Complete and merged in PR #5 at b7305dae739841a23c769e264fa4a84cee6db47c.
+S1-04 is In review/current. All three production mapping assertions remain PENDING and UNRESOLVED.
+Review its draft PR and record Keith's required mapping decisions; never merge without Keith's explicit instruction.
+S1-05 remains blocked and unstarted until S1-04 is explicitly merged and post-merge verified.
 ```
