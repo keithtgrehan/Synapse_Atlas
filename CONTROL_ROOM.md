@@ -24,7 +24,7 @@ active_sprint:
   id: S1
   dates: 2026-08-14/2026-08-27
   wip_limit: 3
-  current_task: S1-02
+  current_task: S1-03
 operating_rules:
   one_active_goal: true
   new_scope_requires_tradeoff: true
@@ -39,11 +39,12 @@ last_completed:
   - S1-01 post-merge closeout removed the unintended Production deployment and aliases while preserving both protected Preview deployments.
   - Automatic Vercel Git deployments from main are disabled by tested version-controlled policy; pull-request Preview deployments remain enabled.
   - PR #3 merged the S1-01 post-merge closeout at 290ca358c86ffd9fd7cfaae61534eec9427115e8.
+  - PR #4 merged S1-02 at 3b83f8f92b925c791430950a8ed5c22e1d5915b2.
 next_action:
-  task: S1-02
-  instruction: Review the S1-02 draft PR; do not merge without Keith's explicit approval and do not start S1-03.
+  task: S1-03
+  instruction: Review the S1-03 draft PR; do not merge without Keith's explicit approval and do not start S1-04.
 blockers:
-  - No real Postgres connection is configured, so the S1-02 migration has not been applied or integration-tested against Postgres.
+  - No approved Postgres connection is configured, so the S1-02 migration remains unapplied and S1-03 live normalized records are not persisted.
 ```
 
 ---
@@ -260,7 +261,7 @@ Acceptance:
 ### S1-02 — Source registry and evidence schema
 
 **Owner:** Research/Source + Data  
-**Status:** In review — current; S1-03 remains blocked
+**Status:** Complete — merged in PR #4 at `3b83f8f92b925c791430950a8ed5c22e1d5915b2`
 
 Acceptance:
 
@@ -274,7 +275,7 @@ Acceptance:
 ### S1-03 — ClinicalTrials.gov vertical slice
 
 **Owner:** Data + Product/UI  
-**Blocked by:** S1-02
+**Status:** In review — current
 
 Acceptance:
 
@@ -290,6 +291,7 @@ Acceptance:
 ## Next
 
 ### S1-04 — Program and compound resolution
+**Status:** Unstarted — blocked by S1-03 review and merge
 Manual reviewed mapping first; aliases and conflicts preserved.
 
 ### S1-05 — Program comparison
@@ -779,6 +781,8 @@ Append one compact row per completed work package.
 | 2026-08-14 | S1-01 post-merge closeout | Verified PR #2 merged; removed the unintended Production deployment and three aliases; preserved the project and protected Previews; added and tested the `main` deployment guardrail | Frozen install, lint, typecheck, 4 test files/8 tests, build, aggregate check, Vercel before/after verification | After Keith explicitly merges PR #3 and the Control Room verifies `main` and Vercel state, issue `START S1-02` |
 | 2026-08-14 | PR #3 — S1-01 post-merge closeout | Merged the tested Preview-only deployment guardrail and closeout record as `290ca358c86ffd9fd7cfaae61534eec9427115e8` | Local, origin/main and live GitHub merge verification; Vercel Production remained empty | S1-02 source registry and evidence schema |
 | 2026-08-14 | S1-02 source registry and evidence schema | Added the deny-by-default `SRC-CTG` policy, seven-table provenance schema, baseline migration/approved-policy bootstrap, runtime invariants and migration drift checks on the feature branch | `pnpm check`; 7 test files/41 tests; build; Drizzle check and no-drift regeneration; smoke, diff and secret review | Review the draft PR; keep S1-03 blocked and unstarted |
+| 2026-08-14 | PR #4 — S1-02 source registry and evidence schema | Merged the reviewed source-policy, evidence, schema and migration foundation as `3b83f8f92b925c791430950a8ed5c22e1d5915b2` | Local, origin/main, live GitHub, CI and protected Preview verification; Vercel Production remained empty | S1-03 ClinicalTrials.gov vertical slice |
+| 2026-08-14 | S1-03 ClinicalTrials.gov vertical slice | Added the bounded official API client, normalized trial records, live list/filter/detail UI, explicit freshness/provenance, and fail-closed states on the feature branch | `pnpm check`; 10 test files/65 tests; production build; live API and desktop/mobile browser journey; diff, secret and scope review | Review the draft PR; keep S1-04 unstarted |
 
 Detailed handovers may be placed below.
 
@@ -844,6 +848,26 @@ Detailed handovers may be placed below.
 
 **Next highest-impact task:** Review and explicitly merge the S1-02 draft PR if it passes; only then start S1-03 as a separate work package.
 
+### 2026-08-14 — S1-03
+
+**Goal:** G1 — Ship private v0.1
+
+**Completed:** Implemented a server-only ClinicalTrials.gov client that constructs one approved request shape, rechecks `SRC-CTG` before every attempt, rejects redirects, sends no credentials or cookies, and bounds term length, status, page token, URL, timeout, retry, response bytes and page size. Added Zod runtime validation, partial-date precision, exact-byte SHA-256 provenance, normalized trial records with explicit reported/not-reported/not-requested states, stable field locators, and deterministic freshness based on retrieval time. Added live `/trials` search/status/pagination and `/trials/[nctId]` detail views with loading, empty, redacted error and not-found states. S1-03 remains In review until its draft PR is explicitly merged.
+
+**Files changed:** Official API client and normalized trial domain modules under `src/lib/`; trial list, detail and state views under `src/app/trials/`; the minimal landing page and shared styles; fixture partial-date validation; deterministic unit/integration tests; `README.md`; and this control room. No database table, migration, source policy, dependency, background job or unrelated product entity was added.
+
+**Tests/checks:** `pnpm lint`; strict `pnpm typecheck`; `pnpm test` (10 test files/65 tests); Drizzle migration consistency; production build and aggregate `pnpm check`; live local official-API smoke; automated browser verification of home, default live search, status filter, opaque-token next page, exact NCT detail, provenance/hash, empty and invalid-ID states, and 390 px mobile layout; no console/framework overlay or horizontal overflow; `git diff --check`; bounded diff, secret/private-data and S1-04 scope review.
+
+**Source/legal evidence:** Requests are limited to credential-free `GET https://clinicaltrials.gov/api/v2/studies` under existing approved policy `SRC-CTG` version `1`, with the fixed fields needed by the views and direct registry attribution. The live client uses the official API; fixtures are deterministic tests only and never a silent product fallback. No scraping, Firecrawl, authentication, restricted content, AI API or new source was used.
+
+**Decisions:** Pagination is one bounded page per user action, at most 10 records, using an opaque provider token; there is no autonomous crawl. Detail lookup remains on the approved studies path through exact `query.id`. Unknown registry values remain explicit. Registry last-update date is a provider fact separate from API retrieval and local processing times. Live records remain request-scoped until an approved Postgres connection exists; no database was provisioned. S1-03 intentionally fails closed rather than presenting its test fixture as live data; this is an explicit review-stage scope override, and an approved persisted or clearly labelled resilience path remains a release-quality gate before `SHIP`.
+
+**Known risks:** The product depends on live ClinicalTrials.gov availability. The S1-02 migration has not been applied to real Postgres, and S1-03 records are not yet persisted or database-integration-tested. A future persistence task must use the existing source/version/claim model and preserve the current provenance semantics.
+
+**Blocked:** No blocker to reviewing S1-03. Database persistence remains blocked on a separately approved Postgres connection. S1-04 is unstarted and must not begin before S1-03 is explicitly merged.
+
+**Next highest-impact task:** Review and explicitly merge the S1-03 draft PR if it passes; only then start S1-04 as a separate work package.
+
 ## Handover template
 
 ```markdown
@@ -880,7 +904,8 @@ Use these commands in a project conversation or Codex:
 
 ```text
 S1-01 is Complete.
-S1-02 is In review/current.
+S1-02 is Complete and merged in PR #4 at 3b83f8f92b925c791430950a8ed5c22e1d5915b2.
+S1-03 is In review/current.
 Review its draft PR; never merge without Keith's explicit instruction.
-S1-03 remains blocked and unstarted until S1-02 is explicitly merged.
+S1-04 remains blocked and unstarted until S1-03 is explicitly merged.
 ```

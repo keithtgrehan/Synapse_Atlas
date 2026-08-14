@@ -151,6 +151,37 @@ pnpm db:check
 No live Postgres instance is provisioned by these commands. Applying and
 integration-testing the migration requires a separately approved connection.
 
+## Live registered-trial explorer
+
+S1-03 adds a small server-rendered product slice at `/trials`. It searches the
+official ClinicalTrials.gov `/api/v2/studies` endpoint, applies an optional
+overall-status filter, follows the API's opaque next-page token, and opens an
+exact NCT record at `/trials/<NCT ID>`. Each user action requests at most 10
+records. Detail lookup uses `query.id` on the already approved endpoint rather
+than broadening the source policy.
+
+The adapter constructs every request itself and rechecks `SRC-CTG` immediately
+before network access. It sends no credentials or cookies, rejects redirects,
+uses a 10-second timeout, retries a transient failure once after a fixed bounded
+delay, accepts at most 1 MiB of JSON, and validates the response at runtime.
+Response bytes are hashed before UTF-8 decoding and normalization. Missing,
+unreported, and unrequested values remain distinct; partial registry dates keep
+their original year, month, or day precision.
+
+List and detail views expose the official study link, API retrieval time, local
+processing time, provider-reported registry update date, evidence class, exact
+response SHA-256, and retained field locators. Freshness describes the age of
+the API retrieval, not the age of the study's registry update. The UI never
+silently substitutes fixture or generated data when the official API fails.
+For this review-stage slice that fail-closed choice is intentional; release
+quality still requires a separately approved persisted or clearly labelled
+resilience path so the final demo is not dependent on live API availability.
+
+S1-03 currently normalizes live records in memory for the server-rendered
+request. It does not claim database persistence: the S1-02 migration still has
+not been applied or integration-tested because no approved Postgres connection
+is configured.
+
 ## Deployment policy
 
 Automatic Vercel Git deployments from `main` are disabled by the root
@@ -194,5 +225,5 @@ biology and scientific reasoning
 - Canonical repository selected: **complete**
 - Project operating system: **initialized**
 - Product scaffold: **S1-01 merged and post-merge closeout complete**
-- Current task: **S1-02 in review; S1-03 remains blocked and unstarted**
+- Current task: **S1-03 in review; S1-04 remains unstarted**
 - Current sprint target: **private v0.1 by 27 August 2026**

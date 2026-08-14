@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+import { partialDateValueSchema } from "../domain/trials";
 import {
   offsetDateTimeSchema,
   processingFollowsRetrieval,
@@ -23,7 +24,7 @@ const clinicalTrialsStudySchema = z.object({
     statusModule: z.object({
       overallStatus: nonEmptyTextSchema,
       startDateStruct: z.object({
-        date: dateSchema,
+        date: partialDateValueSchema,
       }),
       lastUpdatePostDateStruct: z.object({
         date: dateSchema,
