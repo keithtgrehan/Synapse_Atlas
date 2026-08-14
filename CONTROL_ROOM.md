@@ -39,8 +39,8 @@ last_completed:
   - S1-01 post-merge closeout removed the unintended Production deployment and aliases while preserving both protected Preview deployments.
   - Automatic Vercel Git deployments from main are disabled by tested version-controlled policy; pull-request Preview deployments remain enabled.
 next_action:
-  task: Review the S1-01 post-merge closeout draft pull request
-  instruction: Merge only with Keith's explicit approval; after the closeout is integrated, START S1-02. S1-02 is Ready but has not started.
+  task: S1-02
+  instruction: Await Keith's explicit START S1-02 command; then implement only the source registry and evidence schema task. Do not start automatically.
 blockers:
   - No real Postgres connection is configured; this may block applying and integration-testing S1-02 migrations.
 ```
@@ -775,7 +775,7 @@ Append one compact row per completed work package.
 | 2026-08-14 | PR #1 — Authoritative education and MVP roadmaps | Added `docs/01_EDUCATION_90_DAY.md` and `docs/02_CODEX_MVP_ROADMAP.md`; merged as `5609a9b09bb8578f39a088aec1a57ed94eaddc9a` | Git/GitHub merge verification | S1-01 scaffold |
 | 2026-08-14 | S1-01 deployable foundation | Next.js/Postgres scaffold, health route, CI and real ClinicalTrials.gov fixture implemented on feature branch | lint, typecheck, 7 tests, build, Drizzle config, local smoke test, production dependency audit | Review and merge S1-01 draft PR; keep S1-02 blocked |
 | 2026-08-14 | S1-01 review remediation | Added aggregate check, runtime fixture/metadata validation, corrected provenance dates, durable roadmap status, PR #1 ledger evidence and protected Vercel preview | Full requested local verification; protected preview root 200 and expected health 503 | Return draft PR #2 to Control Room review; keep S1-02 blocked |
-| 2026-08-14 | S1-01 post-merge closeout | Verified PR #2 merged; removed the unintended Production deployment and three aliases; preserved the project and protected Previews; added and tested the `main` deployment guardrail | Frozen install, lint, typecheck, 4 test files/8 tests, build, aggregate check, Vercel before/after verification | Review closeout draft PR; after explicit merge approval, START S1-02 |
+| 2026-08-14 | S1-01 post-merge closeout | Verified PR #2 merged; removed the unintended Production deployment and three aliases; preserved the project and protected Previews; added and tested the `main` deployment guardrail | Frozen install, lint, typecheck, 4 test files/8 tests, build, aggregate check, Vercel before/after verification | After Keith explicitly merges PR #3 and the Control Room verifies `main` and Vercel state, issue `START S1-02` |
 
 Detailed handovers may be placed below.
 
@@ -815,11 +815,11 @@ Detailed handovers may be placed below.
 
 **Decisions:** S1-01 is Complete. S1-02 is Ready and current/next but not started. S1-03 is blocked by S1-02. Production deployment requires a future explicit human-approved action.
 
-**Known risks:** No real Postgres connection exists, which may block applying and integration-testing S1-02 migrations. The version-controlled Vercel policy becomes canonical only after this closeout PR is explicitly reviewed and merged.
+**Known risks:** No real Postgres connection exists, which may block applying and integration-testing S1-02 migrations. Production remains restricted to a future explicit human-approved action.
 
-**Blocked:** S1-02 implementation must wait until this closeout PR is integrated. No other S1-01 blocker remains.
+**Blocked:** No S1-01 blocker remains. S1-02 has not started and awaits Keith's explicit `START S1-02` command; database-backed migration verification may remain blocked until a real Postgres connection is configured.
 
-**Next highest-impact task:** Review and explicitly merge the S1-01 post-merge closeout draft PR, then issue `START S1-02` separately.
+**Next highest-impact task:** After Keith explicitly merges PR #3 and the Control Room verifies `main` and Vercel state, issue `START S1-02`.
 
 ## Handover template
 
@@ -856,7 +856,8 @@ Use these commands in a project conversation or Codex:
 ## Current instruction to Codex
 
 ```text
-Read README.md, AGENTS.md and CONTROL_ROOM.md.
-
-Review the S1-01 post-merge closeout draft pull request. Never merge or enable auto-merge without Keith's explicit instruction. S1-02 is Ready but not started; after the closeout is integrated, wait for the separate command `START S1-02`.
+S1-01 is Complete.
+S1-02 is Ready/current but not started.
+Wait for the explicit command `START S1-02`.
+Do not begin work automatically.
 ```
