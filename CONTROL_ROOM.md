@@ -35,12 +35,12 @@ operating_rules:
 last_completed:
   - Canonical repository selected.
   - Three-file project operating system defined.
-  - S1-01 deployable-foundation implementation completed on its feature branch; review and merge remain pending.
+  - S1-01 deployable-foundation implementation and review remediation completed on its feature branch; review and merge remain pending.
 next_action:
   task: Review S1-01 draft pull request
   instruction: Review CI and scope, then merge only with Keith's explicit approval; do not start S1-02 before S1-01 is integrated.
 blockers:
-  - Vercel and database project/environment configuration may require Keith's authenticated account.
+  - No real Postgres connection is configured; no paid database was provisioned for S1-01.
   - Firecrawl requires a user API key or approved self-hosted setup before runtime use.
 ```
 
@@ -770,7 +770,9 @@ Append one compact row per completed work package.
 | Date | Task | Result | Checks | Next |
 |---|---|---|---|---|
 | 2026-08-14 | G0 control system | README, AGENTS and CONTROL_ROOM established | Repository review | S1-01 scaffold |
-| 2026-08-14 | S1-01 deployable foundation | Next.js/Postgres scaffold, health route, CI and real ClinicalTrials.gov fixture implemented on feature branch | lint, typecheck, 6 tests, build, Drizzle config, local smoke test, production dependency audit | Review and merge S1-01 draft PR; keep S1-02 blocked |
+| 2026-08-14 | PR #1 — Authoritative education and MVP roadmaps | Added `docs/01_EDUCATION_90_DAY.md` and `docs/02_CODEX_MVP_ROADMAP.md`; merged as `5609a9b09bb8578f39a088aec1a57ed94eaddc9a` | Git/GitHub merge verification | S1-01 scaffold |
+| 2026-08-14 | S1-01 deployable foundation | Next.js/Postgres scaffold, health route, CI and real ClinicalTrials.gov fixture implemented on feature branch | lint, typecheck, 7 tests, build, Drizzle config, local smoke test, production dependency audit | Review and merge S1-01 draft PR; keep S1-02 blocked |
+| 2026-08-14 | S1-01 review remediation | Added aggregate check, runtime fixture/metadata validation, corrected provenance dates, durable roadmap status, PR #1 ledger evidence and protected Vercel preview | Full requested local verification; protected preview root 200 and expected health 503 | Return draft PR #2 to Control Room review; keep S1-02 blocked |
 
 Detailed handovers may be placed below.
 
@@ -778,19 +780,21 @@ Detailed handovers may be placed below.
 
 **Goal:** G1 — Ship private v0.1
 
-**Completed:** Minimal Next.js 16/TypeScript app; pnpm lockfile; Zod environment validation; lazy Drizzle/Postgres client and migration configuration; `/api/health`; GitHub Actions CI; bounded real ClinicalTrials.gov fixture with source metadata and integrity test; private Vercel-preview-ready build.
+**Completed:** Minimal Next.js 16/TypeScript app; pnpm lockfile and aggregate `check` script; Zod environment validation; lazy Drizzle/Postgres client and migration configuration; `/api/health`; GitHub Actions CI; bounded real ClinicalTrials.gov fixture and metadata validated at runtime with Zod; malformed-fixture rejection and integrity tests; protected Vercel preview.
 
-**Files changed:** Application/configuration under `src/`, root build/tooling configuration, `.github/workflows/ci.yml`, `data/fixtures/clinicaltrials.gov/`, unit tests, `README.md`, and this control room.
+**Files changed:** Application/configuration under `src/`, root build/tooling configuration, `.github/workflows/ci.yml`, `data/fixtures/clinicaltrials.gov/`, unit tests, `README.md`, `docs/02_CODEX_MVP_ROADMAP.md`, and this control room.
 
-**Tests/checks:** `pnpm lint`; `pnpm typecheck`; `pnpm test` (3 files, 6 tests); `pnpm build`; `pnpm db:generate` (configuration loaded, zero S1-01 tables); local production smoke test for `/` and `/api/health`; `pnpm audit --prod` (no known vulnerabilities); `git diff --check`; targeted secret-pattern scan.
+**Tests/checks:** `pnpm install --frozen-lockfile`; `pnpm lint`; `pnpm typecheck`; `pnpm test` (3 files, 7 tests, including malformed-fixture rejection); `pnpm build`; `pnpm check`; `pnpm db:generate` (configuration loaded from a clean generated-output state, zero S1-01 tables); local production smoke test (`/` 200, `/api/health` expected 503 without database configuration); `pnpm audit --prod` (no known vulnerabilities); `git diff --check`; targeted secret-pattern scan.
 
-**Source/legal evidence:** `SRC-CTG` is approved in the source matrix. Fixture came from the official `clinicaltrials.gov/api/v2/studies` endpoint with one exact NCT ID and selected fields; metadata records retrieval time, source processing date, URL, attribution, transformation, and SHA-256. No Firecrawl, authentication, paywall, or restricted full text was used.
+**Source/legal evidence:** `SRC-CTG` is approved in the source matrix. Fixture came from the official `clinicaltrials.gov/api/v2/studies` endpoint with one exact NCT ID and selected fields; metadata separately records API retrieval time, local processing time, registry last-update-posted date, URL, attribution, transformation, and SHA-256. No Firecrawl, authentication, paywall, or restricted full text was used.
 
-**Decisions:** Health reports configuration readiness without exposing credentials or requiring a database connection during build. Database creation remains lazy. S1-02 tables and source-policy interfaces were intentionally not introduced.
+**Decisions:** Health reports configuration readiness without exposing credentials or requiring a database connection during build. Database creation remains lazy. Drizzle schema generation does not require a live connection; commands that use the database still validate `DATABASE_URL`. S1-02 tables and source-policy interfaces were intentionally not introduced.
 
-**Known risks:** CI and a private Vercel preview can only be confirmed after the branch is pushed and platform integrations run. A real Postgres connection has not been provisioned or smoke-tested.
+**Vercel preview:** `https://synapse-atlas-axd426qa0-keith-grehans-projects.vercel.app` is Ready in the Preview environment. Vercel SSO protection applies to all non-custom-domain deployments and Git fork protection is enabled. Unauthenticated root access redirects to authentication; authenticated root returned 200; authenticated `/api/health` returned the expected 503 degraded response because no `DATABASE_URL` exists. The CLI unexpectedly assigned the project's first deployment to production despite no `--prod`; that exact deployment and its aliases were removed. Only the preview remains, and the temporary verification bypass was revoked.
 
-**Blocked:** Private preview/database environment configuration may require Keith's authenticated Vercel and database accounts.
+**Known risks:** A real Postgres connection has not been provisioned or smoke-tested. GitHub CI must rerun on the review-remediation commit.
+
+**Blocked:** None for the S1-01 foundation preview. Database-backed behavior remains unavailable until a real approved Postgres connection is configured.
 
 **Next highest-impact task:** Review and merge the S1-01 draft PR with explicit Keith approval; S1-02 remains blocked until then.
 

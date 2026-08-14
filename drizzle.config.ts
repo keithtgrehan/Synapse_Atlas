@@ -2,17 +2,17 @@ import "dotenv/config";
 
 import { defineConfig } from "drizzle-kit";
 
-import { parseServerEnvironment } from "./src/lib/env";
+import { serverEnvironmentSchema } from "./src/lib/env";
 
-const environment = parseServerEnvironment(process.env);
+const environment = serverEnvironmentSchema.safeParse(process.env);
 
 export default defineConfig({
   dialect: "postgresql",
   schema: "./src/lib/db/schema.ts",
   out: "./drizzle",
-  dbCredentials: {
-    url: environment.DATABASE_URL,
-  },
+  ...(environment.success
+    ? { dbCredentials: { url: environment.data.DATABASE_URL } }
+    : {}),
   strict: true,
   verbose: true,
 });

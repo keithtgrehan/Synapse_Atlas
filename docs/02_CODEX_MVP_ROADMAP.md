@@ -3,7 +3,10 @@
 **Version:** 2.0  
 **Prepared:** 14 August 2026  
 **Canonical repository:** `keithtgrehan/Career-Path-to-Psychedelic-Biotech`  
-**Current canonical `main`:** `e0b4cd68b1a506329a94de675f02f99854e2764d`  
+**Current canonical `main`:** Resolve dynamically from Git/GitHub at the start of every session.
+
+**Current project status:** Maintained in `CONTROL_ROOM.md`.
+
 **Private v0.1 target:** 27 August 2026  
 **Validation target:** 11 September 2026  
 **Career-proof publication target:** 30 September 2026  
@@ -11,13 +14,15 @@
 
 ## 1. Current truth
 
-The canonical repository currently contains the project operating system:
+The canonical repository's operating controls are:
 
 - `README.md`
 - `AGENTS.md`
 - `CONTROL_ROOM.md`
 
-The deployable product scaffold is still the next canonical implementation task.
+This roadmap is the stable implementation plan. Read `CONTROL_ROOM.md` for the
+live task, completed work, blockers, and next action; do not infer current status
+from this roadmap.
 
 Do not claim the production MVP is shipped until the canonical repository contains the application, CI passes, and a private deployed URL has been smoke-tested.
 

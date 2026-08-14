@@ -2,6 +2,12 @@ import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 
 import { describe, expect, it } from "vitest";
+import { ZodError } from "zod";
+
+import {
+  clinicalTrialsFixtureMetadataSchema,
+  clinicalTrialsFixtureSchema,
+} from "../../src/lib/fixtures/clinicaltrials";
 
 const fixtureUrl = new URL(
   "../../data/fixtures/clinicaltrials.gov/NCT03866174.json",
@@ -18,22 +24,10 @@ describe("ClinicalTrials.gov fixture", () => {
       readFile(fixtureUrl, "utf8"),
       readFile(metadataUrl, "utf8"),
     ]);
-    const fixture = JSON.parse(fixtureText) as {
-      studies: Array<{
-        protocolSection: {
-          identificationModule: { nctId: string };
-          statusModule: {
-            lastUpdatePostDateStruct: { date: string };
-          };
-        };
-      }>;
-    };
-    const metadata = JSON.parse(metadataText) as {
-      contentSha256: string;
-      externalId: string;
-      sourceProcessingDate: string;
-      sourceUrl: string;
-    };
+    const fixture = clinicalTrialsFixtureSchema.parse(JSON.parse(fixtureText));
+    const metadata = clinicalTrialsFixtureMetadataSchema.parse(
+      JSON.parse(metadataText),
+    );
     const sha256 = createHash("sha256").update(fixtureText).digest("hex");
     const study = fixture.studies[0];
 
@@ -43,10 +37,27 @@ describe("ClinicalTrials.gov fixture", () => {
     );
     expect(
       study?.protocolSection.statusModule.lastUpdatePostDateStruct.date,
-    ).toBe(metadata.sourceProcessingDate);
+    ).toBe(metadata.registryLastUpdatePostedDate);
     expect(metadata.sourceUrl).toMatch(
       /^https:\/\/clinicaltrials\.gov\/api\/v2\/studies\?/,
     );
     expect(sha256).toBe(metadata.contentSha256);
+  });
+
+  it("rejects a malformed fixture with missing required study data", () => {
+    expect(() =>
+      clinicalTrialsFixtureSchema.parse({
+        totalCount: 1,
+        studies: [
+          {
+            protocolSection: {
+              identificationModule: {
+                nctId: "NCT03866174",
+              },
+            },
+          },
+        ],
+      }),
+    ).toThrow(ZodError);
   });
 });
