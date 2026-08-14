@@ -260,17 +260,6 @@ select {
   align-items: center;
 }
 
-.status-pending {
-  background: var(--warning-soft);
-  color: var(--warning);
-}
-
-.status-unknown {
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--muted);
-}
-
 .detail-status {
   margin-top: 1.25rem;
 }
@@ -303,6 +292,45 @@ select {
   color: var(--text);
   font-size: 0.78rem;
   font-weight: 700;
+}
+
+.status-label.status-pending {
+  background: var(--warning-soft);
+  color: var(--warning);
+}
+
+.status-label.status-approved {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.status-label.status-rejected {
+  background: var(--danger);
+  color: #ffffff;
+}
+
+.status-label.status-needs-revision {
+  border: 1px solid var(--warning);
+  background: var(--surface);
+  color: var(--warning);
+}
+
+.status-label.status-resolved {
+  border: 1px solid var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
+.status-label.status-conflicting {
+  border: 1px solid var(--danger);
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.status-label.status-unresolved {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--muted);
 }
 
 .freshness-fresh {

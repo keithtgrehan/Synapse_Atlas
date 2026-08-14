@@ -16,6 +16,17 @@ const nonBlankTextSchema = z.string().trim().min(1).max(5_000);
 const stableIdSchema = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
 export const programmeSlugSchema = stableIdSchema.max(100);
 
+const programmeSnapshotFields = [
+  "NCTId",
+  "BriefTitle",
+  "OverallStatus",
+  "StartDate",
+  "LastUpdatePostDate",
+  "LeadSponsorName",
+  "Condition",
+  "InterventionName",
+] as const;
+
 export const mappingResolutionStateValues = [
   "RESOLVED",
   "UNRESOLVED",
@@ -103,18 +114,30 @@ export const programmeSourceSnapshotSchema = z
       });
     } else {
       const requestUrl = new URL(snapshot.apiRequestUrl);
-      const queryIds = requestUrl.searchParams.getAll("query.id");
+      const requiredParameters = new Map<string, string>([
+        ["query.id", snapshot.externalId],
+        ["pageSize", "1"],
+        ["countTotal", "true"],
+        ["format", "json"],
+        ["fields", programmeSnapshotFields.join(",")],
+      ]);
+      const parameterEntries = Array.from(requestUrl.searchParams.entries());
 
       if (
-        queryIds.length !== 1 ||
-        queryIds[0] !== snapshot.externalId ||
-        requestUrl.searchParams.get("pageSize") !== "1" ||
-        requestUrl.searchParams.get("countTotal") !== "true" ||
-        requestUrl.searchParams.get("format") !== "json"
+        parameterEntries.length !== requiredParameters.size ||
+        parameterEntries.some(([name]) => !requiredParameters.has(name)) ||
+        Array.from(requiredParameters).some(
+          ([name, expectedValue]) => {
+            const values = requestUrl.searchParams.getAll(name);
+
+            return values.length !== 1 || values[0] !== expectedValue;
+          },
+        )
       ) {
         context.addIssue({
           code: "custom",
-          message: "Snapshot request must be one exact bounded NCT lookup",
+          message:
+            "Snapshot request must contain exactly one of every approved parameter and no others",
           path: ["apiRequestUrl"],
         });
       }
@@ -755,7 +778,7 @@ export function resolutionStateLabel(
 ): string {
   switch (state) {
     case "RESOLVED":
-      return "Approved";
+      return "Resolved";
     case "CONFLICTING":
       return "Conflicting";
     case "UNRESOLVED":

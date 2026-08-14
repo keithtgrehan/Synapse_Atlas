@@ -38,8 +38,8 @@ describe("programme-resolution vertical slice", () => {
         "query.id=NCT05711940",
       );
       expect(resolution).toMatchObject({
-        state: "UNRESOLVED",
-        winnerProgrammeId: null,
+        state: "RESOLVED",
+        winnerProgrammeId: "programme-comp360-trd",
       });
       expect(fetchSpy).not.toHaveBeenCalled();
     } finally {

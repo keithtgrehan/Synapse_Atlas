@@ -29,12 +29,13 @@ export default async function ProgrammesPage({
     <main className="shell">
       <header className="page-header">
         <Link className="back-link" href="/">← Synapse Atlas</Link>
-        <p className="eyebrow">Version-controlled mapping candidates</p>
+        <p className="eyebrow">Version-controlled programme mappings</p>
         <h1>Programmes</h1>
         <p className="lede">
-          Search checked-in ClinicalTrials.gov snapshots and proposed programme,
-          reported sponsor-organisation, and compound relationships. These are
-          review candidates, not live programme data.
+          Search checked-in ClinicalTrials.gov snapshots and evidence-bounded
+          programme, reported sponsor-organisation, and compound relationships.
+          Review and resolution state is shown on every record; none is live
+          programme data.
         </p>
       </header>
 
@@ -51,7 +52,7 @@ export default async function ProgrammesPage({
             defaultValue={parsedParameters.valid ? parsedParameters.query : ""}
           />
         </div>
-        <button className="button" type="submit">Search candidates</button>
+        <button className="button" type="submit">Search mappings</button>
       </form>
 
       <p className="boundary-note">
@@ -83,9 +84,9 @@ export default async function ProgrammesPage({
         <section aria-labelledby="programme-results-heading">
           <div className="results-heading">
             <div>
-              <p className="eyebrow">Checked-in candidates</p>
+              <p className="eyebrow">Checked-in mappings</p>
               <h2 id="programme-results-heading">
-                {results.length} programme {results.length === 1 ? "candidate" : "candidates"}
+                {results.length} programme {results.length === 1 ? "mapping" : "mappings"}
               </h2>
             </div>
             <p>Dataset version {programmeMappingDataset.datasetVersion}</p>

@@ -11,7 +11,7 @@ project:
   owner: Keith Grehan
   location: Berlin, Germany
   started: 2026-08-14
-  last_updated: 2026-08-14
+  last_updated: 2026-08-15
 mission:
   career_goal: Move into CNS, neuropsychiatric or psychedelic biotech through partnerships, business development, strategy, research operations, or AI/data product work.
   product_goal: Prove scientific, product, engineering and commercial capability with a trustworthy private drug-development intelligence tool.
@@ -43,10 +43,10 @@ last_completed:
   - PR #5 merged S1-03 at b7305dae739841a23c769e264fa4a84cee6db47c with successful GitHub CI and Vercel Preview checks.
 next_action:
   task: S1-04
-  instruction: Review the S1-04 draft PR and explicitly approve, reject, or amend each pending mapping row; do not merge without Keith's explicit approval and do not start S1-05.
+  instruction: Confirm the remediated draft PR #6 current head has green CI and Preview checks, then complete final Control Room review; all three bounded mapping decisions are recorded, but do not merge without Keith's explicit instruction and do not start S1-05.
 blockers:
   - No approved Postgres connection is configured, so the S1-02 migration remains unapplied and S1-03 live normalized records are not persisted.
-  - All three S1-04 mapping assertions remain PENDING and UNRESOLVED until Keith makes an explicit human mapping decision.
+  - S1-04 remains unmerged and In review; S1-05 is blocked until an explicit merge and post-merge verification.
 ```
 
 ---
@@ -303,7 +303,7 @@ Acceptance:
 - conservative deterministic resolver with explicit unresolved/conflict states;
 - only approved mappings may resolve;
 - programme list/search/detail UI with linked registered trials and official evidence;
-- pending human review packet;
+- auditable human review decision record;
 - no database migration, AI, fuzzy matching, or new source.
 
 ## Next
@@ -782,6 +782,7 @@ AI extraction, ChEMBL enrichment and publication polish are cut before the relea
 | 2026-08-14 | Three control files at root | Maximum discoverability for Codex/GPT and minimal documentation sprawl | After v0.1 |
 | 2026-08-14 | Disable automatic Vercel Git deployments from `main` | Keep Synapse Atlas Preview-only until a future human-approved Production action | Before an explicitly approved Production release |
 | 2026-08-14 | Keep S1-04 mapping candidates version-controlled, pending, and resolver-gated | ClinicalTrials.gov supports registry observations but not company identity, ownership, focal intervention, or approved programme/compound relationships | After Keith reviews each mapping row |
+| 2026-08-15 | Approve the three S1-04 mappings only within bounded internal programme namespaces | Keith explicitly approved the Usona, COMP360, and CYB003 associations; registry interventions remain separate source observations, programme aliases do not create chemical synonym/equivalence claims, and all unsupported company, rights, chemical, programme-wide, efficacy, safety, mechanism, and superiority claims remain unknown | Final Control Room review of draft PR #6; never broaden these decisions without new approved evidence and review |
 
 ---
 
@@ -802,6 +803,7 @@ Append one compact row per completed work package.
 | 2026-08-14 | S1-03 ClinicalTrials.gov vertical slice | Added the bounded official API client, normalized trial records, live list/filter/detail UI, explicit freshness/provenance, and fail-closed states on the feature branch | `pnpm check`; 10 test files/65 tests; production build; live API and desktop/mobile browser journey; diff, secret and scope review | Review the draft PR; keep S1-04 unstarted |
 | 2026-08-14 | PR #5 — S1-03 ClinicalTrials.gov vertical slice | Merged the reviewed registered-trial explorer as `b7305dae739841a23c769e264fa4a84cee6db47c` | Local, origin/main, live GitHub, CI and Vercel Preview verification; no open PR remained | S1-04 program and compound resolution |
 | 2026-08-14 | S1-04 program and compound resolution | Added three evidence-bound pending mapping candidates, deterministic approval-gated resolution, offline programme search/detail, and exact registry snapshot provenance | `pnpm check`; 13 test files/85 tests; audit clean; migration and Vercel policy unchanged; production smoke and desktop/390 px browser journey | Review the draft PR and decide each pending mapping row; keep S1-05 blocked |
+| 2026-08-15 | S1-04 human-review remediation | Recorded Keith's three bounded approvals, strengthened exact snapshot-query validation, and made programme review/resolution UI state-driven | `pnpm check`; 14 test files/93 tests; audit clean; migration/dependencies/CI/Vercel policy unchanged; seven-route production smoke and desktop/390 px Chrome verification | Confirm the updated draft PR #6 head has green CI and Preview checks, then return it to final Control Room review; never merge or start S1-05 automatically |
 
 Detailed handovers may be placed below.
 
@@ -917,6 +919,26 @@ Detailed handovers may be placed below.
 
 **Next highest-impact task:** Review the S1-04 draft PR, record an explicit approve/reject/amend decision for each mapping row in the same branch, rerun checks if mappings change, then explicitly merge and post-merge verify before starting S1-05.
 
+### 2026-08-15 — S1-04 human-review remediation
+
+**Goal:** G1 — Ship private v0.1
+
+**Completed:** Recorded Keith's explicit human decisions for all three mapping assertions as `APPROVED` and `RESOLVED`, using the exact reviewer reference, rationales, and actual processing time `2026-08-14T22:10:17Z`. Preserved the three Usona registry interventions separately; kept COMP360 and Psilocybin non-equivalent with their chemical/formulation relationship unknown; limited CYB003 approval to the programme candidate, candidate compound label, trial, and reported-sponsor association; and kept programme aliases namespace-scoped. Replaced pending-only UI copy/classes with exhaustive state-driven review and resolution presentations, exposed the human review record and registry interventions, and strengthened snapshot URLs to exactly one approved value for each required parameter with no extras.
+
+**Files changed:** The versioned mapping dataset; programme domain/schema; programme list/detail/state UI and shared styles; focused fixture, resolver, integration, and server-render tests; `README.md`; and this control room. No fixture bytes or metadata, dependency, source policy, CI workflow, database schema, migration, or Vercel policy changed.
+
+**Tests/checks:** `pnpm install --frozen-lockfile`; focused programme suite (4 files/28 tests); `pnpm check` (lint, strict typecheck, 14 test files/93 tests, Drizzle consistency, production build); `pnpm audit --prod` (no known vulnerabilities); `git diff --check`; exact schema/migration, dependency, CI, and `vercel.json` no-change checks; targeted credential/private-data scan. Production-mode local smoke passed `/programs`, COMP360 search, all three detail routes, repeated-parameter redacted error, and unknown-programme 404. Chrome desktop and emulated 390 px checks rendered meaningful content, distinct Approved/Resolved badges, the review record, and all Usona interventions; the 390 px page had no horizontal overflow, framework overlay, or page console error.
+
+**Source/legal evidence:** `SRC-CTG` policy version `1` remains the sole source. No source, request, or fixture was added or refreshed. Existing exact official snapshots for `NCT03866174`, `NCT05711940`, and `NCT06605105` retain their original bytes, metadata, SHA-256 values, registry observations, attribution, and locators. Registry facts remain `STRUCTURED_EXTRACTION`; the reviewed relationships remain bounded `HUMAN_INFERENCE`.
+
+**Decisions:** `mapping-usona-psilocybin-mdd`, `mapping-comp360-trd`, and `mapping-cyb003-mdd` may resolve only within their reviewed programme namespaces. Review approval does not establish company identity, ownership/control, developer or commercial-rights status, chemical/formulation equivalence, programme-wide phase/status, mechanism, efficacy, safety, superiority, or any unreviewed intervention role. S1-04 remains In review until explicit merge and post-merge verification.
+
+**Known risks:** No approved Postgres connection exists, so the S1-02 migration remains unapplied and normalized live trial records remain request-scoped. Linked trial pages still depend on live ClinicalTrials.gov availability. The reviewed mapping boundary must not be broadened without new evidence and human review.
+
+**Blocked:** Draft PR #6 merge remains blocked on Keith's explicit merge instruction. S1-05 remains blocked and unstarted until S1-04 is merged and post-merge verified.
+
+**Next highest-impact task:** Confirm the updated draft PR #6 head has green GitHub CI and a Ready Preview-only Vercel deployment, then return it to final Control Room review without merging.
+
 ## Handover template
 
 ```markdown
@@ -955,7 +977,7 @@ Use these commands in a project conversation or Codex:
 S1-01 is Complete.
 S1-02 is Complete and merged in PR #4 at 3b83f8f92b925c791430950a8ed5c22e1d5915b2.
 S1-03 is Complete and merged in PR #5 at b7305dae739841a23c769e264fa4a84cee6db47c.
-S1-04 is In review/current. All three production mapping assertions remain PENDING and UNRESOLVED.
-Review its draft PR and record Keith's required mapping decisions; never merge without Keith's explicit instruction.
+S1-04 is In review/current. Keith's three bounded human decisions are recorded as APPROVED and RESOLVED, with namespace-scoped aliases and explicit unknowns preserved.
+Confirm the remediated draft PR #6 current head has green CI and Preview checks, then complete final Control Room review; never merge without Keith's explicit instruction.
 S1-05 remains blocked and unstarted until S1-04 is explicitly merged and post-merge verified.
 ```

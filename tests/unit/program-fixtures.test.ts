@@ -3,6 +3,7 @@ import path from "node:path";
 
 import { describe, expect, it } from "vitest";
 
+import { programmeSourceSnapshotSchema } from "../../src/lib/domain/programs";
 import {
   programmeFixturePageSchema,
   readAndValidateProgrammeFixture,
@@ -69,6 +70,80 @@ describe("programme ClinicalTrials.gov snapshots", () => {
         studies: [{ protocolSection: { identificationModule: {} } }],
       }).success,
     ).toBe(false);
+  });
+
+  it("requires exactly one approved value for every snapshot URL parameter", () => {
+    const snapshot = programmeMappingDataset.sourceSnapshots[0]!;
+    const requiredParameterNames = [
+      "query.id",
+      "pageSize",
+      "countTotal",
+      "format",
+      "fields",
+    ] as const;
+    const withMutatedUrl = (mutate: (url: URL) => void) => {
+      const url = new URL(snapshot.apiRequestUrl);
+      mutate(url);
+
+      return { ...snapshot, apiRequestUrl: url.toString() };
+    };
+
+    expect(programmeSourceSnapshotSchema.safeParse(snapshot).success).toBe(true);
+
+    const unexpectedParameter = withMutatedUrl((url) => {
+      url.searchParams.set("unexpected", "true");
+    });
+    expect(
+      programmeSourceSnapshotSchema.safeParse(unexpectedParameter).success,
+    ).toBe(false);
+
+    for (const parameterName of requiredParameterNames) {
+      const duplicateParameter = withMutatedUrl((url) => {
+        url.searchParams.append(
+          parameterName,
+          url.searchParams.get(parameterName)!,
+        );
+      });
+      const missingParameter = withMutatedUrl((url) => {
+        url.searchParams.delete(parameterName);
+      });
+
+      expect(
+        programmeSourceSnapshotSchema.safeParse(duplicateParameter).success,
+        `duplicate ${parameterName}`,
+      ).toBe(false);
+      expect(
+        programmeSourceSnapshotSchema.safeParse(missingParameter).success,
+        `missing ${parameterName}`,
+      ).toBe(false);
+    }
+
+    const changedFieldList = withMutatedUrl((url) => {
+      url.searchParams.set(
+        "fields",
+        "BriefTitle,NCTId,OverallStatus,StartDate,LastUpdatePostDate,LeadSponsorName,Condition,InterventionName",
+      );
+    });
+    const duplicateFieldSelection = withMutatedUrl((url) => {
+      url.searchParams.set(
+        "fields",
+        `${url.searchParams.get("fields")},NCTId`,
+      );
+    });
+    const mismatchedNctId = withMutatedUrl((url) => {
+      url.searchParams.set("query.id", "NCT00000000");
+    });
+
+    for (const [label, candidate] of [
+      ["changed field list", changedFieldList],
+      ["duplicate field selection", duplicateFieldSelection],
+      ["mismatched NCT ID", mismatchedNctId],
+    ] as const) {
+      expect(
+        programmeSourceSnapshotSchema.safeParse(candidate).success,
+        label,
+      ).toBe(false);
+    }
   });
 
   it("rejects mismatched NCT, sponsor, intervention, locator, and hash evidence", async () => {

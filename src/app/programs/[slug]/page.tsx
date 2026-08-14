@@ -11,6 +11,9 @@ import {
 import { programmeMappingDataset } from "../../../lib/programs/dataset";
 import {
   formatUtcDateTime,
+  MappingStateBadges,
+  mappingStateSummary,
+  noRecordedConflictDescription,
   ProgrammeFact,
   SnapshotProvenance,
 } from "../program-ui";
@@ -46,6 +49,13 @@ export default async function ProgrammeDetailPage({
       ),
     ),
   );
+  const interventions = Array.from(
+    new Set(
+      sourceSnapshots.flatMap(
+        (snapshot) => snapshot.observedRegistryFacts.reportedInterventions,
+      ),
+    ),
+  );
 
   return (
     <main className="shell">
@@ -54,17 +64,13 @@ export default async function ProgrammeDetailPage({
         <p className="eyebrow">Version-controlled registry snapshot</p>
         <h1>{programme.canonicalLabel}</h1>
         <p className="lede">
-          This is a human-inferred mapping candidate backed by checked-in
-          ClinicalTrials.gov observations. It is not approved or live programme data.
+          {mappingStateSummary(mapping.reviewStatus, mapping.resolutionState)}
         </p>
-        <div className="status-group detail-status" aria-label="Mapping states">
-          <span className="status-label status-pending">
-            {reviewStatusLabel(mapping.reviewStatus)}
-          </span>
-          <span className="status-label status-unknown">
-            {resolutionStateLabel(mapping.resolutionState)}
-          </span>
-        </div>
+        <MappingStateBadges
+          reviewStatus={mapping.reviewStatus}
+          resolutionState={mapping.resolutionState}
+          className="detail-status"
+        />
       </header>
 
       <section className="detail-section" aria-labelledby="mapping-facts-heading">
@@ -84,7 +90,7 @@ export default async function ProgrammeDetailPage({
           <ProgrammeFact label="Company identity">
             Unknown — {programme.companyIdentity.rationale}
           </ProgrammeFact>
-          <ProgrammeFact label="Candidate compound mapping">
+          <ProgrammeFact label="Candidate compound association">
             {compound.canonicalLabel} · {reviewStatusLabel(mapping.reviewStatus)} · {resolutionStateLabel(mapping.resolutionState)}
           </ProgrammeFact>
           <ProgrammeFact label="Registry observations">Structured extraction</ProgrammeFact>
@@ -106,6 +112,13 @@ export default async function ProgrammeDetailPage({
           <ProgrammeFact label="Source-reported conditions">
             {conditions.join(", ")}
           </ProgrammeFact>
+          <ProgrammeFact label="Source-reported interventions">
+            <ul className="plain-list">
+              {interventions.map((intervention) => (
+                <li key={intervention}>{intervention}</li>
+              ))}
+            </ul>
+          </ProgrammeFact>
           <ProgrammeFact label="Linked registered trials">
             <ul className="plain-list">
               {sourceSnapshots.map((snapshot) => (
@@ -122,11 +135,30 @@ export default async function ProgrammeDetailPage({
       </section>
 
       <section className="detail-section" aria-labelledby="review-packet-heading">
-        <p className="eyebrow">Human review packet</p>
-        <h2 id="review-packet-heading">Rationale, aliases, and uncertainty</h2>
+        <p className="eyebrow">Human review record</p>
+        <h2 id="review-packet-heading">Decision, aliases, and uncertainty</h2>
         <dl className="stacked-facts">
           <ProgrammeFact label="Mapping rationale">{mapping.rationale}</ProgrammeFact>
-          <ProgrammeFact label="Proposed aliases">
+          <ProgrammeFact label="Human review rationale">
+            {mapping.reviewRationale ?? "No human review rationale is recorded."}
+          </ProgrammeFact>
+          <ProgrammeFact label="Reviewer reference">
+            {mapping.reviewerReference ?? "No reviewer reference is recorded."}
+          </ProgrammeFact>
+          <ProgrammeFact label="Reviewed at">
+            {mapping.reviewedAt === undefined ? (
+              "No review timestamp is recorded."
+            ) : (
+              <time dateTime={mapping.reviewedAt}>
+                {formatUtcDateTime(mapping.reviewedAt)}
+              </time>
+            )}
+          </ProgrammeFact>
+          <ProgrammeFact label="Namespace-scoped programme aliases">
+            <p>
+              These aliases apply only to this internal programme grouping;
+              they do not assert chemical synonyms or cross-entity equivalence.
+            </p>
             <ul className="plain-list">
               {mapping.aliases.map((alias) => <li key={alias}>{alias}</li>)}
             </ul>
@@ -138,7 +170,7 @@ export default async function ProgrammeDetailPage({
           </ProgrammeFact>
           <ProgrammeFact label="Conflicts">
             {programme.conflicts.length === 0 ? (
-              "No explicit conflict is recorded in this bounded dataset. That does not constitute approval."
+              noRecordedConflictDescription(mapping.resolutionState)
             ) : (
               <ul className="plain-list">
                 {programme.conflicts.map((conflict) => <li key={conflict}>{conflict}</li>)}

@@ -21,10 +21,17 @@ function syntheticAssertion(
   },
 ): ProgrammeMappingAssertion {
   const base = programmeMappingDataset.mappingAssertions[0]!;
+  const unreviewedBase = structuredClone(base) as Record<string, unknown>;
+
+  delete unreviewedBase.reviewerReference;
+  delete unreviewedBase.reviewRationale;
+  delete unreviewedBase.reviewedAt;
 
   return programmeMappingAssertionSchema.parse({
-    ...base,
+    ...unreviewedBase,
     aliases: ["Synthetic alias"],
+    reviewStatus: "PENDING",
+    resolutionState: "UNRESOLVED",
     ...overrides,
   });
 }
@@ -104,7 +111,7 @@ describe("programme mapping dataset", () => {
     );
   });
 
-  it("returns UNRESOLVED for unknown and pending aliases without guessing", () => {
+  it("returns UNRESOLVED for unknown aliases without guessing", () => {
     expect(
       resolveProgrammeAlias(
         "not present",
@@ -116,16 +123,6 @@ describe("programme mapping dataset", () => {
       candidates: [],
       winnerProgrammeId: null,
     });
-
-    const pending = resolveProgrammeAlias(
-      "COMP360",
-      programmeMappingDataset.mappingAssertions,
-    );
-    expect(pending.state).toBe("UNRESOLVED");
-    expect(pending.winnerProgrammeId).toBeNull();
-    expect(pending.candidates).toMatchObject([
-      { reviewStatus: "PENDING", resolutionState: "UNRESOLVED" },
-    ]);
   });
 
   it("retains pending, rejected, and needs-revision history without resolving it", () => {
@@ -188,6 +185,33 @@ describe("programme mapping dataset", () => {
       delete candidate[field];
       expect(programmeMappingAssertionSchema.safeParse(candidate).success).toBe(false);
     }
+
+    expect(
+      programmeMappingAssertionSchema.safeParse({
+        ...base,
+        resolutionState: "UNRESOLVED",
+      }).success,
+    ).toBe(false);
+
+    expect(
+      programmeMappingAssertionSchema.safeParse({
+        ...syntheticAssertion({
+          id: "mapping-pending-with-review-metadata",
+          programmeId: "programme-pending-with-review-metadata",
+        }),
+        reviewerReference: "must-not-exist",
+      }).success,
+    ).toBe(false);
+
+    for (const reviewStatus of ["REJECTED", "NEEDS_REVISION"] as const) {
+      expect(
+        programmeMappingAssertionSchema.safeParse({
+          ...base,
+          reviewStatus,
+          resolutionState: "RESOLVED",
+        }).success,
+      ).toBe(false);
+    }
   });
 
   it("returns every approved collision candidate deterministically and no winner", () => {
@@ -222,6 +246,22 @@ describe("programme mapping dataset", () => {
       state: "RESOLVED",
       winnerProgrammeId: "programme-resolved",
     });
+  });
+
+  it("resolves every approved production alias only to its reviewed programme grouping", () => {
+    for (const assertion of programmeMappingDataset.mappingAssertions) {
+      for (const alias of assertion.aliases) {
+        expect(
+          resolveProgrammeAlias(
+            alias,
+            programmeMappingDataset.mappingAssertions,
+          ),
+        ).toMatchObject({
+          state: "RESOLVED",
+          winnerProgrammeId: assertion.programmeId,
+        });
+      }
+    }
   });
 
   it("searches programme, compound, sponsor, alias, condition, and NCT ID", () => {
@@ -296,17 +336,34 @@ describe("programme mapping dataset", () => {
     expect(parseProgrammeSearchParameters({ q: "x".repeat(121) }).valid).toBe(false);
   });
 
-  it("keeps production mappings pending and excludes prohibited inferred fields", () => {
+  it("records the three exact human approvals and excludes prohibited inferred fields", () => {
     expect(programmeMappingDataset.mappingAssertions).toHaveLength(3);
+
+    const expectedReviewRationales = new Map([
+      [
+        "mapping-usona-psilocybin-mdd",
+        "Approved as a human-reviewed association of NCT03866174 with a Usona Institute–reported psilocybin-in-major-depressive-disorder programme candidate. ClinicalTrials.gov names Psilocybin in the study title, reports Usona Institute as lead sponsor organisation, and reports Depressive Disorder, Major. Niacin and Set and Setting (SaS) Protocol remain separately preserved registry interventions. This approval does not assert that psilocybin is the only intervention, or establish company identity, ownership, developer status, commercial rights, programme-level phase/status, mechanism, efficacy, or safety.",
+      ],
+      [
+        "mapping-comp360-trd",
+        "Approved as a human-reviewed association within NCT05711940: the ClinicalTrials.gov title names COMP360, the intervention field reports Psilocybin, the lead sponsor organisation is COMPASS Pathways, and the condition is Treatment Resistant Depression. This does not establish that COMP360 and Psilocybin are synonyms or chemically/formulation-equivalent, nor company identity, ownership, developer status, commercial rights, programme-level phase/status, efficacy, or safety.",
+      ],
+      [
+        "mapping-cyb003-mdd",
+        "Approved as an evidence-bounded human-inference mapping: ClinicalTrials.gov record NCT06605105 names CYB003 in the study title, reports CYB003 as its sole intervention, Major Depressive Disorder as the condition, and Cybin IRL Limited as the lead sponsor organisation. This approval links the study to the programme candidate ‘CYB003 for major depressive disorder’ and candidate compound label ‘CYB003’ only. It does not establish chemical identity, company identity, ownership, developer or commercial-rights status, programme-wide phase/status, mechanism, efficacy, safety, or superiority.",
+      ],
+    ]);
+
     expect(
       programmeMappingDataset.mappingAssertions.every(
         (assertion) =>
           assertion.evidenceClass === "HUMAN_INFERENCE" &&
-          assertion.reviewStatus === "PENDING" &&
-          assertion.resolutionState === "UNRESOLVED" &&
-          assertion.reviewerReference === undefined &&
-          assertion.reviewRationale === undefined &&
-          assertion.reviewedAt === undefined,
+          assertion.reviewStatus === "APPROVED" &&
+          assertion.resolutionState === "RESOLVED" &&
+          assertion.reviewerReference ===
+            "Keith Grehan — explicit human review decision in the S1-04 Codex task" &&
+          assertion.reviewedAt === "2026-08-14T22:10:17Z" &&
+          assertion.reviewRationale === expectedReviewRationales.get(assertion.id),
       ),
     ).toBe(true);
     expect(
@@ -332,6 +389,65 @@ describe("programme mapping dataset", () => {
     ]);
     expect(collectKeys(programmeMappingDataset).filter((key) => prohibitedKeys.has(key)))
       .toEqual([]);
+  });
+
+  it("keeps programme aliases namespace-scoped and compound equivalence unknown", () => {
+    expect(
+      resolveProgrammeAlias(
+        "Psilocybin",
+        programmeMappingDataset.mappingAssertions,
+      ),
+    ).toEqual({
+      state: "UNRESOLVED",
+      normalizedInput: "psilocybin",
+      candidates: [],
+      winnerProgrammeId: null,
+    });
+
+    const psilocybin = programmeMappingDataset.compounds.find(
+      (compound) => compound.id === "compound-psilocybin",
+    );
+    const comp360 = getProgrammeBySlug(
+      programmeMappingDataset,
+      "comp360-treatment-resistant-depression",
+    );
+    const usona = getProgrammeBySlug(
+      programmeMappingDataset,
+      "usona-psilocybin-mdd",
+    );
+    const cyb003 = getProgrammeBySlug(
+      programmeMappingDataset,
+      "cyb003-major-depressive-disorder",
+    );
+
+    expect(psilocybin?.rawAliases.map((alias) => alias.value)).toEqual([
+      "Psilocybin",
+      "Psilocybin",
+    ]);
+    expect(psilocybin?.rawAliases.some((alias) => alias.value === "COMP360"))
+      .toBe(false);
+    expect(comp360?.mapping.rationale).toBe(
+      "COMP360-labelled programme candidate associated with the registry-reported Psilocybin intervention in NCT05711940.",
+    );
+    expect(comp360?.programme.explicitUnknowns.join(" ")).toContain(
+      "not asserted to be synonyms, aliases, identical substances, or chemically/formulation-equivalent",
+    );
+    expect(
+      usona?.sourceSnapshots[0]?.observedRegistryFacts.reportedInterventions,
+    ).toEqual([
+      "Psilocybin",
+      "Niacin",
+      "Set and Setting (SaS) Protocol",
+    ]);
+    expect(usona?.programme.explicitUnknowns.join(" ")).toContain(
+      "whether Psilocybin is an exclusive programme compound",
+    );
+    expect(cyb003?.programme.explicitUnknowns.join(" ")).toContain(
+      "Chemical identity beyond the candidate compound label CYB003",
+    );
+    expect(cyb003?.programme.explicitUnknowns.join(" ")).toContain(
+      "superiority",
+    );
   });
 });
 
