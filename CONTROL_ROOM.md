@@ -38,11 +38,12 @@ last_completed:
   - PR #2 merged S1-01 at a79759f6615913fd088ae04184c2c9c7c520abc2.
   - S1-01 post-merge closeout removed the unintended Production deployment and aliases while preserving both protected Preview deployments.
   - Automatic Vercel Git deployments from main are disabled by tested version-controlled policy; pull-request Preview deployments remain enabled.
+  - PR #3 merged the S1-01 post-merge closeout at 290ca358c86ffd9fd7cfaae61534eec9427115e8.
 next_action:
   task: S1-02
-  instruction: Await Keith's explicit START S1-02 command; then implement only the source registry and evidence schema task. Do not start automatically.
+  instruction: Review the S1-02 draft PR; do not merge without Keith's explicit approval and do not start S1-03.
 blockers:
-  - No real Postgres connection is configured; this may block applying and integration-testing S1-02 migrations.
+  - No real Postgres connection is configured, so the S1-02 migration has not been applied or integration-tested against Postgres.
 ```
 
 ---
@@ -259,7 +260,7 @@ Acceptance:
 ### S1-02 — Source registry and evidence schema
 
 **Owner:** Research/Source + Data  
-**Status:** Ready — current/next, not started
+**Status:** In review — current; S1-03 remains blocked
 
 Acceptance:
 
@@ -776,6 +777,8 @@ Append one compact row per completed work package.
 | 2026-08-14 | S1-01 deployable foundation | Next.js/Postgres scaffold, health route, CI and real ClinicalTrials.gov fixture implemented on feature branch | lint, typecheck, 7 tests, build, Drizzle config, local smoke test, production dependency audit | Review and merge S1-01 draft PR; keep S1-02 blocked |
 | 2026-08-14 | S1-01 review remediation | Added aggregate check, runtime fixture/metadata validation, corrected provenance dates, durable roadmap status, PR #1 ledger evidence and protected Vercel preview | Full requested local verification; protected preview root 200 and expected health 503 | Return draft PR #2 to Control Room review; keep S1-02 blocked |
 | 2026-08-14 | S1-01 post-merge closeout | Verified PR #2 merged; removed the unintended Production deployment and three aliases; preserved the project and protected Previews; added and tested the `main` deployment guardrail | Frozen install, lint, typecheck, 4 test files/8 tests, build, aggregate check, Vercel before/after verification | After Keith explicitly merges PR #3 and the Control Room verifies `main` and Vercel state, issue `START S1-02` |
+| 2026-08-14 | PR #3 — S1-01 post-merge closeout | Merged the tested Preview-only deployment guardrail and closeout record as `290ca358c86ffd9fd7cfaae61534eec9427115e8` | Local, origin/main and live GitHub merge verification; Vercel Production remained empty | S1-02 source registry and evidence schema |
+| 2026-08-14 | S1-02 source registry and evidence schema | Added the deny-by-default `SRC-CTG` policy, seven-table provenance schema, baseline migration/approved-policy bootstrap, runtime invariants and migration drift checks on the feature branch | `pnpm check`; 7 test files/41 tests; build; Drizzle check and no-drift regeneration; smoke, diff and secret review | Review the draft PR; keep S1-03 blocked and unstarted |
 
 Detailed handovers may be placed below.
 
@@ -821,6 +824,26 @@ Detailed handovers may be placed below.
 
 **Next highest-impact task:** After Keith explicitly merges PR #3 and the Control Room verifies `main` and Vercel state, issue `START S1-02`.
 
+### 2026-08-14 — S1-02
+
+**Goal:** G1 — Ship private v0.1
+
+**Completed:** Implemented a fail-closed, versioned source-policy registry with one approved ClinicalTrials.gov entry and exact HTTPS host, GET method, path, credential, port, fragment, expiry, and redirect boundaries. Added source-policy, source/version, ingestion-run, claim/input, and review-decision tables with restrictive provenance and policy-coherence foreign keys and database checks. Added pure Zod claim/provenance validators, exact-byte SHA-256 verification, a baseline migration that bootstraps the matching approved policy, migration consistency in CI, and deterministic adversarial tests. S1-02 remains In review until its draft PR is explicitly merged.
+
+**Files changed:** Source policy and evidence modules under `src/lib/`; Drizzle schema, lazy typed client and generated `drizzle/` migration; fixture validation; unit tests; CI/package scripts; `README.md`; and this control room.
+
+**Tests/checks:** `pnpm install --frozen-lockfile`; `pnpm check` (lint, strict typecheck, 7 test files/41 tests, Drizzle migration check, production build); second migration generation reported no schema changes; local production smoke test returned `/` 200 and the expected `/api/health` 503 without database configuration; `git diff --check`; bounded diff, migration SQL, secret/private-data, and S1-03 scope review. GitHub CI evidence will be recorded in the PR/final handover.
+
+**Source/legal evidence:** `SRC-CTG` remains the sole runtime-approved policy. The entry records the official ClinicalTrials.gov API and terms pages, attribution, allowed use, prohibited use, and review timestamp. No new external content, scraping, Firecrawl, authentication, paywall access, or AI API use was introduced.
+
+**Decisions:** Immutable retrieval time, local processing time, and exact stored-byte hash live on `source_versions`; the provider-reported registry update date remains separate source metadata. `source_versions` must match the policy version on both its source and ingestion run. Derived inputs that span rows are enforced by the pure claim validator and `claim_inputs`; conflicts remain representable because claims are not made unique by subject/predicate. The baseline migration and approved-policy bootstrap are generated/statically tested without provisioning or contacting a database.
+
+**Known risks:** The migration has not been applied to a real Postgres instance. Cross-row claim-input class validation and synchronization between claim review status and decision history will require transaction-level application logic in later bounded tasks.
+
+**Blocked:** No blocker to reviewing S1-02. Applying and integration-testing the migration is blocked until a real Postgres connection is separately approved and configured. S1-03 is blocked by S1-02 merge and remains unstarted.
+
+**Next highest-impact task:** Review and explicitly merge the S1-02 draft PR if it passes; only then start S1-03 as a separate work package.
+
 ## Handover template
 
 ```markdown
@@ -857,7 +880,7 @@ Use these commands in a project conversation or Codex:
 
 ```text
 S1-01 is Complete.
-S1-02 is Ready/current but not started.
-Wait for the explicit command `START S1-02`.
-Do not begin work automatically.
+S1-02 is In review/current.
+Review its draft PR; never merge without Keith's explicit instruction.
+S1-03 remains blocked and unstarted until S1-02 is explicitly merged.
 ```

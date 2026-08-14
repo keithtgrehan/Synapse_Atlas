@@ -12,11 +12,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm build",
+    "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm db:check && pnpm build",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
+    "db:check": "drizzle-kit check",
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {

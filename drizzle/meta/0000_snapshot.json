@@ -1,0 +1,1268 @@
+{
+  "id": "07b685e8-d4a0-4467-995d-0d3270356760",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.claim_inputs": {
+      "name": "claim_inputs",
+      "schema": "",
+      "columns": {
+        "derived_claim_id": {
+          "name": "derived_claim_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "input_claim_id": {
+          "name": "input_claim_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "position": {
+          "name": "position",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "claim_inputs_input_claim_idx": {
+          "name": "claim_inputs_input_claim_idx",
+          "columns": [
+            {
+              "expression": "input_claim_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "claim_inputs_derived_claim_id_claims_id_fk": {
+          "name": "claim_inputs_derived_claim_id_claims_id_fk",
+          "tableFrom": "claim_inputs",
+          "tableTo": "claims",
+          "columnsFrom": [
+            "derived_claim_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        },
+        "claim_inputs_input_claim_id_claims_id_fk": {
+          "name": "claim_inputs_input_claim_id_claims_id_fk",
+          "tableFrom": "claim_inputs",
+          "tableTo": "claims",
+          "columnsFrom": [
+            "input_claim_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "compositePrimaryKeys": {
+        "claim_inputs_pk": {
+          "name": "claim_inputs_pk",
+          "columns": [
+            "derived_claim_id",
+            "input_claim_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "claim_inputs_position_unique": {
+          "name": "claim_inputs_position_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "derived_claim_id",
+            "position"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {
+        "claim_inputs_position_nonnegative": {
+          "name": "claim_inputs_position_nonnegative",
+          "value": "\"claim_inputs\".\"position\" >= 0"
+        },
+        "claim_inputs_no_self_reference": {
+          "name": "claim_inputs_no_self_reference",
+          "value": "\"claim_inputs\".\"derived_claim_id\" <> \"claim_inputs\".\"input_claim_id\""
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.claims": {
+      "name": "claims",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "subject_type": {
+          "name": "subject_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "subject_id": {
+          "name": "subject_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "predicate": {
+          "name": "predicate",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "value_json": {
+          "name": "value_json",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "evidence_class": {
+          "name": "evidence_class",
+          "type": "evidence_class",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "source_id": {
+          "name": "source_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "source_version_id": {
+          "name": "source_version_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "external_id": {
+          "name": "external_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "source_locator": {
+          "name": "source_locator",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "extraction_method": {
+          "name": "extraction_method",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "formula_version": {
+          "name": "formula_version",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "model_version": {
+          "name": "model_version",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "prompt_version": {
+          "name": "prompt_version",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "schema_version": {
+          "name": "schema_version",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "confidence": {
+          "name": "confidence",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "review_status": {
+          "name": "review_status",
+          "type": "claim_review_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "claims_subject_predicate_idx": {
+          "name": "claims_subject_predicate_idx",
+          "columns": [
+            {
+              "expression": "subject_type",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "subject_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "predicate",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "claims_source_version_idx": {
+          "name": "claims_source_version_idx",
+          "columns": [
+            {
+              "expression": "source_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "source_version_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "claims_evidence_review_idx": {
+          "name": "claims_evidence_review_idx",
+          "columns": [
+            {
+              "expression": "evidence_class",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "review_status",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "claims_source_id_sources_id_fk": {
+          "name": "claims_source_id_sources_id_fk",
+          "tableFrom": "claims",
+          "tableTo": "sources",
+          "columnsFrom": [
+            "source_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        },
+        "claims_source_version_fk": {
+          "name": "claims_source_version_fk",
+          "tableFrom": "claims",
+          "tableTo": "source_versions",
+          "columnsFrom": [
+            "source_id",
+            "source_version_id"
+          ],
+          "columnsTo": [
+            "source_id",
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "claims_source_version_requires_source": {
+          "name": "claims_source_version_requires_source",
+          "value": "\"claims\".\"source_version_id\" IS NULL OR \"claims\".\"source_id\" IS NOT NULL"
+        },
+        "claims_fact_source_required": {
+          "name": "claims_fact_source_required",
+          "value": "\"claims\".\"evidence_class\" NOT IN ('SOURCE_FACT', 'STRUCTURED_EXTRACTION') OR \"claims\".\"source_id\" IS NOT NULL OR COALESCE(length(btrim(\"claims\".\"external_id\")), 0) > 0"
+        },
+        "claims_derived_formula_required": {
+          "name": "claims_derived_formula_required",
+          "value": "\"claims\".\"evidence_class\" <> 'DERIVED_CALCULATION' OR COALESCE(length(btrim(\"claims\".\"formula_version\")), 0) > 0"
+        },
+        "claims_model_provenance_required": {
+          "name": "claims_model_provenance_required",
+          "value": "\"claims\".\"evidence_class\" <> 'MODEL_INFERENCE' OR (COALESCE(length(btrim(\"claims\".\"model_version\")), 0) > 0 AND COALESCE(length(btrim(\"claims\".\"prompt_version\")), 0) > 0 AND COALESCE(length(btrim(\"claims\".\"schema_version\")), 0) > 0 AND COALESCE(length(btrim(\"claims\".\"source_locator\")), 0) > 0 AND \"claims\".\"confidence\" IS NOT NULL)"
+        },
+        "claims_confidence_range": {
+          "name": "claims_confidence_range",
+          "value": "\"claims\".\"confidence\" IS NULL OR (\"claims\".\"confidence\" >= 0 AND \"claims\".\"confidence\" <= 1)"
+        },
+        "claims_unknown_value": {
+          "name": "claims_unknown_value",
+          "value": "(\"claims\".\"evidence_class\" = 'UNKNOWN' AND \"claims\".\"value_json\" IS NULL) OR (\"claims\".\"evidence_class\" <> 'UNKNOWN' AND \"claims\".\"value_json\" IS NOT NULL)"
+        },
+        "claims_source_fact_not_model": {
+          "name": "claims_source_fact_not_model",
+          "value": "\"claims\".\"evidence_class\" <> 'SOURCE_FACT' OR (\"claims\".\"model_version\" IS NULL AND \"claims\".\"prompt_version\" IS NULL AND \"claims\".\"schema_version\" IS NULL)"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.ingestion_runs": {
+      "name": "ingestion_runs",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "source_policy_id": {
+          "name": "source_policy_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "policy_version": {
+          "name": "policy_version",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "request_hash": {
+          "name": "request_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "started_at": {
+          "name": "started_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "completed_at": {
+          "name": "completed_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "request_count": {
+          "name": "request_count",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "record_count": {
+          "name": "record_count",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "status": {
+          "name": "status",
+          "type": "ingestion_run_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "redacted_error": {
+          "name": "redacted_error",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "ingestion_runs_policy_started_idx": {
+          "name": "ingestion_runs_policy_started_idx",
+          "columns": [
+            {
+              "expression": "source_policy_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "policy_version",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "started_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "ingestion_runs_request_hash_idx": {
+          "name": "ingestion_runs_request_hash_idx",
+          "columns": [
+            {
+              "expression": "request_hash",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "ingestion_runs_policy_fk": {
+          "name": "ingestion_runs_policy_fk",
+          "tableFrom": "ingestion_runs",
+          "tableTo": "source_policies",
+          "columnsFrom": [
+            "source_policy_id",
+            "policy_version"
+          ],
+          "columnsTo": [
+            "policy_id",
+            "policy_version"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "ingestion_runs_id_policy_unique": {
+          "name": "ingestion_runs_id_policy_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "id",
+            "source_policy_id",
+            "policy_version"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {
+        "ingestion_runs_request_hash_sha256": {
+          "name": "ingestion_runs_request_hash_sha256",
+          "value": "\"ingestion_runs\".\"request_hash\" ~ '^[a-f0-9]{64}$'"
+        },
+        "ingestion_runs_counts_nonnegative": {
+          "name": "ingestion_runs_counts_nonnegative",
+          "value": "\"ingestion_runs\".\"request_count\" >= 0 AND \"ingestion_runs\".\"record_count\" >= 0"
+        },
+        "ingestion_runs_completion_order": {
+          "name": "ingestion_runs_completion_order",
+          "value": "\"ingestion_runs\".\"completed_at\" IS NULL OR \"ingestion_runs\".\"completed_at\" >= \"ingestion_runs\".\"started_at\""
+        },
+        "ingestion_runs_completion_state": {
+          "name": "ingestion_runs_completion_state",
+          "value": "((\"ingestion_runs\".\"status\" IN ('PENDING', 'RUNNING')) AND \"ingestion_runs\".\"completed_at\" IS NULL) OR ((\"ingestion_runs\".\"status\" IN ('SUCCEEDED', 'PARTIAL', 'FAILED')) AND \"ingestion_runs\".\"completed_at\" IS NOT NULL)"
+        },
+        "ingestion_runs_redacted_error_length": {
+          "name": "ingestion_runs_redacted_error_length",
+          "value": "\"ingestion_runs\".\"redacted_error\" IS NULL OR length(\"ingestion_runs\".\"redacted_error\") <= 2000"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.review_decisions": {
+      "name": "review_decisions",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "claim_id": {
+          "name": "claim_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "decision": {
+          "name": "decision",
+          "type": "review_decision",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "reviewer_reference": {
+          "name": "reviewer_reference",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "rationale": {
+          "name": "rationale",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "decided_at": {
+          "name": "decided_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "review_decisions_claim_decided_idx": {
+          "name": "review_decisions_claim_decided_idx",
+          "columns": [
+            {
+              "expression": "claim_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "decided_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "review_decisions_claim_id_claims_id_fk": {
+          "name": "review_decisions_claim_id_claims_id_fk",
+          "tableFrom": "review_decisions",
+          "tableTo": "claims",
+          "columnsFrom": [
+            "claim_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "review_decisions_reviewer_nonempty": {
+          "name": "review_decisions_reviewer_nonempty",
+          "value": "length(btrim(\"review_decisions\".\"reviewer_reference\")) > 0"
+        },
+        "review_decisions_rationale_nonempty": {
+          "name": "review_decisions_rationale_nonempty",
+          "value": "length(btrim(\"review_decisions\".\"rationale\")) > 0"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.source_policies": {
+      "name": "source_policies",
+      "schema": "",
+      "columns": {
+        "policy_id": {
+          "name": "policy_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "policy_version": {
+          "name": "policy_version",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "provider": {
+          "name": "provider",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "source_policy_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'PROPOSED'"
+        },
+        "allowed_origin": {
+          "name": "allowed_origin",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "allowed_host": {
+          "name": "allowed_host",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "allowed_methods": {
+          "name": "allowed_methods",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "allowed_paths": {
+          "name": "allowed_paths",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "auth_mode": {
+          "name": "auth_mode",
+          "type": "source_auth_mode",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "redirect_mode": {
+          "name": "redirect_mode",
+          "type": "source_redirect_mode",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "cookies_allowed": {
+          "name": "cookies_allowed",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "attribution": {
+          "name": "attribution",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "terms_url": {
+          "name": "terms_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "api_docs_url": {
+          "name": "api_docs_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "allowed_use": {
+          "name": "allowed_use",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "prohibited_use": {
+          "name": "prohibited_use",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "reviewed_at": {
+          "name": "reviewed_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "approved_at": {
+          "name": "approved_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "source_policies_status_provider_idx": {
+          "name": "source_policies_status_provider_idx",
+          "columns": [
+            {
+              "expression": "status",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "provider",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "source_policies_pk": {
+          "name": "source_policies_pk",
+          "columns": [
+            "policy_id",
+            "policy_version"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "source_policies_methods_nonempty": {
+          "name": "source_policies_methods_nonempty",
+          "value": "cardinality(\"source_policies\".\"allowed_methods\") > 0"
+        },
+        "source_policies_paths_nonempty": {
+          "name": "source_policies_paths_nonempty",
+          "value": "cardinality(\"source_policies\".\"allowed_paths\") > 0"
+        },
+        "source_policies_approved_timestamp": {
+          "name": "source_policies_approved_timestamp",
+          "value": "\"source_policies\".\"status\" <> 'APPROVED' OR \"source_policies\".\"approved_at\" IS NOT NULL"
+        },
+        "source_policies_approval_order": {
+          "name": "source_policies_approval_order",
+          "value": "\"source_policies\".\"approved_at\" IS NULL OR \"source_policies\".\"approved_at\" >= \"source_policies\".\"reviewed_at\""
+        },
+        "source_policies_expiry_order": {
+          "name": "source_policies_expiry_order",
+          "value": "\"source_policies\".\"expires_at\" IS NULL OR (\"source_policies\".\"expires_at\" > \"source_policies\".\"reviewed_at\" AND (\"source_policies\".\"approved_at\" IS NULL OR \"source_policies\".\"expires_at\" > \"source_policies\".\"approved_at\"))"
+        },
+        "source_policies_cookies_forbidden": {
+          "name": "source_policies_cookies_forbidden",
+          "value": "\"source_policies\".\"cookies_allowed\" = false"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.source_versions": {
+      "name": "source_versions",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "source_id": {
+          "name": "source_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ingestion_run_id": {
+          "name": "ingestion_run_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "source_policy_id": {
+          "name": "source_policy_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "policy_version": {
+          "name": "policy_version",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "retrieved_at": {
+          "name": "retrieved_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "processed_at": {
+          "name": "processed_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "content_sha256": {
+          "name": "content_sha256",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "transformation": {
+          "name": "transformation",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "transformation_version": {
+          "name": "transformation_version",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "source_versions_source_retrieved_idx": {
+          "name": "source_versions_source_retrieved_idx",
+          "columns": [
+            {
+              "expression": "source_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "retrieved_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "source_versions_ingestion_run_idx": {
+          "name": "source_versions_ingestion_run_idx",
+          "columns": [
+            {
+              "expression": "ingestion_run_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "source_versions_source_policy_fk": {
+          "name": "source_versions_source_policy_fk",
+          "tableFrom": "source_versions",
+          "tableTo": "sources",
+          "columnsFrom": [
+            "source_id",
+            "source_policy_id",
+            "policy_version"
+          ],
+          "columnsTo": [
+            "id",
+            "policy_id",
+            "policy_version"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        },
+        "source_versions_ingestion_policy_fk": {
+          "name": "source_versions_ingestion_policy_fk",
+          "tableFrom": "source_versions",
+          "tableTo": "ingestion_runs",
+          "columnsFrom": [
+            "ingestion_run_id",
+            "source_policy_id",
+            "policy_version"
+          ],
+          "columnsTo": [
+            "id",
+            "source_policy_id",
+            "policy_version"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "source_versions_source_id_id_unique": {
+          "name": "source_versions_source_id_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "source_id",
+            "id"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {
+        "source_versions_content_sha256": {
+          "name": "source_versions_content_sha256",
+          "value": "\"source_versions\".\"content_sha256\" ~ '^[a-f0-9]{64}$'"
+        },
+        "source_versions_processing_order": {
+          "name": "source_versions_processing_order",
+          "value": "\"source_versions\".\"processed_at\" >= \"source_versions\".\"retrieved_at\""
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.sources": {
+      "name": "sources",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "policy_id": {
+          "name": "policy_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "policy_version": {
+          "name": "policy_version",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "provider": {
+          "name": "provider",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "external_id": {
+          "name": "external_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "canonical_url": {
+          "name": "canonical_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "published_at": {
+          "name": "published_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "licence": {
+          "name": "licence",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "licence_url": {
+          "name": "licence_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "raw_retention_class": {
+          "name": "raw_retention_class",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "sources_provider_external_id_unique": {
+          "name": "sources_provider_external_id_unique",
+          "columns": [
+            {
+              "expression": "provider",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "external_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "where": "\"sources\".\"external_id\" IS NOT NULL",
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "sources_policy_idx": {
+          "name": "sources_policy_idx",
+          "columns": [
+            {
+              "expression": "policy_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "policy_version",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "sources_policy_fk": {
+          "name": "sources_policy_fk",
+          "tableFrom": "sources",
+          "tableTo": "source_policies",
+          "columnsFrom": [
+            "policy_id",
+            "policy_version"
+          ],
+          "columnsTo": [
+            "policy_id",
+            "policy_version"
+          ],
+          "onDelete": "restrict",
+          "onUpdate": "restrict"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "sources_canonical_url_unique": {
+          "name": "sources_canonical_url_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "canonical_url"
+          ]
+        },
+        "sources_id_policy_unique": {
+          "name": "sources_id_policy_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "id",
+            "policy_id",
+            "policy_version"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {
+        "sources_canonical_url_nonempty": {
+          "name": "sources_canonical_url_nonempty",
+          "value": "length(btrim(\"sources\".\"canonical_url\")) > 0"
+        }
+      },
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {
+    "public.claim_review_status": {
+      "name": "claim_review_status",
+      "schema": "public",
+      "values": [
+        "PENDING",
+        "APPROVED",
+        "REJECTED",
+        "NEEDS_REVISION"
+      ]
+    },
+    "public.evidence_class": {
+      "name": "evidence_class",
+      "schema": "public",
+      "values": [
+        "SOURCE_FACT",
+        "STRUCTURED_EXTRACTION",
+        "DERIVED_CALCULATION",
+        "HUMAN_INFERENCE",
+        "MODEL_INFERENCE",
+        "UNVERIFIED",
+        "UNKNOWN"
+      ]
+    },
+    "public.ingestion_run_status": {
+      "name": "ingestion_run_status",
+      "schema": "public",
+      "values": [
+        "PENDING",
+        "RUNNING",
+        "SUCCEEDED",
+        "PARTIAL",
+        "FAILED"
+      ]
+    },
+    "public.review_decision": {
+      "name": "review_decision",
+      "schema": "public",
+      "values": [
+        "APPROVED",
+        "REJECTED",
+        "NEEDS_REVISION"
+      ]
+    },
+    "public.source_auth_mode": {
+      "name": "source_auth_mode",
+      "schema": "public",
+      "values": [
+        "FORBIDDEN",
+        "REQUIRED"
+      ]
+    },
+    "public.source_policy_status": {
+      "name": "source_policy_status",
+      "schema": "public",
+      "values": [
+        "PROPOSED",
+        "APPROVED",
+        "BLOCKED",
+        "DISABLED",
+        "EXPIRED"
+      ]
+    },
+    "public.source_redirect_mode": {
+      "name": "source_redirect_mode",
+      "schema": "public",
+      "values": [
+        "DENY",
+        "SAME_ORIGIN"
+      ]
+    }
+  },
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

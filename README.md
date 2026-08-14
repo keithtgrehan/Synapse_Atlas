@@ -123,6 +123,34 @@ pnpm test
 pnpm build
 ```
 
+## Source and evidence foundation
+
+S1-02 adds a deny-by-default source-policy gate and a baseline Drizzle
+migration for `source_policies`, `sources`, `source_versions`,
+`ingestion_runs`, `claims`, `claim_inputs`, and `review_decisions`. The sole
+runtime-approved entry is `SRC-CTG` version `1`: credential-free `GET` requests
+to `https://clinicaltrials.gov/api/v2/studies` only. Unknown sources, policy
+versions, methods, hosts, paths, ports, credentials, fragments, and redirects
+outside that same boundary are rejected. The baseline migration bootstraps the
+same approved policy so future source and ingestion rows can satisfy their
+policy foreign keys.
+
+Evidence classes preserve source facts, structured extraction, derived
+calculation, human inference, model inference, unverified, and unknown states.
+`retrieved_at` records acquisition time, `processed_at` records local
+processing time, and the provider-reported registry update date remains a
+separate source fact. SHA-256 values cover the exact stored response bytes.
+
+Generate or validate migrations without applying them to a database:
+
+```bash
+pnpm db:generate --name=<migration_name>
+pnpm db:check
+```
+
+No live Postgres instance is provisioned by these commands. Applying and
+integration-testing the migration requires a separately approved connection.
+
 ## Deployment policy
 
 Automatic Vercel Git deployments from `main` are disabled by the root
@@ -166,5 +194,5 @@ biology and scientific reasoning
 - Canonical repository selected: **complete**
 - Project operating system: **initialized**
 - Product scaffold: **S1-01 merged and post-merge closeout complete**
-- Next task: **S1-02 ready but not started**
+- Current task: **S1-02 in review; S1-03 remains blocked and unstarted**
 - Current sprint target: **private v0.1 by 27 August 2026**
