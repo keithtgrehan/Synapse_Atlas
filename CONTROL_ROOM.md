@@ -24,7 +24,7 @@ active_sprint:
   id: S1
   dates: 2026-08-14/2026-08-27
   wip_limit: 3
-  current_task: S1-01
+  current_task: S1-02
 operating_rules:
   one_active_goal: true
   new_scope_requires_tradeoff: true
@@ -35,13 +35,14 @@ operating_rules:
 last_completed:
   - Canonical repository selected.
   - Three-file project operating system defined.
-  - S1-01 deployable-foundation implementation and review remediation completed on its feature branch; review and merge remain pending.
+  - PR #2 merged S1-01 at a79759f6615913fd088ae04184c2c9c7c520abc2.
+  - S1-01 post-merge closeout removed the unintended Production deployment and aliases while preserving both protected Preview deployments.
+  - Automatic Vercel Git deployments from main are disabled by tested version-controlled policy; pull-request Preview deployments remain enabled.
 next_action:
-  task: Review S1-01 draft pull request
-  instruction: Review CI and scope, then merge only with Keith's explicit approval; do not start S1-02 before S1-01 is integrated.
+  task: Review the S1-01 post-merge closeout draft pull request
+  instruction: Merge only with Keith's explicit approval; after the closeout is integrated, START S1-02. S1-02 is Ready but has not started.
 blockers:
-  - No real Postgres connection is configured; no paid database was provisioned for S1-01.
-  - Firecrawl requires a user API key or approved self-hosted setup before runtime use.
+  - No real Postgres connection is configured; this may block applying and integration-testing S1-02 migrations.
 ```
 
 ---
@@ -239,7 +240,7 @@ Only tasks in **Now** may be started.
 ### S1-01 — Deployable foundation
 
 **Owner:** Orchestrator + Release  
-**Status:** In review
+**Status:** Complete
 
 **Outcome:** A minimal Next.js app builds in CI and deploys to a private preview.
 
@@ -258,7 +259,7 @@ Acceptance:
 ### S1-02 — Source registry and evidence schema
 
 **Owner:** Research/Source + Data  
-**Blocked by:** S1-01 interfaces
+**Status:** Ready — current/next, not started
 
 Acceptance:
 
@@ -272,7 +273,7 @@ Acceptance:
 ### S1-03 — ClinicalTrials.gov vertical slice
 
 **Owner:** Data + Product/UI  
-**Blocked by:** S1-01 and S1-02
+**Blocked by:** S1-02
 
 Acceptance:
 
@@ -760,6 +761,7 @@ AI extraction, ChEMBL enrichment and publication polish are cut before the relea
 | 2026-08-14 | Official APIs before Firecrawl | Better legal, provenance and engineering quality | Source-specific exceptions |
 | 2026-08-14 | No vector DB or custom training in v0.1 | No validated need; major scope risk | After user evidence |
 | 2026-08-14 | Three control files at root | Maximum discoverability for Codex/GPT and minimal documentation sprawl | After v0.1 |
+| 2026-08-14 | Disable automatic Vercel Git deployments from `main` | Keep Synapse Atlas Preview-only until a future human-approved Production action | Before an explicitly approved Production release |
 
 ---
 
@@ -773,6 +775,7 @@ Append one compact row per completed work package.
 | 2026-08-14 | PR #1 — Authoritative education and MVP roadmaps | Added `docs/01_EDUCATION_90_DAY.md` and `docs/02_CODEX_MVP_ROADMAP.md`; merged as `5609a9b09bb8578f39a088aec1a57ed94eaddc9a` | Git/GitHub merge verification | S1-01 scaffold |
 | 2026-08-14 | S1-01 deployable foundation | Next.js/Postgres scaffold, health route, CI and real ClinicalTrials.gov fixture implemented on feature branch | lint, typecheck, 7 tests, build, Drizzle config, local smoke test, production dependency audit | Review and merge S1-01 draft PR; keep S1-02 blocked |
 | 2026-08-14 | S1-01 review remediation | Added aggregate check, runtime fixture/metadata validation, corrected provenance dates, durable roadmap status, PR #1 ledger evidence and protected Vercel preview | Full requested local verification; protected preview root 200 and expected health 503 | Return draft PR #2 to Control Room review; keep S1-02 blocked |
+| 2026-08-14 | S1-01 post-merge closeout | Verified PR #2 merged; removed the unintended Production deployment and three aliases; preserved the project and protected Previews; added and tested the `main` deployment guardrail | Frozen install, lint, typecheck, 4 test files/8 tests, build, aggregate check, Vercel before/after verification | Review closeout draft PR; after explicit merge approval, START S1-02 |
 
 Detailed handovers may be placed below.
 
@@ -797,6 +800,26 @@ Detailed handovers may be placed below.
 **Blocked:** None for the S1-01 foundation preview. Database-backed behavior remains unavailable until a real approved Postgres connection is configured.
 
 **Next highest-impact task:** Review and merge the S1-01 draft PR with explicit Keith approval; S1-02 remains blocked until then.
+
+### 2026-08-14 — S1-01 post-merge closeout
+
+**Goal:** G1 — Ship private v0.1
+
+**Completed:** Verified PR #2 merged as `a79759f6615913fd088ae04184c2c9c7c520abc2`. Removed unintended Vercel Production deployment `dpl_9rnR62w5icN46wzDWk55UpfpMPVQ` and the aliases `synapse-atlas-theta.vercel.app`, `synapse-atlas-keith-grehans-projects.vercel.app`, and `synapse-atlas-git-main-keith-grehans-projects.vercel.app`. Preserved the Synapse Atlas Vercel project and protected Preview deployments `dpl_7ZuhsDoV27r9bBq1EbHMZJsZP3tz` and `dpl_C8tsu9tgk4QtvmgBit4EKPA4pJrQ`. Added a version-controlled Vercel policy disabling automatic Git deployments only from `main`; pull-request Preview deployments remain enabled. No Production deployment or promotion occurred.
+
+**Files changed:** `vercel.json`, `tests/unit/vercel-policy.test.ts`, `README.md`, and this control room.
+
+**Tests/checks:** Node `v22.23.1`; pnpm `10.18.3`; `pnpm install --frozen-lockfile`; `pnpm lint`; `pnpm typecheck`; `pnpm test` (4 files, 8 tests); `pnpm build`; `pnpm check`; official Vercel configuration documentation and live schema review; Vercel deployment, alias, project, and Preview before/after verification; final diff and secret/private-data review.
+
+**Source/legal evidence:** No research source or external content was added. Vercel operations were limited to Keith's exact authorized deployment and aliases. No credentials, environment values, bypass tokens, private data, paid service, database, Firecrawl, or OpenAI API use was introduced.
+
+**Decisions:** S1-01 is Complete. S1-02 is Ready and current/next but not started. S1-03 is blocked by S1-02. Production deployment requires a future explicit human-approved action.
+
+**Known risks:** No real Postgres connection exists, which may block applying and integration-testing S1-02 migrations. The version-controlled Vercel policy becomes canonical only after this closeout PR is explicitly reviewed and merged.
+
+**Blocked:** S1-02 implementation must wait until this closeout PR is integrated. No other S1-01 blocker remains.
+
+**Next highest-impact task:** Review and explicitly merge the S1-01 post-merge closeout draft PR, then issue `START S1-02` separately.
 
 ## Handover template
 
@@ -835,7 +858,5 @@ Use these commands in a project conversation or Codex:
 ```text
 Read README.md, AGENTS.md and CONTROL_ROOM.md.
 
-Execute S1-01 only. Create the smallest deployable Next.js 16 / TypeScript foundation with pnpm, Zod, Drizzle/Postgres configuration, Vitest, a health route, CI, environment validation and one checked-in ClinicalTrials.gov API fixture.
-
-Do not add authentication, AI, Firecrawl, vector search, design system, dashboards or extra routes. Run lint, typecheck, tests and build. Update this control room with a truthful handover and stop.
+Review the S1-01 post-merge closeout draft pull request. Never merge or enable auto-merge without Keith's explicit instruction. S1-02 is Ready but not started; after the closeout is integrated, wait for the separate command `START S1-02`.
 ```

@@ -123,6 +123,14 @@ pnpm test
 pnpm build
 ```
 
+## Deployment policy
+
+Automatic Vercel Git deployments from `main` are disabled by the root
+`vercel.json`. Pull-request branches remain eligible for protected Preview
+deployments. Any future Production deployment requires an explicit,
+human-approved action; the S1-01 post-merge closeout did not deploy or promote
+anything to Production.
+
 ## Data and research policy
 
 Private use does not cancel copyright, database rights, contractual terms, robots directives or privacy law.
@@ -157,5 +165,6 @@ biology and scientific reasoning
 
 - Canonical repository selected: **complete**
 - Project operating system: **initialized**
-- Product scaffold: **implemented in S1-01; awaiting review and merge**
+- Product scaffold: **S1-01 merged and post-merge closeout complete**
+- Next task: **S1-02 ready but not started**
 - Current sprint target: **private v0.1 by 27 August 2026**
