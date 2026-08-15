@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 import {
   buildComparison,
@@ -31,7 +32,16 @@ export default async function ComparePage({ searchParams }: ComparePageProps) {
     return <ComparisonUnavailable />;
   }
 
-  const selection = parseComparisonSelection(await searchParams, catalog);
+  const parameters = await searchParams;
+  const selection = parseComparisonSelection(parameters, catalog);
+
+  if (
+    selection.state === "invalid" &&
+    !isSanitizedInvalidSelection(parameters)
+  ) {
+    redirect("/compare?selectionState=invalid");
+  }
+
   let comparison: ComparisonResult | null = null;
 
   if (selection.state === "ready") {
@@ -89,6 +99,18 @@ export default async function ComparePage({ searchParams }: ComparePageProps) {
         <ComparisonView result={comparison} />
       )}
     </main>
+  );
+}
+
+function isSanitizedInvalidSelection(
+  parameters: Record<string, string | string[] | undefined>,
+): boolean {
+  const keys = Object.keys(parameters);
+
+  return (
+    keys.length === 1 &&
+    keys[0] === "selectionState" &&
+    parameters.selectionState === "invalid"
   );
 }
 

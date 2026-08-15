@@ -81,15 +81,23 @@ describe("server-rendered comparison UI", () => {
       { programme: ["usona-psilocybin-mdd", "usona-psilocybin-mdd"] },
       { programme: ["usona-psilocybin-mdd", "cyb003-major-depressive-disorder"], extra: "raw-secret-value" },
     ]) {
-      const html = await renderComparison(parameters);
-
-      expect(html).toContain("The comparison selection could not be used");
-      expect(html).toContain("role=\"alert\"");
-      expect(html).not.toContain("unknown-programme");
-      expect(html).not.toContain("bad&lt;value");
-      expect(html).not.toContain("raw-secret-value");
-      expect(html).not.toContain("<table");
+      await expect(
+        ComparePage({ searchParams: Promise.resolve(parameters) }),
+      ).rejects.toMatchObject({
+        digest: expect.stringContaining(
+          "/compare?selectionState=invalid",
+        ),
+      });
     }
+
+    const html = await renderComparison({ selectionState: "invalid" });
+
+    expect(html).toContain("The comparison selection could not be used");
+    expect(html).toContain("role=\"alert\"");
+    expect(html).not.toContain("unknown-programme");
+    expect(html).not.toContain("bad&lt;value");
+    expect(html).not.toContain("raw-secret-value");
+    expect(html).not.toContain("<table");
   });
 
   it("renders programme, trial, official-source, API, provenance, and clear/change links", async () => {

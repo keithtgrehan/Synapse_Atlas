@@ -369,6 +369,20 @@ export function parseComparisonSelection(
   parametersInput: unknown,
   catalog: ComparisonCatalog,
 ): ComparisonSelection {
+  return parseComparisonSelectionForKnownSlugs(
+    parametersInput,
+    catalog.candidates.map((candidate) => candidate.slug),
+  );
+}
+
+export function parseComparisonSelectionForKnownSlugs(
+  parametersInput: unknown,
+  knownSlugsInput: unknown,
+): ComparisonSelection {
+  const knownSlugs = new Set(
+    z.array(programmeSlugSchema).min(1).max(20).parse(knownSlugsInput),
+  );
+
   if (
     parametersInput === null ||
     typeof parametersInput !== "object" ||
@@ -399,8 +413,6 @@ export function parseComparisonSelection(
     return invalidSelection();
   }
 
-  const knownSlugs = new Set(catalog.candidates.map((candidate) => candidate.slug));
-
   if (
     values.some(
       (value) =>
@@ -421,6 +433,23 @@ export function parseComparisonSelection(
     state: "ready",
     selectedSlugs: values as [string, string, ...string[]],
   };
+}
+
+export function eligibleComparisonProgrammeSlugs(
+  datasetInput: unknown,
+): readonly string[] {
+  const dataset = programmeMappingDatasetSchema.parse(datasetInput);
+
+  return dataset.programmes.flatMap((programme) => {
+    const mapping = dataset.mappingAssertions.find(
+      (assertion) => assertion.id === programme.mappingAssertionId,
+    );
+
+    return mapping?.reviewStatus === "APPROVED" &&
+      mapping.resolutionState === "RESOLVED"
+      ? [programme.slug]
+      : [];
+  });
 }
 
 export function buildComparison(
