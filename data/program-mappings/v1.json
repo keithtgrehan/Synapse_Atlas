@@ -1,6 +1,6 @@
 {
   "datasetVersion": "1.0.0",
-  "updatedAt": "2026-08-14T22:10:17Z",
+  "updatedAt": "2026-08-15T09:04:16Z",
   "sourceBoundary": {
     "sourceId": "SRC-CTG",
     "policyVersion": "1",
@@ -259,10 +259,12 @@
         {
           "sourceSnapshotId": "snapshot-ctg-nct03866174-20260814",
           "locators": [
+            "/studies/0/protocolSection/identificationModule/nctId",
             "/studies/0/protocolSection/identificationModule/briefTitle",
             "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
             "/studies/0/protocolSection/conditionsModule/conditions",
-            "/studies/0/protocolSection/armsInterventionsModule/interventions"
+            "/studies/0/protocolSection/armsInterventionsModule/interventions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
           ]
         }
       ],
@@ -291,10 +293,12 @@
         {
           "sourceSnapshotId": "snapshot-ctg-nct05711940-20260814",
           "locators": [
+            "/studies/0/protocolSection/identificationModule/nctId",
             "/studies/0/protocolSection/identificationModule/briefTitle",
             "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
             "/studies/0/protocolSection/conditionsModule/conditions",
-            "/studies/0/protocolSection/armsInterventionsModule/interventions"
+            "/studies/0/protocolSection/armsInterventionsModule/interventions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
           ]
         }
       ],
@@ -323,10 +327,12 @@
         {
           "sourceSnapshotId": "snapshot-ctg-nct06605105-20260814",
           "locators": [
+            "/studies/0/protocolSection/identificationModule/nctId",
             "/studies/0/protocolSection/identificationModule/briefTitle",
             "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
             "/studies/0/protocolSection/conditionsModule/conditions",
-            "/studies/0/protocolSection/armsInterventionsModule/interventions"
+            "/studies/0/protocolSection/armsInterventionsModule/interventions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
           ]
         }
       ],

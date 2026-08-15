@@ -53,6 +53,29 @@ function approvedAssertion(
   });
 }
 
+function expectDatasetIssue(
+  candidate: unknown,
+  message: string,
+  path: PropertyKey[],
+): void {
+  const result = programmeMappingDatasetSchema.safeParse(candidate);
+
+  expect(result.success).toBe(false);
+
+  if (result.success) {
+    throw new Error("EXPECTED_PROGRAMME_DATASET_REJECTION");
+  }
+
+  expect(result.error.issues).toEqual(
+    expect.arrayContaining([
+      expect.objectContaining({
+        message,
+        path,
+      }),
+    ]),
+  );
+}
+
 describe("programme mapping dataset", () => {
   it("strictly validates production data and rejects unknown or malformed fields", () => {
     expect(programmeMappingDatasetSchema.parse(rawDataset)).toEqual(
@@ -68,6 +91,64 @@ describe("programme mapping dataset", () => {
     const malformed = structuredClone(rawDataset);
     malformed.programmes[0]!.companyIdentity.state = "KNOWN";
     expect(programmeMappingDatasetSchema.safeParse(malformed).success).toBe(false);
+  });
+
+  it("preserves every exact production mapping and its six material locators", () => {
+    const expectedBindings = [
+      {
+        assertionId: "mapping-usona-psilocybin-mdd",
+        sponsorId: "sponsor-usona-institute",
+        compoundId: "compound-psilocybin",
+        nctId: "NCT03866174",
+        snapshotId: "snapshot-ctg-nct03866174-20260814",
+      },
+      {
+        assertionId: "mapping-comp360-trd",
+        sponsorId: "sponsor-compass-pathways",
+        compoundId: "compound-psilocybin",
+        nctId: "NCT05711940",
+        snapshotId: "snapshot-ctg-nct05711940-20260814",
+      },
+      {
+        assertionId: "mapping-cyb003-mdd",
+        sponsorId: "sponsor-cybin-irl-limited",
+        compoundId: "compound-cyb003",
+        nctId: "NCT06605105",
+        snapshotId: "snapshot-ctg-nct06605105-20260814",
+      },
+    ] as const;
+
+    expect(programmeMappingDataset.updatedAt).toBe("2026-08-15T09:04:16Z");
+
+    for (const expected of expectedBindings) {
+      const assertion = programmeMappingDataset.mappingAssertions.find(
+        (candidate) => candidate.id === expected.assertionId,
+      );
+      const snapshot = programmeMappingDataset.sourceSnapshots.find(
+        (candidate) => candidate.id === expected.snapshotId,
+      );
+      const compound = programmeMappingDataset.compounds.find(
+        (candidate) => candidate.id === expected.compoundId,
+      );
+      const compoundLocator = compound?.rawAliases.find(
+        (alias) => alias.sourceSnapshotId === expected.snapshotId,
+      )?.locator;
+
+      expect(assertion).toMatchObject({
+        reportedSponsorOrganisationId: expected.sponsorId,
+        compoundId: expected.compoundId,
+        nctIds: [expected.nctId],
+        evidence: [{ sourceSnapshotId: expected.snapshotId }],
+      });
+      expect(assertion?.evidence[0]?.locators).toEqual([
+        snapshot?.fieldLocators.nctId,
+        snapshot?.fieldLocators.briefTitle,
+        snapshot?.fieldLocators.reportedSponsorOrganisation,
+        snapshot?.fieldLocators.reportedConditions,
+        snapshot?.fieldLocators.reportedInterventions,
+        compoundLocator,
+      ]);
+    }
   });
 
   it("requires unique stable IDs and slugs with no orphan references", () => {
@@ -94,6 +175,299 @@ describe("programme mapping dataset", () => {
     const orphanSource = structuredClone(rawDataset);
     orphanSource.compounds[0]!.rawAliases[0]!.sourceSnapshotId = "missing-snapshot";
     expect(programmeMappingDatasetSchema.safeParse(orphanSource).success).toBe(false);
+  });
+
+  it("binds every mapping sponsor and compound to each evidence snapshot", () => {
+    const wrongSponsor = structuredClone(rawDataset);
+    wrongSponsor.mappingAssertions[0]!.reportedSponsorOrganisationId =
+      "sponsor-compass-pathways";
+    expectDatasetIssue(
+      wrongSponsor,
+      "Mapping sponsor must have a raw alias from every evidence snapshot",
+      ["mappingAssertions", 0, "reportedSponsorOrganisationId"],
+    );
+
+    const wrongCompound = structuredClone(rawDataset);
+    wrongCompound.mappingAssertions[2]!.compoundId = "compound-psilocybin";
+    expectDatasetIssue(
+      wrongCompound,
+      "Mapping compound must have a raw alias from every evidence snapshot",
+      ["mappingAssertions", 2, "compoundId"],
+    );
+
+    const duplicatedSponsorEvidence = structuredClone(rawDataset);
+    duplicatedSponsorEvidence.mappingAssertions[0]!.reportedSponsorOrganisationId =
+      "sponsor-compass-pathways";
+    duplicatedSponsorEvidence.sponsorOrganisations[1]!.rawAliases.push(
+      structuredClone(
+        duplicatedSponsorEvidence.sponsorOrganisations[0]!.rawAliases[0]!,
+      ),
+    );
+    expectDatasetIssue(
+      duplicatedSponsorEvidence,
+      "Every sponsor raw-alias evidence reference must be unique",
+      ["sponsorOrganisations"],
+    );
+
+    const duplicatedCompoundEvidence = structuredClone(rawDataset);
+    duplicatedCompoundEvidence.mappingAssertions[2]!.compoundId =
+      "compound-psilocybin";
+    duplicatedCompoundEvidence.compounds[0]!.rawAliases.push(
+      structuredClone(
+        duplicatedCompoundEvidence.compounds[1]!.rawAliases[0]!,
+      ),
+    );
+    expectDatasetIssue(
+      duplicatedCompoundEvidence,
+      "Every compound raw-alias evidence reference must be unique",
+      ["compounds"],
+    );
+  });
+
+  it("requires unique NCTs and exact one-to-one evidence snapshot coverage", () => {
+    const missingEvidence = structuredClone(rawDataset);
+    missingEvidence.mappingAssertions[0]!.nctIds.push("NCT05711940");
+    expectDatasetIssue(
+      missingEvidence,
+      "Mapping evidence must cover every assertion NCT exactly once",
+      ["mappingAssertions", 0, "nctIds", 1],
+    );
+
+    const unrelatedEvidence = structuredClone(rawDataset);
+    unrelatedEvidence.mappingAssertions[0]!.evidence.push(
+      structuredClone(rawDataset.mappingAssertions[1]!.evidence[0]!),
+    );
+    expectDatasetIssue(
+      unrelatedEvidence,
+      "Mapping evidence must reference one of the assertion NCT records",
+      ["mappingAssertions", 0, "evidence", 1],
+    );
+
+    const duplicateEvidence = structuredClone(rawDataset);
+    duplicateEvidence.mappingAssertions[0]!.evidence.push(
+      structuredClone(duplicateEvidence.mappingAssertions[0]!.evidence[0]!),
+    );
+    expectDatasetIssue(
+      duplicateEvidence,
+      "Mapping evidence snapshot IDs must be unique",
+      ["mappingAssertions", 0, "evidence"],
+    );
+
+    const duplicateNct = structuredClone(rawDataset);
+    duplicateNct.mappingAssertions[0]!.nctIds.push("NCT03866174");
+    expectDatasetIssue(
+      duplicateNct,
+      "Assertion NCT identifiers must be unique",
+      ["mappingAssertions", 0, "nctIds"],
+    );
+  });
+
+  it("requires unique exact material and selected-compound locators", () => {
+    const evidencePath = ["mappingAssertions", 0, "evidence", 0, "locators"];
+    const requiredLocators = [
+      [
+        "NCT ID",
+        rawDataset.sourceSnapshots[0]!.fieldLocators.nctId,
+        "Mapping evidence must include every required material snapshot locator",
+      ],
+      [
+        "brief title",
+        rawDataset.sourceSnapshots[0]!.fieldLocators.briefTitle,
+        "Mapping evidence must include every required material snapshot locator",
+      ],
+      [
+        "sponsor",
+        rawDataset.sourceSnapshots[0]!.fieldLocators
+          .reportedSponsorOrganisation,
+        "Mapping evidence must include every required material snapshot locator",
+      ],
+      [
+        "conditions",
+        rawDataset.sourceSnapshots[0]!.fieldLocators.reportedConditions,
+        "Mapping evidence must include every required material snapshot locator",
+      ],
+      [
+        "interventions parent",
+        rawDataset.sourceSnapshots[0]!.fieldLocators.reportedInterventions,
+        "Mapping evidence must include every required material snapshot locator",
+      ],
+      [
+        "selected compound child",
+        rawDataset.compounds[0]!.rawAliases[0]!.locator,
+        "Mapping evidence must select exactly one same-snapshot compound child locator",
+      ],
+    ] as const;
+
+    for (const [, locator, message] of requiredLocators) {
+      const missingLocator = structuredClone(rawDataset);
+      missingLocator.mappingAssertions[0]!.evidence[0]!.locators =
+        missingLocator.mappingAssertions[0]!.evidence[0]!.locators.filter(
+          (candidate) => candidate !== locator,
+        );
+      expectDatasetIssue(missingLocator, message, evidencePath);
+    }
+
+    const duplicateLocator = structuredClone(rawDataset);
+    duplicateLocator.mappingAssertions[0]!.evidence[0]!.locators.push(
+      duplicateLocator.mappingAssertions[0]!.evidence[0]!.locators[0]!,
+    );
+    expectDatasetIssue(
+      duplicateLocator,
+      "Mapping evidence locators must be unique",
+      evidencePath,
+    );
+
+    const wrongCompoundChild = structuredClone(rawDataset);
+    wrongCompoundChild.mappingAssertions[0]!.evidence[0]!.locators =
+      wrongCompoundChild.mappingAssertions[0]!.evidence[0]!.locators.map(
+        (locator) =>
+          locator === rawDataset.compounds[0]!.rawAliases[0]!.locator
+            ? `${rawDataset.sourceSnapshots[0]!.fieldLocators.reportedInterventions}/1/name`
+            : locator,
+      );
+    expectDatasetIssue(
+      wrongCompoundChild,
+      "Mapping evidence locator must be an exact declared snapshot or selected compound locator",
+      evidencePath,
+    );
+    expectDatasetIssue(
+      wrongCompoundChild,
+      "Mapping evidence must select exactly one same-snapshot compound child locator",
+      evidencePath,
+    );
+
+    const multipleCompoundChildren = structuredClone(rawDataset);
+    multipleCompoundChildren.compounds[0]!.rawAliases.push({
+      value: "Niacin",
+      sourceSnapshotId: rawDataset.sourceSnapshots[0]!.id,
+      locator: `${rawDataset.sourceSnapshots[0]!.fieldLocators.reportedInterventions}/1/name`,
+    });
+    multipleCompoundChildren.mappingAssertions[0]!.evidence[0]!.locators.push(
+      `${rawDataset.sourceSnapshots[0]!.fieldLocators.reportedInterventions}/1/name`,
+    );
+    expectDatasetIssue(
+      multipleCompoundChildren,
+      "Mapping evidence must select exactly one same-snapshot compound child locator",
+      evidencePath,
+    );
+
+    const exactOptionalLocator = structuredClone(rawDataset);
+    exactOptionalLocator.mappingAssertions[0]!.evidence[0]!.locators.push(
+      exactOptionalLocator.sourceSnapshots[0]!.fieldLocators
+        .registryLastUpdatePostedDate,
+    );
+    expect(
+      programmeMappingDatasetSchema.safeParse(exactOptionalLocator).success,
+    ).toBe(true);
+
+    const collidingSnapshotLocators = structuredClone(rawDataset);
+    collidingSnapshotLocators.sourceSnapshots[0]!.fieldLocators.nctId =
+      collidingSnapshotLocators.sourceSnapshots[0]!.fieldLocators.briefTitle;
+    collidingSnapshotLocators.mappingAssertions[0]!.evidence[0]!.locators =
+      collidingSnapshotLocators.mappingAssertions[0]!.evidence[0]!.locators.filter(
+        (locator) => locator !== rawDataset.sourceSnapshots[0]!.fieldLocators.nctId,
+      );
+    expectDatasetIssue(
+      collidingSnapshotLocators,
+      "Snapshot field locators must be unique",
+      ["sourceSnapshots", 0, "fieldLocators"],
+    );
+  });
+
+  it("enforces review chronology while keeping registry update dates separate", () => {
+    const reviewBeforeProcessing = structuredClone(rawDataset);
+    reviewBeforeProcessing.mappingAssertions[0]!.reviewedAt =
+      "2026-08-14T14:27:24.999Z";
+    expectDatasetIssue(
+      reviewBeforeProcessing,
+      "Mapping review must be at or after all evidence processing",
+      ["mappingAssertions", 0, "reviewedAt"],
+    );
+
+    const datasetBeforeReview = structuredClone(rawDataset);
+    datasetBeforeReview.updatedAt = "2026-08-14T22:10:16.999Z";
+    expectDatasetIssue(
+      datasetBeforeReview,
+      "Dataset update must be at or after every mapping review",
+      ["updatedAt"],
+    );
+
+    const reviewEqualsProcessing = structuredClone(rawDataset);
+    reviewEqualsProcessing.mappingAssertions[0]!.reviewedAt =
+      reviewEqualsProcessing.sourceSnapshots[0]!.processedAt;
+    expect(
+      programmeMappingDatasetSchema.safeParse(reviewEqualsProcessing).success,
+    ).toBe(true);
+
+    const datasetEqualsReview = structuredClone(rawDataset);
+    datasetEqualsReview.updatedAt = "2026-08-14T22:10:17Z";
+    expect(
+      programmeMappingDatasetSchema.safeParse(datasetEqualsReview).success,
+    ).toBe(true);
+
+    const laterRegistryFact = structuredClone(rawDataset);
+    laterRegistryFact.sourceSnapshots[0]!.registryLastUpdatePostedDate =
+      "2099-01-01";
+    laterRegistryFact.sourceSnapshots[0]!.observedRegistryFacts.registryLastUpdatePostedDate =
+      "2099-01-01";
+    expect(
+      programmeMappingDatasetSchema.safeParse(laterRegistryFact).success,
+    ).toBe(true);
+
+    const subMillisecondProcessing = structuredClone(rawDataset);
+    subMillisecondProcessing.sourceSnapshots[0]!.processedAt =
+      "2026-08-14T22:10:17.0001Z";
+    expectDatasetIssue(
+      subMillisecondProcessing,
+      "Mapping review must be at or after all evidence processing",
+      ["mappingAssertions", 0, "reviewedAt"],
+    );
+
+    const subMillisecondDatasetUpdate = structuredClone(rawDataset);
+    subMillisecondDatasetUpdate.mappingAssertions[0]!.reviewedAt =
+      "2026-08-15T09:04:16.0001Z";
+    expectDatasetIssue(
+      subMillisecondDatasetUpdate,
+      "Dataset update must be at or after every mapping review",
+      ["updatedAt"],
+    );
+
+    const subMillisecondEquality = structuredClone(rawDataset);
+    subMillisecondEquality.sourceSnapshots[0]!.processedAt =
+      "2026-08-14T22:10:17.0001Z";
+    subMillisecondEquality.mappingAssertions[0]!.reviewedAt =
+      "2026-08-14T22:10:17.0001Z";
+    expect(
+      programmeMappingDatasetSchema.safeParse(subMillisecondEquality).success,
+    ).toBe(true);
+
+    const fractionalPrecisionEquality = structuredClone(rawDataset);
+    fractionalPrecisionEquality.sourceSnapshots[0]!.processedAt =
+      "2026-08-14T22:10:17.1Z";
+    fractionalPrecisionEquality.mappingAssertions[0]!.reviewedAt =
+      "2026-08-14T22:10:17.1000Z";
+    expect(
+      programmeMappingDatasetSchema.safeParse(fractionalPrecisionEquality)
+        .success,
+    ).toBe(true);
+
+    const offsetEquality = structuredClone(rawDataset);
+    offsetEquality.sourceSnapshots[0]!.processedAt =
+      "2026-08-14T22:10:17Z";
+    offsetEquality.mappingAssertions[0]!.reviewedAt =
+      "2026-08-14T23:10:17+01:00";
+    expect(programmeMappingDatasetSchema.safeParse(offsetEquality).success).toBe(
+      true,
+    );
+
+    const subMillisecondAcrossOffsets = structuredClone(rawDataset);
+    subMillisecondAcrossOffsets.sourceSnapshots[0]!.processedAt =
+      "2026-08-14T23:10:17.0001+01:00";
+    expectDatasetIssue(
+      subMillisecondAcrossOffsets,
+      "Mapping review must be at or after all evidence processing",
+      ["mappingAssertions", 0, "reviewedAt"],
+    );
   });
 
   it("uses only conservative NFKC, whitespace, and lowercase normalization", () => {
@@ -125,7 +499,7 @@ describe("programme mapping dataset", () => {
     });
   });
 
-  it("retains pending, rejected, and needs-revision history without resolving it", () => {
+  it("retains review history and conflicts across distinct open programmes", () => {
     const pending = syntheticAssertion({
       id: "mapping-history-pending",
       programmeId: "programme-history-pending",
@@ -154,7 +528,7 @@ describe("programme mapping dataset", () => {
       rejected,
     ]);
 
-    expect(result.state).toBe("UNRESOLVED");
+    expect(result.state).toBe("CONFLICTING");
     expect(result.winnerProgrammeId).toBeNull();
     expect(result.candidates.map((candidate) => candidate.reviewStatus).sort())
       .toEqual(["NEEDS_REVISION", "PENDING", "REJECTED"]);
@@ -245,6 +619,138 @@ describe("programme mapping dataset", () => {
     expect(resolveProgrammeAlias("Resolved alias", [approved])).toMatchObject({
       state: "RESOLVED",
       winnerProgrammeId: "programme-resolved",
+    });
+  });
+
+  it("blocks an approved winner while another programme remains open", () => {
+    const approved = approvedAssertion(
+      "mapping-active-approved",
+      "programme-active-approved",
+      "Active collision alias",
+    );
+    const pending = syntheticAssertion({
+      id: "mapping-active-pending",
+      programmeId: "programme-active-pending",
+      aliases: ["Active collision alias"],
+    });
+    const needsRevision = syntheticAssertion({
+      id: "mapping-active-needs-revision",
+      programmeId: "programme-active-needs-revision",
+      aliases: ["Active collision alias"],
+      reviewStatus: "NEEDS_REVISION",
+      reviewerReference: "synthetic-review-reference",
+      reviewRationale: "Needs revision only inside a deterministic unit test.",
+      reviewedAt: "2026-08-14T22:00:00Z",
+    });
+
+    for (const openCandidate of [pending, needsRevision]) {
+      expect(
+        resolveProgrammeAlias("Active collision alias", [
+          approved,
+          openCandidate,
+        ]),
+      ).toMatchObject({
+        state: "CONFLICTING",
+        winnerProgrammeId: null,
+        candidates: expect.arrayContaining([
+          expect.objectContaining({ programmeId: approved.programmeId }),
+          expect.objectContaining({ programmeId: openCandidate.programmeId }),
+        ]),
+      });
+    }
+  });
+
+  it("ignores rejected cross-programme history without dropping candidates", () => {
+    const approved = approvedAssertion(
+      "mapping-rejected-history-approved",
+      "programme-rejected-history-approved",
+      "Rejected history alias",
+    );
+    const rejected = syntheticAssertion({
+      id: "mapping-rejected-history",
+      programmeId: "programme-rejected-history",
+      aliases: ["Rejected history alias"],
+      reviewStatus: "REJECTED",
+      reviewerReference: "synthetic-review-reference",
+      reviewRationale: "Rejected only inside a deterministic unit test.",
+      reviewedAt: "2026-08-14T22:00:00Z",
+    });
+    const result = resolveProgrammeAlias("Rejected history alias", [
+      rejected,
+      approved,
+    ]);
+
+    expect(result).toMatchObject({
+      state: "RESOLVED",
+      winnerProgrammeId: approved.programmeId,
+    });
+    expect(result.candidates).toHaveLength(2);
+    expect(
+      result.candidates
+        .map((candidate) => candidate.reviewStatus)
+        .sort(),
+    ).toEqual(["APPROVED", "REJECTED"]);
+  });
+
+  it("does not treat multiple active assertions for one programme as a conflict", () => {
+    const approved = approvedAssertion(
+      "mapping-same-programme-approved",
+      "programme-same-active",
+      "Same programme alias",
+    );
+    const pending = syntheticAssertion({
+      id: "mapping-same-programme-pending",
+      programmeId: "programme-same-active",
+      aliases: ["Same programme alias"],
+    });
+
+    expect(
+      resolveProgrammeAlias("Same programme alias", [pending, approved]),
+    ).toMatchObject({
+      state: "RESOLVED",
+      winnerProgrammeId: "programme-same-active",
+      candidates: expect.arrayContaining([
+        expect.objectContaining({ reviewStatus: "APPROVED" }),
+        expect.objectContaining({ reviewStatus: "PENDING" }),
+      ]),
+    });
+  });
+
+  it("keeps resolver candidates and outcomes independent of insertion order", () => {
+    const approved = approvedAssertion(
+      "mapping-order-approved",
+      "programme-order-approved",
+      "Order collision alias",
+    );
+    const pending = syntheticAssertion({
+      id: "mapping-order-pending",
+      programmeId: "programme-order-pending",
+      aliases: ["Order collision alias"],
+    });
+    const rejected = syntheticAssertion({
+      id: "mapping-order-rejected",
+      programmeId: "programme-order-rejected",
+      aliases: ["Order collision alias"],
+      reviewStatus: "REJECTED",
+      reviewerReference: "synthetic-review-reference",
+      reviewRationale: "Rejected only inside a deterministic unit test.",
+      reviewedAt: "2026-08-14T22:00:00Z",
+    });
+    const forward = resolveProgrammeAlias("Order collision alias", [
+      approved,
+      pending,
+      rejected,
+    ]);
+    const reversed = resolveProgrammeAlias("Order collision alias", [
+      rejected,
+      pending,
+      approved,
+    ]);
+
+    expect(forward).toEqual(reversed);
+    expect(forward).toMatchObject({
+      state: "CONFLICTING",
+      winnerProgrammeId: null,
     });
   });
 

@@ -43,7 +43,7 @@ last_completed:
   - PR #5 merged S1-03 at b7305dae739841a23c769e264fa4a84cee6db47c with successful GitHub CI and Vercel Preview checks.
 next_action:
   task: S1-04
-  instruction: Confirm the remediated draft PR #6 current head has green CI and Preview checks, then complete final Control Room review; all three bounded mapping decisions are recorded, but do not merge without Keith's explicit instruction and do not start S1-05.
+  instruction: After confirming the exact invariant-repair head has green CI and a Ready Preview-only deployment, complete final Control Room review of draft PR #6; all three bounded mapping decisions are unchanged, but do not merge without Keith's explicit instruction and do not start S1-05.
 blockers:
   - No approved Postgres connection is configured, so the S1-02 migration remains unapplied and S1-03 live normalized records are not persisted.
   - S1-04 remains unmerged and In review; S1-05 is blocked until an explicit merge and post-merge verification.
@@ -804,6 +804,7 @@ Append one compact row per completed work package.
 | 2026-08-14 | PR #5 — S1-03 ClinicalTrials.gov vertical slice | Merged the reviewed registered-trial explorer as `b7305dae739841a23c769e264fa4a84cee6db47c` | Local, origin/main, live GitHub, CI and Vercel Preview verification; no open PR remained | S1-04 program and compound resolution |
 | 2026-08-14 | S1-04 program and compound resolution | Added three evidence-bound pending mapping candidates, deterministic approval-gated resolution, offline programme search/detail, and exact registry snapshot provenance | `pnpm check`; 13 test files/85 tests; audit clean; migration and Vercel policy unchanged; production smoke and desktop/390 px browser journey | Review the draft PR and decide each pending mapping row; keep S1-05 blocked |
 | 2026-08-15 | S1-04 human-review remediation | Recorded Keith's three bounded approvals, strengthened exact snapshot-query validation, and made programme review/resolution UI state-driven | `pnpm check`; 14 test files/93 tests; audit clean; migration/dependencies/CI/Vercel policy unchanged; seven-route production smoke and desktop/390 px Chrome verification | Confirm the updated draft PR #6 head has green CI and Preview checks, then return it to final Control Room review; never merge or start S1-05 automatically |
+| 2026-08-15 | S1-04 final evidence-governance remediation | Bound every mapping to exact NCT, sponsor, compound, locator, and chronology evidence; made distinct open programme candidates block alias resolution | Focused 4 files/37 tests; `pnpm check` 14 files/102 tests; audit, smoke, no-change checks, invalid-mutation rerun, and two independent read-only reviews passed | After exact-head CI and Ready Preview-only verification, complete final Control Room review of draft PR #6; never merge or start S1-05 automatically |
 
 Detailed handovers may be placed below.
 
@@ -939,6 +940,26 @@ Detailed handovers may be placed below.
 
 **Next highest-impact task:** Confirm the updated draft PR #6 head has green GitHub CI and a Ready Preview-only Vercel deployment, then return it to final Control Room review without merging.
 
+### 2026-08-15 — S1-04 final evidence-governance remediation
+
+**Goal:** G1 — Ship private v0.1
+
+**Completed:** Strengthened the programme dataset to reject duplicate NCT IDs, evidence snapshot IDs, evidence locators, raw-evidence ownership, and snapshot field locators; require exact one-to-one NCT/evidence coverage; bind each asserted sponsor and compound to raw aliases from every evidence snapshot; require the five material snapshot locators plus exactly one selected compound intervention child; and enforce precision-preserving retrieval, processing, review, and dataset chronology with equality allowed. Updated the conservative alias resolver so `APPROVED`, `PENDING`, and `NEEDS_REVISION` candidates from distinct programmes conflict, while `REJECTED` history remains visible but nonblocking and same-programme history does not create a false conflict. The three human decisions and scientific boundaries are unchanged.
+
+**Files changed:** The versioned mapping dataset, programme domain/schema and resolver, focused programme tests, and this control room. `README.md`, fixture and metadata bytes, source queries and hashes, dependencies, database schema and migration, source policy, CI, both roadmaps, and Vercel policy remain unchanged.
+
+**Tests/checks:** `pnpm install --frozen-lockfile`; focused programme suite (4 files/37 tests); `pnpm check` (lint, strict typecheck, 14 files/102 tests, Drizzle consistency, production build); `pnpm audit --prod` (no known vulnerabilities); targeted invalid-mutation rerun (8 tests); production-mode local smoke for `/programs` and all three programme details; `git diff --check`; schema/migration, dependency, CI, source-policy, roadmap, fixture/metadata, README, and Vercel-policy no-change checks; filename-only environment and added-line credential/private-data/bypass scans. Two independent read-only reviews reproduced the adversarial mutations and found no remaining blocker after one bounded repair loop.
+
+**Source/legal evidence:** `SRC-CTG` policy version `1` remains the sole source. No source, request, fixture, or metadata was added or refreshed. The exact retained bytes, SHA-256 values, URLs, provenance, registry facts, original human-review timestamp, reviewer reference, rationales, aliases, and explicit unknowns remain unchanged; only exact material evidence locators and the truthful dataset update timestamp changed.
+
+**Decisions:** Evidence ownership is unique within each entity type; one locator cannot stand for multiple snapshot fields; chronology comparisons retain fractional precision and normalize offsets. Alias resolution blocks an approved winner whenever another programme has an active pending or needs-revision candidate, retains rejected history, and resolves same-programme approved/open history without a false cross-programme conflict. S1-04 remains In review.
+
+**Known risks:** No approved Postgres connection exists, so the S1-02 migration remains unapplied and normalized live trial records remain request-scoped. Linked trial pages still depend on live ClinicalTrials.gov availability. Exact-head GitHub CI and Preview-only Vercel evidence must be verified after the commit and push and recorded in PR #6 without changing that head.
+
+**Blocked:** Draft PR #6 merge remains blocked on Keith's explicit merge instruction. S1-05 remains blocked and unstarted until S1-04 is merged and post-merge verified.
+
+**Next highest-impact task:** After exact-head GitHub CI and Ready Preview-only Vercel verification, complete final Control Room review of draft PR #6 without merging.
+
 ## Handover template
 
 ```markdown
@@ -978,6 +999,6 @@ S1-01 is Complete.
 S1-02 is Complete and merged in PR #4 at 3b83f8f92b925c791430950a8ed5c22e1d5915b2.
 S1-03 is Complete and merged in PR #5 at b7305dae739841a23c769e264fa4a84cee6db47c.
 S1-04 is In review/current. Keith's three bounded human decisions are recorded as APPROVED and RESOLVED, with namespace-scoped aliases and explicit unknowns preserved.
-Confirm the remediated draft PR #6 current head has green CI and Preview checks, then complete final Control Room review; never merge without Keith's explicit instruction.
+After confirming the exact invariant-repair head has green CI and a Ready Preview-only deployment, complete final Control Room review of draft PR #6; never merge without Keith's explicit instruction.
 S1-05 remains blocked and unstarted until S1-04 is explicitly merged and post-merge verified.
 ```

@@ -4,7 +4,6 @@ import { nctIdSchema } from "./trials";
 import {
   claimReviewStatusSchema,
   offsetDateTimeSchema,
-  processingFollowsRetrieval,
   sha256HexSchema,
 } from "../evidence/provenance";
 import {
@@ -46,7 +45,18 @@ const fieldLocatorsSchema = z
     reportedInterventions: nonBlankTextSchema,
     registryLastUpdatePostedDate: nonBlankTextSchema,
   })
-  .strict();
+  .strict()
+  .superRefine((locators, context) => {
+    const locatorValues = Object.values(locators);
+
+    if (new Set(locatorValues).size !== locatorValues.length) {
+      context.addIssue({
+        code: "custom",
+        message: "Snapshot field locators must be unique",
+        path: [],
+      });
+    }
+  });
 
 const observedRegistryFactsSchema = z
   .object({
@@ -87,7 +97,7 @@ export const programmeSourceSnapshotSchema = z
   })
   .strict()
   .superRefine((snapshot, context) => {
-    if (!processingFollowsRetrieval(snapshot.retrievedAt, snapshot.processedAt)) {
+    if (compareOffsetDateTimes(snapshot.processedAt, snapshot.retrievedAt) < 0) {
       context.addIssue({
         code: "custom",
         message: "processedAt must be at or after retrievedAt",
@@ -241,7 +251,16 @@ const mappingEvidenceSchema = z
     sourceSnapshotId: stableIdSchema,
     locators: z.array(nonBlankTextSchema).min(1).max(20),
   })
-  .strict();
+  .strict()
+  .superRefine((evidence, context) => {
+    if (new Set(evidence.locators).size !== evidence.locators.length) {
+      context.addIssue({
+        code: "custom",
+        message: "Mapping evidence locators must be unique",
+        path: ["locators"],
+      });
+    }
+  });
 
 export const programmeMappingAssertionSchema = z
   .object({
@@ -269,6 +288,26 @@ export const programmeMappingAssertionSchema = z
         code: "custom",
         message: "Aliases must be unique after conservative normalization",
         path: ["aliases"],
+      });
+    }
+
+    if (new Set(assertion.nctIds).size !== assertion.nctIds.length) {
+      context.addIssue({
+        code: "custom",
+        message: "Assertion NCT identifiers must be unique",
+        path: ["nctIds"],
+      });
+    }
+
+    const evidenceSnapshotIds = assertion.evidence.map(
+      (evidence) => evidence.sourceSnapshotId,
+    );
+
+    if (new Set(evidenceSnapshotIds).size !== evidenceSnapshotIds.length) {
+      context.addIssue({
+        code: "custom",
+        message: "Mapping evidence snapshot IDs must be unique",
+        path: ["evidence"],
       });
     }
 
@@ -382,9 +421,35 @@ export const programmeMappingDatasetSchema = z
       ["mappingAssertions"],
       "mapping assertion ID",
     );
+    uniqueValues(
+      dataset.sponsorOrganisations.flatMap((sponsor) =>
+        sponsor.rawAliases.map(
+          (alias) => `${alias.sourceSnapshotId}\u0000${alias.locator}`,
+        ),
+      ),
+      context,
+      ["sponsorOrganisations"],
+      "sponsor raw-alias evidence reference",
+    );
+    uniqueValues(
+      dataset.compounds.flatMap((compound) =>
+        compound.rawAliases.map(
+          (alias) => `${alias.sourceSnapshotId}\u0000${alias.locator}`,
+        ),
+      ),
+      context,
+      ["compounds"],
+      "compound raw-alias evidence reference",
+    );
 
     const snapshotsById = new Map(
       dataset.sourceSnapshots.map((snapshot) => [snapshot.id, snapshot]),
+    );
+    const sponsorsById = new Map(
+      dataset.sponsorOrganisations.map((sponsor) => [sponsor.id, sponsor]),
+    );
+    const compoundsById = new Map(
+      dataset.compounds.map((compound) => [compound.id, compound]),
     );
     const assertionsById = new Map(
       dataset.mappingAssertions.map((assertion) => [assertion.id, assertion]),
@@ -448,13 +513,21 @@ export const programmeMappingDatasetSchema = z
     }
 
     for (const [index, assertion] of dataset.mappingAssertions.entries()) {
+      const sponsor = sponsorsById.get(
+        assertion.reportedSponsorOrganisationId,
+      );
+      const compound = compoundsById.get(assertion.compoundId);
+
       if (!programmeIds.has(assertion.programmeId)) {
         orphanIssue(context, ["mappingAssertions", index, "programmeId"], "programme");
       }
-      if (!sponsorIds.has(assertion.reportedSponsorOrganisationId)) {
+      if (
+        !sponsorIds.has(assertion.reportedSponsorOrganisationId) ||
+        sponsor === undefined
+      ) {
         orphanIssue(context, ["mappingAssertions", index, "reportedSponsorOrganisationId"], "sponsor organisation");
       }
-      if (!compoundIds.has(assertion.compoundId)) {
+      if (!compoundIds.has(assertion.compoundId) || compound === undefined) {
         orphanIssue(context, ["mappingAssertions", index, "compoundId"], "compound");
       }
 
@@ -462,7 +535,24 @@ export const programmeMappingDatasetSchema = z
         if (!sourceNctIds.has(nctId)) {
           orphanIssue(context, ["mappingAssertions", index, "nctIds", nctIndex], "source NCT record");
         }
+
+        const matchingEvidenceCount = assertion.evidence.filter((evidence) => {
+          const snapshot = snapshotsById.get(evidence.sourceSnapshotId);
+
+          return snapshot?.externalId === nctId;
+        }).length;
+
+        if (matchingEvidenceCount !== 1) {
+          context.addIssue({
+            code: "custom",
+            message:
+              "Mapping evidence must cover every assertion NCT exactly once",
+            path: ["mappingAssertions", index, "nctIds", nctIndex],
+          });
+        }
       }
+
+      const evidenceSnapshots = [];
 
       for (const [evidenceIndex, evidence] of assertion.evidence.entries()) {
         const snapshot = snapshotsById.get(evidence.sourceSnapshotId);
@@ -472,6 +562,8 @@ export const programmeMappingDatasetSchema = z
           continue;
         }
 
+        evidenceSnapshots.push(snapshot);
+
         if (!assertion.nctIds.includes(snapshot.externalId)) {
           context.addIssue({
             code: "custom",
@@ -480,16 +572,125 @@ export const programmeMappingDatasetSchema = z
           });
         }
 
-        const allowedLocators = Object.values(snapshot.fieldLocators);
+        if (
+          sponsor === undefined ||
+          !sponsor.rawAliases.some(
+            (alias) => alias.sourceSnapshotId === evidence.sourceSnapshotId,
+          )
+        ) {
+          context.addIssue({
+            code: "custom",
+            message:
+              "Mapping sponsor must have a raw alias from every evidence snapshot",
+            path: [
+              "mappingAssertions",
+              index,
+              "reportedSponsorOrganisationId",
+            ],
+          });
+        }
 
-        for (const locator of evidence.locators) {
-          if (!allowedLocators.some((allowed) => locator === allowed || locator.startsWith(`${allowed}/`))) {
+        const compoundAliases =
+          compound?.rawAliases.filter(
+            (alias) => alias.sourceSnapshotId === evidence.sourceSnapshotId,
+          ) ?? [];
+
+        if (compoundAliases.length === 0) {
+          context.addIssue({
+            code: "custom",
+            message:
+              "Mapping compound must have a raw alias from every evidence snapshot",
+            path: ["mappingAssertions", index, "compoundId"],
+          });
+        }
+
+        const requiredSnapshotLocators = [
+          snapshot.fieldLocators.nctId,
+          snapshot.fieldLocators.briefTitle,
+          snapshot.fieldLocators.reportedSponsorOrganisation,
+          snapshot.fieldLocators.reportedConditions,
+          snapshot.fieldLocators.reportedInterventions,
+        ];
+        const compoundAliasLocators = new Set(
+          compoundAliases.map((alias) => alias.locator),
+        );
+        const allowedLocators = new Set([
+          ...Object.values(snapshot.fieldLocators),
+          ...compoundAliasLocators,
+        ]);
+
+        for (const requiredLocator of requiredSnapshotLocators) {
+          if (!evidence.locators.includes(requiredLocator)) {
             context.addIssue({
               code: "custom",
-              message: "Mapping evidence locator must exist in its source snapshot",
+              message:
+                "Mapping evidence must include every required material snapshot locator",
+              path: [
+                "mappingAssertions",
+                index,
+                "evidence",
+                evidenceIndex,
+                "locators",
+              ],
+            });
+          }
+        }
+
+        for (const locator of evidence.locators) {
+          if (!allowedLocators.has(locator)) {
+            context.addIssue({
+              code: "custom",
+              message:
+                "Mapping evidence locator must be an exact declared snapshot or selected compound locator",
               path: ["mappingAssertions", index, "evidence", evidenceIndex, "locators"],
             });
           }
+        }
+
+        const selectedCompoundLocators = evidence.locators.filter((locator) =>
+          compoundAliasLocators.has(locator),
+        );
+
+        if (selectedCompoundLocators.length !== 1) {
+          context.addIssue({
+            code: "custom",
+            message:
+              "Mapping evidence must select exactly one same-snapshot compound child locator",
+            path: [
+              "mappingAssertions",
+              index,
+              "evidence",
+              evidenceIndex,
+              "locators",
+            ],
+          });
+        }
+      }
+
+      const reviewedAt = assertion.reviewedAt;
+
+      if (reviewedAt !== undefined) {
+        if (
+          evidenceSnapshots.length === assertion.evidence.length &&
+          evidenceSnapshots.some(
+            (snapshot) =>
+              compareOffsetDateTimes(reviewedAt, snapshot.processedAt) < 0,
+          )
+        ) {
+          context.addIssue({
+            code: "custom",
+            message:
+              "Mapping review must be at or after all evidence processing",
+            path: ["mappingAssertions", index, "reviewedAt"],
+          });
+        }
+
+        if (compareOffsetDateTimes(dataset.updatedAt, reviewedAt) < 0) {
+          context.addIssue({
+            code: "custom",
+            message: "Dataset update must be at or after every mapping review",
+            path: ["updatedAt"],
+          });
         }
       }
     }
@@ -543,6 +744,46 @@ function orphanIssue(
     message: `Reference must identify an existing ${entity}`,
     path,
   });
+}
+
+function offsetDateTimeParts(value: string): {
+  epochSeconds: number;
+  fractionalSeconds: string;
+} {
+  const fractionalMatch = value.match(
+    /\.(\d+)(?=Z|[+-]\d{2}:\d{2}$)/u,
+  );
+  const withoutFraction =
+    fractionalMatch === null
+      ? value
+      : value.replace(fractionalMatch[0], "");
+
+  return {
+    epochSeconds: Date.parse(withoutFraction) / 1_000,
+    fractionalSeconds: fractionalMatch?.[1] ?? "",
+  };
+}
+
+function compareOffsetDateTimes(left: string, right: string): number {
+  const leftParts = offsetDateTimeParts(left);
+  const rightParts = offsetDateTimeParts(right);
+
+  if (leftParts.epochSeconds !== rightParts.epochSeconds) {
+    return leftParts.epochSeconds < rightParts.epochSeconds ? -1 : 1;
+  }
+
+  const precision = Math.max(
+    leftParts.fractionalSeconds.length,
+    rightParts.fractionalSeconds.length,
+  );
+  const leftFraction = leftParts.fractionalSeconds.padEnd(precision, "0");
+  const rightFraction = rightParts.fractionalSeconds.padEnd(precision, "0");
+
+  return leftFraction < rightFraction
+    ? -1
+    : leftFraction > rightFraction
+      ? 1
+      : 0;
 }
 
 export function normalizeProgrammeAlias(value: string): string {
@@ -728,30 +969,44 @@ export function resolveProgrammeAlias(
         `${right.programmeId}\u0000${right.mappingAssertionId}`,
       ),
     );
-  const approvedProgrammeIds = Array.from(
+  const activeProgrammeIds = Array.from(
     new Set(
       candidates
-        .filter(
-          (candidate) =>
-            candidate.reviewStatus === "APPROVED" &&
-            candidate.resolutionState === "RESOLVED",
-        )
+        .filter((candidate) => candidate.reviewStatus !== "REJECTED")
         .map((candidate) => candidate.programmeId),
     ),
   ).sort(compareStable);
 
-  if (approvedProgrammeIds.length === 1) {
+  if (activeProgrammeIds.length > 1) {
+    return {
+      state: "CONFLICTING",
+      normalizedInput,
+      candidates,
+      winnerProgrammeId: null,
+    };
+  }
+
+  const activeProgrammeId = activeProgrammeIds[0];
+  const hasApprovedResolution =
+    activeProgrammeId !== undefined &&
+    candidates.some(
+      (candidate) =>
+        candidate.programmeId === activeProgrammeId &&
+        candidate.reviewStatus === "APPROVED" &&
+        candidate.resolutionState === "RESOLVED",
+    );
+
+  if (hasApprovedResolution) {
     return {
       state: "RESOLVED",
       normalizedInput,
       candidates,
-      winnerProgrammeId: approvedProgrammeIds[0] ?? null,
+      winnerProgrammeId: activeProgrammeId,
     };
   }
 
   return {
-    state:
-      approvedProgrammeIds.length > 1 ? "CONFLICTING" : "UNRESOLVED",
+    state: "UNRESOLVED",
     normalizedInput,
     candidates,
     winnerProgrammeId: null,
