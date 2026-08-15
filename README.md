@@ -306,6 +306,6 @@ biology and scientific reasoning
 - Product scaffold: **S1-01 merged and post-merge closeout complete**
 - Registered-trial explorer: **S1-03 complete; merged in PR #5 at `b7305dae739841a23c769e264fa4a84cee6db47c`**
 - Programme mapping: **S1-04 complete; merged in PR #6 at `d9cd1e6d41c560e9af7170b27b21aa5c1e50988c`**
-- Current task: **S1-05 deterministic programme comparison in progress**
+- Current task: **S1-05 deterministic programme comparison in review in draft PR #7**
 - Next task: **S1-06 blocked and unstarted until S1-05 is merged and post-merge verified**
 - Current sprint target: **private v0.1 by 27 August 2026**
