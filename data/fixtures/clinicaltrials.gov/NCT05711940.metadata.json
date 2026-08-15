@@ -1,0 +1,13 @@
+{
+  "sourceId": "SRC-CTG",
+  "provider": "ClinicalTrials.gov",
+  "externalId": "NCT05711940",
+  "sourceUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT05711940&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CLastUpdatePostDate%2CLeadSponsorName%2CCondition%2CInterventionName",
+  "retrievedAt": "2026-08-14T21:24:04.791Z",
+  "processedAt": "2026-08-14T21:26:00.000Z",
+  "registryLastUpdatePostedDate": "2026-08-10",
+  "contentSha256": "f74975e80e8863377bcdc2cdc7c9cd3266b9cd7efa865a202354b118aec99807",
+  "transformation": "Response content preserved as returned by the official API; one terminal newline added for repository text-file compatibility.",
+  "rightsStatus": "Approved SRC-CTG official API fixture under the repository source matrix.",
+  "attribution": "ClinicalTrials.gov, U.S. National Library of Medicine"
+}

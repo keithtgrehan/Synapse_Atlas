@@ -182,6 +182,48 @@ request. It does not claim database persistence: the S1-02 migration still has
 not been applied or integration-tested because no approved Postgres connection
 is configured.
 
+## Programme mapping candidates
+
+S1-04 adds a strictly validated, version-controlled dataset at `/programs`.
+It contains three bounded mapping candidates backed by exact checked-in
+ClinicalTrials.gov snapshots: Usona psilocybin / `NCT03866174`, COMP360 /
+`NCT05711940`, and CYB003 / `NCT06605105`. Search covers candidate labels,
+aliases, reported sponsor organisations, compounds, source-reported conditions,
+and NCT identifiers without network access, fuzzy matching, AI, or automatic
+entity creation.
+
+Registry observations remain `STRUCTURED_EXTRACTION`; programme, alias,
+sponsor-organisation, and compound relationships remain `HUMAN_INFERENCE`.
+Keith explicitly reviewed all three mappings in the S1-04 Codex task. Each is
+now `APPROVED` and `RESOLVED` only within its bounded, namespace-scoped
+programme grouping:
+
+- `NCT03866174` is associated with the Usona psilocybin/MDD programme
+  candidate while Psilocybin, Niacin, and Set and Setting (SaS) Protocol remain
+  separate registry interventions; their precise programme roles and whether
+  psilocybin is an exclusive programme compound remain unknown.
+- the COMP360-labelled programme candidate is associated with the
+  registry-reported Psilocybin intervention in `NCT05711940`; COMP360 and
+  Psilocybin are not asserted to be synonyms, aliases, identical substances,
+  or chemically/formulation-equivalent.
+- `NCT06605105`, candidate compound label CYB003, the CYB003/MDD programme
+  candidate, and reported sponsor organisation Cybin IRL Limited are
+  associated without establishing CYB003's chemical identity.
+
+Programme aliases apply only within their reviewed internal grouping and do
+not create chemical synonym or cross-entity equivalence claims. The UI displays
+review and resolution states separately, calls registry organisations
+“reported sponsor organisations,” keeps company identity, ownership/control,
+developer or commercial-rights status, programme-wide phase/status,
+mechanism, efficacy, safety, and superiority explicitly unknown, and labels
+the records as version-controlled snapshots rather than live programme data.
+Each record links to its live `/trials/<NCT ID>` view and official
+ClinicalTrials.gov evidence.
+
+S1-04 does not add database tables or a migration. The existing S1-02 migration
+remains valid, unchanged, and unapplied because no approved Postgres connection
+is configured.
+
 ## Deployment policy
 
 Automatic Vercel Git deployments from `main` are disabled by the root
@@ -225,5 +267,7 @@ biology and scientific reasoning
 - Canonical repository selected: **complete**
 - Project operating system: **initialized**
 - Product scaffold: **S1-01 merged and post-merge closeout complete**
-- Current task: **S1-03 in review; S1-04 remains unstarted**
+- Registered-trial explorer: **S1-03 complete; merged in PR #5 at `b7305dae739841a23c769e264fa4a84cee6db47c`**
+- Current task: **S1-04 in review; all three human mapping decisions are recorded as approved and resolved within their bounded groupings**
+- Next task: **S1-05 blocked and unstarted**
 - Current sprint target: **private v0.1 by 27 August 2026**

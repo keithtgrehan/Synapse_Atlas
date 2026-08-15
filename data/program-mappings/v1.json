@@ -1,0 +1,344 @@
+{
+  "datasetVersion": "1.0.0",
+  "updatedAt": "2026-08-15T09:04:16Z",
+  "sourceBoundary": {
+    "sourceId": "SRC-CTG",
+    "policyVersion": "1",
+    "provider": "ClinicalTrials.gov",
+    "statement": "Registry observations are STRUCTURED_EXTRACTION. Programme, alias, sponsor-organisation, and compound relationships are HUMAN_INFERENCE and remain review-gated."
+  },
+  "sourceSnapshots": [
+    {
+      "id": "snapshot-ctg-nct03866174-20260814",
+      "sourceId": "SRC-CTG",
+      "policyVersion": "1",
+      "provider": "ClinicalTrials.gov",
+      "externalId": "NCT03866174",
+      "apiRequestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT03866174&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CLastUpdatePostDate%2CLeadSponsorName%2CCondition%2CInterventionName",
+      "humanStudyUrl": "https://clinicaltrials.gov/study/NCT03866174",
+      "retrievedAt": "2026-08-14T13:56:45Z",
+      "processedAt": "2026-08-14T14:27:25Z",
+      "registryLastUpdatePostedDate": "2026-04-22",
+      "responseSha256": "ca2f41faaa07ce8c8d92530ff8b0eed7bee05906453b2de01c294cdb38c851cf",
+      "fixturePath": "data/fixtures/clinicaltrials.gov/NCT03866174.json",
+      "metadataPath": "data/fixtures/clinicaltrials.gov/NCT03866174.metadata.json",
+      "evidenceClass": "STRUCTURED_EXTRACTION",
+      "attribution": "ClinicalTrials.gov, U.S. National Library of Medicine",
+      "fieldLocators": {
+        "nctId": "/studies/0/protocolSection/identificationModule/nctId",
+        "briefTitle": "/studies/0/protocolSection/identificationModule/briefTitle",
+        "reportedSponsorOrganisation": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+        "reportedConditions": "/studies/0/protocolSection/conditionsModule/conditions",
+        "reportedInterventions": "/studies/0/protocolSection/armsInterventionsModule/interventions",
+        "registryLastUpdatePostedDate": "/studies/0/protocolSection/statusModule/lastUpdatePostDateStruct/date"
+      },
+      "observedRegistryFacts": {
+        "nctId": "NCT03866174",
+        "briefTitle": "A Study of Psilocybin for Major Depressive Disorder (MDD)",
+        "reportedSponsorOrganisation": "Usona Institute",
+        "reportedConditions": [
+          "Depressive Disorder, Major"
+        ],
+        "reportedInterventions": [
+          "Psilocybin",
+          "Niacin",
+          "Set and Setting (SaS) Protocol"
+        ],
+        "registryLastUpdatePostedDate": "2026-04-22"
+      }
+    },
+    {
+      "id": "snapshot-ctg-nct05711940-20260814",
+      "sourceId": "SRC-CTG",
+      "policyVersion": "1",
+      "provider": "ClinicalTrials.gov",
+      "externalId": "NCT05711940",
+      "apiRequestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT05711940&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CLastUpdatePostDate%2CLeadSponsorName%2CCondition%2CInterventionName",
+      "humanStudyUrl": "https://clinicaltrials.gov/study/NCT05711940",
+      "retrievedAt": "2026-08-14T21:24:04.791Z",
+      "processedAt": "2026-08-14T21:26:00.000Z",
+      "registryLastUpdatePostedDate": "2026-08-10",
+      "responseSha256": "f74975e80e8863377bcdc2cdc7c9cd3266b9cd7efa865a202354b118aec99807",
+      "fixturePath": "data/fixtures/clinicaltrials.gov/NCT05711940.json",
+      "metadataPath": "data/fixtures/clinicaltrials.gov/NCT05711940.metadata.json",
+      "evidenceClass": "STRUCTURED_EXTRACTION",
+      "attribution": "ClinicalTrials.gov, U.S. National Library of Medicine",
+      "fieldLocators": {
+        "nctId": "/studies/0/protocolSection/identificationModule/nctId",
+        "briefTitle": "/studies/0/protocolSection/identificationModule/briefTitle",
+        "reportedSponsorOrganisation": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+        "reportedConditions": "/studies/0/protocolSection/conditionsModule/conditions",
+        "reportedInterventions": "/studies/0/protocolSection/armsInterventionsModule/interventions",
+        "registryLastUpdatePostedDate": "/studies/0/protocolSection/statusModule/lastUpdatePostDateStruct/date"
+      },
+      "observedRegistryFacts": {
+        "nctId": "NCT05711940",
+        "briefTitle": "Efficacy, Safety, and Tolerability of Two Administrations of COMP360 in Participants With TRD",
+        "reportedSponsorOrganisation": "COMPASS Pathways",
+        "reportedConditions": [
+          "Treatment Resistant Depression"
+        ],
+        "reportedInterventions": [
+          "Psilocybin"
+        ],
+        "registryLastUpdatePostedDate": "2026-08-10"
+      }
+    },
+    {
+      "id": "snapshot-ctg-nct06605105-20260814",
+      "sourceId": "SRC-CTG",
+      "policyVersion": "1",
+      "provider": "ClinicalTrials.gov",
+      "externalId": "NCT06605105",
+      "apiRequestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT06605105&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CLastUpdatePostDate%2CLeadSponsorName%2CCondition%2CInterventionName",
+      "humanStudyUrl": "https://clinicaltrials.gov/study/NCT06605105",
+      "retrievedAt": "2026-08-14T21:24:04.938Z",
+      "processedAt": "2026-08-14T21:26:00.000Z",
+      "registryLastUpdatePostedDate": "2026-07-13",
+      "responseSha256": "84e6019edf82426d76ff6d8fcf6187852e5a48f7ee91b50cc646c0a5d09bbb2d",
+      "fixturePath": "data/fixtures/clinicaltrials.gov/NCT06605105.json",
+      "metadataPath": "data/fixtures/clinicaltrials.gov/NCT06605105.metadata.json",
+      "evidenceClass": "STRUCTURED_EXTRACTION",
+      "attribution": "ClinicalTrials.gov, U.S. National Library of Medicine",
+      "fieldLocators": {
+        "nctId": "/studies/0/protocolSection/identificationModule/nctId",
+        "briefTitle": "/studies/0/protocolSection/identificationModule/briefTitle",
+        "reportedSponsorOrganisation": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+        "reportedConditions": "/studies/0/protocolSection/conditionsModule/conditions",
+        "reportedInterventions": "/studies/0/protocolSection/armsInterventionsModule/interventions",
+        "registryLastUpdatePostedDate": "/studies/0/protocolSection/statusModule/lastUpdatePostDateStruct/date"
+      },
+      "observedRegistryFacts": {
+        "nctId": "NCT06605105",
+        "briefTitle": "Phase III Long-term Extension Trial to Assess Safety and Efficacy of CYB003 in MDD (EXTEND)",
+        "reportedSponsorOrganisation": "Cybin IRL Limited",
+        "reportedConditions": [
+          "Major Depressive Disorder"
+        ],
+        "reportedInterventions": [
+          "CYB003"
+        ],
+        "registryLastUpdatePostedDate": "2026-07-13"
+      }
+    }
+  ],
+  "sponsorOrganisations": [
+    {
+      "id": "sponsor-usona-institute",
+      "canonicalLabel": "Usona Institute",
+      "rawAliases": [
+        {
+          "value": "Usona Institute",
+          "sourceSnapshotId": "snapshot-ctg-nct03866174-20260814",
+          "locator": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name"
+        }
+      ]
+    },
+    {
+      "id": "sponsor-compass-pathways",
+      "canonicalLabel": "COMPASS Pathways",
+      "rawAliases": [
+        {
+          "value": "COMPASS Pathways",
+          "sourceSnapshotId": "snapshot-ctg-nct05711940-20260814",
+          "locator": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name"
+        }
+      ]
+    },
+    {
+      "id": "sponsor-cybin-irl-limited",
+      "canonicalLabel": "Cybin IRL Limited",
+      "rawAliases": [
+        {
+          "value": "Cybin IRL Limited",
+          "sourceSnapshotId": "snapshot-ctg-nct06605105-20260814",
+          "locator": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name"
+        }
+      ]
+    }
+  ],
+  "compounds": [
+    {
+      "id": "compound-psilocybin",
+      "canonicalLabel": "Psilocybin",
+      "rawAliases": [
+        {
+          "value": "Psilocybin",
+          "sourceSnapshotId": "snapshot-ctg-nct03866174-20260814",
+          "locator": "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
+        },
+        {
+          "value": "Psilocybin",
+          "sourceSnapshotId": "snapshot-ctg-nct05711940-20260814",
+          "locator": "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
+        }
+      ]
+    },
+    {
+      "id": "compound-cyb003",
+      "canonicalLabel": "CYB003",
+      "rawAliases": [
+        {
+          "value": "CYB003",
+          "sourceSnapshotId": "snapshot-ctg-nct06605105-20260814",
+          "locator": "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
+        }
+      ]
+    }
+  ],
+  "programmes": [
+    {
+      "id": "programme-usona-psilocybin-mdd",
+      "slug": "usona-psilocybin-mdd",
+      "canonicalLabel": "Usona psilocybin for major depressive disorder",
+      "mappingAssertionId": "mapping-usona-psilocybin-mdd",
+      "companyIdentity": {
+        "state": "UNKNOWN",
+        "rationale": "ClinicalTrials.gov reports a lead sponsor organisation but does not establish a company legal identity, ownership, control, developer status, or commercial rights."
+      },
+      "explicitUnknowns": [
+        "Company legal identity and any ownership, control, developer, or commercial-rights relationship",
+        "The precise programme roles of Psilocybin, Niacin, and Set and Setting (SaS) Protocol, and whether Psilocybin is an exclusive programme compound",
+        "Programme-level phase, status, mechanism, efficacy, safety, and superiority"
+      ],
+      "conflicts": []
+    },
+    {
+      "id": "programme-comp360-trd",
+      "slug": "comp360-treatment-resistant-depression",
+      "canonicalLabel": "COMP360 for treatment-resistant depression",
+      "mappingAssertionId": "mapping-comp360-trd",
+      "companyIdentity": {
+        "state": "UNKNOWN",
+        "rationale": "ClinicalTrials.gov reports a lead sponsor organisation but does not establish a company legal identity, ownership, control, developer status, or commercial rights."
+      },
+      "explicitUnknowns": [
+        "Company legal identity and any ownership, control, developer, or commercial-rights relationship",
+        "The exact chemical or formulation relationship between the programme label COMP360 and registry-reported intervention Psilocybin; they are not asserted to be synonyms, aliases, identical substances, or chemically/formulation-equivalent",
+        "Programme-level phase, status, mechanism, efficacy, safety, and superiority"
+      ],
+      "conflicts": []
+    },
+    {
+      "id": "programme-cyb003-mdd",
+      "slug": "cyb003-major-depressive-disorder",
+      "canonicalLabel": "CYB003 for major depressive disorder",
+      "mappingAssertionId": "mapping-cyb003-mdd",
+      "companyIdentity": {
+        "state": "UNKNOWN",
+        "rationale": "ClinicalTrials.gov reports a lead sponsor organisation but does not establish a company legal identity, ownership, control, developer status, or commercial rights."
+      },
+      "explicitUnknowns": [
+        "Chemical identity beyond the candidate compound label CYB003",
+        "Company legal identity and any ownership, control, developer, or commercial-rights relationship",
+        "Asset ownership, control, developer status, and commercial rights",
+        "Programme-level phase, status, mechanism, efficacy, safety, and superiority"
+      ],
+      "conflicts": []
+    }
+  ],
+  "mappingAssertions": [
+    {
+      "id": "mapping-usona-psilocybin-mdd",
+      "programmeId": "programme-usona-psilocybin-mdd",
+      "aliases": [
+        "Usona psilocybin for major depressive disorder",
+        "Usona psilocybin MDD",
+        "A Study of Psilocybin for Major Depressive Disorder (MDD)"
+      ],
+      "reportedSponsorOrganisationId": "sponsor-usona-institute",
+      "compoundId": "compound-psilocybin",
+      "nctIds": [
+        "NCT03866174"
+      ],
+      "evidenceClass": "HUMAN_INFERENCE",
+      "reviewStatus": "APPROVED",
+      "resolutionState": "RESOLVED",
+      "rationale": "NCT03866174 is associated with a Usona Institute–reported psilocybin-in-major-depressive-disorder programme candidate. Psilocybin, Niacin, and Set and Setting (SaS) Protocol remain separate registry-reported interventions, and their precise programme roles remain unknown.",
+      "evidence": [
+        {
+          "sourceSnapshotId": "snapshot-ctg-nct03866174-20260814",
+          "locators": [
+            "/studies/0/protocolSection/identificationModule/nctId",
+            "/studies/0/protocolSection/identificationModule/briefTitle",
+            "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+            "/studies/0/protocolSection/conditionsModule/conditions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
+          ]
+        }
+      ],
+      "reviewerReference": "Keith Grehan — explicit human review decision in the S1-04 Codex task",
+      "reviewRationale": "Approved as a human-reviewed association of NCT03866174 with a Usona Institute–reported psilocybin-in-major-depressive-disorder programme candidate. ClinicalTrials.gov names Psilocybin in the study title, reports Usona Institute as lead sponsor organisation, and reports Depressive Disorder, Major. Niacin and Set and Setting (SaS) Protocol remain separately preserved registry interventions. This approval does not assert that psilocybin is the only intervention, or establish company identity, ownership, developer status, commercial rights, programme-level phase/status, mechanism, efficacy, or safety.",
+      "reviewedAt": "2026-08-14T22:10:17Z"
+    },
+    {
+      "id": "mapping-comp360-trd",
+      "programmeId": "programme-comp360-trd",
+      "aliases": [
+        "COMP360 for treatment-resistant depression",
+        "COMP360",
+        "Efficacy, Safety, and Tolerability of Two Administrations of COMP360 in Participants With TRD"
+      ],
+      "reportedSponsorOrganisationId": "sponsor-compass-pathways",
+      "compoundId": "compound-psilocybin",
+      "nctIds": [
+        "NCT05711940"
+      ],
+      "evidenceClass": "HUMAN_INFERENCE",
+      "reviewStatus": "APPROVED",
+      "resolutionState": "RESOLVED",
+      "rationale": "COMP360-labelled programme candidate associated with the registry-reported Psilocybin intervention in NCT05711940.",
+      "evidence": [
+        {
+          "sourceSnapshotId": "snapshot-ctg-nct05711940-20260814",
+          "locators": [
+            "/studies/0/protocolSection/identificationModule/nctId",
+            "/studies/0/protocolSection/identificationModule/briefTitle",
+            "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+            "/studies/0/protocolSection/conditionsModule/conditions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
+          ]
+        }
+      ],
+      "reviewerReference": "Keith Grehan — explicit human review decision in the S1-04 Codex task",
+      "reviewRationale": "Approved as a human-reviewed association within NCT05711940: the ClinicalTrials.gov title names COMP360, the intervention field reports Psilocybin, the lead sponsor organisation is COMPASS Pathways, and the condition is Treatment Resistant Depression. This does not establish that COMP360 and Psilocybin are synonyms or chemically/formulation-equivalent, nor company identity, ownership, developer status, commercial rights, programme-level phase/status, efficacy, or safety.",
+      "reviewedAt": "2026-08-14T22:10:17Z"
+    },
+    {
+      "id": "mapping-cyb003-mdd",
+      "programmeId": "programme-cyb003-mdd",
+      "aliases": [
+        "CYB003 for major depressive disorder",
+        "CYB003",
+        "Phase III Long-term Extension Trial to Assess Safety and Efficacy of CYB003 in MDD (EXTEND)"
+      ],
+      "reportedSponsorOrganisationId": "sponsor-cybin-irl-limited",
+      "compoundId": "compound-cyb003",
+      "nctIds": [
+        "NCT06605105"
+      ],
+      "evidenceClass": "HUMAN_INFERENCE",
+      "reviewStatus": "APPROVED",
+      "resolutionState": "RESOLVED",
+      "rationale": "CYB003-labelled programme candidate associated with the registry-reported CYB003 intervention, Major Depressive Disorder condition, and Cybin IRL Limited lead sponsor organisation in NCT06605105.",
+      "evidence": [
+        {
+          "sourceSnapshotId": "snapshot-ctg-nct06605105-20260814",
+          "locators": [
+            "/studies/0/protocolSection/identificationModule/nctId",
+            "/studies/0/protocolSection/identificationModule/briefTitle",
+            "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+            "/studies/0/protocolSection/conditionsModule/conditions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
+          ]
+        }
+      ],
+      "reviewerReference": "Keith Grehan — explicit human review decision in the S1-04 Codex task",
+      "reviewRationale": "Approved as an evidence-bounded human-inference mapping: ClinicalTrials.gov record NCT06605105 names CYB003 in the study title, reports CYB003 as its sole intervention, Major Depressive Disorder as the condition, and Cybin IRL Limited as the lead sponsor organisation. This approval links the study to the programme candidate ‘CYB003 for major depressive disorder’ and candidate compound label ‘CYB003’ only. It does not establish chemical identity, company identity, ownership, developer or commercial-rights status, programme-wide phase/status, mechanism, efficacy, safety, or superiority.",
+      "reviewedAt": "2026-08-14T22:10:17Z"
+    }
+  ]
+}
