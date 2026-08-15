@@ -12,6 +12,7 @@ export default function Home() {
         </p>
         <div className="button-row">
           <Link className="button" href="/programs">Explore Programmes</Link>
+          <Link className="button" href="/compare">Compare programmes</Link>
           <Link className="button" href="/trials">Explore registered trials</Link>
           <a className="button button-secondary" href="/api/health">Check system health</a>
         </div>

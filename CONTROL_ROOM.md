@@ -24,7 +24,7 @@ active_sprint:
   id: S1
   dates: 2026-08-14/2026-08-27
   wip_limit: 3
-  current_task: S1-04
+  current_task: S1-05
 operating_rules:
   one_active_goal: true
   new_scope_requires_tradeoff: true
@@ -41,12 +41,13 @@ last_completed:
   - PR #3 merged the S1-01 post-merge closeout at 290ca358c86ffd9fd7cfaae61534eec9427115e8.
   - PR #4 merged S1-02 at 3b83f8f92b925c791430950a8ed5c22e1d5915b2.
   - PR #5 merged S1-03 at b7305dae739841a23c769e264fa4a84cee6db47c with successful GitHub CI and Vercel Preview checks.
+  - PR #6 merged S1-04 at d9cd1e6d41c560e9af7170b27b21aa5c1e50988c with all three bounded programme mappings approved and resolved.
 next_action:
-  task: S1-04
-  instruction: After confirming the exact invariant-repair head has green CI and a Ready Preview-only deployment, complete final Control Room review of draft PR #6; all three bounded mapping decisions are unchanged, but do not merge without Keith's explicit instruction and do not start S1-05.
+  task: S1-05
+  instruction: Commit and push the reviewed exact-base slice, open one draft S1-05 PR, then verify exact-head CI and the protected Git-integrated Preview before final Control Room review; never merge, enable auto-merge, deploy to Production, or start S1-06.
 blockers:
   - No approved Postgres connection is configured, so the S1-02 migration remains unapplied and S1-03 live normalized records are not persisted.
-  - S1-04 remains unmerged and In review; S1-05 is blocked until an explicit merge and post-merge verification.
+  - S1-06 is blocked and unstarted until S1-05 is explicitly merged and post-merge verified.
 ```
 
 ---
@@ -293,7 +294,7 @@ Acceptance:
 ### S1-04 — Program and compound resolution
 
 **Owner:** Data + Scientific Review + Product/UI
-**Status:** In review — current
+**Status:** Complete — merged in PR #6 at `d9cd1e6d41c560e9af7170b27b21aa5c1e50988c`
 
 Acceptance:
 
@@ -306,14 +307,17 @@ Acceptance:
 - auditable human review decision record;
 - no database migration, AI, fuzzy matching, or new source.
 
-## Next
-
 ### S1-05 — Program comparison
-**Status:** Blocked and unstarted — requires explicit S1-04 merge and post-merge verification
+**Owner:** Data + Scientific Review + Product/UI + Quality
+**Status:** In progress — current
 
 Two-to-four comparison using deterministic registered facts.
 
+## Next
+
 ### S1-06 — PubChem enrichment
+**Status:** Blocked and unstarted — requires explicit S1-05 merge and post-merge verification
+
 Canonical identifiers and structures with provenance and throttling.
 
 ### S1-07 — Europe PMC literature metadata
@@ -783,6 +787,7 @@ AI extraction, ChEMBL enrichment and publication polish are cut before the relea
 | 2026-08-14 | Disable automatic Vercel Git deployments from `main` | Keep Synapse Atlas Preview-only until a future human-approved Production action | Before an explicitly approved Production release |
 | 2026-08-14 | Keep S1-04 mapping candidates version-controlled, pending, and resolver-gated | ClinicalTrials.gov supports registry observations but not company identity, ownership, focal intervention, or approved programme/compound relationships | After Keith reviews each mapping row |
 | 2026-08-15 | Approve the three S1-04 mappings only within bounded internal programme namespaces | Keith explicitly approved the Usona, COMP360, and CYB003 associations; registry interventions remain separate source observations, programme aliases do not create chemical synonym/equivalence claims, and all unsupported company, rights, chemical, programme-wide, efficacy, safety, mechanism, and superiority claims remain unknown | Final Control Room review of draft PR #6; never broaden these decisions without new approved evidence and review |
+| 2026-08-15 | Build S1-05 only from the validated S1-04 dataset and exact retained ClinicalTrials.gov bytes | A deterministic comparison can expose reviewed associations, registry observations, a versioned unique-NCT calculation, and explicit unknowns without a live fetch, database, new source, scientific claim promotion, or ranking | Final Control Room review of the S1-05 draft PR |
 
 ---
 
@@ -805,6 +810,8 @@ Append one compact row per completed work package.
 | 2026-08-14 | S1-04 program and compound resolution | Added three evidence-bound pending mapping candidates, deterministic approval-gated resolution, offline programme search/detail, and exact registry snapshot provenance | `pnpm check`; 13 test files/85 tests; audit clean; migration and Vercel policy unchanged; production smoke and desktop/390 px browser journey | Review the draft PR and decide each pending mapping row; keep S1-05 blocked |
 | 2026-08-15 | S1-04 human-review remediation | Recorded Keith's three bounded approvals, strengthened exact snapshot-query validation, and made programme review/resolution UI state-driven | `pnpm check`; 14 test files/93 tests; audit clean; migration/dependencies/CI/Vercel policy unchanged; seven-route production smoke and desktop/390 px Chrome verification | Confirm the updated draft PR #6 head has green CI and Preview checks, then return it to final Control Room review; never merge or start S1-05 automatically |
 | 2026-08-15 | S1-04 final evidence-governance remediation | Bound every mapping to exact NCT, sponsor, compound, locator, and chronology evidence; made distinct open programme candidates block alias resolution | Focused 4 files/37 tests; `pnpm check` 14 files/102 tests; audit, smoke, no-change checks, invalid-mutation rerun, and two independent read-only reviews passed | After exact-head CI and Ready Preview-only verification, complete final Control Room review of draft PR #6; never merge or start S1-05 automatically |
+| 2026-08-15 | PR #6 — S1-04 program and compound resolution | Merged the reviewed mappings as `d9cd1e6d41c560e9af7170b27b21aa5c1e50988c`; all three approved associations and evidence boundaries are now canonical | Live GitHub main, merge commit, reviewed head, successful CI, Ready Preview inventory, no open PR, and empty Production inventory verified | S1-05 deterministic programme comparison |
+| 2026-08-15 | S1-05 deterministic programme comparison | Added exact status/start observations, pure offline comparison construction, strict two-to-four selection, evidence-separated comparison UI, derived unique-NCT count, provenance, explicit unknowns, and responsive states on the feature branch | Frozen install; focused and full 16 files/120 tests; all required individual and aggregate checks; audit; trace, drift, dependency, secret, and exact-base review; route smoke; desktop/390 px browser journey | Open one draft PR, verify exact-head CI and protected Preview, then return it for review; keep S1-06 blocked |
 
 Detailed handovers may be placed below.
 
@@ -960,6 +967,26 @@ Detailed handovers may be placed below.
 
 **Next highest-impact task:** After exact-head GitHub CI and Ready Preview-only Vercel verification, complete final Control Room review of draft PR #6 without merging.
 
+### 2026-08-15 — S1-05
+
+**Goal:** G1 — Ship private v0.1
+
+**Completed:** Verified PR #6 merged to canonical `main` at `d9cd1e6d41c560e9af7170b27b21aa5c1e50988c`, with reviewed branch head `4ec9d522c0008b08718ce228f6e96d4d9f199c21`, green CI, no open PR, no competing S1-05 branch, nine Ready Preview deployments, and an empty Production inventory. Added a server-rendered `/compare` flow for two to four distinct approved/resolved programme slugs; strict fail-closed selection parsing; stable dataset ordering; links to programme and registered-trial details; exact official-source links; desktop semantic table and mobile definition-list cards; visible evidence, review, resolution, unknown, provenance, and freshness boundaries; and change/clear actions. The programme dataset is additively versioned `1.1.0` with exact ClinicalTrials.gov overall-status and registered-start-date observations and JSON-pointer locators cross-validated against unchanged fixture bytes.
+
+**Files changed:** Additive versioned programme snapshot data; programme and fixture schemas; pure comparison domain under `src/lib/domain/`; offline exact-fixture comparison loader; `/compare` page/components and bounded responsive styles; one Home link; focused unit/server-render tests; a `pnpm db` verification alias; route-scoped Next output tracing for the six exact retained fixture/metadata files; `README.md`; and this control room. Dependencies, lockfile, source policy, database schema, migrations, CI, both roadmaps, fixture bytes, fixture metadata, and `vercel.json` remain unchanged.
+
+**Tests/checks:** `pnpm install --frozen-lockfile`; focused comparison/programme checks; full `pnpm test` (16 files/120 tests); `pnpm lint`; strict `pnpm typecheck`; `pnpm db`; production `pnpm build`; aggregate `pnpm check`; `pnpm audit --prod`; `git diff --check`; exact-base, dependency/lockfile, database schema/migration, fixture, source-boundary, credential/bypass, and full-diff review. The final route trace contains exactly the three retained ClinicalTrials.gov snapshots and their three metadata envelopes. Production-mode local smoke passed for Home, `/programs`, all three programme details, initial/two/all-three/one/invalid `/compare` states, and expected degraded `/api/health` 503. Browser verification passed at 1280×720 and 390×844 for Home → Compare, two selections, all three, programme detail navigation, trial/official link targets, clearing, one-selection and unknown-selection validation, visible 3 px keyboard focus, semantic table/mobile cards, and no page overflow or console/framework errors. The browser pass found and verified one bounded repair so same-page clearing now resets preserved checkbox state. GitHub CI and protected Preview evidence remain pending branch publication.
+
+**Source/legal evidence:** `SRC-CTG` policy version `1` remains the sole source. No source request, live refresh, fixture byte, metadata envelope, API query, hash, or mapping decision changed. Existing retained bytes support `COMPLETED` / `2020-01-23` for `NCT03866174`, `ACTIVE_NOT_RECRUITING` / `2023-02-14` for `NCT05711940`, and `ENROLLING_BY_INVITATION` / `2025-07-18` for `NCT06605105`. Registry observations remain `STRUCTURED_EXTRACTION`; reviewed programme/sponsor/compound associations remain bounded `HUMAN_INFERENCE`; the unique-NCT count is `DERIVED_CALCULATION` using formula `registered-trial-count/distinct-nct/v1` and exact NCT locator inputs; unsupported material remains `UNKNOWN`. No Firecrawl, scraping, browser extraction, AI/API inference, enrichment source, credential, restricted content, database, paid service, or Production action was used.
+
+**Decisions:** Selection accepts only repeated `programme=<slug>` values for two to four distinct known candidates and rejects every other query shape without echo. Comparison output follows version-controlled dataset order, not query order. Registered start dates reuse the trial-domain partial-date validator and preserve year/month/day precision. Retrieval time, local processing time, registered start date, and registry last-update-posted date remain separate. The product compares reviewed snapshots and never ranks, scores, recommends, selects a winner, or promotes registry observations into programme-wide scientific or commercial claims.
+
+**Known risks:** The three retained snapshots are intentionally frozen and can become stale. Existing linked live trial-detail pages still depend on ClinicalTrials.gov availability, but comparison construction performs no network request and never falls back to live data. No approved Postgres connection exists, so the S1-02 migration remains unapplied and live trial records remain request-scoped. Protected Preview verification is still pending branch publication.
+
+**Blocked:** No blocker to completing the S1-05 draft PR. S1-06 is blocked and unstarted until S1-05 is explicitly merged and post-merge verified.
+
+**Next highest-impact task:** Commit and push `agent/s1-05-programme-comparison`, open one draft PR, wait for exact-head GitHub CI and protected Vercel Preview, smoke-test the authenticated Preview, confirm Production remains empty, and return the draft PR for final Control Room review without merging.
+
 ## Handover template
 
 ```markdown
@@ -998,7 +1025,8 @@ Use these commands in a project conversation or Codex:
 S1-01 is Complete.
 S1-02 is Complete and merged in PR #4 at 3b83f8f92b925c791430950a8ed5c22e1d5915b2.
 S1-03 is Complete and merged in PR #5 at b7305dae739841a23c769e264fa4a84cee6db47c.
-S1-04 is In review/current. Keith's three bounded human decisions are recorded as APPROVED and RESOLVED, with namespace-scoped aliases and explicit unknowns preserved.
-After confirming the exact invariant-repair head has green CI and a Ready Preview-only deployment, complete final Control Room review of draft PR #6; never merge without Keith's explicit instruction.
-S1-05 remains blocked and unstarted until S1-04 is explicitly merged and post-merge verified.
+S1-04 is Complete and merged in PR #6 at d9cd1e6d41c560e9af7170b27b21aa5c1e50988c. Keith's three bounded human decisions remain APPROVED and RESOLVED, with namespace-scoped aliases and explicit unknowns preserved.
+S1-05 is current and In progress. Complete its exact-base checks, open one draft PR, wait for green exact-head CI and a Ready protected Preview, verify the bounded comparison flows, and return it for final Control Room review.
+Never merge, enable auto-merge, deploy or promote to Production, or start S1-06.
+S1-06 remains blocked and unstarted until S1-05 is explicitly merged and post-merge verified.
 ```
