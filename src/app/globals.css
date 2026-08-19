@@ -46,6 +46,11 @@ summary:focus-visible {
   outline-offset: 3px;
 }
 
+[tabindex]:focus-visible {
+  outline: 3px solid #42a884;
+  outline-offset: 3px;
+}
+
 .shell {
   max-width: 72rem;
   margin: 0 auto;
@@ -524,6 +529,231 @@ summary {
   min-width: 0;
 }
 
+.comparison-selection {
+  margin-bottom: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  background: var(--surface);
+}
+
+.comparison-selection fieldset {
+  min-width: 0;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.comparison-selection legend {
+  padding: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.comparison-selection fieldset > p {
+  max-width: 52rem;
+  margin: 0.6rem 0 1rem;
+  color: var(--muted);
+}
+
+.comparison-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.comparison-options label {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  border: 1px solid var(--border);
+  border-radius: 0.55rem;
+  padding: 0.9rem;
+  cursor: pointer;
+}
+
+.comparison-options label:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.comparison-options input {
+  flex: 0 0 auto;
+  min-height: 1.25rem;
+  width: 1.25rem;
+  margin: 0.15rem 0 0;
+}
+
+.comparison-options span,
+.comparison-options small,
+.comparison-fact,
+.comparison-fact small,
+.comparison-time-list li,
+.comparison-time-list span {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.comparison-options small,
+.comparison-fact small {
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.comparison-form-actions {
+  margin-top: 1rem;
+}
+
+.comparison-state {
+  margin-top: 1rem;
+}
+
+.comparison-results {
+  margin-top: 3rem;
+}
+
+.comparison-results-heading {
+  align-items: start;
+}
+
+.comparison-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  font-weight: 700;
+}
+
+.comparison-boundary {
+  max-width: 60rem;
+  margin-bottom: 1rem;
+}
+
+.comparison-table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--surface);
+}
+
+.comparison-table {
+  width: 100%;
+  min-width: 60rem;
+  border-collapse: collapse;
+}
+
+.comparison-table caption {
+  padding: 1rem;
+  color: var(--muted);
+  font-weight: 700;
+  text-align: left;
+}
+
+.comparison-table th,
+.comparison-table td {
+  min-width: 16rem;
+  border-top: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  padding: 1rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.comparison-table th:first-child {
+  min-width: 13rem;
+  width: 13rem;
+}
+
+.comparison-table th:last-child,
+.comparison-table td:last-child {
+  border-right: 0;
+}
+
+.comparison-table thead th {
+  background: var(--surface-subtle);
+}
+
+.comparison-table tbody th {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.evidence-label {
+  display: inline-flex;
+  width: fit-content;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.25rem 0.5rem;
+  background: var(--surface-subtle);
+  color: var(--text);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.evidence-human-inference {
+  border-color: var(--warning);
+  background: var(--warning-soft);
+  color: var(--warning);
+}
+
+.evidence-structured-extraction {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
+.evidence-derived-calculation {
+  border-color: #46639b;
+  background: #eef3ff;
+  color: #29477f;
+}
+
+.evidence-unknown {
+  border-color: var(--border);
+  background: var(--surface);
+  color: var(--muted);
+}
+
+.comparison-evidence-list,
+.comparison-mobile {
+  display: grid;
+  gap: 1rem;
+}
+
+.comparison-evidence-list > p {
+  margin: 0;
+}
+
+.comparison-evidence {
+  min-width: 0;
+  border-top: 1px solid var(--border);
+  padding-top: 0.8rem;
+}
+
+.comparison-evidence h3 {
+  margin: 0.6rem 0;
+  font-size: 1rem;
+}
+
+.comparison-mobile {
+  display: none;
+}
+
+.comparison-card {
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  background: var(--surface);
+}
+
+.comparison-card h3 {
+  margin: 0;
+  line-height: 1.3;
+}
+
 @media (max-width: 48rem) {
   .shell {
     padding: 2rem 1rem 4rem;
@@ -547,6 +777,22 @@ summary {
 
   .card-facts {
     grid-template-columns: 1fr;
+  }
+
+  .comparison-options {
+    grid-template-columns: 1fr;
+  }
+
+  .comparison-form-actions .button {
+    width: 100%;
+  }
+
+  .comparison-table-wrap {
+    display: none;
+  }
+
+  .comparison-mobile {
+    display: grid;
   }
 }
 

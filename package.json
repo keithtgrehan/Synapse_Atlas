@@ -17,6 +17,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
+    "db": "pnpm db:check",
     "db:check": "drizzle-kit check",
     "db:generate": "drizzle-kit generate"
   },

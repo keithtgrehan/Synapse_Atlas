@@ -42,6 +42,18 @@ describe("programme ClinicalTrials.gov snapshots", () => {
       expect(validated.metadata.processedAt).not.toBe(
         validated.metadata.registryLastUpdatePostedDate,
       );
+      expect(
+        validated.fixture.studies[0]?.protocolSection.statusModule.overallStatus,
+      ).toBe(snapshot.observedRegistryFacts.overallStatus);
+      expect(
+        validated.fixture.studies[0]?.protocolSection.statusModule.startDateStruct.date,
+      ).toBe(snapshot.observedRegistryFacts.registeredStartDate);
+      expect(snapshot.fieldLocators.overallStatus).toBe(
+        "/studies/0/protocolSection/statusModule/overallStatus",
+      );
+      expect(snapshot.fieldLocators.registeredStartDate).toBe(
+        "/studies/0/protocolSection/statusModule/startDateStruct/date",
+      );
     }
   });
 

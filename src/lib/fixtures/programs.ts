@@ -7,7 +7,7 @@ import {
   programmeSourceSnapshotSchema,
   type ProgrammeSourceSnapshot,
 } from "../domain/programs";
-import { nctIdSchema } from "../domain/trials";
+import { nctIdSchema, partialDateValueSchema } from "../domain/trials";
 import { sha256Bytes } from "../evidence/provenance";
 import { clinicalTrialsFixtureMetadataSchema } from "./clinicaltrials";
 
@@ -32,7 +32,7 @@ export const programmeFixturePageSchema = z
                   .object({
                     overallStatus: nonBlankTextSchema,
                     startDateStruct: z
-                      .object({ date: z.iso.date() })
+                      .object({ date: partialDateValueSchema })
                       .strict(),
                     lastUpdatePostDateStruct: z
                       .object({ date: z.iso.date() })
@@ -137,6 +137,9 @@ export function validateProgrammeFixture(
       ),
       observed.reportedInterventions,
     ) ||
+    protocol.statusModule.overallStatus !== observed.overallStatus ||
+    protocol.statusModule.startDateStruct.date !==
+      observed.registeredStartDate ||
     protocol.statusModule.lastUpdatePostDateStruct.date !==
       observed.registryLastUpdatePostedDate
   ) {
@@ -150,6 +153,8 @@ export function validateProgrammeFixture(
     reportedConditions: observed.reportedConditions,
     reportedInterventions:
       protocol.armsInterventionsModule.interventions,
+    overallStatus: observed.overallStatus,
+    registeredStartDate: observed.registeredStartDate,
     registryLastUpdatePostedDate:
       observed.registryLastUpdatePostedDate,
   };

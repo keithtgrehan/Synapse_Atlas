@@ -224,6 +224,43 @@ S1-04 does not add database tables or a migration. The existing S1-02 migration
 remains valid, unchanged, and unapplied because no approved Postgres connection
 is configured.
 
+## Deterministic programme comparison
+
+S1-05 adds a server-rendered comparison at `/compare`. Select two to four
+distinct programme candidates; the form submits repeated `programme=<slug>`
+parameters and accepts only mappings that are both `APPROVED` and `RESOLVED`.
+The current version-controlled dataset contains three eligible candidates.
+Empty, duplicate, unknown, malformed, unexpected, control-character, and
+more-than-four selections fail closed without echoing submitted values.
+
+The comparison reads no live source and uses no database. It validates the
+S1-04 dataset and the exact retained ClinicalTrials.gov response bytes at
+runtime, then presents the selected programmes in stable dataset order. It
+compares reviewed mapping state and sponsor-organisation/candidate-compound
+associations, source-reported sponsor organisation, conditions and
+interventions, linked NCT identifiers, unique-NCT count, registry overall status,
+precision-preserved
+registered start date, registry last-update-posted date, source retrieval and
+local processing timestamps, provenance, and explicit unknowns.
+
+Evidence labels keep meaning separate:
+
+- `HUMAN_INFERENCE` is a bounded, approved programme association; it is not a
+  registry source fact.
+- `STRUCTURED_EXTRACTION` is an observation cross-validated against an exact
+  retained ClinicalTrials.gov snapshot.
+- `DERIVED_CALCULATION` is the versioned unique-NCT count with exact input
+  references.
+- `UNKNOWN` means the assertion is not established from approved sources.
+
+This is a comparison of reviewed registry snapshots, not a programme ranking,
+score, recommendation, or live pipeline view. ClinicalTrials.gov is the sole
+source; each snapshot retains its original retrieval time and may be stale.
+No approved Postgres connection exists. Company identity, ownership/control,
+developer or commercial-rights status, chemical/formulation equivalence,
+programme-wide phase/status, mechanism, efficacy, safety, and superiority
+remain unsupported and explicitly unknown.
+
 ## Deployment policy
 
 Automatic Vercel Git deployments from `main` are disabled by the root
@@ -268,6 +305,7 @@ biology and scientific reasoning
 - Project operating system: **initialized**
 - Product scaffold: **S1-01 merged and post-merge closeout complete**
 - Registered-trial explorer: **S1-03 complete; merged in PR #5 at `b7305dae739841a23c769e264fa4a84cee6db47c`**
-- Current task: **S1-04 in review; all three human mapping decisions are recorded as approved and resolved within their bounded groupings**
-- Next task: **S1-05 blocked and unstarted**
+- Programme mapping: **S1-04 complete; merged in PR #6 at `d9cd1e6d41c560e9af7170b27b21aa5c1e50988c`**
+- Current task: **S1-05 deterministic programme comparison in review in draft PR #7**
+- Next task: **S1-06 blocked and unstarted until S1-05 is merged and post-merge verified**
 - Current sprint target: **private v0.1 by 27 August 2026**

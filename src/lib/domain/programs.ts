@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { nctIdSchema } from "./trials";
+import { nctIdSchema, partialDateValueSchema } from "./trials";
 import {
   claimReviewStatusSchema,
   offsetDateTimeSchema,
@@ -43,6 +43,8 @@ const fieldLocatorsSchema = z
     reportedSponsorOrganisation: nonBlankTextSchema,
     reportedConditions: nonBlankTextSchema,
     reportedInterventions: nonBlankTextSchema,
+    overallStatus: nonBlankTextSchema,
+    registeredStartDate: nonBlankTextSchema,
     registryLastUpdatePostedDate: nonBlankTextSchema,
   })
   .strict()
@@ -65,6 +67,8 @@ const observedRegistryFactsSchema = z
     reportedSponsorOrganisation: nonBlankTextSchema,
     reportedConditions: z.array(nonBlankTextSchema).min(1).max(100),
     reportedInterventions: z.array(nonBlankTextSchema).min(1).max(200),
+    overallStatus: nonBlankTextSchema.max(100),
+    registeredStartDate: partialDateValueSchema,
     registryLastUpdatePostedDate: z.iso.date(),
   })
   .strict();
@@ -358,7 +362,7 @@ export const programmeMappingAssertionSchema = z
 
 export const programmeMappingDatasetSchema = z
   .object({
-    datasetVersion: z.literal("1.0.0"),
+    datasetVersion: z.literal("1.1.0"),
     updatedAt: offsetDateTimeSchema,
     sourceBoundary: z
       .object({

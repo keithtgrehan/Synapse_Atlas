@@ -118,7 +118,8 @@ describe("programme mapping dataset", () => {
       },
     ] as const;
 
-    expect(programmeMappingDataset.updatedAt).toBe("2026-08-15T09:04:16Z");
+    expect(programmeMappingDataset.datasetVersion).toBe("1.1.0");
+    expect(programmeMappingDataset.updatedAt).toBe("2026-08-15T11:28:15Z");
 
     for (const expected of expectedBindings) {
       const assertion = programmeMappingDataset.mappingAssertions.find(
@@ -425,7 +426,7 @@ describe("programme mapping dataset", () => {
 
     const subMillisecondDatasetUpdate = structuredClone(rawDataset);
     subMillisecondDatasetUpdate.mappingAssertions[0]!.reviewedAt =
-      "2026-08-15T09:04:16.0001Z";
+      "2026-08-15T11:28:15.0001Z";
     expectDatasetIssue(
       subMillisecondDatasetUpdate,
       "Dataset update must be at or after every mapping review",
