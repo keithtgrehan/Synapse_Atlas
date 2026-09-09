@@ -24,7 +24,7 @@ active_sprint:
   id: S1
   dates: 2026-08-14/2026-08-27
   wip_limit: 3
-  current_task: S1-05
+  current_task: null
 operating_rules:
   one_active_goal: true
   new_scope_requires_tradeoff: true
@@ -42,14 +42,14 @@ last_completed:
   - PR #4 merged S1-02 at 3b83f8f92b925c791430950a8ed5c22e1d5915b2.
   - PR #5 merged S1-03 at b7305dae739841a23c769e264fa4a84cee6db47c with successful GitHub CI and Vercel Preview checks.
   - PR #6 merged S1-04 at d9cd1e6d41c560e9af7170b27b21aa5c1e50988c with all three bounded programme mappings approved and resolved.
-  - PR #7 merged S1-05 at 3cb39fcb4d11abf38d3c77db44c307f0b184611f on 2026-08-19; security maintenance must merge and pass post-merge verification before closeout is Complete.
+  - PR #7 merged S1-05 at 3cb39fcb4d11abf38d3c77db44c307f0b184611f on 2026-08-19.
+  - PR #8 merged security maintenance at ae1e4d564cc728d14072f623cf4b374e3628ded8 on 2026-09-09; post-merge local checks, main CI, clean production audit, and Preview-only deployment verification passed. S1-05 is Complete.
 next_action:
-  task: S1-05
-  instruction: Review the authorized S1-05 security-maintenance draft PR after exact-head CI and protected Preview verification. Merge requires Keith's explicit instruction; after post-merge closeout, seek explicit human scope approval/planning for S1-06 without implementing it.
+  task: S1-06
+  instruction: Seek explicit human scope approval/planning for S1-06; keep it unstarted and do not access PubChem or implement enrichment.
 blockers:
   - No approved Postgres connection is configured, so the S1-02 migration remains unapplied and S1-03 live normalized records are not persisted.
-  - Canonical main fails the production dependency audit; the bounded Next.js/sharp remediation remains in review until explicitly merged and post-merge verified.
-  - S1-06 remains blocked and unstarted pending S1-05 closeout and explicit human scope approval/planning.
+  - S1-06 remains unstarted pending explicit human scope approval/planning.
 ```
 
 ---
@@ -311,14 +311,14 @@ Acceptance:
 
 ### S1-05 — Program comparison
 **Owner:** Data + Scientific Review + Product/UI + Quality
-**Status:** Merged in PR #7 at `3cb39fcb4d11abf38d3c77db44c307f0b184611f` — current security maintenance in review; post-merge closeout not Complete
+**Status:** Complete — PR #7 merged comparison; PR #8 merged security maintenance at `ae1e4d564cc728d14072f623cf4b374e3628ded8`; post-merge verification passed on 9 September 2026
 
 Two-to-four comparison using deterministic registered facts.
 
 ## Next
 
 ### S1-06 — PubChem enrichment
-**Status:** Blocked and unstarted — requires successful S1-05 closeout and explicit human scope approval/planning
+**Status:** Unstarted — awaits explicit human scope approval/planning
 
 Canonical identifiers and structures with provenance and throttling.
 
@@ -815,6 +815,7 @@ Append one compact row per completed work package.
 | 2026-08-15 | PR #6 — S1-04 program and compound resolution | Merged the reviewed mappings as `d9cd1e6d41c560e9af7170b27b21aa5c1e50988c`; all three approved associations and evidence boundaries are now canonical | Live GitHub main, merge commit, reviewed head, successful CI, Ready Preview inventory, no open PR, and empty Production inventory verified | S1-05 deterministic programme comparison |
 | 2026-08-15 | S1-05 deterministic programme comparison | Added exact status/start observations, pure offline comparison construction, strict two-to-four selection, pre-render invalid-query sanitization, evidence-separated comparison UI, derived unique-NCT count, provenance, explicit unknowns, and responsive states | Frozen install; full 17 files/122 tests; all required individual/aggregate checks and audit; exact evidence trace; drift, dependency, secret, and base review; local route/browser QA; green CI; protected Preview smoke; Production empty | Final Control Room review of draft PR #7; keep S1-06 blocked |
 | 2026-09-09 | S1-05 bounded security maintenance | Verified PR #7 merge; upgraded Next.js/eslint-config-next to 16.3.4 and transitive sharp to 0.35.4 after the baseline audit reported 2 critical and 1 high advisory | Frozen install, `pnpm check` (17 files/122 tests), `pnpm db`, production audit clean, local production comparison smoke and desktop/mobile checks | Exact-head CI and protected Preview verification, then human review of the security-maintenance draft PR; no merge or S1-06 |
+| 2026-09-09 | PR #8 merge and S1-05 final closeout | Explicitly authorized merge at `ae1e4d564cc728d14072f623cf4b374e3628ded8`; S1-05 Complete; no active implementation task | Exact reviewed-tree equality; frozen install; full check/122 tests/build; audit clean; main CI green; 13 Ready deployments, no merge-commit deployment and no Production | Human scope approval/planning for S1-06; keep unstarted |
 
 Detailed handovers may be placed below.
 
@@ -1014,6 +1015,28 @@ Detailed handovers may be placed below.
 
 **Control-room update:** Completed for the security-maintenance review stage; final external check/deployment evidence belongs in the draft PR and handoff.
 
+### 2026-09-09 — PR #8 merge and S1-05 final closeout
+
+**Goal:** G1 — Ship private v0.1
+
+**Completed:** Keith explicitly authorized PR #8 merge and post-merge closeout. Reverified the unchanged, mergeable PR head `bc46776157218bfe909cbf4df3ac11a0ca774d83`, successful CI/Vercel checks, Ready protected Preview, and clean audit; marked the draft ready and merged with that exact head constraint. GitHub records merge `ae1e4d564cc728d14072f623cf4b374e3628ded8` by `keithtgrehan` at `2026-09-09T20:02:52Z`. Fetched origin; live main and the isolated closeout base match that merge, whose tree exactly equals the reviewed head. S1-05 is Complete. The primary checkout and previous uncommitted closeout work remain untouched.
+
+**Files changed:** `CONTROL_ROOM.md` and two README status lines only, on isolated branch `codex/s1-05-final-closeout`; this governance record is a local closeout commit, not an additional main merge.
+
+**Tests/checks:** Post-merge frozen install and `pnpm check` passed (lint, strict typecheck, 17 test files/122 tests, static Drizzle consistency, production build); `pnpm audit --prod` reports no known vulnerabilities. [Main CI](https://github.com/keithtgrehan/Career-Path-to-Psychedelic-Biotech/actions/runs/34398684340) passed at the merge commit. Exact drift review and `git diff --check` passed. No product, dependency, source, fixture/mapping, schema/migration, CI, roadmap, or deployment-policy drift is included in the closeout.
+
+**Source/legal evidence:** No research-source requests or data changes. Ready Preview `dpl_HYvsHEwaAmJetjeMaRMeew7LC8H9` remains on the exact reviewed PR head with previously verified authenticated comparison/redaction smoke and desktop/mobile checks. Post-merge Vercel inventory contains 13 Ready deployments, no merge-commit deployment, and zero Production deployments. Project protection remains `all_except_custom_domains`; tested `git.deploymentEnabled.main: false` remains unchanged.
+
+**Decisions:** Preserve G1 as the single active goal and WIP limit three. Clear the active implementation task; S1-06 remains unstarted pending explicit human scope approval/planning. No auto-merge, Production deployment/promotion, PubChem access, or S1-06 work occurred.
+
+**Known risks:** No approved Postgres connection exists; retained snapshots may be stale and linked live trial pages depend on ClinicalTrials.gov. Main CI emitted a non-failing Node 20 action-runtime deprecation annotation; workflow updates are outside this closeout. G1/v0.1 is not declared shipped.
+
+**Blocked:** No S1-05 blocker remains. S1-06 awaits human scope approval/planning.
+
+**Next highest-impact task:** Human scope approval/planning for S1-06; do not implement it automatically.
+
+**Control-room update:** Completed locally with verified S1-05 completion and accurate next-action gates.
+
 ## Handover template
 
 ```markdown
@@ -1053,7 +1076,7 @@ S1-01 is Complete.
 S1-02 is Complete and merged in PR #4 at 3b83f8f92b925c791430950a8ed5c22e1d5915b2.
 S1-03 is Complete and merged in PR #5 at b7305dae739841a23c769e264fa4a84cee6db47c.
 S1-04 is Complete and merged in PR #6 at d9cd1e6d41c560e9af7170b27b21aa5c1e50988c. Keith's three bounded human decisions remain APPROVED and RESOLVED, with namespace-scoped aliases and explicit unknowns preserved.
-S1-05 was merged in PR #7 at 3cb39fcb4d11abf38d3c77db44c307f0b184611f. Keith authorized bounded security maintenance after the production dependency audit blocked closeout: next and eslint-config-next 16.3.4 with the regenerated lockfile, validation, one draft PR, and protected Preview verification only.
-Never merge, enable auto-merge, deploy or promote to Production, or start S1-06.
-Return the security-maintenance draft PR for explicit human review. After an explicitly authorized merge and successful post-merge closeout, seek explicit human scope approval/planning for S1-06; it remains unstarted.
+S1-05 is Complete. PR #7 merged comparison; Keith explicitly authorized PR #8 security-maintenance merge at ae1e4d564cc728d14072f623cf4b374e3628ded8. Post-merge checks, main CI, production audit, and Preview-only inventory verification passed.
+No active implementation task. Seek explicit human scope approval/planning for S1-06; keep it unstarted.
+Do not enable auto-merge, deploy or promote to Production, or perform further merges without explicit authorization.
 ```
