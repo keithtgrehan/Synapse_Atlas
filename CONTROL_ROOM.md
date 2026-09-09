@@ -11,7 +11,7 @@ project:
   owner: Keith Grehan
   location: Berlin, Germany
   started: 2026-08-14
-  last_updated: 2026-08-15
+  last_updated: 2026-09-09
 mission:
   career_goal: Move into CNS, neuropsychiatric or psychedelic biotech through partnerships, business development, strategy, research operations, or AI/data product work.
   product_goal: Prove scientific, product, engineering and commercial capability with a trustworthy private drug-development intelligence tool.
@@ -42,12 +42,14 @@ last_completed:
   - PR #4 merged S1-02 at 3b83f8f92b925c791430950a8ed5c22e1d5915b2.
   - PR #5 merged S1-03 at b7305dae739841a23c769e264fa4a84cee6db47c with successful GitHub CI and Vercel Preview checks.
   - PR #6 merged S1-04 at d9cd1e6d41c560e9af7170b27b21aa5c1e50988c with all three bounded programme mappings approved and resolved.
+  - PR #7 merged S1-05 at 3cb39fcb4d11abf38d3c77db44c307f0b184611f on 2026-08-19; security maintenance must merge and pass post-merge verification before closeout is Complete.
 next_action:
   task: S1-05
-  instruction: Complete final Control Room review of draft PR #7 at the verified governance head; never merge without Keith's explicit instruction, enable auto-merge, deploy to Production, or start S1-06.
+  instruction: Review the authorized S1-05 security-maintenance draft PR after exact-head CI and protected Preview verification. Merge requires Keith's explicit instruction; after post-merge closeout, seek explicit human scope approval/planning for S1-06 without implementing it.
 blockers:
   - No approved Postgres connection is configured, so the S1-02 migration remains unapplied and S1-03 live normalized records are not persisted.
-  - S1-06 is blocked and unstarted until S1-05 is explicitly merged and post-merge verified.
+  - Canonical main fails the production dependency audit; the bounded Next.js/sharp remediation remains in review until explicitly merged and post-merge verified.
+  - S1-06 remains blocked and unstarted pending S1-05 closeout and explicit human scope approval/planning.
 ```
 
 ---
@@ -309,14 +311,14 @@ Acceptance:
 
 ### S1-05 — Program comparison
 **Owner:** Data + Scientific Review + Product/UI + Quality
-**Status:** In review — current in draft PR #7
+**Status:** Merged in PR #7 at `3cb39fcb4d11abf38d3c77db44c307f0b184611f` — current security maintenance in review; post-merge closeout not Complete
 
 Two-to-four comparison using deterministic registered facts.
 
 ## Next
 
 ### S1-06 — PubChem enrichment
-**Status:** Blocked and unstarted — requires explicit S1-05 merge and post-merge verification
+**Status:** Blocked and unstarted — requires successful S1-05 closeout and explicit human scope approval/planning
 
 Canonical identifiers and structures with provenance and throttling.
 
@@ -812,6 +814,7 @@ Append one compact row per completed work package.
 | 2026-08-15 | S1-04 final evidence-governance remediation | Bound every mapping to exact NCT, sponsor, compound, locator, and chronology evidence; made distinct open programme candidates block alias resolution | Focused 4 files/37 tests; `pnpm check` 14 files/102 tests; audit, smoke, no-change checks, invalid-mutation rerun, and two independent read-only reviews passed | After exact-head CI and Ready Preview-only verification, complete final Control Room review of draft PR #6; never merge or start S1-05 automatically |
 | 2026-08-15 | PR #6 — S1-04 program and compound resolution | Merged the reviewed mappings as `d9cd1e6d41c560e9af7170b27b21aa5c1e50988c`; all three approved associations and evidence boundaries are now canonical | Live GitHub main, merge commit, reviewed head, successful CI, Ready Preview inventory, no open PR, and empty Production inventory verified | S1-05 deterministic programme comparison |
 | 2026-08-15 | S1-05 deterministic programme comparison | Added exact status/start observations, pure offline comparison construction, strict two-to-four selection, pre-render invalid-query sanitization, evidence-separated comparison UI, derived unique-NCT count, provenance, explicit unknowns, and responsive states | Frozen install; full 17 files/122 tests; all required individual/aggregate checks and audit; exact evidence trace; drift, dependency, secret, and base review; local route/browser QA; green CI; protected Preview smoke; Production empty | Final Control Room review of draft PR #7; keep S1-06 blocked |
+| 2026-09-09 | S1-05 bounded security maintenance | Verified PR #7 merge; upgraded Next.js/eslint-config-next to 16.3.4 and transitive sharp to 0.35.4 after the baseline audit reported 2 critical and 1 high advisory | Frozen install, `pnpm check` (17 files/122 tests), `pnpm db`, production audit clean, local production comparison smoke and desktop/mobile checks | Exact-head CI and protected Preview verification, then human review of the security-maintenance draft PR; no merge or S1-06 |
 
 Detailed handovers may be placed below.
 
@@ -989,6 +992,28 @@ Detailed handovers may be placed below.
 
 **Next highest-impact task:** Confirm the governance-only head of draft PR #7 has green exact-head GitHub CI and a Ready protected Preview, then complete final Control Room review without merging, enabling auto-merge, promoting to Production, or starting S1-06.
 
+### 2026-09-09 — S1-05 bounded security maintenance
+
+**Goal:** G1 — Ship private v0.1
+
+**Completed:** Reverified canonical `origin/main` and live GitHub at PR #7 merge `3cb39fcb4d11abf38d3c77db44c307f0b184611f`; PR #7 head `dc7ad8fb6a34e9f7349177681d4d272e2637e0a1` has an identical tree and successful CI/Vercel checks. No open PR existed at start. Keith explicitly authorized this bounded remediation after the 9 September production audit blocked closeout. Updated only `next` and `eslint-config-next` from `16.3.1` to `16.3.4`; regenerated the lockfile, which resolves `sharp 0.35.4` and its patched native packages. Primary checkout and the earlier uncommitted closeout worktree are preserved.
+
+**Files changed:** `package.json`, `pnpm-lock.yaml`, `CONTROL_ROOM.md`, and the two stale README status lines. Application, tests, source policy, fixture/metadata/mapping bytes, schema/migrations, CI, both roadmaps, and `vercel.json` are unchanged.
+
+**Tests/checks:** Node `v22.23.1`, pnpm `10.18.3`; `pnpm install --frozen-lockfile`; `pnpm check` (lint, strict typecheck, 17 files/122 tests, Drizzle consistency, production build); `pnpm db`; `pnpm audit --prod` (no known vulnerabilities); `git diff --check`; exact drift and added-line secret review. Production-mode local smoke passed Home, programmes, COMP360 detail, initial/one/two/three-programme comparison states, and expected health 503 without a database. Unknown, unexpected, duplicate, empty, and control-character queries redirect 307 to the fixed sanitized URL and render the redacted error without raw marker leakage. The comparison trace still includes exactly the six retained fixture/metadata files. Browser checks at 1280×720 and 390×844 passed selection, comparison, clear/reset, one-selection validation, invalid selection, detail/source links, desktop table/mobile cards, no horizontal page overflow, visible 3 px keyboard focus, and no console warnings/errors.
+
+**Source/legal evidence:** Current package-registry metadata confirms `next 16.3.4` requires optional `sharp ^0.35.4`; baseline audit reports [GHSA-p293-qw3h-jr36](https://github.com/advisories/GHSA-p293-qw3h-jr36), [GHSA-2xp9-vwfh-vxw4](https://github.com/advisories/GHSA-2xp9-vwfh-vxw4), and [GHSA-rgj7-g3m4-5g8c](https://github.com/advisories/GHSA-rgj7-g3m4-5g8c). The patched lockfile clears all three. No research-source access, data refresh, new direct dependency, database connection, or scientific claim change was introduced.
+
+**Decisions:** This is security maintenance within the current S1-05 closeout, preserving one active goal and WIP limit three. It does not mark canonical main remediated or S1-05 Complete before explicit merge and post-merge verification. S1-06 remains unstarted and needs explicit human scope approval/planning after closeout. Push, one draft PR, CI, and authenticated protected Preview verification are authorized; merge, auto-merge, and Production are not.
+
+**Known risks:** Main retains the audited dependencies until this remediation is explicitly merged. Existing snapshots can be stale; linked live trial pages depend on ClinicalTrials.gov availability; no approved Postgres connection exists. Baseline Vercel inventory has 12 Ready deployments and zero Production deployments; the exact-head Preview and CI evidence will be recorded in the draft PR after publication without changing the reviewed head. The tested `git.deploymentEnabled.main: false` rule remains unchanged.
+
+**Blocked:** No local validation blocker. Security maintenance remains in review pending exact-head CI/Preview evidence and Keith's explicit merge decision; S1-05 post-merge closeout and S1-06 remain gated.
+
+**Next highest-impact task:** Finish exact-head CI and authenticated protected Preview verification, return the draft security-maintenance PR for human review, then stop before merge or Production.
+
+**Control-room update:** Completed for the security-maintenance review stage; final external check/deployment evidence belongs in the draft PR and handoff.
+
 ## Handover template
 
 ```markdown
@@ -1028,7 +1053,7 @@ S1-01 is Complete.
 S1-02 is Complete and merged in PR #4 at 3b83f8f92b925c791430950a8ed5c22e1d5915b2.
 S1-03 is Complete and merged in PR #5 at b7305dae739841a23c769e264fa4a84cee6db47c.
 S1-04 is Complete and merged in PR #6 at d9cd1e6d41c560e9af7170b27b21aa5c1e50988c. Keith's three bounded human decisions remain APPROVED and RESOLVED, with namespace-scoped aliases and explicit unknowns preserved.
-S1-05 is current and In review in draft PR #7. Its deterministic comparison product head, CI, and protected Preview are verified; confirm the governance-only exact head remains green, then complete final Control Room review.
+S1-05 was merged in PR #7 at 3cb39fcb4d11abf38d3c77db44c307f0b184611f. Keith authorized bounded security maintenance after the production dependency audit blocked closeout: next and eslint-config-next 16.3.4 with the regenerated lockfile, validation, one draft PR, and protected Preview verification only.
 Never merge, enable auto-merge, deploy or promote to Production, or start S1-06.
-S1-06 remains blocked and unstarted until S1-05 is explicitly merged and post-merge verified.
+Return the security-maintenance draft PR for explicit human review. After an explicitly authorized merge and successful post-merge closeout, seek explicit human scope approval/planning for S1-06; it remains unstarted.
 ```
