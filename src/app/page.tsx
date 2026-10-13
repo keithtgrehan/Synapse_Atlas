@@ -4,27 +4,28 @@ export default function Home() {
   return (
     <main className="shell home">
       <section className="hero">
-        <p className="eyebrow">Private evidence workspace</p>
+        <p className="eyebrow">Neuropsychiatric research workspace</p>
         <h1>Synapse Atlas</h1>
         <p className="lede">
-          Traceable intelligence for neuropsychiatric drug-development programmes,
-          starting with registered study facts from the official source.
+          Compare selected depression studies. Understand their registered endpoints
+          and timelines, inspect the evidence and export a dated research brief.
         </p>
         <div className="button-row">
-          <Link className="button" href="/programs">Explore Programmes</Link>
-          <Link className="button" href="/compare">Compare programmes</Link>
-          <Link className="button" href="/trials">Explore registered trials</Link>
-          <a className="button button-secondary" href="/api/health">Check system health</a>
+          <Link className="button" href="/compare?programme=usona-psilocybin-mdd&programme=comp360-treatment-resistant-depression&programme=cyb003-major-depressive-disorder">Explore the depression study comparison</Link>
+          <Link className="button button-secondary" href="/programs">Explore programmes</Link>
+          <Link className="button button-secondary" href="/trials">Search registered trials</Link>
         </div>
       </section>
       <section className="principles" aria-labelledby="principles-heading">
         <p className="eyebrow">Trust boundary</p>
         <h2 id="principles-heading">Facts stay attached to evidence</h2>
         <ul>
-          <li>Official ClinicalTrials.gov API only</li>
+          <li>Three reviewed programme contexts, with selected ClinicalTrials.gov studies</li>
           <li>Unknown and missing fields remain visible</li>
           <li>Every trial links back to its registry record</li>
+          <li>CSV, source manifest and a printable brief use the same saved evidence</li>
         </ul>
+        <Link href="/methodology">Sources, methodology and limitations</Link>
       </section>
     </main>
   );
