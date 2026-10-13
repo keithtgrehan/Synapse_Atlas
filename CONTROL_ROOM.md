@@ -5,9 +5,9 @@
 
 ```yaml
 project:
-  canonical_repo: keithtgrehan/Career-Path-to-Psychedelic-Biotech
+  canonical_repo: keithtgrehan/Synapse_Atlas
   product_name: Synapse Atlas
-  visibility: private
+  visibility: public
   owner: Keith Grehan
   location: Berlin, Germany
   started: 2026-08-14
@@ -1086,6 +1086,28 @@ Detailed handovers may be placed below.
 **Blocked:** No commit/push blocker.
 **Next highest-impact task:** Merge PR #10 when explicitly authorized.
 **Control-room update:** Completed.
+
+### 2026-10-13 — Public portfolio README
+
+**Goal:** G3 / reviewer-facing portfolio documentation; no new product scope.
+
+**Completed:** Rewrote README around the working comparison-to-brief journey, commercial research purpose, reviewed associations, source traceability and deliberate scope choices. Removed outdated private-launch objectives from the front page while retaining the development history here. Earlier in this chat Keith explicitly made this repository public; the current header now records that state and repository name.
+
+**Files changed:** `README.md`, `CONTROL_ROOM.md`.
+
+**Tests/checks:** Frozen pnpm install; `pnpm check` passed (lint, typecheck, 18 files/130 tests, Drizzle consistency, production build). README relative links/anchors and whitespace checks passed. Hosted homepage/comparison HTML contains the named preset, three expected NCT IDs and print/export controls; CSV and source-manifest requests returned 200 and parsed successfully (CSV header plus three study rows). These are HTTP/content checks, not a new browser interaction or print test. Independent Astra source review found no remaining blocker after this hosted check.
+
+**Source/legal evidence:** No new research sources or datasets. README reflects existing reviewed ClinicalTrials.gov associations and retained snapshots. GitHub confirms PR #10 merged at `215f639d4bfcc984bfb69314beb7b07d9d93815a` on 13 October; the earlier pending-merge entries above are historical.
+
+**Decisions:** Prepare a documentation-only PR on `codex/interviewer-readme`. Preserve application behaviour, evidence boundaries and deployment policy. User approval to update documentation does not override the explicit merge-to-main gate.
+
+**Known risks:** The demo compares selected studies, not complete pipelines or treatment effectiveness; those boundaries remain in the README. Runtime tests do not validate scientific efficacy.
+
+**Blocked:** No editing or validation blocker; final main merge awaits explicit approval.
+
+**Next highest-impact task:** Review and approve the documentation-only PR.
+
+**Control-room update:** Completed for this documentation change; existing product goals are unchanged.
 
 ## Handover template
 

@@ -1,337 +1,89 @@
-# Career Path to Psychedelic Biotech
+# Synapse Atlas
 
-Canonical private repository for Keith Grehan's transition into CNS, neuropsychiatric and psychedelic biotech.
+**Turn registered clinical-trial data into a clear, source-backed research brief.**
 
-The portfolio product inside this repository is **Synapse Atlas**: a source-traceable intelligence tool for comparing neuropsychiatric drug-development programs, registered trials, compounds, mechanisms and supporting literature.
+[Open the demo](https://synapse-atlas-theta.vercel.app/) · [Explore the implementation](src/lib/programs/research-brief.ts) · [Read the methodology](src/app/methodology/page.tsx)
 
-## Current objective
+Synapse Atlas is a portfolio research tool for exploring neuropsychiatric drug-development programmes and comparing selected registered studies. It brings study design, endpoints, timelines and source evidence into one workflow, then exports the same information for further analysis or discussion.
 
-By **27 August 2026**, ship a private, credible v0.1 that demonstrates:
+The commercial question behind it is practical: **how do you prepare a useful conversation about a complex market while keeping facts, assumptions and unanswered questions separate?**
 
-- scientific literacy;
-- structured public-data ingestion;
-- deterministic analysis;
-- evidence provenance;
-- restrained, evaluated AI use;
-- commercially useful program comparison;
-- clean, accessible product UX;
-- production-minded engineering.
+## Start here: a three-minute walkthrough
 
-By **12 November 2026**, use the product, research outputs and network-building work to become a credible candidate for roles such as:
+1. Open the demo and select **Explore the depression study comparison**.
+2. Compare the selected studies associated with Usona psilocybin, COMP360 and CYB003. Inspect registered phase, enrolment, endpoints and completion dates.
+3. Follow a source link and check when the evidence was collected. Programme associations and registry observations are labelled separately.
+4. Download the **CSV** and **source manifest**, or use **Print / save as PDF** to take the comparison into a research discussion.
 
-- strategic partnerships / business development;
-- research or external partnerships;
-- commercial strategy;
-- strategy and operations / Chief of Staff;
-- AI or data product for R&D;
-- research operations;
-- digital transformation in CNS or neuropsychiatric biotech.
+The prepared comparison contains **three reviewed programme contexts, with one selected study per programme**. It is a dated research view, rather than a complete company pipeline or a comparison of treatment effectiveness.
 
-## Active product goal
+## What works
 
-> A user can search for a neuropsychiatric program, inspect its compound, mechanism, indication and registered trials, compare it with two to four competing programs, and open the source behind every material fact.
+| Capability | Why it matters |
+| --- | --- |
+| Search registered trials through ClinicalTrials.gov | Start with an official source and open the underlying record. |
+| Explore reviewed programme associations | Connect a research question to a defined set of studies without silently equating programme names and chemical identities. |
+| Compare selected study facts side by side | Make differences in registered design and timing easier to inspect. |
+| Export CSV, source manifest and printable brief | Carry the evidence into a meeting, spreadsheet or follow-up document. |
+| Show collection dates, source links and evidence labels | Let another reviewer check where information came from and distinguish observation from interpretation. |
+| Preserve unknown and missing values | Make the next research question visible instead of filling gaps with plausible text. |
 
-This is a **private career portfolio and research tool**, not a clinical decision-support system, medical-advice product, drug-ranking engine or investment recommendation service.
+## Product judgement behind the design
 
-## v0.1 scope
+**Complete the research workflow before expanding the dataset.** A comparison becomes useful when someone can inspect its sources and take the findings away. Export and print therefore came before broader literature enrichment, alerts or account features.
 
-1. ClinicalTrials.gov ingestion through the official API.
-2. Canonical company, program, compound, indication and trial entities.
-3. Literature metadata through Europe PMC, Crossref and/or OpenAlex.
-4. Compound identifiers through PubChem; selected mechanism/target enrichment through ChEMBL and Open Targets only where licensing is recorded.
-5. Program and trial explorer.
-6. Two-to-four-program comparison.
-7. Claim-level provenance and source freshness.
-8. Methodology, limitations and data-license view.
-9. Reproducible export supporting one strong research publication.
-10. Review-only structured AI extraction after a manually reviewed evaluation gate.
+**Use saved evidence for comparison and live data for exploration.** The prepared comparison reads validated, versioned snapshots. That makes its display and exports reproducible without a live API call. The trial explorer queries ClinicalTrials.gov separately for current registry observations; it does not silently replace a saved comparison with newer data.
 
-## Explicit non-goals for v0.1
+**Keep the user's judgement visible.** Registry facts do not establish programme ownership, commercial rights or comparative efficacy. The product preserves those distinctions rather than generating a ranking that would imply more than the evidence supports.
 
-- custom model training or fine-tuning;
-- autonomous medical or scientific conclusions;
-- efficacy, approval-probability or investment scores;
-- vector database or broad RAG layer;
-- molecule generation;
-- patent intelligence;
-- multi-tenant authentication;
-- subscriptions or billing;
-- community features;
-- mobile app;
-- broad internet crawling;
-- authenticated, paywalled or access-controlled scraping;
-- automated job applications or outbound messaging.
+**Use deterministic comparison before generated synthesis.** Explicit fields, validation and source references address the current task directly. A vector database, custom model or generated analyst narrative would add complexity before demonstrating a better answer to that task.
 
-Adding one of these requires removing equivalent sprint scope and recording the decision in `CONTROL_ROOM.md`.
+**Keep infrastructure proportional to the product.** The comparison and exports work from checked-in evidence and need no database. A Drizzle/Postgres schema exists for future persistence; it is not a prerequisite for the demonstrated workflow.
 
-## Lean architecture
+## What this project demonstrates
 
-- Next.js 16 and TypeScript
-- Zod schemas
-- Postgres with Drizzle
-- Vitest and Playwright
-- Vercel deployment
-- Python only where a scientific/data library creates clear value
-- SQL and deterministic filters before embeddings
-- source-specific adapters behind a deny-by-default registry
+This project connects Keith Grehan's biology background and commercial interests with practical data-product work: defining a research question, choosing useful comparisons, reviewing programme associations and making evidence accessible to a non-specialist reader. Keith explicitly reviewed the three bounded programme mappings; implementation was developed with AI-assisted tooling.
 
-Patterns may be adapted from Keith's existing repositories, especially the provenance, source-registry, audit, release and evidence-governance patterns in Career Command Center. Private career data, restricted course content and unlicensed code or datasets must never be copied.
+For a sales or partnerships conversation, the relevant skills are structured discovery, source evaluation and explaining a complex domain clearly. The application supports research preparation; it does not establish clinical conclusions or commercial rights.
 
-## Project control
-
-Read these files before changing the repository:
-
-1. [`CONTROL_ROOM.md`](./CONTROL_ROOM.md) — canonical project memory, goals, sprint, backlog, source approvals, decisions and handovers.
-2. [`AGENTS.md`](./AGENTS.md) — operating contract for Codex and specialist agents.
-3. This `README.md` — stable product boundary and onboarding.
-
-`CONTROL_ROOM.md` is the persistent handover between ChatGPT, Codex, manual project sessions and future agents. Every completed work package must leave it accurate.
-
-## Execution rule
-
-Build the smallest trustworthy vertical slice first:
+## Architecture and review points
 
 ```text
-official source
-  -> validated adapter
-  -> normalized relational record
-  -> provenance
-  -> useful UI
-  -> test
-  -> deploy
+Official registry API → validated records → reviewed programme associations
+                                           ↓
+Versioned study snapshots → comparison → CSV / source manifest / print
 ```
 
-Do not build infrastructure in anticipation of hypothetical scale.
+- **Application:** Next.js, React and TypeScript.
+- **Validation:** Zod schemas, retained response hashes and field-level source references.
+- **Data:** ClinicalTrials.gov; versioned evidence for the prepared comparison.
+- **Quality:** Vitest unit and integration tests, strict type checking and a production build check.
 
-## Local foundation
+Useful places to inspect:
 
-The S1-01 foundation uses Node.js 22 and pnpm. Copy `.env.example` to a local
-`.env` file, replace `DATABASE_URL` with the intended Postgres connection, then
-run:
+- [Comparison evidence](data/comparison/2026-10-13/manifest.json) — source URLs, dates and hashes.
+- [Research brief](src/lib/programs/research-brief.ts) — shared data preparation for display and export.
+- [Export handling](src/lib/programs/brief-download.ts) — selection validation and download behaviour.
+- [Research-brief tests](tests/unit/research-brief.test.tsx) — evidence integrity and output behaviour.
+- [ClinicalTrials.gov client](src/lib/sources/clinicaltrials/client.ts) — bounded requests and source-policy checks.
+
+## Run locally
+
+Use Node.js 22 and pnpm 10.18.3. From the repository root:
 
 ```bash
-pnpm install
+pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-The readiness endpoint is `GET /api/health`. Validate the foundation with:
+Open `http://localhost:3000` and choose the prepared comparison. That route and its exports need no API key or database. Live trial search needs internet access to ClinicalTrials.gov.
 
 ```bash
-pnpm lint
-pnpm typecheck
-pnpm test
-pnpm build
+pnpm check
 ```
 
-## Source and evidence foundation
+This runs lint, type checking, tests, migration consistency and the production build. Database features are separate: `.env.example` documents `DATABASE_URL`, and the database health endpoint requires a configured connection.
 
-S1-02 adds a deny-by-default source-policy gate and a baseline Drizzle
-migration for `source_policies`, `sources`, `source_versions`,
-`ingestion_runs`, `claims`, `claim_inputs`, and `review_decisions`. The sole
-runtime-approved entry is `SRC-CTG` version `1`: credential-free `GET` requests
-to `https://clinicaltrials.gov/api/v2/studies` only. Unknown sources, policy
-versions, methods, hosts, paths, ports, credentials, fragments, and redirects
-outside that same boundary are rejected. The baseline migration bootstraps the
-same approved policy so future source and ingestion rows can satisfy their
-policy foreign keys.
+## Project notes
 
-Evidence classes preserve source facts, structured extraction, derived
-calculation, human inference, model inference, unverified, and unknown states.
-`retrieved_at` records acquisition time, `processed_at` records local
-processing time, and the provider-reported registry update date remains a
-separate source fact. SHA-256 values cover the exact stored response bytes.
-
-Generate or validate migrations without applying them to a database:
-
-```bash
-pnpm db:generate --name=<migration_name>
-pnpm db:check
-```
-
-No live Postgres instance is provisioned by these commands. Applying and
-integration-testing the migration requires a separately approved connection.
-
-## Live registered-trial explorer
-
-S1-03 adds a small server-rendered product slice at `/trials`. It searches the
-official ClinicalTrials.gov `/api/v2/studies` endpoint, applies an optional
-overall-status filter, follows the API's opaque next-page token, and opens an
-exact NCT record at `/trials/<NCT ID>`. Each user action requests at most 10
-records. Detail lookup uses `query.id` on the already approved endpoint rather
-than broadening the source policy.
-
-The adapter constructs every request itself and rechecks `SRC-CTG` immediately
-before network access. It sends no credentials or cookies, rejects redirects,
-uses a 10-second timeout, retries a transient failure once after a fixed bounded
-delay, accepts at most 1 MiB of JSON, and validates the response at runtime.
-Response bytes are hashed before UTF-8 decoding and normalization. Missing,
-unreported, and unrequested values remain distinct; partial registry dates keep
-their original year, month, or day precision.
-
-List and detail views expose the official study link, API retrieval time, local
-processing time, provider-reported registry update date, evidence class, exact
-response SHA-256, and retained field locators. Freshness describes the age of
-the API retrieval, not the age of the study's registry update. The UI never
-silently substitutes fixture or generated data when the official API fails.
-For this review-stage slice that fail-closed choice is intentional; release
-quality still requires a separately approved persisted or clearly labelled
-resilience path so the final demo is not dependent on live API availability.
-
-S1-03 currently normalizes live records in memory for the server-rendered
-request. It does not claim database persistence: the S1-02 migration still has
-not been applied or integration-tested because no approved Postgres connection
-is configured.
-
-## Programme mapping candidates
-
-S1-04 adds a strictly validated, version-controlled dataset at `/programs`.
-It contains three bounded mapping candidates backed by exact checked-in
-ClinicalTrials.gov snapshots: Usona psilocybin / `NCT03866174`, COMP360 /
-`NCT05711940`, and CYB003 / `NCT06605105`. Search covers candidate labels,
-aliases, reported sponsor organisations, compounds, source-reported conditions,
-and NCT identifiers without network access, fuzzy matching, AI, or automatic
-entity creation.
-
-Registry observations remain `STRUCTURED_EXTRACTION`; programme, alias,
-sponsor-organisation, and compound relationships remain `HUMAN_INFERENCE`.
-Keith explicitly reviewed all three mappings in the S1-04 Codex task. Each is
-now `APPROVED` and `RESOLVED` only within its bounded, namespace-scoped
-programme grouping:
-
-- `NCT03866174` is associated with the Usona psilocybin/MDD programme
-  candidate while Psilocybin, Niacin, and Set and Setting (SaS) Protocol remain
-  separate registry interventions; their precise programme roles and whether
-  psilocybin is an exclusive programme compound remain unknown.
-- the COMP360-labelled programme candidate is associated with the
-  registry-reported Psilocybin intervention in `NCT05711940`; COMP360 and
-  Psilocybin are not asserted to be synonyms, aliases, identical substances,
-  or chemically/formulation-equivalent.
-- `NCT06605105`, candidate compound label CYB003, the CYB003/MDD programme
-  candidate, and reported sponsor organisation Cybin IRL Limited are
-  associated without establishing CYB003's chemical identity.
-
-Programme aliases apply only within their reviewed internal grouping and do
-not create chemical synonym or cross-entity equivalence claims. The UI displays
-review and resolution states separately, calls registry organisations
-“reported sponsor organisations,” keeps company identity, ownership/control,
-developer or commercial-rights status, programme-wide phase/status,
-mechanism, efficacy, safety, and superiority explicitly unknown, and labels
-the records as version-controlled snapshots rather than live programme data.
-Each record links to its live `/trials/<NCT ID>` view and official
-ClinicalTrials.gov evidence.
-
-S1-04 does not add database tables or a migration. The existing S1-02 migration
-remains valid, unchanged, and unapplied because no approved Postgres connection
-is configured.
-
-## Deterministic programme comparison
-
-S1-05 adds a server-rendered comparison at `/compare`. Select two to four
-distinct programme candidates; the form submits repeated `programme=<slug>`
-parameters and accepts only mappings that are both `APPROVED` and `RESOLVED`.
-The current version-controlled dataset contains three eligible candidates.
-Empty, duplicate, unknown, malformed, unexpected, control-character, and
-more-than-four selections fail closed without echoing submitted values.
-
-The comparison reads no live source and uses no database. It validates the
-S1-04 dataset and the exact retained ClinicalTrials.gov response bytes at
-runtime, then presents the selected programmes in stable dataset order. It
-compares reviewed mapping state and sponsor-organisation/candidate-compound
-associations, source-reported sponsor organisation, conditions and
-interventions, linked NCT identifiers, unique-NCT count, registry overall status,
-precision-preserved
-registered start date, registry last-update-posted date, source retrieval and
-local processing timestamps, provenance, and explicit unknowns.
-
-Evidence labels keep meaning separate:
-
-- `HUMAN_INFERENCE` is a bounded, approved programme association; it is not a
-  registry source fact.
-- `STRUCTURED_EXTRACTION` is an observation cross-validated against an exact
-  retained ClinicalTrials.gov snapshot.
-- `DERIVED_CALCULATION` is the versioned unique-NCT count with exact input
-  references.
-- `UNKNOWN` means the assertion is not established from approved sources.
-
-This is a comparison of reviewed registry snapshots, not a programme ranking,
-score, recommendation, or live pipeline view. ClinicalTrials.gov is the sole
-source; each snapshot retains its original retrieval time and may be stale.
-No approved Postgres connection exists. Company identity, ownership/control,
-developer or commercial-rights status, chemical/formulation equivalence,
-programme-wide phase/status, mechanism, efficacy, safety, and superiority
-remain unsupported and explicitly unknown.
-
-## Deployment policy
-
-Automatic Vercel Git deployments from `main` are disabled by the root
-`vercel.json`. Pull-request branches remain eligible for protected Preview
-deployments. Any future Production deployment requires an explicit,
-human-approved action; the S1-01 post-merge closeout did not deploy or promote
-anything to Production.
-
-## Data and research policy
-
-Private use does not cancel copyright, database rights, contractual terms, robots directives or privacy law.
-
-- Prefer official APIs and bulk downloads.
-- Use Firecrawl only for exact, approved public sources after source-specific legal and technical review.
-- Never bypass login, paywall, CAPTCHA, robots controls, rate limits or access controls.
-- Do not commit full paper text unless an applicable licence permits storage and reuse.
-- For restricted papers, retain citation metadata, lawful links and Keith's own notes—not automated copied full text.
-- Record source, external identifier, retrieval time, processing date, content hash, licence and transformation.
-- Generated inference never silently becomes source fact.
-
-See the source matrix and Firecrawl gate in `CONTROL_ROOM.md`.
-
-## Definition of success
-
-The project succeeds when it improves career credibility, not when it maximizes technical complexity.
-
-The highest-value proof is:
-
-```text
-biology and scientific reasoning
-+ trustworthy public data
-+ evidence provenance
-+ useful commercial comparison
-+ evaluated AI
-+ polished private demo
-+ reproducible publication
-```
-
-## Status
-
-- Canonical repository selected: **complete**
-- Project operating system: **initialized**
-- Product scaffold: **S1-01 merged and post-merge closeout complete**
-- Registered-trial explorer: **S1-03 complete; merged in PR #5 at `b7305dae739841a23c769e264fa4a84cee6db47c`**
-- Programme mapping: **S1-04 complete; merged in PR #6 at `d9cd1e6d41c560e9af7170b27b21aa5c1e50988c`**
-- Programme comparison: **S1-05 Complete; PR #8 security maintenance merged at `ae1e4d564cc728d14072f623cf4b374e3628ded8` and post-merge verification passed**
-- Next task: **S1-06 unstarted; awaits explicit human scope approval/planning**
-- Current sprint target: **private v0.1 by 27 August 2026**
-
-## Comparison to research brief (S1-13)
-
-The homepage opens a prepared three-programme depression comparison. `/compare`
-shows registered phase, enrolment, endpoint/time frame and completion dates from
-separately retained official snapshots captured on 13 October 2026. The original
-August mapping evidence and human decisions remain unchanged in an expandable
-audit section. Coverage is one selected study per programme, not a full pipeline.
-
-Use **Download CSV**, **Download source manifest**, or **Print / save as PDF**.
-All three outputs use the same validated saved evidence. CSV includes source
-URLs, dates, response hashes, field locators and limitations; potentially
-executable spreadsheet cells receive an apostrophe prefix. Exports require the
-snapshot version shown on the page and reject unknown or duplicate selections.
-`/methodology` explains evidence classes, missing fields, date precision and reuse.
-
-Snapshot files live in `data/comparison/2026-10-13/`. The manual capture script
-`node scripts/capture-comparison.cjs` refuses to overwrite that directory. A future
-refresh requires a new version, reviewed raw responses and updated manifest
-import/version references. It makes at most three exact-ID requests through the
-existing approved SRC-CTG boundary; it does not crawl or follow pagination.
-Never replace the original mapping evidence with a newer registry observation.
-
-Validation: `pnpm check` and `pnpm audit --prod`. The comparison/export/print flow
-needs no database. Live trial-detail pages still depend on ClinicalTrials.gov;
-saved comparison snapshots remain available offline and display their age.
+Synapse Atlas is a focused portfolio prototype. Its value is a reviewable research workflow with explicit evidence boundaries. The [methodology](src/app/methodology/page.tsx) documents sources and interpretation; [CONTROL_ROOM.md](CONTROL_ROOM.md) retains the detailed development record and [AGENTS.md](AGENTS.md) governs contributions. Deployment and data-expansion decisions remain separate from documentation changes.
