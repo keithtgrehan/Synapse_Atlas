@@ -1,0 +1,32 @@
+{
+  "version": "2026-10-13",
+  "snapshots": [
+    {
+      "nctId": "NCT03866174",
+      "sourceId": "SRC-CTG",
+      "policyVersion": "1",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT03866174&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CBriefSummary%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-10-13T17:40:49.778Z",
+      "processedAt": "2026-10-13T17:40:49.779Z",
+      "sha256": "d0af19636449dd0d27447a3baa79d8f109f6a909f7afb117f8ff4aedaa48b64b"
+    },
+    {
+      "nctId": "NCT05711940",
+      "sourceId": "SRC-CTG",
+      "policyVersion": "1",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT05711940&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CBriefSummary%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-10-13T17:40:49.933Z",
+      "processedAt": "2026-10-13T17:40:49.933Z",
+      "sha256": "dc16a930afb9d8030db3a04231d2e8b7fd027beb20233b13aa1492b84acf400f"
+    },
+    {
+      "nctId": "NCT06605105",
+      "sourceId": "SRC-CTG",
+      "policyVersion": "1",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT06605105&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CBriefSummary%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-10-13T17:40:50.089Z",
+      "processedAt": "2026-10-13T17:40:50.089Z",
+      "sha256": "145ed3bd5d7ecf885a3112cef4126bb77a9abd5e844f4bed70b169a546d202bc"
+    }
+  ]
+}

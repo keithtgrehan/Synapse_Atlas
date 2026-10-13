@@ -7,6 +7,8 @@ import {
   parseComparisonSelection,
   type ComparisonResult,
 } from "../../lib/domain/comparisons";
+import { ResearchBriefView } from "./brief-ui";
+import { loadResearchBrief } from "../../lib/programs/research-brief";
 import { loadComparisonCatalog } from "../../lib/programs/comparison-dataset";
 import {
   ComparisonSelectionForm,
@@ -43,29 +45,30 @@ export default async function ComparePage({ searchParams }: ComparePageProps) {
   }
 
   let comparison: ComparisonResult | null = null;
+  let brief = null;
 
   if (selection.state === "ready") {
     try {
       comparison = buildComparison(catalog, selection.selectedSlugs);
+      brief = await loadResearchBrief(comparison);
     } catch {
       return <ComparisonUnavailable />;
     }
   }
 
   return (
-    <main className="shell">
+    <main className="shell brief-page">
       <header className="page-header">
         <Link className="back-link" href="/">← Synapse Atlas</Link>
         <p className="eyebrow">Reviewed registry snapshot comparison</p>
         <h1>Compare programmes</h1>
         <p className="lede">
-          Select two to four approved and resolved programme mappings. The
-          comparison uses only version-controlled records and exact retained
-          ClinicalTrials.gov response bytes; it makes no live request.
+          Compare selected registered studies in their reviewed programme contexts,
+          check the evidence and take away a dated research brief.
         </p>
       </header>
 
-      <ComparisonSelectionForm catalog={catalog} selection={selection} />
+      {brief ? <details className="selection-disclosure"><summary>Change programmes</summary><ComparisonSelectionForm catalog={catalog} selection={selection} /></details> : <ComparisonSelectionForm catalog={catalog} selection={selection} />}
 
       {selection.state === "too_few" ? (
         <section className="state-panel comparison-state" role="status" aria-live="polite">
@@ -96,7 +99,13 @@ export default async function ComparePage({ searchParams }: ComparePageProps) {
           </p>
         </section>
       ) : (
-        <ComparisonView result={comparison} />
+        <>
+          {brief && <ResearchBriefView brief={brief} />}
+          <details className="mapping-audit"><summary>Original programme mapping evidence (August 2026)</summary>
+            <p>This historical evidence supports the reviewed associations. Its older registry observations are preserved for audit; the comparison above and exports use the separately dated snapshots.</p>
+            <ComparisonView result={comparison} />
+          </details>
+        </>
       )}
     </main>
   );
@@ -116,7 +125,7 @@ function isSanitizedInvalidSelection(
 
 function ComparisonUnavailable() {
   return (
-    <main className="shell">
+    <main className="shell brief-page">
       <header className="page-header">
         <Link className="back-link" href="/">← Synapse Atlas</Link>
         <p className="eyebrow">Deterministic comparison</p>

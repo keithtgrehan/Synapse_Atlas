@@ -11,7 +11,7 @@ project:
   owner: Keith Grehan
   location: Berlin, Germany
   started: 2026-08-14
-  last_updated: 2026-09-09
+  last_updated: 2026-10-13
 mission:
   career_goal: Move into CNS, neuropsychiatric or psychedelic biotech through partnerships, business development, strategy, research operations, or AI/data product work.
   product_goal: Prove scientific, product, engineering and commercial capability with a trustworthy private drug-development intelligence tool.
@@ -24,7 +24,7 @@ active_sprint:
   id: S1
   dates: 2026-08-14/2026-08-27
   wip_limit: 3
-  current_task: null
+  current_task: S1-13
 operating_rules:
   one_active_goal: true
   new_scope_requires_tradeoff: true
@@ -45,8 +45,8 @@ last_completed:
   - PR #7 merged S1-05 at 3cb39fcb4d11abf38d3c77db44c307f0b184611f on 2026-08-19.
   - PR #8 merged security maintenance at ae1e4d564cc728d14072f623cf4b374e3628ded8 on 2026-09-09; post-merge local checks, main CI, clean production audit, and Preview-only deployment verification passed. S1-05 is Complete.
 next_action:
-  task: S1-06
-  instruction: Seek explicit human scope approval/planning for S1-06; keep it unstarted and do not access PubChem or implement enrichment.
+  task: S1-13
+  instruction: S1-13 approved by Keith; commit/push and repository status update authorized. PR #10 is ready for merge review. Merge and Production require explicit authorization.
 blockers:
   - No approved Postgres connection is configured, so the S1-02 migration remains unapplied and S1-03 live normalized records are not persisted.
   - S1-06 remains unstarted pending explicit human scope approval/planning.
@@ -314,6 +314,19 @@ Acceptance:
 **Status:** Complete — PR #7 merged comparison; PR #8 merged security maintenance at `ae1e4d564cc728d14072f623cf4b374e3628ded8`; post-merge verification passed on 9 September 2026
 
 Two-to-four comparison using deterministic registered facts.
+
+### S1-13 — Comparison to research brief
+**Owner:** Orchestrator / implementation lead
+**Status:** Implementation approved by Keith on 13 October 2026; committed and pushed in PR #10, ready for merge review.
+**Goal:** G1; a reader opens a depression comparison, understands selected study designs, checks evidence, and exports matching dated information.
+**Scope:** Three existing approved programme associations; separately versioned official trial snapshots; comparison phase, enrolment, endpoints/time frames and completion dates; CSV plus source manifest; browser-print brief; homepage preset and concise methodology.
+**Files:** Comparison data/domain/loader, comparison and homepage UI/CSS, export routes, bounded capture script, relevant tests, README and this record.
+**Non-goals/tradeoff:** Defer S1-06 PubChem, literature/AI, alerts, accounts, database provisioning and nine-study expansion. No new scientific interpretation, mappings, efficacy ranking, merge or Production deployment.
+**Source:** Existing SRC-CTG/v1 only; exact-ID credential-free bounded GET requests, three records, retained response hashes/times and field locators. Original mapping evidence remains unchanged.
+**Acceptance:** Preset reaches a valid comparison; all displayed registry facts, CSV and printable brief use the same retained snapshot; missing fields/types/date precision remain explicit; source links, collection date and registry update date distinguish historical mapping evidence from newer registry observations; invalid selections fail closed; desktop/mobile/keyboard/print work.
+**Release maintenance:** The 13 October production dependency audit found nine advisories in the existing tree (1 critical, 3 high, 4 moderate, 1 low). As a bounded release prerequisite, update Next.js/eslint-config-next 16.3.4 → 16.3.8 and compatible transitive patches; no new dependency or architecture. The critical advisory concerns next/og ImageResponse; no such route was observed here.
+**Checks:** Baseline and full repository checks, evidence/hash/query/tampering tests, CSV quoting/formula-injection tests, export selection/error tests and browser journey.
+**Workspace:** Fresh checkout at `/Users/keith/.codex/workspaces/synapse-atlas-comparison-brief-20261013`, branch `codex/comparison-brief`, base e6c7b647. Original Documents checkout contains cloud placeholders and local deployment notes; it remains untouched. The current public demo is user-supplied context, not authorization to deploy this change.
 
 ## Next
 
@@ -791,6 +804,8 @@ AI extraction, ChEMBL enrichment and publication polish are cut before the relea
 | 2026-08-15 | Approve the three S1-04 mappings only within bounded internal programme namespaces | Keith explicitly approved the Usona, COMP360, and CYB003 associations; registry interventions remain separate source observations, programme aliases do not create chemical synonym/equivalence claims, and all unsupported company, rights, chemical, programme-wide, efficacy, safety, mechanism, and superiority claims remain unknown | Final Control Room review of draft PR #6; never broaden these decisions without new approved evidence and review |
 | 2026-08-15 | Build S1-05 only from the validated S1-04 dataset and exact retained ClinicalTrials.gov bytes | A deterministic comparison can expose reviewed associations, registry observations, a versioned unique-NCT calculation, and explicit unknowns without a live fetch, database, new source, scientific claim promotion, or ranking | Final Control Room review of the S1-05 draft PR |
 
+| 2026-10-13 | Deliver S1-13 comparison-to-brief using three separately versioned SRC-CTG snapshots; preserve original approved mapping evidence | Keith authorized the smallest useful next-day release; CSV, print and evidence exports complete a usable research workflow. Defer S1-06 and broader enrichment. Patch existing dependencies before review. | Human review of S1-13; no automatic merge or Production |
+
 ---
 
 # 18. Handover ledger
@@ -1037,6 +1052,41 @@ Detailed handovers may be placed below.
 
 **Control-room update:** Completed locally with verified S1-05 completion and accurate next-action gates.
 
+### 2026-10-13 — S1-13 comparison-to-brief, implemented for review
+
+**Goal:** G1 — Ship private v0.1; complete the user-authorized comparison-to-brief slice.
+
+**Completed:** Added a homepage comparison preset, readable selected-study facts, CSV export, source manifest, one-study-per-page browser print, mobile cards and a concise methodology page. Registry fields, date precision and actual/estimated labels share one formatter across screen/CSV/print. Captured three exact-ID official registry responses as a separate 2026-10-13 snapshot; preserved the original mapping dataset and evidence. Patched Next.js/eslint-config-next 16.3.4 to 16.3.8 and compatible transitive packages.
+
+**Files changed:** Comparison UI/homepage/CSS/methodology, brief domain and loaders, two export routes, bounded capture script, four snapshot files, route tracing, relevant tests, package manifest/lockfile, README and this record.
+
+**Tests/checks:** Baseline 17 files/122 tests passed. Final `pnpm check` passed: lint, strict typecheck, 18 files/130 tests, Drizzle consistency and production build. `pnpm audit --prod`: no known vulnerabilities. `git diff --check` passed. Built traces include all three new raw snapshots for comparison and both downloads. Production-mode localhost browser checks passed homepage preset, keyboard selection, preserved one-selection guidance, restored three-programme comparison, desktop table and mobile cards at 390px with no horizontal overflow. Downloaded CSV and JSON were parsed and matched for all three NCT IDs, source URLs, retrieval times and hashes. Native Chrome print preview displayed three pages with all three study headings, dates, source URLs and hashes; saving a PDF file was not independently confirmed. Screenshot saved outside the repository.
+
+**Source/legal evidence:** Existing approved SRC-CTG/v1 official API only. Exact request URLs, retrieval/processing timestamps and response SHA-256 are in `data/comparison/2026-10-13/manifest.json`; each rendered record retains attribution and field locators. No new source, patient/contact data, inference or programme association was added. Current CTG terms link appears in methodology and exported source manifest. Dependency audit and GitHub advisories justified bounded security maintenance; this is not evidence the prior app was exploited.
+
+**Decisions:** Preserve G1, existing human mapping decisions, source policy and deployment gates. The new snapshots are observations of selected studies, not complete programme coverage or comparative efficacy. Original Documents checkout and its local deployment notes remain untouched because cloud placeholders blocked reliable reads. Use the fresh local checkout and one `codex/comparison-brief` draft PR for review; do not merge or deploy to Production.
+
+**Known risks:** Only three selected studies are covered. Snapshots do not refresh automatically; the UI warns after 48 hours. Browser print pagination may differ by browser/settings. Database provisioning is not needed for this slice and remains unresolved for future ingestion. Main/live demo do not contain this change until an authorized release. External CI/Preview results are recorded in the draft PR after publication.
+
+**Blocked:** No local implementation blocker. Merge and Production remain subject to Keith's explicit authorization.
+
+**Next highest-impact task:** Review the comparison/export flow and draft PR, then authorize the release if accepted.
+
+**Control-room update:** Completed; S1-13 is implemented and locally verified, pending review; G1 is not declared shipped.
+
+### 2026-10-13 — S1-13 approval and repository update
+
+**Goal:** G1 / S1-13.
+**Completed:** Keith approved the implementation and requested commit, push and repository update. Confirmed implementation commit `082f2824653076ec12ad680ee110bcf5cb48b6cd` is already pushed to `codex/comparison-brief`; recorded approval and prepared PR #10 for merge review.
+**Files changed:** `CONTROL_ROOM.md` only; product code unchanged.
+**Tests/checks:** Implementation-head GitHub CI and Vercel Preview checks passed. Preview comparison rendered all three studies. Prior local 130 tests, lint, typecheck, migration consistency, production build and clean dependency audit remain applicable because this update changes documentation only. Documentation diff/whitespace validation passed; remote commit synchronization checked after push.
+**Source/legal evidence:** No source requests or data changes in this update.
+**Decisions:** Record approval and publish the status update on the existing PR branch. No new feature, merge to main or Production action.
+**Known risks:** Snapshot freshness and previously recorded remote download-verification limitation remain unchanged.
+**Blocked:** No commit/push blocker.
+**Next highest-impact task:** Merge PR #10 when explicitly authorized.
+**Control-room update:** Completed.
+
 ## Handover template
 
 ```markdown
@@ -1077,6 +1127,6 @@ S1-02 is Complete and merged in PR #4 at 3b83f8f92b925c791430950a8ed5c22e1d5915b
 S1-03 is Complete and merged in PR #5 at b7305dae739841a23c769e264fa4a84cee6db47c.
 S1-04 is Complete and merged in PR #6 at d9cd1e6d41c560e9af7170b27b21aa5c1e50988c. Keith's three bounded human decisions remain APPROVED and RESOLVED, with namespace-scoped aliases and explicit unknowns preserved.
 S1-05 is Complete. PR #7 merged comparison; Keith explicitly authorized PR #8 security-maintenance merge at ae1e4d564cc728d14072f623cf4b374e3628ded8. Post-merge checks, main CI, production audit, and Preview-only inventory verification passed.
-No active implementation task. Seek explicit human scope approval/planning for S1-06; keep it unstarted.
+S1-13 comparison-to-brief is implemented, verified and approved by Keith; committed/pushed in PR #10 and ready for merge review. S1-06 remains deferred.
 Do not enable auto-merge, deploy or promote to Production, or perform further merges without explicit authorization.
 ```

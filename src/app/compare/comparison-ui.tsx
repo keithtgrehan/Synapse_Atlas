@@ -28,8 +28,8 @@ export function ComparisonSelectionForm({
       <fieldset>
         <legend>Select two to four reviewed programmes</legend>
         <p>
-          Only mappings with both an Approved review state and a Resolved
-          namespace-scoped association are available.
+          Choose the programme contexts you want to explore. Each includes a
+          selected study with a reviewed association.
         </p>
         <div className="comparison-options">
           {catalog.candidates.map((candidate) => (

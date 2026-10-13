@@ -309,3 +309,29 @@ biology and scientific reasoning
 - Programme comparison: **S1-05 Complete; PR #8 security maintenance merged at `ae1e4d564cc728d14072f623cf4b374e3628ded8` and post-merge verification passed**
 - Next task: **S1-06 unstarted; awaits explicit human scope approval/planning**
 - Current sprint target: **private v0.1 by 27 August 2026**
+
+## Comparison to research brief (S1-13)
+
+The homepage opens a prepared three-programme depression comparison. `/compare`
+shows registered phase, enrolment, endpoint/time frame and completion dates from
+separately retained official snapshots captured on 13 October 2026. The original
+August mapping evidence and human decisions remain unchanged in an expandable
+audit section. Coverage is one selected study per programme, not a full pipeline.
+
+Use **Download CSV**, **Download source manifest**, or **Print / save as PDF**.
+All three outputs use the same validated saved evidence. CSV includes source
+URLs, dates, response hashes, field locators and limitations; potentially
+executable spreadsheet cells receive an apostrophe prefix. Exports require the
+snapshot version shown on the page and reject unknown or duplicate selections.
+`/methodology` explains evidence classes, missing fields, date precision and reuse.
+
+Snapshot files live in `data/comparison/2026-10-13/`. The manual capture script
+`node scripts/capture-comparison.cjs` refuses to overwrite that directory. A future
+refresh requires a new version, reviewed raw responses and updated manifest
+import/version references. It makes at most three exact-ID requests through the
+existing approved SRC-CTG boundary; it does not crawl or follow pagination.
+Never replace the original mapping evidence with a newer registry observation.
+
+Validation: `pnpm check` and `pnpm audit --prod`. The comparison/export/print flow
+needs no database. Live trial-detail pages still depend on ClinicalTrials.gov;
+saved comparison snapshots remain available offline and display their age.
