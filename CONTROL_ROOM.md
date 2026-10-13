@@ -46,7 +46,7 @@ last_completed:
   - PR #8 merged security maintenance at ae1e4d564cc728d14072f623cf4b374e3628ded8 on 2026-09-09; post-merge local checks, main CI, clean production audit, and Preview-only deployment verification passed. S1-05 is Complete.
 next_action:
   task: S1-13
-  instruction: Review the implemented S1-13 comparison-to-brief release and its draft PR. No merge or Production deployment without explicit authorization.
+  instruction: S1-13 approved by Keith; commit/push and repository status update authorized. PR #10 is ready for merge review. Merge and Production require explicit authorization.
 blockers:
   - No approved Postgres connection is configured, so the S1-02 migration remains unapplied and S1-03 live normalized records are not persisted.
   - S1-06 remains unstarted pending explicit human scope approval/planning.
@@ -317,7 +317,7 @@ Two-to-four comparison using deterministic registered facts.
 
 ### S1-13 — Comparison to research brief
 **Owner:** Orchestrator / implementation lead
-**Status:** Implemented and locally verified; ready for review — explicitly authorized by Keith on 13 October 2026.
+**Status:** Implementation approved by Keith on 13 October 2026; committed and pushed in PR #10, ready for merge review.
 **Goal:** G1; a reader opens a depression comparison, understands selected study designs, checks evidence, and exports matching dated information.
 **Scope:** Three existing approved programme associations; separately versioned official trial snapshots; comparison phase, enrolment, endpoints/time frames and completion dates; CSV plus source manifest; browser-print brief; homepage preset and concise methodology.
 **Files:** Comparison data/domain/loader, comparison and homepage UI/CSS, export routes, bounded capture script, relevant tests, README and this record.
@@ -1074,6 +1074,19 @@ Detailed handovers may be placed below.
 
 **Control-room update:** Completed; S1-13 is implemented and locally verified, pending review; G1 is not declared shipped.
 
+### 2026-10-13 — S1-13 approval and repository update
+
+**Goal:** G1 / S1-13.
+**Completed:** Keith approved the implementation and requested commit, push and repository update. Confirmed implementation commit `082f2824653076ec12ad680ee110bcf5cb48b6cd` is already pushed to `codex/comparison-brief`; recorded approval and prepared PR #10 for merge review.
+**Files changed:** `CONTROL_ROOM.md` only; product code unchanged.
+**Tests/checks:** Implementation-head GitHub CI and Vercel Preview checks passed. Preview comparison rendered all three studies. Prior local 130 tests, lint, typecheck, migration consistency, production build and clean dependency audit remain applicable because this update changes documentation only. Documentation diff/whitespace validation passed; remote commit synchronization checked after push.
+**Source/legal evidence:** No source requests or data changes in this update.
+**Decisions:** Record approval and publish the status update on the existing PR branch. No new feature, merge to main or Production action.
+**Known risks:** Snapshot freshness and previously recorded remote download-verification limitation remain unchanged.
+**Blocked:** No commit/push blocker.
+**Next highest-impact task:** Merge PR #10 when explicitly authorized.
+**Control-room update:** Completed.
+
 ## Handover template
 
 ```markdown
@@ -1114,6 +1127,6 @@ S1-02 is Complete and merged in PR #4 at 3b83f8f92b925c791430950a8ed5c22e1d5915b
 S1-03 is Complete and merged in PR #5 at b7305dae739841a23c769e264fa4a84cee6db47c.
 S1-04 is Complete and merged in PR #6 at d9cd1e6d41c560e9af7170b27b21aa5c1e50988c. Keith's three bounded human decisions remain APPROVED and RESOLVED, with namespace-scoped aliases and explicit unknowns preserved.
 S1-05 is Complete. PR #7 merged comparison; Keith explicitly authorized PR #8 security-maintenance merge at ae1e4d564cc728d14072f623cf4b374e3628ded8. Post-merge checks, main CI, production audit, and Preview-only inventory verification passed.
-S1-13 comparison-to-brief is implemented and locally verified, pending review. S1-06 remains deferred.
+S1-13 comparison-to-brief is implemented, verified and approved by Keith; committed/pushed in PR #10 and ready for merge review. S1-06 remains deferred.
 Do not enable auto-merge, deploy or promote to Production, or perform further merges without explicit authorization.
 ```
