@@ -11,7 +11,7 @@ project:
   owner: Keith Grehan
   location: Berlin, Germany
   started: 2026-08-14
-  last_updated: 2026-10-13
+  last_updated: 2026-10-14
 mission:
   career_goal: Move into CNS, neuropsychiatric or psychedelic biotech through partnerships, business development, strategy, research operations, or AI/data product work.
   product_goal: Prove scientific, product, engineering and commercial capability with a trustworthy private drug-development intelligence tool.
@@ -24,7 +24,7 @@ active_sprint:
   id: S1
   dates: 2026-08-14/2026-08-27
   wip_limit: 3
-  current_task: S1-13
+  current_task: S1-14
 operating_rules:
   one_active_goal: true
   new_scope_requires_tradeoff: true
@@ -33,6 +33,8 @@ operating_rules:
   no_medical_advice: true
   no_custom_model_training_v0_1: true
 last_completed:
+  - S1-14 mapping integration follow-up deployed and publicly verified on 13 October 2026: 13 programme entries, comparison/exports, scoped model-inference labels preserved.
+  - S1-14 ten retained study examples deployed to the existing public Vercel site after Preview and production verification on 13 October 2026.
   - Canonical repository selected.
   - Three-file project operating system defined.
   - PR #2 merged S1-01 at a79759f6615913fd088ae04184c2c9c7c520abc2.
@@ -45,8 +47,8 @@ last_completed:
   - PR #7 merged S1-05 at 3cb39fcb4d11abf38d3c77db44c307f0b184611f on 2026-08-19.
   - PR #8 merged security maintenance at ae1e4d564cc728d14072f623cf4b374e3628ded8 on 2026-09-09; post-merge local checks, main CI, clean production audit, and Preview-only deployment verification passed. S1-05 is Complete.
 next_action:
-  task: S1-13
-  instruction: S1-13 approved by Keith; commit/push and repository status update authorized. PR #10 is ready for merge review. Merge and Production require explicit authorization.
+  task: S1-14
+  instruction: The 13-entry mapping release is live. Keith authorized committing and publishing the release to main on 14 October 2026. Preserve the newer portfolio README and existing release evidence; verify the exact release tree, publish by normal fast-forward push, and check main CI. Main Git deployment remains disabled.
 blockers:
   - No approved Postgres connection is configured, so the S1-02 migration remains unapplied and S1-03 live normalized records are not persisted.
   - S1-06 remains unstarted pending explicit human scope approval/planning.
@@ -317,7 +319,7 @@ Two-to-four comparison using deterministic registered facts.
 
 ### S1-13 — Comparison to research brief
 **Owner:** Orchestrator / implementation lead
-**Status:** Implementation approved by Keith on 13 October 2026; committed and pushed in PR #10, ready for merge review.
+**Status:** Complete — existing merge 215f639 and its production release were observed on 13 October 2026 before S1-14; comparison/brief behavior preserved and reverified.
 **Goal:** G1; a reader opens a depression comparison, understands selected study designs, checks evidence, and exports matching dated information.
 **Scope:** Three existing approved programme associations; separately versioned official trial snapshots; comparison phase, enrolment, endpoints/time frames and completion dates; CSV plus source manifest; browser-print brief; homepage preset and concise methodology.
 **Files:** Comparison data/domain/loader, comparison and homepage UI/CSS, export routes, bounded capture script, relevant tests, README and this record.
@@ -327,6 +329,23 @@ Two-to-four comparison using deterministic registered facts.
 **Release maintenance:** The 13 October production dependency audit found nine advisories in the existing tree (1 critical, 3 high, 4 moderate, 1 low). As a bounded release prerequisite, update Next.js/eslint-config-next 16.3.4 → 16.3.8 and compatible transitive patches; no new dependency or architecture. The critical advisory concerns next/og ImageResponse; no such route was observed here.
 **Checks:** Baseline and full repository checks, evidence/hash/query/tampering tests, CSV quoting/formula-injection tests, export selection/error tests and browser journey.
 **Workspace:** Fresh checkout at `/Users/keith/.codex/workspaces/synapse-atlas-comparison-brief-20261013`, branch `codex/comparison-brief`, base e6c7b647. Original Documents checkout contains cloud placeholders and local deployment notes; it remains untouched. The current public demo is user-supplied context, not authorization to deploy this change.
+
+### S1-14 — Ten retained non-psychedelic study examples
+**Owner:** Orchestrator / implementation lead
+**Status:** Complete — public deployment and anonymous browser verification on 13 October 2026.
+**Goal:** G1; discover ten real trials, inspect complete source-linked details, and distinguish retained evidence from live registry data.
+**Scope:** Verified packet only; versioned public registry bytes and bibliographic metadata; homepage/explorer discovery; stable NCT pages; comparator arms, date/enrollment types, endpoints, provenance and source discrepancies. Preserve existing three programmes and comparison briefs.
+**Non-goals:** No database, importer, new dependencies, programme associations, effect-size extraction or efficacy ranking. No merge to main or push.
+**Acceptance/checks:** Exact-source validation and duplicate rejection; 135 passing tests plus lint/typecheck/schema/build; all ten desktop/mobile journeys on Preview and production; original three programmes/exports, keyboard and source links verified. External PubMed browser access returned 403; exact PMID links and retained metadata are verified, and DOI alternatives are present.
+**Release:** https://synapse-atlas-theta.vercel.app/trials/examples — dpl_GKuztzz11rk45vbVaViGcKb23w3c. Details and rollback evidence below.
+
+### S1-14 follow-up — Ten scoped programme mappings
+**Owner:** Orchestrator / implementation lead
+**Status:** Complete — Preview, staged production and public production verified on 13 October 2026.
+**Goal:** G1; extend the existing programme catalogue and two-to-four comparison/export flow to the ten already retained study examples.
+**Authority/scope:** Keith supplied the completed review and explicitly requested updating the Vercel site accordingly. The document’s ten accept decisions are scoped and unattributed; it explicitly disclaims human scientific review. Keep MODEL_INFERENCE and record owner acceptance for site inclusion separately. Preserve the three original HUMAN_INFERENCE mappings.
+**Acceptance:** Exactly 13 unique programme entries; all ten detail/source journeys; honest evidence labels; original source bytes, dose/comparator records and caveats; mixed comparison, CSV/source manifest and print; desktop/mobile verification; existing Vercel project Preview then production. No database, dependency additions, new source integration, main merge or push.
+**Release:** https://synapse-atlas-theta.vercel.app/programs — dataset 1.2.0, production dpl_k7K2gWwKZqBvg1ZkDYhNtxejP575. Detailed evidence and rollback below.
 
 ## Next
 
@@ -1149,6 +1168,119 @@ S1-02 is Complete and merged in PR #4 at 3b83f8f92b925c791430950a8ed5c22e1d5915b
 S1-03 is Complete and merged in PR #5 at b7305dae739841a23c769e264fa4a84cee6db47c.
 S1-04 is Complete and merged in PR #6 at d9cd1e6d41c560e9af7170b27b21aa5c1e50988c. Keith's three bounded human decisions remain APPROVED and RESOLVED, with namespace-scoped aliases and explicit unknowns preserved.
 S1-05 is Complete. PR #7 merged comparison; Keith explicitly authorized PR #8 security-maintenance merge at ae1e4d564cc728d14072f623cf4b374e3628ded8. Post-merge checks, main CI, production audit, and Preview-only inventory verification passed.
-S1-13 comparison-to-brief is implemented, verified and approved by Keith; committed/pushed in PR #10 and ready for merge review. S1-06 remains deferred.
+S1-13 comparison-to-brief is merged at 215f639 and its existing public release was verified. S1-14 ten retained study examples is deployed after explicit production authorization; existing programmes and briefs remain intact. S1-06 remains deferred.
 Do not enable auto-merge, deploy or promote to Production, or perform further merges without explicit authorization.
 ```
+
+
+### 2026-09-10 — Current local site deployment
+
+**Goal:** G1 — deploy the current local Synapse Atlas site at Keith's explicit request.
+
+**Completed:** Deployed local application commit `ae1e4d564cc728d14072f623cf4b374e3628ded8` to the existing Vercel project as Ready protected Preview `dpl_BA9mXnhLxzxMSA82Uoh3TihPu1Nf`: https://synapse-atlas-qsi5z2mpi-keith-grehans-projects.vercel.app . GitHub resolves the canonical repository to `keithtgrehan/Synapse_Atlas`; verified remote main `e6c7b647fb71f08c374285ad3c8206874efd669e` differs from the local checkout only in README/control-room closeout documentation. S1-05 is Complete per that current canonical record; earlier review-stage statements above are historical.
+
+**Files changed:** This local handover only; ignored Vercel project linkage/environment created by CLI. No application change, commit, push or merge.
+
+**Tests/checks:** `pnpm check` passed: lint, typecheck, 17 files/122 tests, Drizzle consistency and production build. `pnpm audit --prod`: no known vulnerabilities. Vercel remote build passed and inspect confirmed Ready/Preview. Authenticated HTTP/content checks passed home, programme list, COMP360 detail, two-programme comparison and live trial NCT05711940 (all 200). Health returned expected 503/degraded/databaseConfiguration missing. Unauthenticated home returned 302 with existing SSO protection preserved.
+
+**Source/legal evidence:** Existing SRC-CTG official API and approved retained snapshots only; no new source, scraping, scientific claim, or data refresh committed.
+
+**Decisions:** Deploy current local application as a protected site; preserve `git.deploymentEnabled.main: false` and existing private boundary. Use authenticated local Vercel account/team `keith-grehans-projects`, which owns the existing project; connector account lists a different team. No paid service activated.
+
+**Known risks:** No approved Postgres connection; retained snapshots may be stale; live trial retrieval depends on ClinicalTrials.gov. This deploy does not complete all G1/v0.1 acceptance criteria.
+
+**Blocked:** None for this site deployment; database persistence remains unavailable.
+
+**Next highest-impact task:** Keith can open the protected site and review the existing product.
+
+**Control-room update:** Completed locally, uncommitted. Rollback: use the prior verified protected Preview; this deployment did not promote or replace Production.
+
+
+### 2026-09-10 — Explicitly authorized public application demo
+
+**Goal:** G1 — make the existing site public for Keith's applications.
+**Completed:** Keith explicitly requested public-facing access. Promoted the verified local site; Vercel rebuilt it for Production as `dpl_DAZYkck7BsWqbgyrJ4XKvaHyxWgL`, Ready at https://synapse-atlas-theta.vercel.app (also https://synapse-atlas-keith-grehans-projects.vercel.app).
+**Files changed:** This local handover only. Vercel protection changed to `prod_deployment_urls_and_all_previews`, making production aliases public while protecting preview/deployment URLs.
+**Tests/checks:** Production build Ready; anonymous requests with no cookies or bypass credentials returned 200 and verified actual app content at home, programme list, two-programme comparison and live trial NCT05711940, without login redirects. Prior same-code 122 tests/lint/typecheck/audit/build passed.
+**Source/legal evidence:** Existing approved source and mapping boundaries preserved. No new scientific claims, research sources, or private repository publication.
+**Decisions:** Latest explicit user authorization supersedes earlier private-site/Production restrictions for this deployment. Git main auto-deployment remains disabled. Repository remains private; no merge or paid activation.
+**Known risks:** Existing database persistence and snapshot freshness limitations remain. This publishes the current product; it does not declare the full v0.1 roadmap complete.
+**Blocked:** None for public access.
+**Next highest-impact task:** Use the stable public production link in applications.
+**Control-room update:** Recorded locally, uncommitted, preserving previous handovers.
+
+
+### 2026-10-13 — Non-psychedelic study research and adapter-ready packet
+
+**Goal:** G1 — Keith's explicit request for ten real non-psychedelic studies, supported-format preparation and available local validation.
+**Completed:** Selected ten distinct completed human interventional drug trials (eight Phase 3, two Phase 2), each with posted registry results and an original publication. Read prior study screening/proposals and all three programme anchors; no NCT overlap. Prepared exact official API response / ClinicalTrialsPage capture files using the unchanged client and existing CSV review columns. Preserved enrollment/date types, source timestamps, hashes, locators, arm roles and publication discrepancies.
+**Files changed:** New `../review/studies/non-psychedelic-2026-10-13/` packet (README ranked table, native captures, review CSV, source evidence/notes, validation evidence and ZIP); this appended handover. Existing local control-room changes preserved. No application code, source policy, programme mapping or production-data changes.
+**Tests/checks:** Existing normalization/source verifier passed all ten records; separate raw-source/hash/CSV mapping and duplicate checks passed (10 unique NCT and protocol IDs; zero overlap with prior 25 unique screened IDs/three anchors). Offline unchanged trial-detail rendering passed for all ten. Repeated exact-ID reads preserved facts; duplicate-NCT API pages rejected. Full existing regression: 17 files/122 tests passed. Reused integrity checks rejected six changed fields plus raw-byte tampering. Older packet remains verified: 26 source records/four export hashes. ZIP integrity and all archived content hashes passed. No browser end-to-end or persisted-import test performed.
+**Source/legal evidence:** SRC-CTG/v1 official API, exact bounded queries; separate research-only selected registry modules for arms/results flags/eligibility. SRC-EPMC metadata and primary-publication links/concise original notes. No paper full text downloaded or redistributed; no Firecrawl or new application source enabled. Checked 2026-10-13 with per-record UTC retrieval/processing times retained.
+**Decisions:** Rank by dataset relevance (MODEL_INFERENCE), not therapeutic merit. Excluded psychedelics, MDMA, ketamine/esketamine and ambiguous dissociative alternatives. Trial facts remain STRUCTURED_EXTRACTION; programme mappings stay unassigned/PENDING, without fabricating human approval.
+**Known risks:** Older registry update dates remain visible. Aticaprant publication has conflicting enrollment counts; vortioxetine enrollment differs and completion date is absent; brexpiprazole has lead-in/efficacy denominators; PACT healthy-volunteer flag conflicts with patient eligibility. Current reported sponsors differ from historical publication labels. All preserved in evidence-notes.json.
+**Blocked:** No persisted trial importer/upsert, trial table, or approved database connection; local environment inspection found no configured DATABASE_URL. Cannot prove repeated persistent import deduplication or make records appear in static programme/compare lists. Read-only replay is not import idempotency. No importer built.
+**Next highest-impact task:** Keith authorizes a bounded persistent trial-import milestone using the prepared packet and an isolated test database, with registry-ID uniqueness and repeat-import verification before any production import.
+**Control-room update:** Completed locally; uncommitted. This records the requested research work without starting a new implementation milestone.
+
+
+### 2026-10-13 — S1-14 public study examples release
+
+**Goal:** G1 / S1-14 — Keith explicitly authorized adding the ten verified studies and deploying through the existing Vercel project, with Preview verification before Production.
+**Completed:** All ten distinct NCT examples are discoverable from Home and the live explorer at `/trials/examples`; every stable NCT detail page displays indication, intervention/comparator, phase/status, sponsor, enrollment/type, dates/types, all primary endpoints, registry/publication links, source differences and provenance. Snapshots are explicitly retained as of 13 October 2026, with separate live-registry links. Production is Ready at https://synapse-atlas-theta.vercel.app and https://synapse-atlas-keith-grehans-projects.vercel.app.
+**Files changed:** `data/study-examples/v1/` (exact ten CTG captures, bibliographic response, bounded catalog and evidence README); `src/lib/studies/examples.ts`; retained list/detail routes; shared `trial-facts.tsx`; small homepage/explorer links, provenance wrapping and output tracing; five focused tests; README and this record. Browser reports/screenshots and deployment file hashes are outside the repository in `../review/studies/non-psychedelic-2026-10-13/site-validation/`.
+**Tests/checks:** Full `pnpm check` passed on an exact 110-file temporary copy with frozen dependencies: lint, strict typecheck, 19 files/135 tests, Drizzle consistency and Next 16.3.8 production build. Production dependency audit: no known vulnerabilities. Original Documents dependency placeholders blocked reliable local checks, so source hashes were matched against the clean copy before release; no dependency was added. Validation covers all capture hashes, ten unique IDs, no programme overlap, repeat-read equality, tampered bytes/wrong ID/duplicate rejection, missing dates/types, source discrepancies and rendered links. Local, protected Preview, production deployment and anonymous stable production browser tests passed at 1440px and 390px: all ten paths and displayed source fields, no horizontal overflow or application console errors, exactly ten records after reload, unknown-ID 404, three original programme details and comparison CSV/JSON downloads. Production keyboard/focus, live-registry retrieval from an example, explorer-to-examples link and both public aliases passed. All ten registry links and all ten PubMed destinations were followed in a browser; registry pages opened, but PubMed returned 403 to automation. Whitespace/scope checks passed.
+**Source/legal evidence:** Byte-identical selected official ClinicalTrials.gov full-module captures from the verified packet, normalized by the existing schema/adapter. Full captures preserve actual/estimated date types absent from the narrower live query. Existing SRC-CTG/v1 policy is checked at retrieval. Europe PMC bibliographic metadata, original concise source notes and publication links only; no paper full text, private career data, patient data or new live source integration. Notes retain MODEL_INFERENCE / PENDING human scientific review; unsupported effect sizes and programme relationships remain unknown.
+**Decisions:** Production inspection found a newer existing release based on `215f639d4bfcc984bfb69314beb7b07d9d93815a` (comparison briefs and Next 16.3.8). Fast-forwarded only the `codex/non-psychedelic-examples` feature branch to that base, restored the study changes and preserved all pre-existing local control-room notes. No main merge, push or force-push. The earlier backup remains in the named Codex stash. Programme mappings, comparison data/export code, dependency lock, database schema/migrations, source policy and `vercel.json` are unchanged relative to the current production base. No database or importer was created.
+**Deployment evidence:** Existing team `keith-grehans-projects`, project `synapse-atlas` / `prj_H3NqvCuEieWmPm8EXbKJiaNTIRzs`. Preview `dpl_aWyq1fxDdgpDyJj377TdUC7K5MFN` at https://synapse-atlas-105l93zhh-keith-grehans-projects.vercel.app is Ready and browser-verified. Production build `dpl_GKuztzz11rk45vbVaViGcKb23w3c` at https://synapse-atlas-encbd9057-keith-grehans-projects.vercel.app was created with `--prod --skip-domain`, browser-verified, then promoted without rebuilding. Vercel attached its automatic team alias during staging; the stable theta alias remained on the preceding release until promotion. Existing `prod_deployment_urls_and_all_previews` protection remains; protected testing used authenticated CLI access/cookies held only in memory after the local OIDC path did not grant access. Public production was tested without authentication. The release is the current uncommitted working-tree change over the stated base; it is not claimed to be identical to that base commit.
+**Known risks:** Retained snapshots do not refresh automatically. Human scientific review of synthesis notes is pending; cross-trial efficacy comparison is unsupported. PubMed blocked the automated browser with 403, so third-party article-page rendering is not claimed as passed; PMID metadata/linkage and DOI links remain available. Existing database configuration limitation is unchanged and does not block these static examples. G1 as a whole is not declared complete.
+**Browser evidence:** Passing reports: `site-validation/local-layout-browser.json`, `preview-browser.json`, `staged-production-browser.json`, `production-browser.json` and `production-keyboard-live.json` under the verified review packet. Earlier `local-browser.json` retains the external-link evidence and an initial navigation-wait failure corrected in the later passing runs.
+**Post-release observability:** Bounded Vercel error-log query for this deployment over the preceding 15 minutes returned zero rows. This is a release smoke check, not continuous monitoring.
+**Blocked:** None for this authorized release.
+**Next highest-impact task:** Review the ten public examples at https://synapse-atlas-theta.vercel.app/trials/examples.
+**Control-room update:** Completed locally; all source changes remain uncommitted on the feature branch. Rollback, if needed and authorized: restore prior production `dpl_EAkNEryKe2PTubP6vHh8YQ6Yihjr` (the comparison-brief release); do not revert to the older September build.
+
+
+### 2026-10-13 — S1-14 follow-up: proposed mapping review packet
+
+**Goal:** G1 / S1-14 follow-up — prepare the ten associations for review, as Keith requested; provide instructions suitable for a reviewer with a biochemistry background.
+**Completed:** One Markdown packet contains exactly ten bounded proposals, exact registry sponsor/intervention/condition evidence, stable NCT-derived ID proposals, original source timestamps/hashes/locators, publication links and all retained study caveats. Added a step-by-step reviewer guide, worked cautions and a ten-row decision form. Every proposal remains MODEL_INFERENCE / PENDING / UNRESOLVED without fabricated review metadata.
+**Files changed:** `../review/studies/non-psychedelic-2026-10-13/proposed-programme-mappings.md` and this existing project record only during this work package. Earlier implementation changes remain intact.
+**Tests/checks:** Document/evidence assertions passed: exactly ten distinct IDs, no overlap with three existing programmes, ten capture hashes and byte equality to original research evidence, selected intervention indices/names, sponsor/condition extraction, query-ID matching, publication metadata hash and ten PMID links. Nine publication links match retained registry references; aticaprant retains the prior paper-link exception. No application build/browser checks or new deployment were needed or performed for this document-only work.
+**Source/legal evidence:** Existing retained SRC-CTG public facts and SRC-EPMC bibliographic metadata, plus original notes only. No fresh registry or paper requests, copied full text, new source integration or claim of current live verification. Source retrieval dates remain 13 October 2026.
+**Decisions:** Registry intervention names anchor the proposals. Combinations, adjunctive therapy, dose rows, historical sponsor differences and unknown chemical/commercial claims remain explicit. Preparing the packet does not approve its associations, modify application data, or authorize scope expansion. Review feedback must distinguish actual source checks from access limitations.
+**Known risks:** Some publication claims rely on prior packet verification; current live sources may differ from retained evidence. A biochemistry reviewer is not being asked to certify clinical efficacy/safety or resolve unsupported clinical/statistical questions. Mapping schema/fixture/comparison limits still require bounded implementation after accepted review; this file is not a supported import format.
+**Blocked:** No blocker to packet preparation. Application approval labels remain unchanged pending explicit decisions on the concrete proposed associations.
+**Next highest-impact task:** Have the designated reviewer complete the packet’s ten-row decision table and return it to Keith for recorded disposition.
+**Control-room update:** Completed locally; no commit, push, application mutation or deployment in this follow-up.
+
+
+### 2026-10-13 — S1-14 mapping integration and production closeout
+
+**Goal:** G1 / S1-14 follow-up — implement the supplied scoped review decisions in the existing catalogue, comparison and Vercel site.
+**Completed:** `/programs` now has exactly 13 mappings: the preserved original three plus ten NCT-derived `study-nct…` entries. New detail pages display retained trial facts, comparator, publication link, all endpoints and source discrepancies; they link to full dose/arm evidence and comparison selection. Home offers the four-study non-psychedelic MDD preset. Two-to-four selections, mixed old/new contexts, CSV, source manifest and printable study cards work. Dose-labelled rows and combination/background-treatment boundaries remain explicit. No efficacy ranking or new chemical/ownership assertions.
+**Files changed:** `data/program-mappings/v2.json` and the exact unattributed review document; ten companion metadata files beside existing full-module study bytes; bounded mapping/comparison schemas and fixture/brief loaders; existing programme, comparison, methodology, homepage and example views; existing output tracing; tests and README. The original v1 dataset, original three mapping entities/decisions, registry response bytes, comparison snapshots, dependency lock, database schema and Vercel project configuration remain unchanged. This record reflects the release after deployment.
+**Tests/checks:** Full `pnpm check` passed: lint, strict typecheck, 20 test files / 140 tests, Drizzle consistency and Next 16.3.8 build. `pnpm audit --prod`: no known vulnerabilities. Exact equality of 123 workspace files to the existing isolated validation copy was checked before release; 122 non-Control-Room file hashes remain in `mapping-release-files.json`. New tests cover original-data preservation, 13 unique/repeat-stable entries, all ten detail/render/export journeys, mixed evidence classes, duplicate/missing-owner-acceptance/tampered-byte/wrong-query rejection, prohibition on promoting the unattributed packet to HUMAN_INFERENCE, multiple dose locators, missing dates and all suvorexant primary outcomes. Existing security/query and CSV tests still pass. Build tracing includes full retained study captures and the review packet where required. `git diff --check` passes.
+**Browser verification:** Local, protected Preview, staged production and anonymous stable production all passed at 1440px and 390px: Home → programme catalogue → all 13 details; all ten retained study backlinks, required trial facts and source links; four comparison groups including the new MDD preset, other indications, a mixed old/new comparison and original three; matching selected IDs/hashes/caveats in CSV and source manifest; print cards with controls hidden; exactly 13 entries after reload; five-selection rejection; unknown programme 404; keyboard link focus; no horizontal overflow or browser page errors. Mobile layout was also visually inspected. All ten registry links were actually followed from Preview programme pages and returned 200. All ten PubMed links were followed and returned 403 to automation; metadata/PMID links are verified but article-page rendering is not claimed as passed.
+**Source/legal evidence:** Existing public SRC-CTG captures and SRC-EPMC bibliographic metadata plus original notes. The supplied `synapse_atlas_mapping_review_2026-10-13.md` is retained exactly as `data/program-mappings/review-2026-10-13.md`, SHA-256 `65e4f7d14ba5596bbee29e71344ae0cc5c25fc2347963e50721d56cfb64755c8`. It is an unattributed evidence-packet assessment, not credentialed or human scientific review. No full texts fetched or copied for this release; opening source links is not a refresh of retained facts.
+**Decisions:** All ten additions remain MODEL_INFERENCE. The owner’s instruction to apply the supplied packet authorizes site inclusion; UI badges say “Approved for inclusion” and explain that resolution means an internal grouping, not scientific certainty. Review metadata identifies owner inclusion, not the packet author as a human reviewer. The original three HUMAN_INFERENCE approvals are unchanged. PENDING scientific synthesis notes in the study examples remain PENDING. No database/importer, new dependency, new project, main merge, commit or push.
+**Deployment evidence:** Existing project `synapse-atlas` / `prj_H3NqvCuEieWmPm8EXbKJiaNTIRzs`, team `keith-grehans-projects`. Preview `dpl_7z9v4JA8KhFzUDh7pivoZvsTrYu6` at https://synapse-atlas-r4z3o67hp-keith-grehans-projects.vercel.app was Ready and browser-verified. Production `dpl_k7K2gWwKZqBvg1ZkDYhNtxejP575` at https://synapse-atlas-dmvm8ank6-keith-grehans-projects.vercel.app was built with `--prod --skip-domain`, verified, then promoted without rebuilding. Vercel’s automatic team alias was assigned during staging; the main theta alias was verified on the prior release until promotion, then verified on the new Ready deployment. Deployment protection was not changed; authenticated preview/staging cookies stayed in memory and scoped to the exact host. Stable production testing used a fresh unauthenticated browser context. Release source remains uncommitted over `215f639d4bfcc984bfb69314beb7b07d9d93815a` on `codex/non-psychedelic-examples`.
+**Known risks:** Retained snapshots do not refresh automatically. Packet review did not independently validate raw JSON hashes or all publication Methods; our automated source-byte validation does not convert it into independent scientific review. Existing participant-count, healthy-volunteer and historical-sponsor discrepancies remain visible. PubMed blocks automated rendering with 403. The broader G1 goal and database limitation are unchanged.
+**Evidence files:** Under `../review/studies/non-psychedelic-2026-10-13/site-validation/`: `mapping-automated-checks.log`, `mapping-release-files.json`, `local-mapping-browser.json`, `preview-mapping-browser.json`, `preview-mapping-sources.json`, `staged-production-mapping-browser.json`, `production-mapping-browser.json` and corresponding screenshots/browser scripts.
+**Blocked:** None for this authorized release.
+**Next highest-impact task:** Use the new non-psychedelic depression comparison on the live site and inspect/export the selected study evidence.
+**Control-room update:** Completed locally. Rollback target if needed and authorized: previous study-examples production `dpl_GKuztzz11rk45vbVaViGcKb23w3c` / https://synapse-atlas-encbd9057-keith-grehans-projects.vercel.app. Local test server on port 3119 stopped after verification; pre-existing unrelated services remain untouched.
+
+
+### 2026-10-14 — Publish the deployed mapping release to main
+
+**Goal:** G1 / S1-14 closeout — Keith explicitly authorized committing/publishing on main and updating README.
+**Completed:** Integrated upstream `328ade1` (the public portfolio README) into the release branch, preserving that presentation and all local release history. README now documents 13 mappings, ten retained examples, source/review boundaries, local setup, validation and deployment policy. The application and data remain the already deployed release.
+**Files changed:** Previously deployed S1-14 application/data/tests plus README and this project record. No new product or dependency changes in this closeout.
+**Tests/checks:** Fresh full `pnpm check` passed on the synchronized 123-file isolated copy: lint, strict types, 20 files/140 tests, Drizzle consistency and production build. All 121 non-README files in the deployed release manifest match byte-for-byte. README relative links resolve. Anonymous HTTP checks returned 200 for Home, programmes and examples, matching all 13 expected programme slugs and ten NCT detail links. Secret-pattern and staged-path review found no credentials/generated files. Whitespace validation has only three intentional Markdown hard breaks in the byte-preserved review packet; excluding end-of-line blanks passes. Earlier full release browser results remain applicable; no new browser run is claimed. Remote publication/CI result follows below.
+**Source/legal evidence:** Existing public registry facts, publication metadata and scoped review packet only; no new research or full texts. GitHub confirms the repository is already public, consistent with the upstream portfolio handover.
+**Decisions:** Current explicit instruction authorizes a normal main push and supersedes the earlier no-main-publish boundary for this release. Preserve both local recovery stashes. Main auto-deployment stays disabled; the existing verified Vercel production release needs no rebuild for documentation/Git publication.
+**Known risks:** Retained evidence and independent scientific-review limitations are unchanged. Earlier no-commit/push entries describe historical work packages.
+**Blocked:** None identified; publication/CI verification remains to be completed.
+**Next highest-impact task:** Publish the validated release to main and verify remote CI.
+**Control-room update:** Updated for this publication work package; final result follows.

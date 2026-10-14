@@ -2,8 +2,11 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
-    "/compare": ["./data/fixtures/clinicaltrials.gov/*.json", "./data/comparison/**/*.json"],
-    "/compare/*": ["./data/fixtures/clinicaltrials.gov/*.json", "./data/comparison/**/*.json"],
+    "/programs/[slug]": ["./data/study-examples/v1/*.json"],
+    "/trials/examples": ["./data/study-examples/v1/*.json"],
+    "/trials/examples/[nctId]": ["./data/study-examples/v1/*.json"],
+    "/compare": ["./data/fixtures/clinicaltrials.gov/*.json", "./data/comparison/**/*.json", "./data/program-mappings/*.md", "./data/study-examples/v1/*.json"],
+    "/compare/*": ["./data/fixtures/clinicaltrials.gov/*.json", "./data/comparison/**/*.json", "./data/program-mappings/*.md", "./data/study-examples/v1/*.json"],
   },
   poweredByHeader: false,
 };

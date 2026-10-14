@@ -15,7 +15,7 @@ import { ResearchBriefView } from "../../src/app/compare/brief-ui";
 
 async function comparison() {
   const catalog = await loadComparisonCatalog();
-  return buildComparison(catalog, catalog.candidates.map((c) => c.slug));
+  return buildComparison(catalog, catalog.candidates.slice(0, 3).map((c) => c.slug));
 }
 async function source() {
   const metadata = manifest.snapshots[0]!;
@@ -111,7 +111,7 @@ describe("source-bound research brief", () => {
 
   it("downloads only selected studies, pins the snapshot and rejects invalid input without echo", async () => {
     const catalog = await loadComparisonCatalog();
-    const brief = await loadResearchBrief(buildComparison(catalog, catalog.candidates.slice(1).map((p) => p.slug)));
+    const brief = await loadResearchBrief(buildComparison(catalog, catalog.candidates.slice(1, 3).map((p) => p.slug)));
     const request = new Request(`http://localhost/compare/export.csv?${briefQuery(brief)}`);
     const response = await csvGet(request);
     expect(response.status).toBe(200);

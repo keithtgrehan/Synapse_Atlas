@@ -15,7 +15,8 @@ import {
 } from "../../src/lib/domain/comparisons";
 import { readAndValidateProgrammeFixture } from "../../src/lib/fixtures/programs";
 import { loadComparisonCatalog } from "../../src/lib/programs/comparison-dataset";
-import { programmeMappingDataset } from "../../src/lib/programs/dataset";
+import { programmeMappingDatasetSchema } from "../../src/lib/domain/programs";
+const programmeMappingDataset = programmeMappingDatasetSchema.parse(rawDataset);
 
 async function loadFixtureRecords(): Promise<ComparisonFixtureRecord[]> {
   return Promise.all(
@@ -28,7 +29,7 @@ async function loadFixtureRecords(): Promise<ComparisonFixtureRecord[]> {
 }
 
 function extendCatalog(catalog: ComparisonCatalog, total: number): ComparisonCatalog {
-  const candidates = [...catalog.candidates];
+  const candidates = catalog.candidates.slice(0, Math.min(3, total));
 
   while (candidates.length < total) {
     const index = candidates.length + 1;
@@ -43,7 +44,7 @@ function extendCatalog(catalog: ComparisonCatalog, total: number): ComparisonCat
 }
 
 describe("deterministic programme comparison", () => {
-  it("loads the exact three approved and resolved production candidates without network access", async () => {
+  it("loads the thirteen approved and resolved production candidates without network access", async () => {
     const fetchSpy = vi
       .spyOn(globalThis, "fetch")
       .mockRejectedValue(new Error("NETWORK_MUST_NOT_BE_USED"));
@@ -51,7 +52,8 @@ describe("deterministic programme comparison", () => {
     try {
       const catalog = await loadComparisonCatalog();
 
-      expect(catalog.candidates.map((candidate) => candidate.slug)).toEqual([
+      expect(catalog.candidates).toHaveLength(13);
+      expect(catalog.candidates.slice(0, 3).map((candidate) => candidate.slug)).toEqual([
         "usona-psilocybin-mdd",
         "comp360-treatment-resistant-depression",
         "cyb003-major-depressive-disorder",

@@ -26,7 +26,7 @@ describe("programme-resolution vertical slice", () => {
         programmeMappingDataset.mappingAssertions,
       );
 
-      expect(programmes).toHaveLength(3);
+      expect(programmes).toHaveLength(13);
       expect(results).toHaveLength(1);
       expect(detail?.programme.canonicalLabel).toBe(
         "COMP360 for treatment-resistant depression",

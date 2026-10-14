@@ -11,16 +11,18 @@ export type ResearchBrief = {
     mapping: ComparisonResult["programmes"][number]["mapping"];
     unknowns: string[];
     trials: TrialRecord[];
+    studyContext?: { comparator: string; publicationUrl: string };
   }>;
 };
 
-export function buildResearchBrief(comparison: ComparisonResult, trials: readonly TrialRecord[]): ResearchBrief {
+export function buildResearchBrief(comparison: ComparisonResult, trials: readonly TrialRecord[], contexts: ReadonlyMap<string, { comparator: string; publicationUrl: string }> = new Map()): ResearchBrief {
   const byId = new Map(trials.map((trial) => [trial.nctId, trial]));
   if (byId.size !== trials.length) throw new Error("DUPLICATE_BRIEF_STUDY");
   return {
     version: briefVersion,
     mappingVersion: comparison.datasetVersion,
     programmes: comparison.programmes.map((programme) => ({
+      studyContext: contexts.get(programme.registeredTrials[0].nctId),
       slug: programme.slug, label: programme.canonicalLabel, mapping: programme.mapping,
       unknowns: programme.explicitUnknowns.map((entry) => entry.statement),
       trials: programme.registeredTrials.map(({ nctId }) => {
@@ -73,12 +75,12 @@ export function csvCell(value: string): string {
 }
 
 export function researchBriefCsv(brief: ResearchBrief): string {
-  const headers = ["Programme context (reviewed association)", "NCT ID", "Study title", ...researchBriefFields.map((f) => f.label), "Snapshot version", "Mapping dataset version", "Evidence class", "Source URL", "Retrieved at (UTC)", "Processed at (UTC)", "Source SHA-256", "Field locators (JSON)", "Limitations"];
+  const headers = ["Programme context (reviewed association)", "NCT ID", "Study title", ...researchBriefFields.map((f) => f.label), "Snapshot version", "Mapping dataset version", "Evidence class", "Source URL", "Retrieved at (UTC)", "Processed at (UTC)", "Source SHA-256", "Field locators (JSON)", "Limitations", "Mapping evidence class", "Inclusion decision", "Source caveats", "Comparator (source-based summary)", "Publication URL"];
   const rows = brief.programmes.flatMap((programme) => programme.trials.map((trial) => [
     programme.label, trial.nctId, trial.briefTitle, ...researchBriefFields.map((f) => f.value(trial)),
     brief.version, brief.mappingVersion, trial.provenance.evidenceClass, trial.provenance.sourceUrl,
     trial.provenance.retrievedAt, trial.provenance.processedAt, trial.provenance.contentSha256,
-    JSON.stringify(trial.provenance.fieldLocators), briefLimitations,
+    JSON.stringify(trial.provenance.fieldLocators), briefLimitations, programme.mapping.evidenceClass, programme.mapping.reviewRationale ?? "See mapping evidence", (programme.mapping.caveats ?? []).join("\n"), programme.studyContext?.comparator ?? "See registered interventions", programme.studyContext?.publicationUrl ?? "Not included in this brief",
   ]));
   return "\uFEFF" + [headers, ...rows].map((row) => row.map(csvCell).join(",")).join("\r\n") + "\r\n";
 }
@@ -92,7 +94,7 @@ export function researchBriefManifest(brief: ResearchBrief) {
     csvEncoding: "UTF-8 with BOM; all cells quoted; potentially executable spreadsheet cells prefixed with an apostrophe",
     sourceTerms: "https://clinicaltrials.gov/about-site/terms-conditions",
     programmes: brief.programmes.map((p) => ({
-      slug: p.slug, label: p.label, mapping: p.mapping, unknowns: p.unknowns,
+      slug: p.slug, label: p.label, mapping: p.mapping, unknowns: p.unknowns, studyContext: p.studyContext,
       studies: p.trials.map((t) => ({ nctId: t.nctId, title: t.briefTitle, provenance: t.provenance })),
     })),
   };

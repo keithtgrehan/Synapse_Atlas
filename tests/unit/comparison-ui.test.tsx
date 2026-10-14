@@ -12,13 +12,14 @@ async function renderComparison(
 }
 
 describe("server-rendered comparison UI", () => {
-  it("renders the initial accessible selection form with exactly the three approved candidates", async () => {
+  it("renders the initial accessible selection form with all thirteen accepted candidates", async () => {
     const html = await renderComparison({});
 
     expect(html).toContain("<h1>Compare programmes</h1>");
     expect(html).toContain("<fieldset>");
     expect(html).toContain("<legend>Select two to four reviewed programmes</legend>");
-    expect(html.match(/name="programme"/g)).toHaveLength(3);
+    expect(html.match(/name="programme"/g)).toHaveLength(13);
+    expect(html.match(/Owner-approved inclusion · Model inference/g)).toHaveLength(10);
     expect(html.match(/Approved · Resolved/g)).toHaveLength(3);
     expect(html).toContain("Choose programmes to compare");
     expect(html).not.toContain("<table");

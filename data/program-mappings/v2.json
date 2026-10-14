@@ -1,0 +1,1572 @@
+{
+  "datasetVersion": "1.2.0",
+  "updatedAt": "2026-10-13T21:03:22+00:00",
+  "sourceBoundary": {
+    "sourceId": "SRC-CTG",
+    "policyVersion": "1",
+    "provider": "ClinicalTrials.gov",
+    "statement": "Registry observations are STRUCTURED_EXTRACTION. Original three associations remain HUMAN_INFERENCE. Ten new associations remain MODEL_INFERENCE with owner-approved inclusion based on an unattributed scoped packet; no independent human scientific review is claimed."
+  },
+  "sourceSnapshots": [
+    {
+      "id": "snapshot-ctg-nct03866174-20260814",
+      "sourceId": "SRC-CTG",
+      "policyVersion": "1",
+      "provider": "ClinicalTrials.gov",
+      "externalId": "NCT03866174",
+      "apiRequestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT03866174&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CLastUpdatePostDate%2CLeadSponsorName%2CCondition%2CInterventionName",
+      "humanStudyUrl": "https://clinicaltrials.gov/study/NCT03866174",
+      "retrievedAt": "2026-08-14T13:56:45Z",
+      "processedAt": "2026-08-14T14:27:25Z",
+      "registryLastUpdatePostedDate": "2026-04-22",
+      "responseSha256": "ca2f41faaa07ce8c8d92530ff8b0eed7bee05906453b2de01c294cdb38c851cf",
+      "fixturePath": "data/fixtures/clinicaltrials.gov/NCT03866174.json",
+      "metadataPath": "data/fixtures/clinicaltrials.gov/NCT03866174.metadata.json",
+      "evidenceClass": "STRUCTURED_EXTRACTION",
+      "attribution": "ClinicalTrials.gov, U.S. National Library of Medicine",
+      "fieldLocators": {
+        "nctId": "/studies/0/protocolSection/identificationModule/nctId",
+        "briefTitle": "/studies/0/protocolSection/identificationModule/briefTitle",
+        "reportedSponsorOrganisation": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+        "reportedConditions": "/studies/0/protocolSection/conditionsModule/conditions",
+        "reportedInterventions": "/studies/0/protocolSection/armsInterventionsModule/interventions",
+        "overallStatus": "/studies/0/protocolSection/statusModule/overallStatus",
+        "registeredStartDate": "/studies/0/protocolSection/statusModule/startDateStruct/date",
+        "registryLastUpdatePostedDate": "/studies/0/protocolSection/statusModule/lastUpdatePostDateStruct/date"
+      },
+      "observedRegistryFacts": {
+        "nctId": "NCT03866174",
+        "briefTitle": "A Study of Psilocybin for Major Depressive Disorder (MDD)",
+        "reportedSponsorOrganisation": "Usona Institute",
+        "reportedConditions": [
+          "Depressive Disorder, Major"
+        ],
+        "reportedInterventions": [
+          "Psilocybin",
+          "Niacin",
+          "Set and Setting (SaS) Protocol"
+        ],
+        "overallStatus": "COMPLETED",
+        "registeredStartDate": "2020-01-23",
+        "registryLastUpdatePostedDate": "2026-04-22"
+      }
+    },
+    {
+      "id": "snapshot-ctg-nct05711940-20260814",
+      "sourceId": "SRC-CTG",
+      "policyVersion": "1",
+      "provider": "ClinicalTrials.gov",
+      "externalId": "NCT05711940",
+      "apiRequestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT05711940&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CLastUpdatePostDate%2CLeadSponsorName%2CCondition%2CInterventionName",
+      "humanStudyUrl": "https://clinicaltrials.gov/study/NCT05711940",
+      "retrievedAt": "2026-08-14T21:24:04.791Z",
+      "processedAt": "2026-08-14T21:26:00.000Z",
+      "registryLastUpdatePostedDate": "2026-08-10",
+      "responseSha256": "f74975e80e8863377bcdc2cdc7c9cd3266b9cd7efa865a202354b118aec99807",
+      "fixturePath": "data/fixtures/clinicaltrials.gov/NCT05711940.json",
+      "metadataPath": "data/fixtures/clinicaltrials.gov/NCT05711940.metadata.json",
+      "evidenceClass": "STRUCTURED_EXTRACTION",
+      "attribution": "ClinicalTrials.gov, U.S. National Library of Medicine",
+      "fieldLocators": {
+        "nctId": "/studies/0/protocolSection/identificationModule/nctId",
+        "briefTitle": "/studies/0/protocolSection/identificationModule/briefTitle",
+        "reportedSponsorOrganisation": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+        "reportedConditions": "/studies/0/protocolSection/conditionsModule/conditions",
+        "reportedInterventions": "/studies/0/protocolSection/armsInterventionsModule/interventions",
+        "overallStatus": "/studies/0/protocolSection/statusModule/overallStatus",
+        "registeredStartDate": "/studies/0/protocolSection/statusModule/startDateStruct/date",
+        "registryLastUpdatePostedDate": "/studies/0/protocolSection/statusModule/lastUpdatePostDateStruct/date"
+      },
+      "observedRegistryFacts": {
+        "nctId": "NCT05711940",
+        "briefTitle": "Efficacy, Safety, and Tolerability of Two Administrations of COMP360 in Participants With TRD",
+        "reportedSponsorOrganisation": "COMPASS Pathways",
+        "reportedConditions": [
+          "Treatment Resistant Depression"
+        ],
+        "reportedInterventions": [
+          "Psilocybin"
+        ],
+        "overallStatus": "ACTIVE_NOT_RECRUITING",
+        "registeredStartDate": "2023-02-14",
+        "registryLastUpdatePostedDate": "2026-08-10"
+      }
+    },
+    {
+      "id": "snapshot-ctg-nct06605105-20260814",
+      "sourceId": "SRC-CTG",
+      "policyVersion": "1",
+      "provider": "ClinicalTrials.gov",
+      "externalId": "NCT06605105",
+      "apiRequestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT06605105&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COverallStatus%2CStartDate%2CLastUpdatePostDate%2CLeadSponsorName%2CCondition%2CInterventionName",
+      "humanStudyUrl": "https://clinicaltrials.gov/study/NCT06605105",
+      "retrievedAt": "2026-08-14T21:24:04.938Z",
+      "processedAt": "2026-08-14T21:26:00.000Z",
+      "registryLastUpdatePostedDate": "2026-07-13",
+      "responseSha256": "84e6019edf82426d76ff6d8fcf6187852e5a48f7ee91b50cc646c0a5d09bbb2d",
+      "fixturePath": "data/fixtures/clinicaltrials.gov/NCT06605105.json",
+      "metadataPath": "data/fixtures/clinicaltrials.gov/NCT06605105.metadata.json",
+      "evidenceClass": "STRUCTURED_EXTRACTION",
+      "attribution": "ClinicalTrials.gov, U.S. National Library of Medicine",
+      "fieldLocators": {
+        "nctId": "/studies/0/protocolSection/identificationModule/nctId",
+        "briefTitle": "/studies/0/protocolSection/identificationModule/briefTitle",
+        "reportedSponsorOrganisation": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+        "reportedConditions": "/studies/0/protocolSection/conditionsModule/conditions",
+        "reportedInterventions": "/studies/0/protocolSection/armsInterventionsModule/interventions",
+        "overallStatus": "/studies/0/protocolSection/statusModule/overallStatus",
+        "registeredStartDate": "/studies/0/protocolSection/statusModule/startDateStruct/date",
+        "registryLastUpdatePostedDate": "/studies/0/protocolSection/statusModule/lastUpdatePostDateStruct/date"
+      },
+      "observedRegistryFacts": {
+        "nctId": "NCT06605105",
+        "briefTitle": "Phase III Long-term Extension Trial to Assess Safety and Efficacy of CYB003 in MDD (EXTEND)",
+        "reportedSponsorOrganisation": "Cybin IRL Limited",
+        "reportedConditions": [
+          "Major Depressive Disorder"
+        ],
+        "reportedInterventions": [
+          "CYB003"
+        ],
+        "overallStatus": "ENROLLING_BY_INVITATION",
+        "registeredStartDate": "2025-07-18",
+        "registryLastUpdatePostedDate": "2026-07-13"
+      }
+    },
+    {
+      "id": "snapshot-ctg-nct03672175-20261013",
+      "captureFormat": "STUDY_EXAMPLE_V1",
+      "sourceId": "SRC-CTG",
+      "policyVersion": "1",
+      "provider": "ClinicalTrials.gov",
+      "externalId": "NCT03672175",
+      "apiRequestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT03672175&pageSize=1&countTotal=true&format=json&fields=IdentificationModule%2CStatusModule%2CSponsorCollaboratorsModule%2CDescriptionModule%2CConditionsModule%2CDesignModule%2CArmsInterventionsModule%2COutcomesModule%2CEligibilityModule%2CReferencesModule%2CHasResults",
+      "humanStudyUrl": "https://clinicaltrials.gov/study/NCT03672175",
+      "retrievedAt": "2026-10-13T19:07:39.147828+00:00",
+      "processedAt": "2026-10-13T19:07:39.148524+00:00",
+      "registryLastUpdatePostedDate": "2023-11-29",
+      "responseSha256": "33641b785ee157dbada527475ca9ffa3a7c4010fe47bda21150268a0c47086e5",
+      "fixturePath": "data/study-examples/v1/NCT03672175.json",
+      "metadataPath": "data/study-examples/v1/NCT03672175.metadata.json",
+      "evidenceClass": "STRUCTURED_EXTRACTION",
+      "attribution": "ClinicalTrials.gov, U.S. National Library of Medicine",
+      "fieldLocators": {
+        "nctId": "/studies/0/protocolSection/identificationModule/nctId",
+        "briefTitle": "/studies/0/protocolSection/identificationModule/briefTitle",
+        "reportedSponsorOrganisation": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+        "reportedConditions": "/studies/0/protocolSection/conditionsModule/conditions",
+        "reportedInterventions": "/studies/0/protocolSection/armsInterventionsModule/interventions",
+        "overallStatus": "/studies/0/protocolSection/statusModule/overallStatus",
+        "registeredStartDate": "/studies/0/protocolSection/statusModule/startDateStruct/date",
+        "registryLastUpdatePostedDate": "/studies/0/protocolSection/statusModule/lastUpdatePostDateStruct/date"
+      },
+      "observedRegistryFacts": {
+        "nctId": "NCT03672175",
+        "briefTitle": "A Study to Evaluate the Efficacy of SAGE-217 in the Treatment of Adult Participants With Major Depressive Disorder",
+        "reportedSponsorOrganisation": "Biogen",
+        "reportedConditions": [
+          "Major Depressive Disorder"
+        ],
+        "reportedInterventions": [
+          "SAGE-217",
+          "Placebo"
+        ],
+        "overallStatus": "COMPLETED",
+        "registeredStartDate": "2018-11-19",
+        "registryLastUpdatePostedDate": "2023-11-29"
+      }
+    },
+    {
+      "id": "snapshot-ctg-nct03559192-20261013",
+      "captureFormat": "STUDY_EXAMPLE_V1",
+      "sourceId": "SRC-CTG",
+      "policyVersion": "1",
+      "provider": "ClinicalTrials.gov",
+      "externalId": "NCT03559192",
+      "apiRequestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT03559192&pageSize=1&countTotal=true&format=json&fields=IdentificationModule%2CStatusModule%2CSponsorCollaboratorsModule%2CDescriptionModule%2CConditionsModule%2CDesignModule%2CArmsInterventionsModule%2COutcomesModule%2CEligibilityModule%2CReferencesModule%2CHasResults",
+      "humanStudyUrl": "https://clinicaltrials.gov/study/NCT03559192",
+      "retrievedAt": "2026-10-13T19:07:39.817754+00:00",
+      "processedAt": "2026-10-13T19:07:39.818266+00:00",
+      "registryLastUpdatePostedDate": "2025-04-29",
+      "responseSha256": "0a6e8e9f4b3b494ad4dcb7b356a27821c5efe44add6499c49efe67f979208e21",
+      "fixturePath": "data/study-examples/v1/NCT03559192.json",
+      "metadataPath": "data/study-examples/v1/NCT03559192.metadata.json",
+      "evidenceClass": "STRUCTURED_EXTRACTION",
+      "attribution": "ClinicalTrials.gov, U.S. National Library of Medicine",
+      "fieldLocators": {
+        "nctId": "/studies/0/protocolSection/identificationModule/nctId",
+        "briefTitle": "/studies/0/protocolSection/identificationModule/briefTitle",
+        "reportedSponsorOrganisation": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+        "reportedConditions": "/studies/0/protocolSection/conditionsModule/conditions",
+        "reportedInterventions": "/studies/0/protocolSection/armsInterventionsModule/interventions",
+        "overallStatus": "/studies/0/protocolSection/statusModule/overallStatus",
+        "registeredStartDate": "/studies/0/protocolSection/statusModule/startDateStruct/date",
+        "registryLastUpdatePostedDate": "/studies/0/protocolSection/statusModule/lastUpdatePostDateStruct/date"
+      },
+      "observedRegistryFacts": {
+        "nctId": "NCT03559192",
+        "briefTitle": "A Study to Explore the Efficacy of JNJ-67953964 in the Treatment of Depression",
+        "reportedSponsorOrganisation": "Janssen Research & Development, LLC",
+        "reportedConditions": [
+          "Depressive Disorder, Major"
+        ],
+        "reportedInterventions": [
+          "JNJ-67953964",
+          "Placebo"
+        ],
+        "overallStatus": "COMPLETED",
+        "registeredStartDate": "2018-07-16",
+        "registryLastUpdatePostedDate": "2025-04-29"
+      }
+    },
+    {
+      "id": "snapshot-ctg-nct01360645-20261013",
+      "captureFormat": "STUDY_EXAMPLE_V1",
+      "sourceId": "SRC-CTG",
+      "policyVersion": "1",
+      "provider": "ClinicalTrials.gov",
+      "externalId": "NCT01360645",
+      "apiRequestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT01360645&pageSize=1&countTotal=true&format=json&fields=IdentificationModule%2CStatusModule%2CSponsorCollaboratorsModule%2CDescriptionModule%2CConditionsModule%2CDesignModule%2CArmsInterventionsModule%2COutcomesModule%2CEligibilityModule%2CReferencesModule%2CHasResults",
+      "humanStudyUrl": "https://clinicaltrials.gov/study/NCT01360645",
+      "retrievedAt": "2026-10-13T19:07:40.429124+00:00",
+      "processedAt": "2026-10-13T19:07:40.430953+00:00",
+      "registryLastUpdatePostedDate": "2015-11-26",
+      "responseSha256": "31696c079e40196da6e4f31a7cebe9b6a48255be7c27a8c05757ed61c4ac6b88",
+      "fixturePath": "data/study-examples/v1/NCT01360645.json",
+      "metadataPath": "data/study-examples/v1/NCT01360645.metadata.json",
+      "evidenceClass": "STRUCTURED_EXTRACTION",
+      "attribution": "ClinicalTrials.gov, U.S. National Library of Medicine",
+      "fieldLocators": {
+        "nctId": "/studies/0/protocolSection/identificationModule/nctId",
+        "briefTitle": "/studies/0/protocolSection/identificationModule/briefTitle",
+        "reportedSponsorOrganisation": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+        "reportedConditions": "/studies/0/protocolSection/conditionsModule/conditions",
+        "reportedInterventions": "/studies/0/protocolSection/armsInterventionsModule/interventions",
+        "overallStatus": "/studies/0/protocolSection/statusModule/overallStatus",
+        "registeredStartDate": "/studies/0/protocolSection/statusModule/startDateStruct/date",
+        "registryLastUpdatePostedDate": "/studies/0/protocolSection/statusModule/lastUpdatePostDateStruct/date"
+      },
+      "observedRegistryFacts": {
+        "nctId": "NCT01360645",
+        "briefTitle": "Study of the Safety and Efficacy of Fixed Dose OPC-34712 as Adjunctive Therapy in the Treatment of Adults With Major Depressive Disorder (the Pyxis Trial)",
+        "reportedSponsorOrganisation": "Otsuka Pharmaceutical Development & Commercialization, Inc.",
+        "reportedConditions": [
+          "Depressive Disorder",
+          "Depression",
+          "Depressive Disorder, Major",
+          "Mood Disorders",
+          "Mental Disorders"
+        ],
+        "reportedInterventions": [
+          "OPC-34712 + ADT",
+          "Placebo + ADT",
+          "Placebo + ADT"
+        ],
+        "overallStatus": "COMPLETED",
+        "registeredStartDate": "2011-07",
+        "registryLastUpdatePostedDate": "2015-11-26"
+      }
+    },
+    {
+      "id": "snapshot-ctg-nct01422213-20261013",
+      "captureFormat": "STUDY_EXAMPLE_V1",
+      "sourceId": "SRC-CTG",
+      "policyVersion": "1",
+      "provider": "ClinicalTrials.gov",
+      "externalId": "NCT01422213",
+      "apiRequestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT01422213&pageSize=1&countTotal=true&format=json&fields=IdentificationModule%2CStatusModule%2CSponsorCollaboratorsModule%2CDescriptionModule%2CConditionsModule%2CDesignModule%2CArmsInterventionsModule%2COutcomesModule%2CEligibilityModule%2CReferencesModule%2CHasResults",
+      "humanStudyUrl": "https://clinicaltrials.gov/study/NCT01422213",
+      "retrievedAt": "2026-10-13T19:07:41.007770+00:00",
+      "processedAt": "2026-10-13T19:07:41.008435+00:00",
+      "registryLastUpdatePostedDate": "2014-08-05",
+      "responseSha256": "c02ce4a94d5eb8cf0f9d8687001bfa02bc9f87c49cc99510e62a5c8610b7dd2b",
+      "fixturePath": "data/study-examples/v1/NCT01422213.json",
+      "metadataPath": "data/study-examples/v1/NCT01422213.metadata.json",
+      "evidenceClass": "STRUCTURED_EXTRACTION",
+      "attribution": "ClinicalTrials.gov, U.S. National Library of Medicine",
+      "fieldLocators": {
+        "nctId": "/studies/0/protocolSection/identificationModule/nctId",
+        "briefTitle": "/studies/0/protocolSection/identificationModule/briefTitle",
+        "reportedSponsorOrganisation": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+        "reportedConditions": "/studies/0/protocolSection/conditionsModule/conditions",
+        "reportedInterventions": "/studies/0/protocolSection/armsInterventionsModule/interventions",
+        "overallStatus": "/studies/0/protocolSection/statusModule/overallStatus",
+        "registeredStartDate": "/studies/0/protocolSection/statusModule/startDateStruct/date",
+        "registryLastUpdatePostedDate": "/studies/0/protocolSection/statusModule/lastUpdatePostDateStruct/date"
+      },
+      "observedRegistryFacts": {
+        "nctId": "NCT01422213",
+        "briefTitle": "Efficacy Study of Vortioxetine on Cognitive Dysfunction in Adult Patients With Major Depressive Disorder",
+        "reportedSponsorOrganisation": "H. Lundbeck A/S",
+        "reportedConditions": [
+          "Major Depressive Disorder"
+        ],
+        "reportedInterventions": [
+          "Placebo",
+          "Vortioxetine (Lu AA21004)",
+          "Vortioxetine (Lu AA21004)"
+        ],
+        "overallStatus": "COMPLETED",
+        "registeredStartDate": "2011-12",
+        "registryLastUpdatePostedDate": "2014-08-05"
+      }
+    },
+    {
+      "id": "snapshot-ctg-nct02942004-20261013",
+      "captureFormat": "STUDY_EXAMPLE_V1",
+      "sourceId": "SRC-CTG",
+      "policyVersion": "1",
+      "provider": "ClinicalTrials.gov",
+      "externalId": "NCT02942004",
+      "apiRequestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT02942004&pageSize=1&countTotal=true&format=json&fields=IdentificationModule%2CStatusModule%2CSponsorCollaboratorsModule%2CDescriptionModule%2CConditionsModule%2CDesignModule%2CArmsInterventionsModule%2COutcomesModule%2CEligibilityModule%2CReferencesModule%2CHasResults",
+      "humanStudyUrl": "https://clinicaltrials.gov/study/NCT02942004",
+      "retrievedAt": "2026-10-13T19:07:41.577663+00:00",
+      "processedAt": "2026-10-13T19:07:41.578659+00:00",
+      "registryLastUpdatePostedDate": "2025-10-14",
+      "responseSha256": "f128938760f8fa78e171f89275a155ff7ddf397b9f3c7d07d8edc7752f6b622f",
+      "fixturePath": "data/study-examples/v1/NCT02942004.json",
+      "metadataPath": "data/study-examples/v1/NCT02942004.metadata.json",
+      "evidenceClass": "STRUCTURED_EXTRACTION",
+      "attribution": "ClinicalTrials.gov, U.S. National Library of Medicine",
+      "fieldLocators": {
+        "nctId": "/studies/0/protocolSection/identificationModule/nctId",
+        "briefTitle": "/studies/0/protocolSection/identificationModule/briefTitle",
+        "reportedSponsorOrganisation": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+        "reportedConditions": "/studies/0/protocolSection/conditionsModule/conditions",
+        "reportedInterventions": "/studies/0/protocolSection/armsInterventionsModule/interventions",
+        "overallStatus": "/studies/0/protocolSection/statusModule/overallStatus",
+        "registeredStartDate": "/studies/0/protocolSection/statusModule/startDateStruct/date",
+        "registryLastUpdatePostedDate": "/studies/0/protocolSection/statusModule/lastUpdatePostDateStruct/date"
+      },
+      "observedRegistryFacts": {
+        "nctId": "NCT02942004",
+        "briefTitle": "A Study to Evaluate Efficacy and Safety of SAGE-547 in Participants With Severe Postpartum Depression (547-PPD-202B)",
+        "reportedSponsorOrganisation": "Supernus Pharmaceuticals, Inc.",
+        "reportedConditions": [
+          "Postpartum Depression"
+        ],
+        "reportedInterventions": [
+          "Placebo",
+          "SAGE-547 60 μg/kg/h",
+          "SAGE-547 90 μg/kg/h"
+        ],
+        "overallStatus": "COMPLETED",
+        "registeredStartDate": "2016-08-01",
+        "registryLastUpdatePostedDate": "2025-10-14"
+      }
+    },
+    {
+      "id": "snapshot-ctg-nct03249376-20261013",
+      "captureFormat": "STUDY_EXAMPLE_V1",
+      "sourceId": "SRC-CTG",
+      "policyVersion": "1",
+      "provider": "ClinicalTrials.gov",
+      "externalId": "NCT03249376",
+      "apiRequestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT03249376&pageSize=1&countTotal=true&format=json&fields=IdentificationModule%2CStatusModule%2CSponsorCollaboratorsModule%2CDescriptionModule%2CConditionsModule%2CDesignModule%2CArmsInterventionsModule%2COutcomesModule%2CEligibilityModule%2CReferencesModule%2CHasResults",
+      "humanStudyUrl": "https://clinicaltrials.gov/study/NCT03249376",
+      "retrievedAt": "2026-10-13T19:07:42.129817+00:00",
+      "processedAt": "2026-10-13T19:07:42.130291+00:00",
+      "registryLastUpdatePostedDate": "2022-06-03",
+      "responseSha256": "4515130085f6e9820f18115cdc3035a6be6e18a2b8a574be37292410b81502ab",
+      "fixturePath": "data/study-examples/v1/NCT03249376.json",
+      "metadataPath": "data/study-examples/v1/NCT03249376.metadata.json",
+      "evidenceClass": "STRUCTURED_EXTRACTION",
+      "attribution": "ClinicalTrials.gov, U.S. National Library of Medicine",
+      "fieldLocators": {
+        "nctId": "/studies/0/protocolSection/identificationModule/nctId",
+        "briefTitle": "/studies/0/protocolSection/identificationModule/briefTitle",
+        "reportedSponsorOrganisation": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+        "reportedConditions": "/studies/0/protocolSection/conditionsModule/conditions",
+        "reportedInterventions": "/studies/0/protocolSection/armsInterventionsModule/interventions",
+        "overallStatus": "/studies/0/protocolSection/statusModule/overallStatus",
+        "registeredStartDate": "/studies/0/protocolSection/statusModule/startDateStruct/date",
+        "registryLastUpdatePostedDate": "/studies/0/protocolSection/statusModule/lastUpdatePostDateStruct/date"
+      },
+      "observedRegistryFacts": {
+        "nctId": "NCT03249376",
+        "briefTitle": "Lumateperone Monotherapy for the Treatment of Bipolar Depression Conducted Globally",
+        "reportedSponsorOrganisation": "Intra-Cellular Therapies, Inc.",
+        "reportedConditions": [
+          "Bipolar Depression"
+        ],
+        "reportedInterventions": [
+          "Lumateperone",
+          "Placebo"
+        ],
+        "overallStatus": "COMPLETED",
+        "registeredStartDate": "2017-11-27",
+        "registryLastUpdatePostedDate": "2022-06-03"
+      }
+    },
+    {
+      "id": "snapshot-ctg-nct04659161-20261013",
+      "captureFormat": "STUDY_EXAMPLE_V1",
+      "sourceId": "SRC-CTG",
+      "policyVersion": "1",
+      "provider": "ClinicalTrials.gov",
+      "externalId": "NCT04659161",
+      "apiRequestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT04659161&pageSize=1&countTotal=true&format=json&fields=IdentificationModule%2CStatusModule%2CSponsorCollaboratorsModule%2CDescriptionModule%2CConditionsModule%2CDesignModule%2CArmsInterventionsModule%2COutcomesModule%2CEligibilityModule%2CReferencesModule%2CHasResults",
+      "humanStudyUrl": "https://clinicaltrials.gov/study/NCT04659161",
+      "retrievedAt": "2026-10-13T19:07:42.791679+00:00",
+      "processedAt": "2026-10-13T19:07:42.793469+00:00",
+      "registryLastUpdatePostedDate": "2023-12-12",
+      "responseSha256": "e0e1e8289523a2f5596342d476f846289e0ed982fc934ef2695fd0ec84d4291b",
+      "fixturePath": "data/study-examples/v1/NCT04659161.json",
+      "metadataPath": "data/study-examples/v1/NCT04659161.metadata.json",
+      "evidenceClass": "STRUCTURED_EXTRACTION",
+      "attribution": "ClinicalTrials.gov, U.S. National Library of Medicine",
+      "fieldLocators": {
+        "nctId": "/studies/0/protocolSection/identificationModule/nctId",
+        "briefTitle": "/studies/0/protocolSection/identificationModule/briefTitle",
+        "reportedSponsorOrganisation": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+        "reportedConditions": "/studies/0/protocolSection/conditionsModule/conditions",
+        "reportedInterventions": "/studies/0/protocolSection/armsInterventionsModule/interventions",
+        "overallStatus": "/studies/0/protocolSection/statusModule/overallStatus",
+        "registeredStartDate": "/studies/0/protocolSection/statusModule/startDateStruct/date",
+        "registryLastUpdatePostedDate": "/studies/0/protocolSection/statusModule/lastUpdatePostDateStruct/date"
+      },
+      "observedRegistryFacts": {
+        "nctId": "NCT04659161",
+        "briefTitle": "A Study to Assess Efficacy and Safety of KarXT in Acutely Psychotic Hospitalized Adult Patients With Schizophrenia (EMERGENT-2)",
+        "reportedSponsorOrganisation": "Karuna Therapeutics, Inc., a Bristol Myers Squibb company",
+        "reportedConditions": [
+          "Schizophrenia",
+          "Schizophrenia; Psychosis"
+        ],
+        "reportedInterventions": [
+          "Xanomeline and Trospium Chloride Capsules",
+          "Placebo"
+        ],
+        "overallStatus": "COMPLETED",
+        "registeredStartDate": "2020-12-16",
+        "registryLastUpdatePostedDate": "2023-12-12"
+      }
+    },
+    {
+      "id": "snapshot-ctg-nct02969382-20261013",
+      "captureFormat": "STUDY_EXAMPLE_V1",
+      "sourceId": "SRC-CTG",
+      "policyVersion": "1",
+      "provider": "ClinicalTrials.gov",
+      "externalId": "NCT02969382",
+      "apiRequestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT02969382&pageSize=1&countTotal=true&format=json&fields=IdentificationModule%2CStatusModule%2CSponsorCollaboratorsModule%2CDescriptionModule%2CConditionsModule%2CDesignModule%2CArmsInterventionsModule%2COutcomesModule%2CEligibilityModule%2CReferencesModule%2CHasResults",
+      "humanStudyUrl": "https://clinicaltrials.gov/study/NCT02969382",
+      "retrievedAt": "2026-10-13T19:07:43.380053+00:00",
+      "processedAt": "2026-10-13T19:07:43.381002+00:00",
+      "registryLastUpdatePostedDate": "2024-07-05",
+      "responseSha256": "1453d16cc5da013f57b3a074428491d11ac7f440e4a1da4b24991b469732fddd",
+      "fixturePath": "data/study-examples/v1/NCT02969382.json",
+      "metadataPath": "data/study-examples/v1/NCT02969382.metadata.json",
+      "evidenceClass": "STRUCTURED_EXTRACTION",
+      "attribution": "ClinicalTrials.gov, U.S. National Library of Medicine",
+      "fieldLocators": {
+        "nctId": "/studies/0/protocolSection/identificationModule/nctId",
+        "briefTitle": "/studies/0/protocolSection/identificationModule/briefTitle",
+        "reportedSponsorOrganisation": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+        "reportedConditions": "/studies/0/protocolSection/conditionsModule/conditions",
+        "reportedInterventions": "/studies/0/protocolSection/armsInterventionsModule/interventions",
+        "overallStatus": "/studies/0/protocolSection/statusModule/overallStatus",
+        "registeredStartDate": "/studies/0/protocolSection/statusModule/startDateStruct/date",
+        "registryLastUpdatePostedDate": "/studies/0/protocolSection/statusModule/lastUpdatePostDateStruct/date"
+      },
+      "observedRegistryFacts": {
+        "nctId": "NCT02969382",
+        "briefTitle": "A Study to Evaluate the Efficacy and Safety of SEP-363856 in Acutely Psychotic Adults With Schizophrenia",
+        "reportedSponsorOrganisation": "Otsuka Pharmaceutical Development & Commercialization, Inc.",
+        "reportedConditions": [
+          "Schizophrenia"
+        ],
+        "reportedInterventions": [
+          "SEP-363856",
+          "Placebo - Cap"
+        ],
+        "overallStatus": "COMPLETED",
+        "registeredStartDate": "2016-12-05",
+        "registryLastUpdatePostedDate": "2024-07-05"
+      }
+    },
+    {
+      "id": "snapshot-ctg-nct00532493-20261013",
+      "captureFormat": "STUDY_EXAMPLE_V1",
+      "sourceId": "SRC-CTG",
+      "policyVersion": "1",
+      "provider": "ClinicalTrials.gov",
+      "externalId": "NCT00532493",
+      "apiRequestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT00532493&pageSize=1&countTotal=true&format=json&fields=IdentificationModule%2CStatusModule%2CSponsorCollaboratorsModule%2CDescriptionModule%2CConditionsModule%2CDesignModule%2CArmsInterventionsModule%2COutcomesModule%2CEligibilityModule%2CReferencesModule%2CHasResults",
+      "humanStudyUrl": "https://clinicaltrials.gov/study/NCT00532493",
+      "retrievedAt": "2026-10-13T19:07:44.047148+00:00",
+      "processedAt": "2026-10-13T19:07:44.047714+00:00",
+      "registryLastUpdatePostedDate": "2018-05-01",
+      "responseSha256": "e65f745f87f8da72408d69e1121ebe022d3376be62deb138a5d698c2a4f79b33",
+      "fixturePath": "data/study-examples/v1/NCT00532493.json",
+      "metadataPath": "data/study-examples/v1/NCT00532493.metadata.json",
+      "evidenceClass": "STRUCTURED_EXTRACTION",
+      "attribution": "ClinicalTrials.gov, U.S. National Library of Medicine",
+      "fieldLocators": {
+        "nctId": "/studies/0/protocolSection/identificationModule/nctId",
+        "briefTitle": "/studies/0/protocolSection/identificationModule/briefTitle",
+        "reportedSponsorOrganisation": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+        "reportedConditions": "/studies/0/protocolSection/conditionsModule/conditions",
+        "reportedInterventions": "/studies/0/protocolSection/armsInterventionsModule/interventions",
+        "overallStatus": "/studies/0/protocolSection/statusModule/overallStatus",
+        "registeredStartDate": "/studies/0/protocolSection/statusModule/startDateStruct/date",
+        "registryLastUpdatePostedDate": "/studies/0/protocolSection/statusModule/lastUpdatePostDateStruct/date"
+      },
+      "observedRegistryFacts": {
+        "nctId": "NCT00532493",
+        "briefTitle": "Cooperative Studies Program #563 - Prazosin and Combat Trauma PTSD",
+        "reportedSponsorOrganisation": "VA Office of Research and Development",
+        "reportedConditions": [
+          "PTSD",
+          "Sleep Disorders"
+        ],
+        "reportedInterventions": [
+          "prazosin",
+          "placebo"
+        ],
+        "overallStatus": "COMPLETED",
+        "registeredStartDate": "2010-01-06",
+        "registryLastUpdatePostedDate": "2018-05-01"
+      }
+    },
+    {
+      "id": "snapshot-ctg-nct02750306-20261013",
+      "captureFormat": "STUDY_EXAMPLE_V1",
+      "sourceId": "SRC-CTG",
+      "policyVersion": "1",
+      "provider": "ClinicalTrials.gov",
+      "externalId": "NCT02750306",
+      "apiRequestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT02750306&pageSize=1&countTotal=true&format=json&fields=IdentificationModule%2CStatusModule%2CSponsorCollaboratorsModule%2CDescriptionModule%2CConditionsModule%2CDesignModule%2CArmsInterventionsModule%2COutcomesModule%2CEligibilityModule%2CReferencesModule%2CHasResults",
+      "humanStudyUrl": "https://clinicaltrials.gov/study/NCT02750306",
+      "retrievedAt": "2026-10-13T19:07:44.738049+00:00",
+      "processedAt": "2026-10-13T19:07:44.738978+00:00",
+      "registryLastUpdatePostedDate": "2019-10-16",
+      "responseSha256": "958f6c6b1efc5d5561c2f72f1660df035ef5fd0bf61513a9cbabd10c66915ddc",
+      "fixturePath": "data/study-examples/v1/NCT02750306.json",
+      "metadataPath": "data/study-examples/v1/NCT02750306.metadata.json",
+      "evidenceClass": "STRUCTURED_EXTRACTION",
+      "attribution": "ClinicalTrials.gov, U.S. National Library of Medicine",
+      "fieldLocators": {
+        "nctId": "/studies/0/protocolSection/identificationModule/nctId",
+        "briefTitle": "/studies/0/protocolSection/identificationModule/briefTitle",
+        "reportedSponsorOrganisation": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+        "reportedConditions": "/studies/0/protocolSection/conditionsModule/conditions",
+        "reportedInterventions": "/studies/0/protocolSection/armsInterventionsModule/interventions",
+        "overallStatus": "/studies/0/protocolSection/statusModule/overallStatus",
+        "registeredStartDate": "/studies/0/protocolSection/statusModule/startDateStruct/date",
+        "registryLastUpdatePostedDate": "/studies/0/protocolSection/statusModule/lastUpdatePostDateStruct/date"
+      },
+      "observedRegistryFacts": {
+        "nctId": "NCT02750306",
+        "briefTitle": "Safety and Efficacy of Suvorexant (MK-4305) for the Treatment of Insomnia in Participants With Alzheimer's Disease (MK-4305-061)",
+        "reportedSponsorOrganisation": "Merck Sharp & Dohme LLC",
+        "reportedConditions": [
+          "Sleep Initiation and Maintenance Disorders",
+          "Alzheimer Disease"
+        ],
+        "reportedInterventions": [
+          "Suvorexant",
+          "Placebo"
+        ],
+        "overallStatus": "COMPLETED",
+        "registeredStartDate": "2016-05-23",
+        "registryLastUpdatePostedDate": "2019-10-16"
+      }
+    }
+  ],
+  "sponsorOrganisations": [
+    {
+      "id": "sponsor-usona-institute",
+      "canonicalLabel": "Usona Institute",
+      "rawAliases": [
+        {
+          "value": "Usona Institute",
+          "sourceSnapshotId": "snapshot-ctg-nct03866174-20260814",
+          "locator": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name"
+        }
+      ]
+    },
+    {
+      "id": "sponsor-compass-pathways",
+      "canonicalLabel": "COMPASS Pathways",
+      "rawAliases": [
+        {
+          "value": "COMPASS Pathways",
+          "sourceSnapshotId": "snapshot-ctg-nct05711940-20260814",
+          "locator": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name"
+        }
+      ]
+    },
+    {
+      "id": "sponsor-cybin-irl-limited",
+      "canonicalLabel": "Cybin IRL Limited",
+      "rawAliases": [
+        {
+          "value": "Cybin IRL Limited",
+          "sourceSnapshotId": "snapshot-ctg-nct06605105-20260814",
+          "locator": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name"
+        }
+      ]
+    },
+    {
+      "id": "reported-sponsor-nct03672175",
+      "canonicalLabel": "Biogen",
+      "rawAliases": [
+        {
+          "value": "Biogen",
+          "sourceSnapshotId": "snapshot-ctg-nct03672175-20261013",
+          "locator": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name"
+        }
+      ]
+    },
+    {
+      "id": "reported-sponsor-nct03559192",
+      "canonicalLabel": "Janssen Research & Development, LLC",
+      "rawAliases": [
+        {
+          "value": "Janssen Research & Development, LLC",
+          "sourceSnapshotId": "snapshot-ctg-nct03559192-20261013",
+          "locator": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name"
+        }
+      ]
+    },
+    {
+      "id": "reported-sponsor-nct01360645",
+      "canonicalLabel": "Otsuka Pharmaceutical Development & Commercialization, Inc.",
+      "rawAliases": [
+        {
+          "value": "Otsuka Pharmaceutical Development & Commercialization, Inc.",
+          "sourceSnapshotId": "snapshot-ctg-nct01360645-20261013",
+          "locator": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name"
+        },
+        {
+          "value": "Otsuka Pharmaceutical Development & Commercialization, Inc.",
+          "sourceSnapshotId": "snapshot-ctg-nct02969382-20261013",
+          "locator": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name"
+        }
+      ]
+    },
+    {
+      "id": "reported-sponsor-nct01422213",
+      "canonicalLabel": "H. Lundbeck A/S",
+      "rawAliases": [
+        {
+          "value": "H. Lundbeck A/S",
+          "sourceSnapshotId": "snapshot-ctg-nct01422213-20261013",
+          "locator": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name"
+        }
+      ]
+    },
+    {
+      "id": "reported-sponsor-nct02942004",
+      "canonicalLabel": "Supernus Pharmaceuticals, Inc.",
+      "rawAliases": [
+        {
+          "value": "Supernus Pharmaceuticals, Inc.",
+          "sourceSnapshotId": "snapshot-ctg-nct02942004-20261013",
+          "locator": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name"
+        }
+      ]
+    },
+    {
+      "id": "reported-sponsor-nct03249376",
+      "canonicalLabel": "Intra-Cellular Therapies, Inc.",
+      "rawAliases": [
+        {
+          "value": "Intra-Cellular Therapies, Inc.",
+          "sourceSnapshotId": "snapshot-ctg-nct03249376-20261013",
+          "locator": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name"
+        }
+      ]
+    },
+    {
+      "id": "reported-sponsor-nct04659161",
+      "canonicalLabel": "Karuna Therapeutics, Inc., a Bristol Myers Squibb company",
+      "rawAliases": [
+        {
+          "value": "Karuna Therapeutics, Inc., a Bristol Myers Squibb company",
+          "sourceSnapshotId": "snapshot-ctg-nct04659161-20261013",
+          "locator": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name"
+        }
+      ]
+    },
+    {
+      "id": "reported-sponsor-nct00532493",
+      "canonicalLabel": "VA Office of Research and Development",
+      "rawAliases": [
+        {
+          "value": "VA Office of Research and Development",
+          "sourceSnapshotId": "snapshot-ctg-nct00532493-20261013",
+          "locator": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name"
+        }
+      ]
+    },
+    {
+      "id": "reported-sponsor-nct02750306",
+      "canonicalLabel": "Merck Sharp & Dohme LLC",
+      "rawAliases": [
+        {
+          "value": "Merck Sharp & Dohme LLC",
+          "sourceSnapshotId": "snapshot-ctg-nct02750306-20261013",
+          "locator": "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name"
+        }
+      ]
+    }
+  ],
+  "compounds": [
+    {
+      "id": "compound-psilocybin",
+      "canonicalLabel": "Psilocybin",
+      "rawAliases": [
+        {
+          "value": "Psilocybin",
+          "sourceSnapshotId": "snapshot-ctg-nct03866174-20260814",
+          "locator": "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
+        },
+        {
+          "value": "Psilocybin",
+          "sourceSnapshotId": "snapshot-ctg-nct05711940-20260814",
+          "locator": "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
+        }
+      ]
+    },
+    {
+      "id": "compound-cyb003",
+      "canonicalLabel": "CYB003",
+      "rawAliases": [
+        {
+          "value": "CYB003",
+          "sourceSnapshotId": "snapshot-ctg-nct06605105-20260814",
+          "locator": "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
+        }
+      ]
+    },
+    {
+      "id": "intervention-nct03672175",
+      "canonicalLabel": "SAGE-217",
+      "rawAliases": [
+        {
+          "value": "SAGE-217",
+          "sourceSnapshotId": "snapshot-ctg-nct03672175-20261013",
+          "locator": "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
+        }
+      ]
+    },
+    {
+      "id": "intervention-nct03559192",
+      "canonicalLabel": "JNJ-67953964",
+      "rawAliases": [
+        {
+          "value": "JNJ-67953964",
+          "sourceSnapshotId": "snapshot-ctg-nct03559192-20261013",
+          "locator": "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
+        }
+      ]
+    },
+    {
+      "id": "intervention-nct01360645",
+      "canonicalLabel": "OPC-34712 + ADT",
+      "rawAliases": [
+        {
+          "value": "OPC-34712 + ADT",
+          "sourceSnapshotId": "snapshot-ctg-nct01360645-20261013",
+          "locator": "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
+        }
+      ]
+    },
+    {
+      "id": "intervention-nct01422213",
+      "canonicalLabel": "Vortioxetine (Lu AA21004)",
+      "rawAliases": [
+        {
+          "value": "Vortioxetine (Lu AA21004)",
+          "sourceSnapshotId": "snapshot-ctg-nct01422213-20261013",
+          "locator": "/studies/0/protocolSection/armsInterventionsModule/interventions/1/name"
+        },
+        {
+          "value": "Vortioxetine (Lu AA21004)",
+          "sourceSnapshotId": "snapshot-ctg-nct01422213-20261013",
+          "locator": "/studies/0/protocolSection/armsInterventionsModule/interventions/2/name"
+        }
+      ]
+    },
+    {
+      "id": "intervention-nct02942004",
+      "canonicalLabel": "SAGE-547 infusion arms (60 and 90 μg/kg/h)",
+      "rawAliases": [
+        {
+          "value": "SAGE-547 60 μg/kg/h",
+          "sourceSnapshotId": "snapshot-ctg-nct02942004-20261013",
+          "locator": "/studies/0/protocolSection/armsInterventionsModule/interventions/1/name"
+        },
+        {
+          "value": "SAGE-547 90 μg/kg/h",
+          "sourceSnapshotId": "snapshot-ctg-nct02942004-20261013",
+          "locator": "/studies/0/protocolSection/armsInterventionsModule/interventions/2/name"
+        }
+      ]
+    },
+    {
+      "id": "intervention-nct03249376",
+      "canonicalLabel": "Lumateperone",
+      "rawAliases": [
+        {
+          "value": "Lumateperone",
+          "sourceSnapshotId": "snapshot-ctg-nct03249376-20261013",
+          "locator": "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
+        }
+      ]
+    },
+    {
+      "id": "intervention-nct04659161",
+      "canonicalLabel": "Xanomeline and Trospium Chloride Capsules",
+      "rawAliases": [
+        {
+          "value": "Xanomeline and Trospium Chloride Capsules",
+          "sourceSnapshotId": "snapshot-ctg-nct04659161-20261013",
+          "locator": "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
+        }
+      ]
+    },
+    {
+      "id": "intervention-nct02969382",
+      "canonicalLabel": "SEP-363856",
+      "rawAliases": [
+        {
+          "value": "SEP-363856",
+          "sourceSnapshotId": "snapshot-ctg-nct02969382-20261013",
+          "locator": "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
+        }
+      ]
+    },
+    {
+      "id": "intervention-nct00532493",
+      "canonicalLabel": "prazosin",
+      "rawAliases": [
+        {
+          "value": "prazosin",
+          "sourceSnapshotId": "snapshot-ctg-nct00532493-20261013",
+          "locator": "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
+        }
+      ]
+    },
+    {
+      "id": "intervention-nct02750306",
+      "canonicalLabel": "Suvorexant",
+      "rawAliases": [
+        {
+          "value": "Suvorexant",
+          "sourceSnapshotId": "snapshot-ctg-nct02750306-20261013",
+          "locator": "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
+        }
+      ]
+    }
+  ],
+  "programmes": [
+    {
+      "id": "programme-usona-psilocybin-mdd",
+      "slug": "usona-psilocybin-mdd",
+      "canonicalLabel": "Usona psilocybin for major depressive disorder",
+      "mappingAssertionId": "mapping-usona-psilocybin-mdd",
+      "companyIdentity": {
+        "state": "UNKNOWN",
+        "rationale": "ClinicalTrials.gov reports a lead sponsor organisation but does not establish a company legal identity, ownership, control, developer status, or commercial rights."
+      },
+      "explicitUnknowns": [
+        "Company legal identity and any ownership, control, developer, or commercial-rights relationship",
+        "The precise programme roles of Psilocybin, Niacin, and Set and Setting (SaS) Protocol, and whether Psilocybin is an exclusive programme compound",
+        "Programme-level phase, status, mechanism, efficacy, safety, and superiority"
+      ],
+      "conflicts": []
+    },
+    {
+      "id": "programme-comp360-trd",
+      "slug": "comp360-treatment-resistant-depression",
+      "canonicalLabel": "COMP360 for treatment-resistant depression",
+      "mappingAssertionId": "mapping-comp360-trd",
+      "companyIdentity": {
+        "state": "UNKNOWN",
+        "rationale": "ClinicalTrials.gov reports a lead sponsor organisation but does not establish a company legal identity, ownership, control, developer status, or commercial rights."
+      },
+      "explicitUnknowns": [
+        "Company legal identity and any ownership, control, developer, or commercial-rights relationship",
+        "The exact chemical or formulation relationship between the programme label COMP360 and registry-reported intervention Psilocybin; they are not asserted to be synonyms, aliases, identical substances, or chemically/formulation-equivalent",
+        "Programme-level phase, status, mechanism, efficacy, safety, and superiority"
+      ],
+      "conflicts": []
+    },
+    {
+      "id": "programme-cyb003-mdd",
+      "slug": "cyb003-major-depressive-disorder",
+      "canonicalLabel": "CYB003 for major depressive disorder",
+      "mappingAssertionId": "mapping-cyb003-mdd",
+      "companyIdentity": {
+        "state": "UNKNOWN",
+        "rationale": "ClinicalTrials.gov reports a lead sponsor organisation but does not establish a company legal identity, ownership, control, developer status, or commercial rights."
+      },
+      "explicitUnknowns": [
+        "Chemical identity beyond the candidate compound label CYB003",
+        "Company legal identity and any ownership, control, developer, or commercial-rights relationship",
+        "Asset ownership, control, developer status, and commercial rights",
+        "Programme-level phase, status, mechanism, efficacy, safety, and superiority"
+      ],
+      "conflicts": []
+    },
+    {
+      "id": "study-nct03672175",
+      "slug": "study-nct03672175",
+      "canonicalLabel": "SAGE-217 for major depressive disorder",
+      "mappingAssertionId": "mapping-nct03672175",
+      "companyIdentity": {
+        "state": "UNKNOWN",
+        "rationale": "Registry-reported organisation only; ownership, developer identity and commercial rights are not established."
+      },
+      "explicitUnknowns": [
+        "Company legal identity and any ownership, control, developer, or commercial-rights relationship",
+        "The precise programme roles of Psilocybin, Niacin, and Set and Setting (SaS) Protocol, and whether Psilocybin is an exclusive programme compound",
+        "Programme-level phase, status, mechanism, efficacy, safety, and superiority"
+      ],
+      "conflicts": [
+        "Registry enrollment is 581 actual; the paper reports 581 randomized. The captured registry names Biogen as lead sponsor; publication affiliations include Sage. These source-specific labels do not establish ownership or development rights.",
+        "Exact-ID retained association is internally consistent; placebo separate. Zuranolone/MOUNTAIN is publication context, not independently validated synonym or formulation. 581 actual enrollment vs 581 randomized; Sage author affiliations do not override registry sponsor or establish commercial rights."
+      ]
+    },
+    {
+      "id": "study-nct03559192",
+      "slug": "study-nct03559192",
+      "canonicalLabel": "JNJ-67953964 as adjunctive treatment for major depressive disorder",
+      "mappingAssertionId": "mapping-nct03559192",
+      "companyIdentity": {
+        "state": "UNKNOWN",
+        "rationale": "Registry-reported organisation only; ownership, developer identity and commercial rights are not established."
+      },
+      "explicitUnknowns": [
+        "Company legal identity and any ownership, control, developer, or commercial-rights relationship",
+        "The precise programme roles of Psilocybin, Niacin, and Set and Setting (SaS) Protocol, and whether Psilocybin is an exclusive programme compound",
+        "Programme-level phase, status, mechanism, efficacy, safety, and superiority"
+      ],
+      "conflicts": [
+        "Registry enrollment is 181 actual. The paper's abstract says 184 enrolled, while its Study results section says 181 entered lead-in and 169 were randomized/treated; 166 formed the full efficacy set and 121 the enriched primary set. The publication discrepancy remains unresolved. The original paper confirms the NCT identifier in its Study design section; no reference is listed in this registry snapshot.",
+        "Do not collapse into monotherapy: ongoing oral SSRI/SNRI, placebo lead-in and enriched primary group are essential. Aticaprant is paper context; packet reports NCT linkage in article Study design, rather than registry PMID. Unresolved paper counts: abstract 184 enrolled, 181 in lead-in, 169 randomized/treated, 166 full efficacy, 121 enriched; do not reconcile without source clarification."
+      ]
+    },
+    {
+      "id": "study-nct01360645",
+      "slug": "study-nct01360645",
+      "canonicalLabel": "OPC-34712 plus antidepressant therapy for major depressive disorder",
+      "mappingAssertionId": "mapping-nct01360645",
+      "companyIdentity": {
+        "state": "UNKNOWN",
+        "rationale": "Registry-reported organisation only; ownership, developer identity and commercial rights are not established."
+      },
+      "explicitUnknowns": [
+        "Company legal identity and any ownership, control, developer, or commercial-rights relationship",
+        "The precise programme roles of Psilocybin, Niacin, and Set and Setting (SaS) Protocol, and whether Psilocybin is an exclusive programme compound",
+        "Programme-level phase, status, mechanism, efficacy, safety, and superiority"
+      ],
+      "conflicts": [
+        "Registry enrollment is 826 actual, including the lead-in population. The paper reports efficacy groups of 175 and 178 under final-protocol criteria. Registry endpoints occur at week 14 after the week-8 lead-in baseline; the paper describes six randomized treatment weeks. Repeated Placebo + ADT intervention rows refer to distinct study phases.",
+        "Combination/context + ADT required. Two Placebo + ADT records reflect distinct phases; preserve both. Brexpiprazole/PYXIS contextual only. 826 registry enrollment includes lead-in; paper's 175/178 groups concern final-protocol efficacy set. Week 14 registry endpoint and six randomized weeks are consistent with week-8 lead-in."
+      ]
+    },
+    {
+      "id": "study-nct01422213",
+      "slug": "study-nct01422213",
+      "canonicalLabel": "Vortioxetine (Lu AA21004) for major depressive disorder — cognitive-function study",
+      "mappingAssertionId": "mapping-nct01422213",
+      "companyIdentity": {
+        "state": "UNKNOWN",
+        "rationale": "Registry-reported organisation only; ownership, developer identity and commercial rights are not established."
+      },
+      "explicitUnknowns": [
+        "Company legal identity and any ownership, control, developer, or commercial-rights relationship",
+        "The precise programme roles of Psilocybin, Niacin, and Set and Setting (SaS) Protocol, and whether Psilocybin is an exclusive programme compound",
+        "Programme-level phase, status, mechanism, efficacy, safety, and superiority"
+      ],
+      "conflicts": [
+        "Registry enrollment is 598 actual; the publication abstract reports 602 randomized. The reason for this difference is unverified. Registry completion date is absent; primary completion is 2013-05 actual. Start is 2011-12 with type unreported. Repeated vortioxetine intervention rows belong to separate dose arms.",
+        "Two separate vortioxetine dose intervention records must survive grouping; cognitive endpoint retained. Registry 598 actual vs publication abstract 602 randomized unresolved. No completion date can be invented; registry only has primary completion 2013-05 actual. Do not infer chemical equivalence from aliases alone."
+      ]
+    },
+    {
+      "id": "study-nct02942004",
+      "slug": "study-nct02942004",
+      "canonicalLabel": "SAGE-547 for severe postpartum depression — two infusion arms",
+      "mappingAssertionId": "mapping-nct02942004",
+      "companyIdentity": {
+        "state": "UNKNOWN",
+        "rationale": "Registry-reported organisation only; ownership, developer identity and commercial rights are not established."
+      },
+      "explicitUnknowns": [
+        "Company legal identity and any ownership, control, developer, or commercial-rights relationship",
+        "The precise programme roles of Psilocybin, Niacin, and Set and Setting (SaS) Protocol, and whether Psilocybin is an exclusive programme compound",
+        "Programme-level phase, status, mechanism, efficacy, safety, and superiority"
+      ],
+      "conflicts": [
+        "Registry enrollment is 138 actual. The publication also reports a second trial, NCT02942017, which is not included here. The captured registry names Supernus Pharmaceuticals, Inc.; the older publication names Sage in funding and affiliations. These source-specific labels do not establish corporate ownership.",
+        "Preserve distinct infusion rates and schedules, separate placebo. This maps NCT02942004 only; exclude NCT02942017, the other trial in the paper. Severe PPD setting should remain visible. Registry sponsor Supernus differs from historical protocol/publication Sage; sponsor-at-capture and study-time funding are distinct fields. Retained enrollment 138 actual."
+      ]
+    },
+    {
+      "id": "study-nct03249376",
+      "slug": "study-nct03249376",
+      "canonicalLabel": "Lumateperone for bipolar I/II depression",
+      "mappingAssertionId": "mapping-nct03249376",
+      "companyIdentity": {
+        "state": "UNKNOWN",
+        "rationale": "Registry-reported organisation only; ownership, developer identity and commercial rights are not established."
+      },
+      "explicitUnknowns": [
+        "Company legal identity and any ownership, control, developer, or commercial-rights relationship",
+        "The precise programme roles of Psilocybin, Niacin, and Set and Setting (SaS) Protocol, and whether Psilocybin is an exclusive programme compound",
+        "Programme-level phase, status, mechanism, efficacy, safety, and superiority"
+      ],
+      "conflicts": [
+        "The registry reports 381 ACTUAL enrollment. Bipolar I/II populations are not interchangeable with the existing unipolar MDD programme mappings.",
+        "Correct bipolar depression study grouping: major depressive episodes in bipolar I/II, not unipolar MDD. Registry also uses ITI-007 wording; do not promote to separately proven chemical/formulation equivalence. Retained 381 actual enrollment; placebo separate."
+      ]
+    },
+    {
+      "id": "study-nct04659161",
+      "slug": "study-nct04659161",
+      "canonicalLabel": "Xanomeline and trospium chloride capsules for schizophrenia",
+      "mappingAssertionId": "mapping-nct04659161",
+      "companyIdentity": {
+        "state": "UNKNOWN",
+        "rationale": "Registry-reported organisation only; ownership, developer identity and commercial rights are not established."
+      },
+      "explicitUnknowns": [
+        "Company legal identity and any ownership, control, developer, or commercial-rights relationship",
+        "The precise programme roles of Psilocybin, Niacin, and Set and Setting (SaS) Protocol, and whether Psilocybin is an exclusive programme compound",
+        "Programme-level phase, status, mechanism, efficacy, safety, and superiority"
+      ],
+      "conflicts": [
+        "Registry enrollment and publication randomization are both 252. Paper enrollment dates and registry completion dates refer to different events. The displayed sponsor is the captured registry's exact label; it does not establish independent corporate identity.",
+        "Two agents in the registered combination, not xanomeline monotherapy or a single molecule. KarXT/EMERGENT-2 retained as context. Preserve source-condition records including duplicate schizophrenia and psychosis; 252 enrolled/randomized. Sponsor wording is a source-reported string, not independent legal-identity proof."
+      ]
+    },
+    {
+      "id": "study-nct02969382",
+      "slug": "study-nct02969382",
+      "canonicalLabel": "SEP-363856 for schizophrenia — selected Phase 2 trial",
+      "mappingAssertionId": "mapping-nct02969382",
+      "companyIdentity": {
+        "state": "UNKNOWN",
+        "rationale": "Registry-reported organisation only; ownership, developer identity and commercial rights are not established."
+      },
+      "explicitUnknowns": [
+        "Company legal identity and any ownership, control, developer, or commercial-rights relationship",
+        "The precise programme roles of Psilocybin, Niacin, and Set and Setting (SaS) Protocol, and whether Psilocybin is an exclusive programme compound",
+        "Programme-level phase, status, mechanism, efficacy, safety, and superiority"
+      ],
+      "conflicts": [
+        "Registry enrollment is 245 actual; publication groups contain 120 and 125 participants. The paper names Sunovion as funder whereas the captured registry names Otsuka Pharmaceutical Development & Commercialization, Inc. This Phase 2 example does not establish outcomes of later trials.",
+        "Trial-specific code and indication match retained evidence; placebo capsule comparator separate. Registry 245 actual, publication allocation 120 + 125. Paper's Sunovion funding and captured Otsuka sponsor are not interchangeable; no later studies/outcomes or unverified compound names imported."
+      ]
+    },
+    {
+      "id": "study-nct00532493",
+      "slug": "study-nct00532493",
+      "canonicalLabel": "Prazosin for PTSD with sleep disturbance in military veterans",
+      "mappingAssertionId": "mapping-nct00532493",
+      "companyIdentity": {
+        "state": "UNKNOWN",
+        "rationale": "Registry-reported organisation only; ownership, developer identity and commercial rights are not established."
+      },
+      "explicitUnknowns": [
+        "Company legal identity and any ownership, control, developer, or commercial-rights relationship",
+        "The precise programme roles of Psilocybin, Niacin, and Set and Setting (SaS) Protocol, and whether Psilocybin is an exclusive programme compound",
+        "Programme-level phase, status, mechanism, efficacy, safety, and superiority"
+      ],
+      "conflicts": [
+        "Registry enrollment is 304 actual and the paper reports 304 randomized. The retained registry flag healthyVolunteers=true conflicts with patient-specific PTSD inclusion criteria and the publication population. It is a source discrepancy, not evidence that the enrolled cohort consisted of healthy volunteers.",
+        "Correct patient-specific PTSD/sleep condition, not a healthy-volunteer programme. healthyVolunteers=true in retained registry is inconsistent with PTSD-specific inclusion and publication cohort; retain as unresolved source-data inconsistency and escalate only if cohort classification is ingested. 304 actual/randomized; placebo separate."
+      ]
+    },
+    {
+      "id": "study-nct02750306",
+      "slug": "study-nct02750306",
+      "canonicalLabel": "Suvorexant for insomnia in an Alzheimer disease population",
+      "mappingAssertionId": "mapping-nct02750306",
+      "companyIdentity": {
+        "state": "UNKNOWN",
+        "rationale": "Registry-reported organisation only; ownership, developer identity and commercial rights are not established."
+      },
+      "explicitUnknowns": [
+        "Company legal identity and any ownership, control, developer, or commercial-rights relationship",
+        "The precise programme roles of Psilocybin, Niacin, and Set and Setting (SaS) Protocol, and whether Psilocybin is an exclusive programme compound",
+        "Programme-level phase, status, mechanism, efficacy, safety, and superiority"
+      ],
+      "conflicts": [
+        "Registry enrollment is 285 actual and the paper reports 285 randomized. All three registry primary outcomes are retained: total sleep time, adverse events, and discontinuation due to adverse events. The publication abstract emphasizes the sleep efficacy endpoint. This is not a trial of disease modification in Alzheimer's disease.",
+        "Correct symptom-treatment setting; not Alzheimer disease modification. Keep both registry conditions and all three primary outcomes: total sleep time, adverse events, discontinuations due to adverse events. 285 actual/randomized; placebo separate."
+      ]
+    }
+  ],
+  "mappingAssertions": [
+    {
+      "id": "mapping-usona-psilocybin-mdd",
+      "programmeId": "programme-usona-psilocybin-mdd",
+      "aliases": [
+        "Usona psilocybin for major depressive disorder",
+        "Usona psilocybin MDD",
+        "A Study of Psilocybin for Major Depressive Disorder (MDD)"
+      ],
+      "reportedSponsorOrganisationId": "sponsor-usona-institute",
+      "compoundId": "compound-psilocybin",
+      "nctIds": [
+        "NCT03866174"
+      ],
+      "evidenceClass": "HUMAN_INFERENCE",
+      "reviewStatus": "APPROVED",
+      "resolutionState": "RESOLVED",
+      "rationale": "NCT03866174 is associated with a Usona Institute–reported psilocybin-in-major-depressive-disorder programme candidate. Psilocybin, Niacin, and Set and Setting (SaS) Protocol remain separate registry-reported interventions, and their precise programme roles remain unknown.",
+      "evidence": [
+        {
+          "sourceSnapshotId": "snapshot-ctg-nct03866174-20260814",
+          "locators": [
+            "/studies/0/protocolSection/identificationModule/nctId",
+            "/studies/0/protocolSection/identificationModule/briefTitle",
+            "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+            "/studies/0/protocolSection/conditionsModule/conditions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
+          ]
+        }
+      ],
+      "reviewerReference": "Keith Grehan — explicit human review decision in the S1-04 Codex task",
+      "reviewRationale": "Approved as a human-reviewed association of NCT03866174 with a Usona Institute–reported psilocybin-in-major-depressive-disorder programme candidate. ClinicalTrials.gov names Psilocybin in the study title, reports Usona Institute as lead sponsor organisation, and reports Depressive Disorder, Major. Niacin and Set and Setting (SaS) Protocol remain separately preserved registry interventions. This approval does not assert that psilocybin is the only intervention, or establish company identity, ownership, developer status, commercial rights, programme-level phase/status, mechanism, efficacy, or safety.",
+      "reviewedAt": "2026-08-14T22:10:17Z"
+    },
+    {
+      "id": "mapping-comp360-trd",
+      "programmeId": "programme-comp360-trd",
+      "aliases": [
+        "COMP360 for treatment-resistant depression",
+        "COMP360",
+        "Efficacy, Safety, and Tolerability of Two Administrations of COMP360 in Participants With TRD"
+      ],
+      "reportedSponsorOrganisationId": "sponsor-compass-pathways",
+      "compoundId": "compound-psilocybin",
+      "nctIds": [
+        "NCT05711940"
+      ],
+      "evidenceClass": "HUMAN_INFERENCE",
+      "reviewStatus": "APPROVED",
+      "resolutionState": "RESOLVED",
+      "rationale": "COMP360-labelled programme candidate associated with the registry-reported Psilocybin intervention in NCT05711940.",
+      "evidence": [
+        {
+          "sourceSnapshotId": "snapshot-ctg-nct05711940-20260814",
+          "locators": [
+            "/studies/0/protocolSection/identificationModule/nctId",
+            "/studies/0/protocolSection/identificationModule/briefTitle",
+            "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+            "/studies/0/protocolSection/conditionsModule/conditions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
+          ]
+        }
+      ],
+      "reviewerReference": "Keith Grehan — explicit human review decision in the S1-04 Codex task",
+      "reviewRationale": "Approved as a human-reviewed association within NCT05711940: the ClinicalTrials.gov title names COMP360, the intervention field reports Psilocybin, the lead sponsor organisation is COMPASS Pathways, and the condition is Treatment Resistant Depression. This does not establish that COMP360 and Psilocybin are synonyms or chemically/formulation-equivalent, nor company identity, ownership, developer status, commercial rights, programme-level phase/status, efficacy, or safety.",
+      "reviewedAt": "2026-08-14T22:10:17Z"
+    },
+    {
+      "id": "mapping-cyb003-mdd",
+      "programmeId": "programme-cyb003-mdd",
+      "aliases": [
+        "CYB003 for major depressive disorder",
+        "CYB003",
+        "Phase III Long-term Extension Trial to Assess Safety and Efficacy of CYB003 in MDD (EXTEND)"
+      ],
+      "reportedSponsorOrganisationId": "sponsor-cybin-irl-limited",
+      "compoundId": "compound-cyb003",
+      "nctIds": [
+        "NCT06605105"
+      ],
+      "evidenceClass": "HUMAN_INFERENCE",
+      "reviewStatus": "APPROVED",
+      "resolutionState": "RESOLVED",
+      "rationale": "CYB003-labelled programme candidate associated with the registry-reported CYB003 intervention, Major Depressive Disorder condition, and Cybin IRL Limited lead sponsor organisation in NCT06605105.",
+      "evidence": [
+        {
+          "sourceSnapshotId": "snapshot-ctg-nct06605105-20260814",
+          "locators": [
+            "/studies/0/protocolSection/identificationModule/nctId",
+            "/studies/0/protocolSection/identificationModule/briefTitle",
+            "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+            "/studies/0/protocolSection/conditionsModule/conditions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
+          ]
+        }
+      ],
+      "reviewerReference": "Keith Grehan — explicit human review decision in the S1-04 Codex task",
+      "reviewRationale": "Approved as an evidence-bounded human-inference mapping: ClinicalTrials.gov record NCT06605105 names CYB003 in the study title, reports CYB003 as its sole intervention, Major Depressive Disorder as the condition, and Cybin IRL Limited as the lead sponsor organisation. This approval links the study to the programme candidate ‘CYB003 for major depressive disorder’ and candidate compound label ‘CYB003’ only. It does not establish chemical identity, company identity, ownership, developer or commercial-rights status, programme-wide phase/status, mechanism, efficacy, safety, or superiority.",
+      "reviewedAt": "2026-08-14T22:10:17Z"
+    },
+    {
+      "id": "mapping-nct03672175",
+      "programmeId": "study-nct03672175",
+      "aliases": [
+        "SAGE-217 for major depressive disorder",
+        "MOUNTAIN — zuranolone in MDD",
+        "NCT03672175"
+      ],
+      "reportedSponsorOrganisationId": "reported-sponsor-nct03672175",
+      "compoundId": "intervention-nct03672175",
+      "nctIds": [
+        "NCT03672175"
+      ],
+      "evidenceClass": "MODEL_INFERENCE",
+      "reviewStatus": "APPROVED",
+      "resolutionState": "RESOLVED",
+      "approvalBasis": "OWNER_ACCEPTED_UNATTRIBUTED_PACKET",
+      "reviewPacketSha256": "65e4f7d14ba5596bbee29e71344ae0cc5c25fc2347963e50721d56cfb64755c8",
+      "rationale": "Model-proposed internal grouping limited to this NCT record, the selected registry intervention(s), indication and reported sponsor. Contextual names do not establish chemical equivalence. Exact-ID retained association is internally consistent; placebo separate. Zuranolone/MOUNTAIN is publication context, not independently validated synonym or formulation. 581 actual enrollment vs 581 randomized; Sage author affiliations do not override registry sponsor or establish commercial rights.",
+      "evidence": [
+        {
+          "sourceSnapshotId": "snapshot-ctg-nct03672175-20261013",
+          "locators": [
+            "/studies/0/protocolSection/identificationModule/nctId",
+            "/studies/0/protocolSection/identificationModule/briefTitle",
+            "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+            "/studies/0/protocolSection/conditionsModule/conditions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
+          ]
+        }
+      ],
+      "reviewerReference": "Project owner — site inclusion authorized in the Synapse Atlas task; supplied packet unattributed",
+      "reviewRationale": "Approved for site inclusion by the project owner following the supplied 13 October 2026 scoped packet. The packet is not a named, credentialed or human scientific review. Its author could not independently validate raw JSON hashes or all publication Methods. This remains MODEL_INFERENCE; approval is not independent audit certification. Exact-ID retained association is internally consistent; placebo separate. Zuranolone/MOUNTAIN is publication context, not independently validated synonym or formulation. 581 actual enrollment vs 581 randomized; Sage author affiliations do not override registry sponsor or establish commercial rights.",
+      "reviewedAt": "2026-10-13T21:03:22+00:00"
+    },
+    {
+      "id": "mapping-nct03559192",
+      "programmeId": "study-nct03559192",
+      "aliases": [
+        "JNJ-67953964 as adjunctive treatment for major depressive disorder",
+        "Aticaprant adjunctive MDD trial",
+        "NCT03559192"
+      ],
+      "reportedSponsorOrganisationId": "reported-sponsor-nct03559192",
+      "compoundId": "intervention-nct03559192",
+      "nctIds": [
+        "NCT03559192"
+      ],
+      "evidenceClass": "MODEL_INFERENCE",
+      "reviewStatus": "APPROVED",
+      "resolutionState": "RESOLVED",
+      "approvalBasis": "OWNER_ACCEPTED_UNATTRIBUTED_PACKET",
+      "reviewPacketSha256": "65e4f7d14ba5596bbee29e71344ae0cc5c25fc2347963e50721d56cfb64755c8",
+      "rationale": "Model-proposed internal grouping limited to this NCT record, the selected registry intervention(s), indication and reported sponsor. Contextual names do not establish chemical equivalence. Do not collapse into monotherapy: ongoing oral SSRI/SNRI, placebo lead-in and enriched primary group are essential. Aticaprant is paper context; packet reports NCT linkage in article Study design, rather than registry PMID. Unresolved paper counts: abstract 184 enrolled, 181 in lead-in, 169 randomized/treated, 166 full efficacy, 121 enriched; do not reconcile without source clarification.",
+      "evidence": [
+        {
+          "sourceSnapshotId": "snapshot-ctg-nct03559192-20261013",
+          "locators": [
+            "/studies/0/protocolSection/identificationModule/nctId",
+            "/studies/0/protocolSection/identificationModule/briefTitle",
+            "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+            "/studies/0/protocolSection/conditionsModule/conditions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
+          ]
+        }
+      ],
+      "reviewerReference": "Project owner — site inclusion authorized in the Synapse Atlas task; supplied packet unattributed",
+      "reviewRationale": "Approved for site inclusion by the project owner following the supplied 13 October 2026 scoped packet. The packet is not a named, credentialed or human scientific review. Its author could not independently validate raw JSON hashes or all publication Methods. This remains MODEL_INFERENCE; approval is not independent audit certification. Do not collapse into monotherapy: ongoing oral SSRI/SNRI, placebo lead-in and enriched primary group are essential. Aticaprant is paper context; packet reports NCT linkage in article Study design, rather than registry PMID. Unresolved paper counts: abstract 184 enrolled, 181 in lead-in, 169 randomized/treated, 166 full efficacy, 121 enriched; do not reconcile without source clarification.",
+      "reviewedAt": "2026-10-13T21:03:22+00:00"
+    },
+    {
+      "id": "mapping-nct01360645",
+      "programmeId": "study-nct01360645",
+      "aliases": [
+        "OPC-34712 plus antidepressant therapy for major depressive disorder",
+        "PYXIS — adjunctive brexpiprazole",
+        "NCT01360645"
+      ],
+      "reportedSponsorOrganisationId": "reported-sponsor-nct01360645",
+      "compoundId": "intervention-nct01360645",
+      "nctIds": [
+        "NCT01360645"
+      ],
+      "evidenceClass": "MODEL_INFERENCE",
+      "reviewStatus": "APPROVED",
+      "resolutionState": "RESOLVED",
+      "approvalBasis": "OWNER_ACCEPTED_UNATTRIBUTED_PACKET",
+      "reviewPacketSha256": "65e4f7d14ba5596bbee29e71344ae0cc5c25fc2347963e50721d56cfb64755c8",
+      "rationale": "Model-proposed internal grouping limited to this NCT record, the selected registry intervention(s), indication and reported sponsor. Contextual names do not establish chemical equivalence. Combination/context + ADT required. Two Placebo + ADT records reflect distinct phases; preserve both. Brexpiprazole/PYXIS contextual only. 826 registry enrollment includes lead-in; paper's 175/178 groups concern final-protocol efficacy set. Week 14 registry endpoint and six randomized weeks are consistent with week-8 lead-in.",
+      "evidence": [
+        {
+          "sourceSnapshotId": "snapshot-ctg-nct01360645-20261013",
+          "locators": [
+            "/studies/0/protocolSection/identificationModule/nctId",
+            "/studies/0/protocolSection/identificationModule/briefTitle",
+            "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+            "/studies/0/protocolSection/conditionsModule/conditions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
+          ]
+        }
+      ],
+      "reviewerReference": "Project owner — site inclusion authorized in the Synapse Atlas task; supplied packet unattributed",
+      "reviewRationale": "Approved for site inclusion by the project owner following the supplied 13 October 2026 scoped packet. The packet is not a named, credentialed or human scientific review. Its author could not independently validate raw JSON hashes or all publication Methods. This remains MODEL_INFERENCE; approval is not independent audit certification. Combination/context + ADT required. Two Placebo + ADT records reflect distinct phases; preserve both. Brexpiprazole/PYXIS contextual only. 826 registry enrollment includes lead-in; paper's 175/178 groups concern final-protocol efficacy set. Week 14 registry endpoint and six randomized weeks are consistent with week-8 lead-in.",
+      "reviewedAt": "2026-10-13T21:03:22+00:00"
+    },
+    {
+      "id": "mapping-nct01422213",
+      "programmeId": "study-nct01422213",
+      "aliases": [
+        "Vortioxetine (Lu AA21004) for major depressive disorder — cognitive-function study",
+        "Vortioxetine cognitive-function trial",
+        "NCT01422213"
+      ],
+      "reportedSponsorOrganisationId": "reported-sponsor-nct01422213",
+      "compoundId": "intervention-nct01422213",
+      "nctIds": [
+        "NCT01422213"
+      ],
+      "evidenceClass": "MODEL_INFERENCE",
+      "reviewStatus": "APPROVED",
+      "resolutionState": "RESOLVED",
+      "approvalBasis": "OWNER_ACCEPTED_UNATTRIBUTED_PACKET",
+      "reviewPacketSha256": "65e4f7d14ba5596bbee29e71344ae0cc5c25fc2347963e50721d56cfb64755c8",
+      "rationale": "Model-proposed internal grouping limited to this NCT record, the selected registry intervention(s), indication and reported sponsor. Contextual names do not establish chemical equivalence. Two separate vortioxetine dose intervention records must survive grouping; cognitive endpoint retained. Registry 598 actual vs publication abstract 602 randomized unresolved. No completion date can be invented; registry only has primary completion 2013-05 actual. Do not infer chemical equivalence from aliases alone.",
+      "evidence": [
+        {
+          "sourceSnapshotId": "snapshot-ctg-nct01422213-20261013",
+          "locators": [
+            "/studies/0/protocolSection/identificationModule/nctId",
+            "/studies/0/protocolSection/identificationModule/briefTitle",
+            "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+            "/studies/0/protocolSection/conditionsModule/conditions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions/1/name",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions/2/name"
+          ]
+        }
+      ],
+      "reviewerReference": "Project owner — site inclusion authorized in the Synapse Atlas task; supplied packet unattributed",
+      "reviewRationale": "Approved for site inclusion by the project owner following the supplied 13 October 2026 scoped packet. The packet is not a named, credentialed or human scientific review. Its author could not independently validate raw JSON hashes or all publication Methods. This remains MODEL_INFERENCE; approval is not independent audit certification. Two separate vortioxetine dose intervention records must survive grouping; cognitive endpoint retained. Registry 598 actual vs publication abstract 602 randomized unresolved. No completion date can be invented; registry only has primary completion 2013-05 actual. Do not infer chemical equivalence from aliases alone.",
+      "reviewedAt": "2026-10-13T21:03:22+00:00"
+    },
+    {
+      "id": "mapping-nct02942004",
+      "programmeId": "study-nct02942004",
+      "aliases": [
+        "SAGE-547 for severe postpartum depression — two infusion arms",
+        "Brexanolone severe postpartum-depression trial",
+        "NCT02942004"
+      ],
+      "reportedSponsorOrganisationId": "reported-sponsor-nct02942004",
+      "compoundId": "intervention-nct02942004",
+      "nctIds": [
+        "NCT02942004"
+      ],
+      "evidenceClass": "MODEL_INFERENCE",
+      "reviewStatus": "APPROVED",
+      "resolutionState": "RESOLVED",
+      "approvalBasis": "OWNER_ACCEPTED_UNATTRIBUTED_PACKET",
+      "reviewPacketSha256": "65e4f7d14ba5596bbee29e71344ae0cc5c25fc2347963e50721d56cfb64755c8",
+      "rationale": "Model-proposed internal grouping limited to this NCT record, the selected registry intervention(s), indication and reported sponsor. Contextual names do not establish chemical equivalence. Preserve distinct infusion rates and schedules, separate placebo. This maps NCT02942004 only; exclude NCT02942017, the other trial in the paper. Severe PPD setting should remain visible. Registry sponsor Supernus differs from historical protocol/publication Sage; sponsor-at-capture and study-time funding are distinct fields. Retained enrollment 138 actual.",
+      "evidence": [
+        {
+          "sourceSnapshotId": "snapshot-ctg-nct02942004-20261013",
+          "locators": [
+            "/studies/0/protocolSection/identificationModule/nctId",
+            "/studies/0/protocolSection/identificationModule/briefTitle",
+            "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+            "/studies/0/protocolSection/conditionsModule/conditions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions/1/name",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions/2/name"
+          ]
+        }
+      ],
+      "reviewerReference": "Project owner — site inclusion authorized in the Synapse Atlas task; supplied packet unattributed",
+      "reviewRationale": "Approved for site inclusion by the project owner following the supplied 13 October 2026 scoped packet. The packet is not a named, credentialed or human scientific review. Its author could not independently validate raw JSON hashes or all publication Methods. This remains MODEL_INFERENCE; approval is not independent audit certification. Preserve distinct infusion rates and schedules, separate placebo. This maps NCT02942004 only; exclude NCT02942017, the other trial in the paper. Severe PPD setting should remain visible. Registry sponsor Supernus differs from historical protocol/publication Sage; sponsor-at-capture and study-time funding are distinct fields. Retained enrollment 138 actual.",
+      "reviewedAt": "2026-10-13T21:03:22+00:00"
+    },
+    {
+      "id": "mapping-nct03249376",
+      "programmeId": "study-nct03249376",
+      "aliases": [
+        "Lumateperone for bipolar I/II depression",
+        "Lumateperone bipolar-depression trial",
+        "NCT03249376"
+      ],
+      "reportedSponsorOrganisationId": "reported-sponsor-nct03249376",
+      "compoundId": "intervention-nct03249376",
+      "nctIds": [
+        "NCT03249376"
+      ],
+      "evidenceClass": "MODEL_INFERENCE",
+      "reviewStatus": "APPROVED",
+      "resolutionState": "RESOLVED",
+      "approvalBasis": "OWNER_ACCEPTED_UNATTRIBUTED_PACKET",
+      "reviewPacketSha256": "65e4f7d14ba5596bbee29e71344ae0cc5c25fc2347963e50721d56cfb64755c8",
+      "rationale": "Model-proposed internal grouping limited to this NCT record, the selected registry intervention(s), indication and reported sponsor. Contextual names do not establish chemical equivalence. Correct bipolar depression study grouping: major depressive episodes in bipolar I/II, not unipolar MDD. Registry also uses ITI-007 wording; do not promote to separately proven chemical/formulation equivalence. Retained 381 actual enrollment; placebo separate.",
+      "evidence": [
+        {
+          "sourceSnapshotId": "snapshot-ctg-nct03249376-20261013",
+          "locators": [
+            "/studies/0/protocolSection/identificationModule/nctId",
+            "/studies/0/protocolSection/identificationModule/briefTitle",
+            "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+            "/studies/0/protocolSection/conditionsModule/conditions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
+          ]
+        }
+      ],
+      "reviewerReference": "Project owner — site inclusion authorized in the Synapse Atlas task; supplied packet unattributed",
+      "reviewRationale": "Approved for site inclusion by the project owner following the supplied 13 October 2026 scoped packet. The packet is not a named, credentialed or human scientific review. Its author could not independently validate raw JSON hashes or all publication Methods. This remains MODEL_INFERENCE; approval is not independent audit certification. Correct bipolar depression study grouping: major depressive episodes in bipolar I/II, not unipolar MDD. Registry also uses ITI-007 wording; do not promote to separately proven chemical/formulation equivalence. Retained 381 actual enrollment; placebo separate.",
+      "reviewedAt": "2026-10-13T21:03:22+00:00"
+    },
+    {
+      "id": "mapping-nct04659161",
+      "programmeId": "study-nct04659161",
+      "aliases": [
+        "Xanomeline and trospium chloride capsules for schizophrenia",
+        "EMERGENT-2 — xanomeline/trospium",
+        "NCT04659161"
+      ],
+      "reportedSponsorOrganisationId": "reported-sponsor-nct04659161",
+      "compoundId": "intervention-nct04659161",
+      "nctIds": [
+        "NCT04659161"
+      ],
+      "evidenceClass": "MODEL_INFERENCE",
+      "reviewStatus": "APPROVED",
+      "resolutionState": "RESOLVED",
+      "approvalBasis": "OWNER_ACCEPTED_UNATTRIBUTED_PACKET",
+      "reviewPacketSha256": "65e4f7d14ba5596bbee29e71344ae0cc5c25fc2347963e50721d56cfb64755c8",
+      "rationale": "Model-proposed internal grouping limited to this NCT record, the selected registry intervention(s), indication and reported sponsor. Contextual names do not establish chemical equivalence. Two agents in the registered combination, not xanomeline monotherapy or a single molecule. KarXT/EMERGENT-2 retained as context. Preserve source-condition records including duplicate schizophrenia and psychosis; 252 enrolled/randomized. Sponsor wording is a source-reported string, not independent legal-identity proof.",
+      "evidence": [
+        {
+          "sourceSnapshotId": "snapshot-ctg-nct04659161-20261013",
+          "locators": [
+            "/studies/0/protocolSection/identificationModule/nctId",
+            "/studies/0/protocolSection/identificationModule/briefTitle",
+            "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+            "/studies/0/protocolSection/conditionsModule/conditions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
+          ]
+        }
+      ],
+      "reviewerReference": "Project owner — site inclusion authorized in the Synapse Atlas task; supplied packet unattributed",
+      "reviewRationale": "Approved for site inclusion by the project owner following the supplied 13 October 2026 scoped packet. The packet is not a named, credentialed or human scientific review. Its author could not independently validate raw JSON hashes or all publication Methods. This remains MODEL_INFERENCE; approval is not independent audit certification. Two agents in the registered combination, not xanomeline monotherapy or a single molecule. KarXT/EMERGENT-2 retained as context. Preserve source-condition records including duplicate schizophrenia and psychosis; 252 enrolled/randomized. Sponsor wording is a source-reported string, not independent legal-identity proof.",
+      "reviewedAt": "2026-10-13T21:03:22+00:00"
+    },
+    {
+      "id": "mapping-nct02969382",
+      "programmeId": "study-nct02969382",
+      "aliases": [
+        "SEP-363856 for schizophrenia — selected Phase 2 trial",
+        "SEP-363856 schizophrenia trial",
+        "NCT02969382"
+      ],
+      "reportedSponsorOrganisationId": "reported-sponsor-nct01360645",
+      "compoundId": "intervention-nct02969382",
+      "nctIds": [
+        "NCT02969382"
+      ],
+      "evidenceClass": "MODEL_INFERENCE",
+      "reviewStatus": "APPROVED",
+      "resolutionState": "RESOLVED",
+      "approvalBasis": "OWNER_ACCEPTED_UNATTRIBUTED_PACKET",
+      "reviewPacketSha256": "65e4f7d14ba5596bbee29e71344ae0cc5c25fc2347963e50721d56cfb64755c8",
+      "rationale": "Model-proposed internal grouping limited to this NCT record, the selected registry intervention(s), indication and reported sponsor. Contextual names do not establish chemical equivalence. Trial-specific code and indication match retained evidence; placebo capsule comparator separate. Registry 245 actual, publication allocation 120 + 125. Paper's Sunovion funding and captured Otsuka sponsor are not interchangeable; no later studies/outcomes or unverified compound names imported.",
+      "evidence": [
+        {
+          "sourceSnapshotId": "snapshot-ctg-nct02969382-20261013",
+          "locators": [
+            "/studies/0/protocolSection/identificationModule/nctId",
+            "/studies/0/protocolSection/identificationModule/briefTitle",
+            "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+            "/studies/0/protocolSection/conditionsModule/conditions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
+          ]
+        }
+      ],
+      "reviewerReference": "Project owner — site inclusion authorized in the Synapse Atlas task; supplied packet unattributed",
+      "reviewRationale": "Approved for site inclusion by the project owner following the supplied 13 October 2026 scoped packet. The packet is not a named, credentialed or human scientific review. Its author could not independently validate raw JSON hashes or all publication Methods. This remains MODEL_INFERENCE; approval is not independent audit certification. Trial-specific code and indication match retained evidence; placebo capsule comparator separate. Registry 245 actual, publication allocation 120 + 125. Paper's Sunovion funding and captured Otsuka sponsor are not interchangeable; no later studies/outcomes or unverified compound names imported.",
+      "reviewedAt": "2026-10-13T21:03:22+00:00"
+    },
+    {
+      "id": "mapping-nct00532493",
+      "programmeId": "study-nct00532493",
+      "aliases": [
+        "Prazosin for PTSD with sleep disturbance in military veterans",
+        "PACT — prazosin in military veterans",
+        "NCT00532493"
+      ],
+      "reportedSponsorOrganisationId": "reported-sponsor-nct00532493",
+      "compoundId": "intervention-nct00532493",
+      "nctIds": [
+        "NCT00532493"
+      ],
+      "evidenceClass": "MODEL_INFERENCE",
+      "reviewStatus": "APPROVED",
+      "resolutionState": "RESOLVED",
+      "approvalBasis": "OWNER_ACCEPTED_UNATTRIBUTED_PACKET",
+      "reviewPacketSha256": "65e4f7d14ba5596bbee29e71344ae0cc5c25fc2347963e50721d56cfb64755c8",
+      "rationale": "Model-proposed internal grouping limited to this NCT record, the selected registry intervention(s), indication and reported sponsor. Contextual names do not establish chemical equivalence. Correct patient-specific PTSD/sleep condition, not a healthy-volunteer programme. healthyVolunteers=true in retained registry is inconsistent with PTSD-specific inclusion and publication cohort; retain as unresolved source-data inconsistency and escalate only if cohort classification is ingested. 304 actual/randomized; placebo separate.",
+      "evidence": [
+        {
+          "sourceSnapshotId": "snapshot-ctg-nct00532493-20261013",
+          "locators": [
+            "/studies/0/protocolSection/identificationModule/nctId",
+            "/studies/0/protocolSection/identificationModule/briefTitle",
+            "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+            "/studies/0/protocolSection/conditionsModule/conditions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
+          ]
+        }
+      ],
+      "reviewerReference": "Project owner — site inclusion authorized in the Synapse Atlas task; supplied packet unattributed",
+      "reviewRationale": "Approved for site inclusion by the project owner following the supplied 13 October 2026 scoped packet. The packet is not a named, credentialed or human scientific review. Its author could not independently validate raw JSON hashes or all publication Methods. This remains MODEL_INFERENCE; approval is not independent audit certification. Correct patient-specific PTSD/sleep condition, not a healthy-volunteer programme. healthyVolunteers=true in retained registry is inconsistent with PTSD-specific inclusion and publication cohort; retain as unresolved source-data inconsistency and escalate only if cohort classification is ingested. 304 actual/randomized; placebo separate.",
+      "reviewedAt": "2026-10-13T21:03:22+00:00"
+    },
+    {
+      "id": "mapping-nct02750306",
+      "programmeId": "study-nct02750306",
+      "aliases": [
+        "Suvorexant for insomnia in an Alzheimer disease population",
+        "Suvorexant insomnia/Alzheimer's trial",
+        "NCT02750306"
+      ],
+      "reportedSponsorOrganisationId": "reported-sponsor-nct02750306",
+      "compoundId": "intervention-nct02750306",
+      "nctIds": [
+        "NCT02750306"
+      ],
+      "evidenceClass": "MODEL_INFERENCE",
+      "reviewStatus": "APPROVED",
+      "resolutionState": "RESOLVED",
+      "approvalBasis": "OWNER_ACCEPTED_UNATTRIBUTED_PACKET",
+      "reviewPacketSha256": "65e4f7d14ba5596bbee29e71344ae0cc5c25fc2347963e50721d56cfb64755c8",
+      "rationale": "Model-proposed internal grouping limited to this NCT record, the selected registry intervention(s), indication and reported sponsor. Contextual names do not establish chemical equivalence. Correct symptom-treatment setting; not Alzheimer disease modification. Keep both registry conditions and all three primary outcomes: total sleep time, adverse events, discontinuations due to adverse events. 285 actual/randomized; placebo separate.",
+      "evidence": [
+        {
+          "sourceSnapshotId": "snapshot-ctg-nct02750306-20261013",
+          "locators": [
+            "/studies/0/protocolSection/identificationModule/nctId",
+            "/studies/0/protocolSection/identificationModule/briefTitle",
+            "/studies/0/protocolSection/sponsorCollaboratorsModule/leadSponsor/name",
+            "/studies/0/protocolSection/conditionsModule/conditions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions",
+            "/studies/0/protocolSection/armsInterventionsModule/interventions/0/name"
+          ]
+        }
+      ],
+      "reviewerReference": "Project owner — site inclusion authorized in the Synapse Atlas task; supplied packet unattributed",
+      "reviewRationale": "Approved for site inclusion by the project owner following the supplied 13 October 2026 scoped packet. The packet is not a named, credentialed or human scientific review. Its author could not independently validate raw JSON hashes or all publication Methods. This remains MODEL_INFERENCE; approval is not independent audit certification. Correct symptom-treatment setting; not Alzheimer disease modification. Keep both registry conditions and all three primary outcomes: total sleep time, adverse events, discontinuations due to adverse events. 285 actual/randomized; placebo separate.",
+      "reviewedAt": "2026-10-13T21:03:22+00:00"
+    }
+  ]
+}

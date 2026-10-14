@@ -1,0 +1,211 @@
+{
+  "version": 1,
+  "publicationSource": {
+    "requestUrl": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID%3A%2836811520+OR+38649428+OR+26301701+OR+24787143+OR+30177236+OR+34551584+OR+38104575+OR+32294346+OR+29414272+OR+31944580%29+AND+SRC%3AMED&format=json&resultType=lite&pageSize=10",
+    "retrievedAt": "2026-10-13T19:07:45.606926+00:00",
+    "processedAt": "2026-10-13T19:07:45.607439+00:00",
+    "contentSha256": "ae784ba93a5e6fa4a60df5962c5f2a0504c1d80de06ae33118ac7893e153066b"
+  },
+  "studies": [
+    {
+      "nctId": "NCT03672175",
+      "label": "MOUNTAIN \u2014 zuranolone in MDD",
+      "indication": "Major depressive disorder",
+      "intervention": "Zuranolone (registry: SAGE-217), 20 or 30 mg daily for 14 days",
+      "comparator": "Matched placebo for 14 days",
+      "pmid": "36811520",
+      "publicationUrl": "https://pubmed.ncbi.nlm.nih.gov/36811520/",
+      "caution": "Registry enrollment is 581 actual; the paper reports 581 randomized. The captured registry names Biogen as lead sponsor; publication affiliations include Sage. These source-specific labels do not establish ownership or development rights.",
+      "researchCheckedDate": "2026-10-13",
+      "reviewStatus": "PENDING",
+      "selectionEvidenceClass": "MODEL_INFERENCE",
+      "registry": {
+        "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT03672175&pageSize=1&countTotal=true&format=json&fields=IdentificationModule%2CStatusModule%2CSponsorCollaboratorsModule%2CDescriptionModule%2CConditionsModule%2CDesignModule%2CArmsInterventionsModule%2COutcomesModule%2CEligibilityModule%2CReferencesModule%2CHasResults",
+        "retrievedAt": "2026-10-13T19:07:39.147828+00:00",
+        "processedAt": "2026-10-13T19:07:39.148524+00:00",
+        "contentSha256": "33641b785ee157dbada527475ca9ffa3a7c4010fe47bda21150268a0c47086e5"
+      },
+      "publicationLinkEvidence": "https://clinicaltrials.gov/study/NCT03672175"
+    },
+    {
+      "nctId": "NCT03559192",
+      "label": "Aticaprant adjunctive MDD trial",
+      "indication": "MDD with inadequate response to SSRI/SNRI",
+      "intervention": "Aticaprant (registry: JNJ-67953964) 10 mg daily added to ongoing antidepressant",
+      "comparator": "Matched placebo added to ongoing antidepressant, after placebo lead-in",
+      "pmid": "38649428",
+      "publicationUrl": "https://pubmed.ncbi.nlm.nih.gov/38649428/",
+      "caution": "Registry enrollment is 181 actual. The paper's abstract says 184 enrolled, while its Study results section says 181 entered lead-in and 169 were randomized/treated; 166 formed the full efficacy set and 121 the enriched primary set. The publication discrepancy remains unresolved. The original paper confirms the NCT identifier in its Study design section; no reference is listed in this registry snapshot.",
+      "researchCheckedDate": "2026-10-13",
+      "reviewStatus": "PENDING",
+      "selectionEvidenceClass": "MODEL_INFERENCE",
+      "registry": {
+        "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT03559192&pageSize=1&countTotal=true&format=json&fields=IdentificationModule%2CStatusModule%2CSponsorCollaboratorsModule%2CDescriptionModule%2CConditionsModule%2CDesignModule%2CArmsInterventionsModule%2COutcomesModule%2CEligibilityModule%2CReferencesModule%2CHasResults",
+        "retrievedAt": "2026-10-13T19:07:39.817754+00:00",
+        "processedAt": "2026-10-13T19:07:39.818266+00:00",
+        "contentSha256": "0a6e8e9f4b3b494ad4dcb7b356a27821c5efe44add6499c49efe67f979208e21"
+      },
+      "publicationLinkEvidence": "https://www.nature.com/articles/s41386-024-01862-x"
+    },
+    {
+      "nctId": "NCT01360645",
+      "label": "PYXIS \u2014 adjunctive brexpiprazole",
+      "indication": "MDD with inadequate antidepressant response",
+      "intervention": "Brexpiprazole (registry: OPC-34712) 2 mg plus antidepressant therapy",
+      "comparator": "Placebo plus antidepressant therapy",
+      "pmid": "26301701",
+      "publicationUrl": "https://pubmed.ncbi.nlm.nih.gov/26301701/",
+      "caution": "Registry enrollment is 826 actual, including the lead-in population. The paper reports efficacy groups of 175 and 178 under final-protocol criteria. Registry endpoints occur at week 14 after the week-8 lead-in baseline; the paper describes six randomized treatment weeks. Repeated Placebo + ADT intervention rows refer to distinct study phases.",
+      "researchCheckedDate": "2026-10-13",
+      "reviewStatus": "PENDING",
+      "selectionEvidenceClass": "MODEL_INFERENCE",
+      "registry": {
+        "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT01360645&pageSize=1&countTotal=true&format=json&fields=IdentificationModule%2CStatusModule%2CSponsorCollaboratorsModule%2CDescriptionModule%2CConditionsModule%2CDesignModule%2CArmsInterventionsModule%2COutcomesModule%2CEligibilityModule%2CReferencesModule%2CHasResults",
+        "retrievedAt": "2026-10-13T19:07:40.429124+00:00",
+        "processedAt": "2026-10-13T19:07:40.430953+00:00",
+        "contentSha256": "31696c079e40196da6e4f31a7cebe9b6a48255be7c27a8c05757ed61c4ac6b88"
+      },
+      "publicationLinkEvidence": "https://clinicaltrials.gov/study/NCT01360645"
+    },
+    {
+      "nctId": "NCT01422213",
+      "label": "Vortioxetine cognitive-function trial",
+      "indication": "Recurrent MDD with cognitive dysfunction",
+      "intervention": "Vortioxetine 10 or 20 mg daily for eight weeks",
+      "comparator": "Placebo",
+      "pmid": "24787143",
+      "publicationUrl": "https://pubmed.ncbi.nlm.nih.gov/24787143/",
+      "caution": "Registry enrollment is 598 actual; the publication abstract reports 602 randomized. The reason for this difference is unverified. Registry completion date is absent; primary completion is 2013-05 actual. Start is 2011-12 with type unreported. Repeated vortioxetine intervention rows belong to separate dose arms.",
+      "researchCheckedDate": "2026-10-13",
+      "reviewStatus": "PENDING",
+      "selectionEvidenceClass": "MODEL_INFERENCE",
+      "registry": {
+        "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT01422213&pageSize=1&countTotal=true&format=json&fields=IdentificationModule%2CStatusModule%2CSponsorCollaboratorsModule%2CDescriptionModule%2CConditionsModule%2CDesignModule%2CArmsInterventionsModule%2COutcomesModule%2CEligibilityModule%2CReferencesModule%2CHasResults",
+        "retrievedAt": "2026-10-13T19:07:41.007770+00:00",
+        "processedAt": "2026-10-13T19:07:41.008435+00:00",
+        "contentSha256": "c02ce4a94d5eb8cf0f9d8687001bfa02bc9f87c49cc99510e62a5c8610b7dd2b"
+      },
+      "publicationLinkEvidence": "https://clinicaltrials.gov/study/NCT01422213"
+    },
+    {
+      "nctId": "NCT02942004",
+      "label": "Brexanolone severe postpartum-depression trial",
+      "indication": "Severe postpartum depression",
+      "intervention": "Brexanolone (registry: SAGE-547), 60-hour infusion targeting 60 or 90 micrograms/kg/hour",
+      "comparator": "Matched placebo infusion",
+      "pmid": "30177236",
+      "publicationUrl": "https://pubmed.ncbi.nlm.nih.gov/30177236/",
+      "caution": "Registry enrollment is 138 actual. The publication also reports a second trial, NCT02942017, which is not included here. The captured registry names Supernus Pharmaceuticals, Inc.; the older publication names Sage in funding and affiliations. These source-specific labels do not establish corporate ownership.",
+      "researchCheckedDate": "2026-10-13",
+      "reviewStatus": "PENDING",
+      "selectionEvidenceClass": "MODEL_INFERENCE",
+      "registry": {
+        "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT02942004&pageSize=1&countTotal=true&format=json&fields=IdentificationModule%2CStatusModule%2CSponsorCollaboratorsModule%2CDescriptionModule%2CConditionsModule%2CDesignModule%2CArmsInterventionsModule%2COutcomesModule%2CEligibilityModule%2CReferencesModule%2CHasResults",
+        "retrievedAt": "2026-10-13T19:07:41.577663+00:00",
+        "processedAt": "2026-10-13T19:07:41.578659+00:00",
+        "contentSha256": "f128938760f8fa78e171f89275a155ff7ddf397b9f3c7d07d8edc7752f6b622f"
+      },
+      "publicationLinkEvidence": "https://clinicaltrials.gov/study/NCT02942004"
+    },
+    {
+      "nctId": "NCT03249376",
+      "label": "Lumateperone bipolar-depression trial",
+      "indication": "Major depressive episode in bipolar I or II disorder",
+      "intervention": "Lumateperone 42 mg daily for six weeks",
+      "comparator": "Placebo",
+      "pmid": "34551584",
+      "publicationUrl": "https://pubmed.ncbi.nlm.nih.gov/34551584/",
+      "caution": "The registry reports 381 ACTUAL enrollment. Bipolar I/II populations are not interchangeable with the existing unipolar MDD programme mappings.",
+      "researchCheckedDate": "2026-10-13",
+      "reviewStatus": "PENDING",
+      "selectionEvidenceClass": "MODEL_INFERENCE",
+      "registry": {
+        "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT03249376&pageSize=1&countTotal=true&format=json&fields=IdentificationModule%2CStatusModule%2CSponsorCollaboratorsModule%2CDescriptionModule%2CConditionsModule%2CDesignModule%2CArmsInterventionsModule%2COutcomesModule%2CEligibilityModule%2CReferencesModule%2CHasResults",
+        "retrievedAt": "2026-10-13T19:07:42.129817+00:00",
+        "processedAt": "2026-10-13T19:07:42.130291+00:00",
+        "contentSha256": "4515130085f6e9820f18115cdc3035a6be6e18a2b8a574be37292410b81502ab"
+      },
+      "publicationLinkEvidence": "https://clinicaltrials.gov/study/NCT03249376"
+    },
+    {
+      "nctId": "NCT04659161",
+      "label": "EMERGENT-2 \u2014 xanomeline/trospium",
+      "indication": "Acute schizophrenia",
+      "intervention": "Xanomeline/trospium (KarXT), flexible twice-daily dosing",
+      "comparator": "Placebo capsules",
+      "pmid": "38104575",
+      "publicationUrl": "https://pubmed.ncbi.nlm.nih.gov/38104575/",
+      "caution": "Registry enrollment and publication randomization are both 252. Paper enrollment dates and registry completion dates refer to different events. The displayed sponsor is the captured registry's exact label; it does not establish independent corporate identity.",
+      "researchCheckedDate": "2026-10-13",
+      "reviewStatus": "PENDING",
+      "selectionEvidenceClass": "MODEL_INFERENCE",
+      "registry": {
+        "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT04659161&pageSize=1&countTotal=true&format=json&fields=IdentificationModule%2CStatusModule%2CSponsorCollaboratorsModule%2CDescriptionModule%2CConditionsModule%2CDesignModule%2CArmsInterventionsModule%2COutcomesModule%2CEligibilityModule%2CReferencesModule%2CHasResults",
+        "retrievedAt": "2026-10-13T19:07:42.791679+00:00",
+        "processedAt": "2026-10-13T19:07:42.793469+00:00",
+        "contentSha256": "e0e1e8289523a2f5596342d476f846289e0ed982fc934ef2695fd0ec84d4291b"
+      },
+      "publicationLinkEvidence": "https://clinicaltrials.gov/study/NCT04659161"
+    },
+    {
+      "nctId": "NCT02969382",
+      "label": "SEP-363856 schizophrenia trial",
+      "indication": "Acute schizophrenia",
+      "intervention": "SEP-363856, 50 or 75 mg daily for four weeks",
+      "comparator": "Placebo capsule",
+      "pmid": "32294346",
+      "publicationUrl": "https://pubmed.ncbi.nlm.nih.gov/32294346/",
+      "caution": "Registry enrollment is 245 actual; publication groups contain 120 and 125 participants. The paper names Sunovion as funder whereas the captured registry names Otsuka Pharmaceutical Development & Commercialization, Inc. This Phase 2 example does not establish outcomes of later trials.",
+      "researchCheckedDate": "2026-10-13",
+      "reviewStatus": "PENDING",
+      "selectionEvidenceClass": "MODEL_INFERENCE",
+      "registry": {
+        "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT02969382&pageSize=1&countTotal=true&format=json&fields=IdentificationModule%2CStatusModule%2CSponsorCollaboratorsModule%2CDescriptionModule%2CConditionsModule%2CDesignModule%2CArmsInterventionsModule%2COutcomesModule%2CEligibilityModule%2CReferencesModule%2CHasResults",
+        "retrievedAt": "2026-10-13T19:07:43.380053+00:00",
+        "processedAt": "2026-10-13T19:07:43.381002+00:00",
+        "contentSha256": "1453d16cc5da013f57b3a074428491d11ac7f440e4a1da4b24991b469732fddd"
+      },
+      "publicationLinkEvidence": "https://clinicaltrials.gov/study/NCT02969382"
+    },
+    {
+      "nctId": "NCT00532493",
+      "label": "PACT \u2014 prazosin in military veterans",
+      "indication": "PTSD with nightmares and sleep disturbance",
+      "intervention": "Prazosin with dose titration",
+      "comparator": "Placebo",
+      "pmid": "29414272",
+      "publicationUrl": "https://pubmed.ncbi.nlm.nih.gov/29414272/",
+      "caution": "Registry enrollment is 304 actual and the paper reports 304 randomized. The retained registry flag healthyVolunteers=true conflicts with patient-specific PTSD inclusion criteria and the publication population. It is a source discrepancy, not evidence that the enrolled cohort consisted of healthy volunteers.",
+      "researchCheckedDate": "2026-10-13",
+      "reviewStatus": "PENDING",
+      "selectionEvidenceClass": "MODEL_INFERENCE",
+      "registry": {
+        "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT00532493&pageSize=1&countTotal=true&format=json&fields=IdentificationModule%2CStatusModule%2CSponsorCollaboratorsModule%2CDescriptionModule%2CConditionsModule%2CDesignModule%2CArmsInterventionsModule%2COutcomesModule%2CEligibilityModule%2CReferencesModule%2CHasResults",
+        "retrievedAt": "2026-10-13T19:07:44.047148+00:00",
+        "processedAt": "2026-10-13T19:07:44.047714+00:00",
+        "contentSha256": "e65f745f87f8da72408d69e1121ebe022d3376be62deb138a5d698c2a4f79b33"
+      },
+      "publicationLinkEvidence": "https://clinicaltrials.gov/study/NCT00532493"
+    },
+    {
+      "nctId": "NCT02750306",
+      "label": "Suvorexant insomnia/Alzheimer's trial",
+      "indication": "Insomnia in probable Alzheimer's disease dementia",
+      "intervention": "Suvorexant 10 mg nightly, potentially increased to 20 mg",
+      "comparator": "Matched placebo",
+      "pmid": "31944580",
+      "publicationUrl": "https://pubmed.ncbi.nlm.nih.gov/31944580/",
+      "caution": "Registry enrollment is 285 actual and the paper reports 285 randomized. All three registry primary outcomes are retained: total sleep time, adverse events, and discontinuation due to adverse events. The publication abstract emphasizes the sleep efficacy endpoint. This is not a trial of disease modification in Alzheimer's disease.",
+      "researchCheckedDate": "2026-10-13",
+      "reviewStatus": "PENDING",
+      "selectionEvidenceClass": "MODEL_INFERENCE",
+      "registry": {
+        "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT02750306&pageSize=1&countTotal=true&format=json&fields=IdentificationModule%2CStatusModule%2CSponsorCollaboratorsModule%2CDescriptionModule%2CConditionsModule%2CDesignModule%2CArmsInterventionsModule%2COutcomesModule%2CEligibilityModule%2CReferencesModule%2CHasResults",
+        "retrievedAt": "2026-10-13T19:07:44.738049+00:00",
+        "processedAt": "2026-10-13T19:07:44.738978+00:00",
+        "contentSha256": "958f6c6b1efc5d5561c2f72f1660df035ef5fd0bf61513a9cbabd10c66915ddc"
+      },
+      "publicationLinkEvidence": "https://clinicaltrials.gov/study/NCT02750306"
+    }
+  ]
+}

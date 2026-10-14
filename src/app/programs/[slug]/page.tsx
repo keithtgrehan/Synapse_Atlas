@@ -11,12 +11,16 @@ import {
 import { programmeMappingDataset } from "../../../lib/programs/dataset";
 import {
   formatUtcDateTime,
+  mappingEvidenceLabel,
   MappingStateBadges,
   mappingStateSummary,
   noRecordedConflictDescription,
   ProgrammeFact,
   SnapshotProvenance,
 } from "../program-ui";
+
+import { loadStudyExamples } from "../../../lib/studies/examples";
+import { TrialFacts } from "../../trials/trial-facts";
 
 export const metadata: Metadata = {
   title: "Programme mapping candidate · Synapse Atlas",
@@ -49,13 +53,8 @@ export default async function ProgrammeDetailPage({
       ),
     ),
   );
-  const interventions = Array.from(
-    new Set(
-      sourceSnapshots.flatMap(
-        (snapshot) => snapshot.observedRegistryFacts.reportedInterventions,
-      ),
-    ),
-  );
+  const interventions = sourceSnapshots.flatMap((snapshot) => snapshot.observedRegistryFacts.reportedInterventions);
+  const study = mapping.evidenceClass === "MODEL_INFERENCE" ? (await loadStudyExamples()).find((entry) => mapping.nctIds.includes(entry.nctId)) : undefined;
 
   return (
     <main className="shell">
@@ -64,9 +63,10 @@ export default async function ProgrammeDetailPage({
         <p className="eyebrow">Version-controlled registry snapshot</p>
         <h1>{programme.canonicalLabel}</h1>
         <p className="lede">
-          {mappingStateSummary(mapping.reviewStatus, mapping.resolutionState)}
+          {mappingStateSummary(mapping.reviewStatus, mapping.resolutionState, mapping.evidenceClass)}
         </p>
         <MappingStateBadges
+          evidenceClass={mapping.evidenceClass}
           reviewStatus={mapping.reviewStatus}
           resolutionState={mapping.resolutionState}
           className="detail-status"
@@ -83,7 +83,7 @@ export default async function ProgrammeDetailPage({
           <ProgrammeFact label="Resolution state">
             {resolutionStateLabel(mapping.resolutionState)}
           </ProgrammeFact>
-          <ProgrammeFact label="Relationship evidence">Human inference</ProgrammeFact>
+          <ProgrammeFact label="Relationship evidence">{mappingEvidenceLabel(mapping.evidenceClass)}</ProgrammeFact>
           <ProgrammeFact label="Reported sponsor organisation">
             {sponsorOrganisation.canonicalLabel}
           </ProgrammeFact>
@@ -114,8 +114,8 @@ export default async function ProgrammeDetailPage({
           </ProgrammeFact>
           <ProgrammeFact label="Source-reported interventions">
             <ul className="plain-list">
-              {interventions.map((intervention) => (
-                <li key={intervention}>{intervention}</li>
+              {interventions.map((intervention, index) => (
+                <li key={`${index}-${intervention}`}>{intervention}</li>
               ))}
             </ul>
           </ProgrammeFact>
@@ -134,18 +134,34 @@ export default async function ProgrammeDetailPage({
         </dl>
       </section>
 
+      <p className="source-link-row"><Link href={`/compare?programme=${programme.slug}`}>Compare this programme with another</Link></p>
+      {study && <>
+        <section className="detail-section" aria-labelledby="selected-study-heading">
+          <h2 id="selected-study-heading">Selected study · retained 13 October 2026</h2>
+          <dl className="stacked-facts">
+            <ProgrammeFact label="Indication">{study.indication}</ProgrammeFact>
+            <ProgrammeFact label="Intervention">{study.intervention}</ProgrammeFact>
+            <ProgrammeFact label="Comparator">{study.comparator}</ProgrammeFact>
+          </dl>
+          <p><Link href={`/trials/examples/${study.nctId}`}>Inspect retained study, dose arms and source discrepancies</Link></p>
+          <p><a href={study.publicationUrl}>{study.publication.title}</a> · {study.publication.pubYear}</p>
+          <p>{study.caution}</p>
+        </section>
+        <TrialFacts trial={study.trial} retained />
+      </>}
+
       <section className="detail-section" aria-labelledby="review-packet-heading">
-        <p className="eyebrow">Human review record</p>
+        <p className="eyebrow">{mapping.evidenceClass === "MODEL_INFERENCE" ? "Site inclusion decision · unattributed packet" : "Human review record"}</p>
         <h2 id="review-packet-heading">Decision, aliases, and uncertainty</h2>
         <dl className="stacked-facts">
           <ProgrammeFact label="Mapping rationale">{mapping.rationale}</ProgrammeFact>
-          <ProgrammeFact label="Human review rationale">
+          <ProgrammeFact label={mapping.evidenceClass === "MODEL_INFERENCE" ? "Inclusion rationale" : "Human review rationale"}>
             {mapping.reviewRationale ?? "No human review rationale is recorded."}
           </ProgrammeFact>
           <ProgrammeFact label="Reviewer reference">
             {mapping.reviewerReference ?? "No reviewer reference is recorded."}
           </ProgrammeFact>
-          <ProgrammeFact label="Reviewed at">
+          <ProgrammeFact label={mapping.evidenceClass === "MODEL_INFERENCE" ? "Inclusion decision recorded" : "Reviewed at"}>
             {mapping.reviewedAt === undefined ? (
               "No review timestamp is recorded."
             ) : (
@@ -154,6 +170,7 @@ export default async function ProgrammeDetailPage({
               </time>
             )}
           </ProgrammeFact>
+          {mapping.reviewPacketSha256 && <ProgrammeFact label="Unattributed packet SHA-256"><code>{mapping.reviewPacketSha256}</code></ProgrammeFact>}
           <ProgrammeFact label="Namespace-scoped programme aliases">
             <p>
               These aliases apply only to this internal programme grouping;

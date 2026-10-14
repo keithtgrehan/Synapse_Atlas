@@ -161,6 +161,11 @@ export default async function TrialsPage({ searchParams }: TrialsPageProps) {
         </p>
       </header>
 
+      <p className="boundary-note">
+        <Link href="/trials/examples">Browse 10 non-psychedelic study examples</Link>
+        {" — retained snapshots retrieved 13 October 2026, with publications and source notes."}
+      </p>
+
       <form className="search-panel" action="/trials" method="get" role="search">
         <div className="search-field search-field-wide">
           <label htmlFor="trial-query">Condition, intervention, sponsor, or NCT ID</label>

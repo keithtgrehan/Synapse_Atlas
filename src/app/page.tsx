@@ -12,6 +12,8 @@ export default function Home() {
         </p>
         <div className="button-row">
           <Link className="button" href="/compare?programme=usona-psilocybin-mdd&programme=comp360-treatment-resistant-depression&programme=cyb003-major-depressive-disorder">Explore the depression study comparison</Link>
+          <Link className="button button-secondary" href="/compare?programme=study-nct03672175&programme=study-nct03559192&programme=study-nct01360645&programme=study-nct01422213">Explore the non-psychedelic depression comparison</Link>
+          <Link className="button button-secondary" href="/trials/examples">Explore 10 study examples</Link>
           <Link className="button button-secondary" href="/programs">Explore programmes</Link>
           <Link className="button button-secondary" href="/trials">Search registered trials</Link>
         </div>
@@ -20,7 +22,7 @@ export default function Home() {
         <p className="eyebrow">Trust boundary</p>
         <h2 id="principles-heading">Facts stay attached to evidence</h2>
         <ul>
-          <li>Three reviewed programme contexts, with selected ClinicalTrials.gov studies</li>
+          <li>13 programme contexts: three human-reviewed associations and ten model-proposed mappings approved for inclusion</li>
           <li>Unknown and missing fields remain visible</li>
           <li>Every trial links back to its registry record</li>
           <li>CSV, source manifest and a printable brief use the same saved evidence</li>

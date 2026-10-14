@@ -12,7 +12,7 @@ import {
   searchProgrammes,
   type ProgrammeMappingAssertion,
 } from "../../src/lib/domain/programs";
-import { programmeMappingDataset } from "../../src/lib/programs/dataset";
+const programmeMappingDataset = programmeMappingDatasetSchema.parse(rawDataset);
 
 function syntheticAssertion(
   overrides: Partial<ProgrammeMappingAssertion> & {

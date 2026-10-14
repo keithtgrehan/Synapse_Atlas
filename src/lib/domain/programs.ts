@@ -15,6 +15,11 @@ const nonBlankTextSchema = z.string().trim().min(1).max(5_000);
 const stableIdSchema = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
 export const programmeSlugSchema = stableIdSchema.max(100);
 
+const fullModuleSnapshotFields = "IdentificationModule,StatusModule,SponsorCollaboratorsModule,DescriptionModule,ConditionsModule,DesignModule,ArmsInterventionsModule,OutcomesModule,EligibilityModule,ReferencesModule,HasResults";
+
+export const mappingEvidenceClassSchema = z.enum(["HUMAN_INFERENCE", "MODEL_INFERENCE"]);
+export const mappingDatasetVersionSchema = z.enum(["1.1.0", "1.2.0"]);
+
 const programmeSnapshotFields = [
   "NCTId",
   "BriefTitle",
@@ -76,6 +81,7 @@ const observedRegistryFactsSchema = z
 export const programmeSourceSnapshotSchema = z
   .object({
     id: stableIdSchema,
+    captureFormat: z.literal("STUDY_EXAMPLE_V1").optional(),
     sourceId: z.literal("SRC-CTG"),
     policyVersion: z.literal("1"),
     provider: z.literal("ClinicalTrials.gov"),
@@ -88,11 +94,11 @@ export const programmeSourceSnapshotSchema = z
     responseSha256: sha256HexSchema,
     fixturePath: z
       .string()
-      .regex(/^data\/fixtures\/clinicaltrials\.gov\/NCT\d{8}\.json$/),
+      .regex(/^data\/(?:fixtures\/clinicaltrials\.gov|study-examples\/v1)\/NCT\d{8}\.json$/),
     metadataPath: z
       .string()
       .regex(
-        /^data\/fixtures\/clinicaltrials\.gov\/NCT\d{8}\.metadata\.json$/,
+        /^data\/(?:fixtures\/clinicaltrials\.gov|study-examples\/v1)\/NCT\d{8}\.metadata\.json$/,
       ),
     evidenceClass: z.literal("STRUCTURED_EXTRACTION"),
     attribution: nonBlankTextSchema,
@@ -133,7 +139,7 @@ export const programmeSourceSnapshotSchema = z
         ["pageSize", "1"],
         ["countTotal", "true"],
         ["format", "json"],
-        ["fields", programmeSnapshotFields.join(",")],
+        ["fields", snapshot.captureFormat === "STUDY_EXAMPLE_V1" ? fullModuleSnapshotFields : programmeSnapshotFields.join(",")],
       ]);
       const parameterEntries = Array.from(requestUrl.searchParams.entries());
 
@@ -168,10 +174,9 @@ export const programmeSourceSnapshotSchema = z
       });
     }
 
-    const expectedFixturePath =
-      `data/fixtures/clinicaltrials.gov/${snapshot.externalId}.json`;
-    const expectedMetadataPath =
-      `data/fixtures/clinicaltrials.gov/${snapshot.externalId}.metadata.json`;
+    const sourceDirectory = snapshot.captureFormat === "STUDY_EXAMPLE_V1" ? "data/study-examples/v1" : "data/fixtures/clinicaltrials.gov";
+    const expectedFixturePath = `${sourceDirectory}/${snapshot.externalId}.json`;
+    const expectedMetadataPath = `${sourceDirectory}/${snapshot.externalId}.metadata.json`;
 
     if (snapshot.fixturePath !== expectedFixturePath) {
       context.addIssue({
@@ -274,7 +279,9 @@ export const programmeMappingAssertionSchema = z
     reportedSponsorOrganisationId: stableIdSchema,
     compoundId: stableIdSchema,
     nctIds: z.array(nctIdSchema).min(1).max(10),
-    evidenceClass: z.literal("HUMAN_INFERENCE"),
+    evidenceClass: mappingEvidenceClassSchema,
+    approvalBasis: z.literal("OWNER_ACCEPTED_UNATTRIBUTED_PACKET").optional(),
+    reviewPacketSha256: sha256HexSchema.optional(),
     reviewStatus: claimReviewStatusSchema,
     resolutionState: mappingResolutionStateSchema,
     rationale: nonBlankTextSchema,
@@ -285,6 +292,12 @@ export const programmeMappingAssertionSchema = z
   })
   .strict()
   .superRefine((assertion, context) => {
+    if (assertion.evidenceClass === "MODEL_INFERENCE" && assertion.reviewStatus === "APPROVED" && (!assertion.approvalBasis || !assertion.reviewPacketSha256)) {
+      context.addIssue({ code: "custom", message: "Model association inclusion requires explicit owner acceptance and packet provenance" });
+    }
+    if (assertion.evidenceClass === "HUMAN_INFERENCE" && (assertion.approvalBasis || assertion.reviewPacketSha256)) {
+      context.addIssue({ code: "custom", message: "Unattributed packet cannot establish human inference" });
+    }
     const normalizedAliases = assertion.aliases.map(normalizeProgrammeAlias);
 
     if (new Set(normalizedAliases).size !== normalizedAliases.length) {
@@ -362,7 +375,7 @@ export const programmeMappingAssertionSchema = z
 
 export const programmeMappingDatasetSchema = z
   .object({
-    datasetVersion: z.literal("1.1.0"),
+    datasetVersion: mappingDatasetVersionSchema,
     updatedAt: offsetDateTimeSchema,
     sourceBoundary: z
       .object({
@@ -372,14 +385,14 @@ export const programmeMappingDatasetSchema = z
         statement: nonBlankTextSchema,
       })
       .strict(),
-    sourceSnapshots: z.array(programmeSourceSnapshotSchema).min(1).max(3),
-    sponsorOrganisations: z.array(sponsorOrganisationSchema).min(1).max(3),
-    compounds: z.array(compoundSchema).min(1).max(3),
-    programmes: z.array(programmeCandidateSchema).min(1).max(3),
+    sourceSnapshots: z.array(programmeSourceSnapshotSchema).min(1).max(13),
+    sponsorOrganisations: z.array(sponsorOrganisationSchema).min(1).max(13),
+    compounds: z.array(compoundSchema).min(1).max(13),
+    programmes: z.array(programmeCandidateSchema).min(1).max(13),
     mappingAssertions: z
       .array(programmeMappingAssertionSchema)
       .min(1)
-      .max(3),
+      .max(13),
   })
   .strict()
   .superRefine((dataset, context) => {
@@ -490,11 +503,11 @@ export const programmeMappingDatasetSchema = z
           continue;
         }
 
-        const interventionIndex = snapshot.observedRegistryFacts.reportedInterventions.indexOf(alias.value);
+        const interventionIndex = Number(alias.locator.split("/").at(-2));
         const expectedLocator =
           `${snapshot.fieldLocators.reportedInterventions}/${interventionIndex}/name`;
 
-        if (interventionIndex < 0 || alias.locator !== expectedLocator) {
+        if (!Number.isInteger(interventionIndex) || interventionIndex < 0 || snapshot.observedRegistryFacts.reportedInterventions[interventionIndex] !== alias.value || alias.locator !== expectedLocator) {
           context.addIssue({
             code: "custom",
             message: "Compound raw alias must match a registry intervention and exact locator",
@@ -655,7 +668,7 @@ export const programmeMappingDatasetSchema = z
           compoundAliasLocators.has(locator),
         );
 
-        if (selectedCompoundLocators.length !== 1) {
+        if (selectedCompoundLocators.length !== (assertion.evidenceClass === "MODEL_INFERENCE" ? compoundAliases.length : 1)) {
           context.addIssue({
             code: "custom",
             message:

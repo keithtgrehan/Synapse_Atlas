@@ -4,6 +4,7 @@ import manifestInput from "../../../data/comparison/2026-10-13/manifest.json";
 import { briefManifestSchema, validateBriefSnapshot } from "../domain/brief-snapshots";
 import { buildResearchBrief } from "../domain/research-brief";
 import type { ComparisonResult } from "../domain/comparisons";
+import { loadStudyExamples } from "../studies/examples";
 import { programmeMappingDataset } from "./dataset";
 
 export async function loadResearchBrief(comparison: ComparisonResult, repositoryRoot = process.cwd()) {
@@ -14,5 +15,6 @@ export async function loadResearchBrief(comparison: ComparisonResult, repository
     const bytes = await readFile(path.join(repositoryRoot, "data/comparison", manifest.version, `${snapshot.nctId}.json`));
     return validateBriefSnapshot(snapshot, bytes);
   }));
-  return buildResearchBrief(comparison, trials);
+  const examples = await loadStudyExamples(repositoryRoot);
+  return buildResearchBrief(comparison, [...trials, ...examples.map((example) => example.trial)], new Map(examples.map((example) => [example.nctId, { comparator: example.comparator, publicationUrl: example.publicationUrl }])));
 }

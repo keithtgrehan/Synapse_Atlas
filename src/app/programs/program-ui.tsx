@@ -9,6 +9,10 @@ import {
   type ProgrammeView,
 } from "../../lib/domain/programs";
 
+export function mappingEvidenceLabel(evidenceClass: ProgrammeMappingAssertion["evidenceClass"]): string {
+  return evidenceClass === "MODEL_INFERENCE" ? "Model inference · owner-approved inclusion; no independent human scientific review" : "Human inference";
+}
+
 type MappingReviewStatus = ProgrammeMappingAssertion["reviewStatus"];
 type MappingResolutionState = ProgrammeMappingAssertion["resolutionState"];
 
@@ -40,8 +44,8 @@ export function StatusKey() {
     <aside className="status-key" aria-labelledby="status-key-heading">
       <h2 id="status-key-heading">Mapping status key</h2>
       <ul>
-        <li><strong>Pending review</strong> — a proposed human mapping with no review decision.</li>
-        <li><strong>Approved</strong> — the review decision accepted the bounded mapping.</li>
+        <li><strong>Pending review</strong> — a proposed mapping with no review decision.</li>
+        <li><strong>Approved</strong> — the bounded association is accepted for inclusion; check its evidence class and decision scope. This is not scientific certification.</li>
         <li><strong>Rejected</strong> — the review decision did not accept the mapping.</li>
         <li><strong>Needs revision</strong> — the mapping must be amended before another decision.</li>
         <li><strong>Resolved</strong> — an approved mapping can resolve deterministically in its programme namespace.</li>
@@ -81,7 +85,9 @@ export function resolutionStateClassName(
 export function mappingStateSummary(
   reviewStatus: MappingReviewStatus,
   resolutionState: MappingResolutionState,
+  evidenceClass: ProgrammeMappingAssertion["evidenceClass"] = "HUMAN_INFERENCE",
 ): string {
+  if (evidenceClass === "MODEL_INFERENCE") return `This model-proposed association uses retained registry observations. ${reviewStatus === "APPROVED" ? "The project owner approved site inclusion based on an unattributed scoped packet." : "Site inclusion has not been approved."} It is not independent human scientific review. Resolution describes the internal grouping only, not scientific certainty. This is not live programme data.`;
   const reviewSummary = {
     PENDING: "It awaits a human review decision.",
     APPROVED: "It has an explicit human approval.",
@@ -114,7 +120,9 @@ export function MappingStateBadges({
   reviewStatus,
   resolutionState,
   className,
+  evidenceClass = "HUMAN_INFERENCE",
 }: {
+  evidenceClass?: ProgrammeMappingAssertion["evidenceClass"];
   reviewStatus: MappingReviewStatus;
   resolutionState: MappingResolutionState;
   className?: string;
@@ -123,19 +131,19 @@ export function MappingStateBadges({
 
   return (
     <div className={groupClassName} aria-label="Mapping states">
-      <ReviewStatusBadge status={reviewStatus} />
+      <ReviewStatusBadge status={reviewStatus} evidenceClass={evidenceClass} />
       <ResolutionStateBadge state={resolutionState} />
     </div>
   );
 }
 
-export function ReviewStatusBadge({ status }: { status: MappingReviewStatus }) {
+export function ReviewStatusBadge({ status, evidenceClass = "HUMAN_INFERENCE" }: { status: MappingReviewStatus; evidenceClass?: ProgrammeMappingAssertion["evidenceClass"] }) {
   return (
     <span
       className={`status-label ${reviewStatusClassName(status)}`}
       data-mapping-state={`review-${status.toLowerCase()}`}
     >
-      {reviewStatusLabel(status)}
+      {status === "APPROVED" && evidenceClass === "MODEL_INFERENCE" ? "Approved for inclusion" : reviewStatusLabel(status)}
     </span>
   );
 }
@@ -169,7 +177,7 @@ export function ProgrammeCard({ view }: { view: ProgrammeView }) {
       <div className="programme-card-heading">
         <div>
           <p className="nct-id">
-            {reviewStatusLabel(view.mapping.reviewStatus)} mapping
+            {view.mapping.evidenceClass === "MODEL_INFERENCE" ? "Model-proposed" : reviewStatusLabel(view.mapping.reviewStatus)} mapping
           </p>
           <h2>
             <Link href={`/programs/${view.programme.slug}`}>
@@ -178,6 +186,7 @@ export function ProgrammeCard({ view }: { view: ProgrammeView }) {
           </h2>
         </div>
         <MappingStateBadges
+          evidenceClass={view.mapping.evidenceClass}
           reviewStatus={view.mapping.reviewStatus}
           resolutionState={view.mapping.resolutionState}
         />
@@ -201,7 +210,7 @@ export function ProgrammeCard({ view }: { view: ProgrammeView }) {
         </div>
       </dl>
       <div className="card-footer">
-        <span>Version-controlled snapshot · Human inference</span>
+        <span>Version-controlled snapshot · {mappingEvidenceLabel(view.mapping.evidenceClass)}</span>
         <Link href={`/programs/${view.programme.slug}`}>Inspect mapping evidence</Link>
       </div>
     </li>

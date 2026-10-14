@@ -1,0 +1,13 @@
+{
+  "sourceId": "SRC-CTG",
+  "provider": "ClinicalTrials.gov",
+  "externalId": "NCT02969382",
+  "sourceUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT02969382&pageSize=1&countTotal=true&format=json&fields=IdentificationModule%2CStatusModule%2CSponsorCollaboratorsModule%2CDescriptionModule%2CConditionsModule%2CDesignModule%2CArmsInterventionsModule%2COutcomesModule%2CEligibilityModule%2CReferencesModule%2CHasResults",
+  "retrievedAt": "2026-10-13T19:07:43.380053+00:00",
+  "processedAt": "2026-10-13T19:07:43.381002+00:00",
+  "registryLastUpdatePostedDate": "2024-07-05",
+  "contentSha256": "1453d16cc5da013f57b3a074428491d11ac7f440e4a1da4b24991b469732fddd",
+  "transformation": "Exact original full-module API bytes retained; deterministic projection of selected fields for mapping validation only. Full trial values and dose rows remain in the response.",
+  "rightsStatus": "Public registry facts under approved SRC-CTG/v1 source policy and authorized site inclusion.",
+  "attribution": "ClinicalTrials.gov, U.S. National Library of Medicine"
+}

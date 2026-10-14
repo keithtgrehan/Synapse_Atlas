@@ -94,15 +94,14 @@ export default async function ComparePage({ searchParams }: ComparePageProps) {
         <section className="state-panel comparison-state" aria-labelledby="comparison-start-heading">
           <h2 id="comparison-start-heading">Choose programmes to compare</h2>
           <p>
-            The three available candidates are the complete approved and
-            resolved dataset for this slice.
+            All {catalog.candidates.length} available candidates are accepted for inclusion. Select two to four; each retains its evidence class and decision scope.
           </p>
         </section>
       ) : (
         <>
           {brief && <ResearchBriefView brief={brief} />}
-          <details className="mapping-audit"><summary>Original programme mapping evidence (August 2026)</summary>
-            <p>This historical evidence supports the reviewed associations. Its older registry observations are preserved for audit; the comparison above and exports use the separately dated snapshots.</p>
+          <details className="mapping-audit"><summary>Programme mapping evidence and inclusion decisions</summary>
+            <p>Each association retains its own evidence and decision scope. The original three use August mapping evidence; the ten additional model-proposed associations use retained October snapshots and owner-approved inclusion, not independent human scientific review.</p>
             <ComparisonView result={comparison} />
           </details>
         </>

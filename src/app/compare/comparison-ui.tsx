@@ -44,7 +44,7 @@ export function ComparisonSelectionForm({
               />
               <span>
                 <strong>{candidate.canonicalLabel}</strong>
-                <small>Approved · Resolved</small>
+                <small>{candidate.mapping.evidenceClass === "MODEL_INFERENCE" ? "Owner-approved inclusion · Model inference" : "Approved · Resolved"}</small>
               </span>
             </label>
           ))}
@@ -109,22 +109,22 @@ export function ComparisonView({ result }: { result: ComparisonResult }) {
           </thead>
           <tbody>
             <ComparisonRow label="Mapping review status" programmes={result.programmes}>
-              {() => (
-                <FactWithEvidence evidenceClass="HUMAN_INFERENCE">
-                  Approved
+              {(programme) => (
+                <FactWithEvidence evidenceClass={programme.mapping.evidenceClass}>
+                  {programme.mapping.evidenceClass === "MODEL_INFERENCE" ? "Approved for inclusion; no independent human scientific review" : "Approved"}
                 </FactWithEvidence>
               )}
             </ComparisonRow>
             <ComparisonRow label="Resolution status" programmes={result.programmes}>
-              {() => (
-                <FactWithEvidence evidenceClass="HUMAN_INFERENCE">
+              {(programme) => (
+                <FactWithEvidence evidenceClass={programme.mapping.evidenceClass}>
                   Resolved within the reviewed programme namespace
                 </FactWithEvidence>
               )}
             </ComparisonRow>
             <ComparisonRow label="Reviewed sponsor-organisation association" programmes={result.programmes}>
               {(programme) => (
-                <FactWithEvidence evidenceClass="HUMAN_INFERENCE">
+                <FactWithEvidence evidenceClass={programme.mapping.evidenceClass}>
                   {programme.mapping.reportedSponsorOrganisation}
                 </FactWithEvidence>
               )}
@@ -139,7 +139,7 @@ export function ComparisonView({ result }: { result: ComparisonResult }) {
             </ComparisonRow>
             <ComparisonRow label="Candidate compound association" programmes={result.programmes}>
               {(programme) => (
-                <FactWithEvidence evidenceClass="HUMAN_INFERENCE">
+                <FactWithEvidence evidenceClass={programme.mapping.evidenceClass}>
                   {programme.mapping.candidateCompound}
                 </FactWithEvidence>
               )}
@@ -243,7 +243,7 @@ function FactWithEvidence({
   evidenceClass,
   children,
 }: {
-  evidenceClass: "HUMAN_INFERENCE" | "STRUCTURED_EXTRACTION" | "DERIVED_CALCULATION" | "UNKNOWN";
+  evidenceClass: "HUMAN_INFERENCE" | "MODEL_INFERENCE" | "STRUCTURED_EXTRACTION" | "DERIVED_CALCULATION" | "UNKNOWN";
   children: ReactNode;
 }) {
   return (
@@ -257,7 +257,7 @@ function FactWithEvidence({
 function EvidenceTag({
   evidenceClass,
 }: {
-  evidenceClass: "HUMAN_INFERENCE" | "STRUCTURED_EXTRACTION" | "DERIVED_CALCULATION" | "UNKNOWN";
+  evidenceClass: "HUMAN_INFERENCE" | "MODEL_INFERENCE" | "STRUCTURED_EXTRACTION" | "DERIVED_CALCULATION" | "UNKNOWN";
 }) {
   return (
     <span
@@ -370,7 +370,7 @@ function ProgrammeEvidence({ programme }: { programme: ComparisonProgramme }) {
   return (
     <div className="comparison-evidence-list">
       <p>
-        <EvidenceTag evidenceClass="HUMAN_INFERENCE" /> Mapping assertion {" "}
+        <EvidenceTag evidenceClass={programme.mapping.evidenceClass} /> Mapping assertion {" "}
         <code>{programme.mapping.assertionId}</code>
       </p>
       <details>
@@ -437,16 +437,16 @@ function MobileComparisonCard({ programme }: { programme: ComparisonProgramme })
       <h3><Link href={programme.programmeHref}>{programme.canonicalLabel}</Link></h3>
       <dl className="stacked-facts">
         <MobileFact label="Mapping state">
-          <FactWithEvidence evidenceClass="HUMAN_INFERENCE">Approved · Resolved</FactWithEvidence>
+          <FactWithEvidence evidenceClass={programme.mapping.evidenceClass}>{programme.mapping.evidenceClass === "MODEL_INFERENCE" ? "Owner-approved inclusion · Resolved grouping" : "Approved · Resolved"}</FactWithEvidence>
         </MobileFact>
         <MobileFact label="Reviewed sponsor-organisation association">
-          <FactWithEvidence evidenceClass="HUMAN_INFERENCE">{programme.mapping.reportedSponsorOrganisation}</FactWithEvidence>
+          <FactWithEvidence evidenceClass={programme.mapping.evidenceClass}>{programme.mapping.reportedSponsorOrganisation}</FactWithEvidence>
         </MobileFact>
         <MobileFact label="Source-reported sponsor organisation">
           <RegistryValues programme={programme} select={(trial) => [trial.reportedSponsorOrganisation]} />
         </MobileFact>
         <MobileFact label="Candidate compound association">
-          <FactWithEvidence evidenceClass="HUMAN_INFERENCE">{programme.mapping.candidateCompound}</FactWithEvidence>
+          <FactWithEvidence evidenceClass={programme.mapping.evidenceClass}>{programme.mapping.candidateCompound}</FactWithEvidence>
         </MobileFact>
         <MobileFact label="Source-reported conditions">
           <RegistryValues programme={programme} select={(trial) => trial.reportedConditions} />

@@ -864,3 +864,7 @@ summary {
 .brief-limitations summary { color: var(--text); }
 .brief-overview .brief-actions { margin-top: 1rem; }
 .brief-overview .boundary-note { margin-bottom: 1rem; }
+
+.provenance code {
+  overflow-wrap: anywhere;
+}

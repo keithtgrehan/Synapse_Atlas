@@ -9,7 +9,7 @@ import {
 } from "../domain/programs";
 import { nctIdSchema, partialDateValueSchema } from "../domain/trials";
 import { sha256Bytes } from "../evidence/provenance";
-import { clinicalTrialsFixtureMetadataSchema } from "./clinicaltrials";
+import { clinicalTrialsFixtureSchema, clinicalTrialsFixtureMetadataSchema } from "./clinicaltrials";
 
 const nonBlankTextSchema = z.string().trim().min(1).max(5_000);
 
@@ -103,7 +103,8 @@ export function validateProgrammeFixture(
     throw new Error("INVALID_PROGRAMME_FIXTURE_ENCODING");
   }
 
-  const fixture = programmeFixturePageSchema.parse(decoded);
+  if (fixtureBytes.byteLength > 1_048_576) throw new Error("PROGRAMME_FIXTURE_TOO_LARGE");
+  const fixture = programmeFixturePageSchema.parse(snapshot.captureFormat === "STUDY_EXAMPLE_V1" ? clinicalTrialsFixtureSchema.parse(decoded) : decoded);
   const study = fixture.studies[0];
   const protocol = study.protocolSection;
   const observed = snapshot.observedRegistryFacts;

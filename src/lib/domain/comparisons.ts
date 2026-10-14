@@ -2,6 +2,8 @@ import { z } from "zod";
 
 import {
   programmeMappingDatasetSchema,
+  mappingEvidenceClassSchema,
+  mappingDatasetVersionSchema,
   programmeSlugSchema,
 } from "./programs";
 import { nctIdSchema, partialDateValueSchema } from "./trials";
@@ -112,7 +114,11 @@ const mappingComparisonSchema = z
     resolutionState: z.literal("RESOLVED"),
     reportedSponsorOrganisation: nonBlankTextSchema,
     candidateCompound: nonBlankTextSchema,
-    evidenceClass: z.literal("HUMAN_INFERENCE"),
+    evidenceClass: mappingEvidenceClassSchema,
+    approvalBasis: z.literal("OWNER_ACCEPTED_UNATTRIBUTED_PACKET").optional(),
+    reviewPacketSha256: sha256HexSchema.optional(),
+    reviewRationale: nonBlankTextSchema.optional(),
+    caveats: z.array(nonBlankTextSchema).max(20).optional(),
     provenanceReferences: z.array(provenanceReferenceSchema).min(1).max(100),
   })
   .strict();
@@ -139,7 +145,7 @@ export const comparisonProgrammeSchema = z
 
 export const comparisonCatalogSchema = z
   .object({
-    datasetVersion: z.literal("1.1.0"),
+    datasetVersion: mappingDatasetVersionSchema,
     datasetUpdatedAt: offsetDateTimeSchema,
     candidates: z.array(comparisonProgrammeSchema).max(20),
   })
@@ -150,7 +156,7 @@ export type ComparisonCatalog = z.infer<typeof comparisonCatalogSchema>;
 
 export const comparisonResultSchema = z
   .object({
-    datasetVersion: z.literal("1.1.0"),
+    datasetVersion: mappingDatasetVersionSchema,
     datasetUpdatedAt: offsetDateTimeSchema,
     programmes: z.array(comparisonProgrammeSchema).min(2).max(4),
   })
@@ -226,7 +232,7 @@ export function buildComparisonCatalog(
   const fixtureRecords = z
     .array(comparisonFixtureRecordSchema)
     .min(1)
-    .max(3)
+    .max(13)
     .parse(fixtureRecordsInput);
   const fixturesBySnapshotId = uniqueFixtureMap(fixtureRecords);
 
@@ -345,6 +351,10 @@ export function buildComparisonCatalog(
           reportedSponsorOrganisation: sponsor.canonicalLabel,
           candidateCompound: compound.canonicalLabel,
           evidenceClass: mapping.evidenceClass,
+          approvalBasis: mapping.approvalBasis,
+          reviewPacketSha256: mapping.reviewPacketSha256,
+          reviewRationale: mapping.reviewRationale,
+          caveats: programme.conflicts,
           provenanceReferences: mappingReferences,
         },
         registeredTrials,
