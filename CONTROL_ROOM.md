@@ -33,6 +33,7 @@ operating_rules:
   no_medical_advice: true
   no_custom_model_training_v0_1: true
 last_completed:
+  - S1-14 deployed release published to main as 4842037 on 14 October 2026; portfolio README updated and upstream documentation preserved.
   - S1-14 mapping integration follow-up deployed and publicly verified on 13 October 2026: 13 programme entries, comparison/exports, scoped model-inference labels preserved.
   - S1-14 ten retained study examples deployed to the existing public Vercel site after Preview and production verification on 13 October 2026.
   - Canonical repository selected.
@@ -48,7 +49,7 @@ last_completed:
   - PR #8 merged security maintenance at ae1e4d564cc728d14072f623cf4b374e3628ded8 on 2026-09-09; post-merge local checks, main CI, clean production audit, and Preview-only deployment verification passed. S1-05 is Complete.
 next_action:
   task: S1-14
-  instruction: The 13-entry mapping release is live. Keith authorized committing and publishing the release to main on 14 October 2026. Preserve the newer portfolio README and existing release evidence; verify the exact release tree, publish by normal fast-forward push, and check main CI. Main Git deployment remains disabled.
+  instruction: The 13-entry mapping release and updated README are published on main (release commit 4842037), and the verified Vercel site remains live. Use the non-psychedelic depression comparison for a source-backed research discussion. The ten additions retain MODEL_INFERENCE with owner-approved inclusion; independent scientific review remains separate. Main Git auto-deployment remains disabled.
 blockers:
   - No approved Postgres connection is configured, so the S1-02 migration remains unapplied and S1-03 live normalized records are not persisted.
   - S1-06 remains unstarted pending explicit human scope approval/planning.
@@ -1281,6 +1282,7 @@ Do not enable auto-merge, deploy or promote to Production, or perform further me
 **Source/legal evidence:** Existing public registry facts, publication metadata and scoped review packet only; no new research or full texts. GitHub confirms the repository is already public, consistent with the upstream portfolio handover.
 **Decisions:** Current explicit instruction authorizes a normal main push and supersedes the earlier no-main-publish boundary for this release. Preserve both local recovery stashes. Main auto-deployment stays disabled; the existing verified Vercel production release needs no rebuild for documentation/Git publication.
 **Known risks:** Retained evidence and independent scientific-review limitations are unchanged. Earlier no-commit/push entries describe historical work packages.
-**Blocked:** None identified; publication/CI verification remains to be completed.
-**Next highest-impact task:** Publish the validated release to main and verify remote CI.
-**Control-room update:** Updated for this publication work package; final result follows.
+**Publication evidence:** Release commit `48420379c8b748842f4c43c8ac2378818b2a1c24` was pushed normally to `main`; `git ls-remote` confirmed the same SHA and the working tree was clean. [GitHub CI for the release](https://github.com/keithtgrehan/Synapse_Atlas/actions/runs/38538174405) is the durable remote check record. This documentation-only follow-up records the completed publication; final-head CI is checked separately after its push. No force-push, repository visibility change or Vercel redeployment occurred.
+**Blocked:** None for publication.
+**Next highest-impact task:** Use the live non-psychedelic depression comparison in a source-backed research discussion.
+**Control-room update:** Completed; both recovery stashes remain preserved. Current release limitations and rollback target remain in the preceding deployment closeout.
