@@ -26,7 +26,7 @@ export default async function ProgrammesPage({
     : [];
 
   return (
-    <main className="shell">
+    <main id="main-content" className="shell">
       <header className="page-header">
         <Link className="back-link" href="/">← Synapse Atlas</Link>
         <p className="eyebrow">Version-controlled programme mappings</p>

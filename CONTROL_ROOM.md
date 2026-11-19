@@ -11,25 +11,25 @@ project:
   owner: Keith Grehan
   location: Berlin, Germany
   started: 2026-08-14
-  last_updated: 2026-10-14
+  last_updated: 2026-11-20
 mission:
   career_goal: Move into CNS, neuropsychiatric or psychedelic biotech through partnerships, business development, strategy, research operations, or AI/data product work.
-  product_goal: Prove scientific, product, engineering and commercial capability with a trustworthy private drug-development intelligence tool.
+  product_goal: Deliver a useful, reproducible NCT-first research brief and saved-versus-current snapshot comparison as credible portfolio evidence.
 active_goal:
-  id: G1
-  name: Ship private v0.1
-  target_date: 2026-08-27
+  id: G5
+  name: Evidence-led research workspace and NCT Snapshot Diff portfolio release
+  target_date: 2026-11-19
   status: in_progress
 active_sprint:
-  id: S1
-  dates: 2026-08-14/2026-08-27
+  id: S2
+  dates: 2026-11-19/2026-12-02
   wip_limit: 3
-  current_task: S1-14
+  current_task: S2-01
 operating_rules:
   one_active_goal: true
   new_scope_requires_tradeoff: true
   source_registry_deny_by_default: true
-  human_review_required: true
+  human_review_required: false # deterministic registry transformations; historical mapping review states remain unchanged
   no_medical_advice: true
   no_custom_model_training_v0_1: true
 last_completed:
@@ -48,12 +48,63 @@ last_completed:
   - PR #7 merged S1-05 at 3cb39fcb4d11abf38d3c77db44c307f0b184611f on 2026-08-19.
   - PR #8 merged security maintenance at ae1e4d564cc728d14072f623cf4b374e3628ded8 on 2026-09-09; post-merge local checks, main CI, clean production audit, and Preview-only deployment verification passed. S1-05 is Complete.
 next_action:
-  task: S1-14
-  instruction: The 13-entry mapping release and updated README are published on main (release commit 4842037), and the verified Vercel site remains live. Use the non-psychedelic depression comparison for a source-backed research discussion. The ten additions retain MODEL_INFERENCE with owner-approved inclusion; independent scientific review remains separate. Main Git auto-deployment remains disabled.
-blockers:
-  - No approved Postgres connection is configured, so the S1-02 migration remains unapplied and S1-03 live normalized records are not persisted.
-  - S1-06 remains unstarted pending explicit human scope approval/planning.
+  task: S2-01
+  instruction: Deliver the validated 39-trial, three-case MVP as a working Preview and feature-branch draft PR. Latest user instruction defers Production; do not merge or alter the existing live deployment.
+blockers: [] # database persistence, manual annotation and clinical adjudication are outside this release
+
 ```
+
+
+## Current release contract — 19 November 2026 (supersedes historical plans below)
+
+**G5 / S2-01: What changed since this research brief?** Keith explicitly authorized replacing the old private-v0.1 goal with a bounded, usable portfolio release. Historic goals, source decisions and review records below are retained as evidence, not active prerequisites.
+
+**Finish line:** A visitor opens a prepared NCT-first study comparison, inspects saved versus newly retrieved exact-ID fields, opens evidence and exports the same captured pair as CSV, printable brief and replayable source bundle. Retained records work without any programme mapping, approval, resolution or compound assertion. Current responses stay in session memory; no database writes or baseline replacement.
+
+**Active work (three bounded packages):**
+1. Deterministic capture/catalogue/diff/export with source and edge-case tests (data owner).
+2. Integrated product journey, truthful legacy copy, shared How it works and release preparation (lead).
+3. Independent UX/accessibility and final diff review (reviewer).
+
+**Acceptance:** 39 independently validated saved NCT records; status/enrolment/endpoints/completion/sponsor/intervention comparison; raw-source and normalized hashes, transformation/comparator version, field locators, capture and registry dates; explicit missing/removed/ambiguous states; exact ID and bounded response validation; safe rendering/formula-safe CSV; no contact fields. Same pair drives screen and exports, without export-time requests. Real retained replay and honest unchanged/network-failure paths. Fresh `pnpm check`; complete desktop/320px keyboard/source/export/print browser checks; independent review and draft PR.
+
+**Retired as release prerequisites:** manual gold annotation, individual clinical adjudication, custom models, model-judge agreement, dataset-size targets, database provisioning and S1-06 enrichment. Historical MODEL_INFERENCE/PENDING labels are preserved. No literature integration, alerts, accounts, broad crawl, chat or efficacy ranking is added.
+
+**Authority and release gate:** Scoped implementation, checks, commit, feature push and draft PR are approved. Existing protected Preview is permitted with cleared public data; `vercel.json` continues disabling automatic main Production deployment. Production was explicitly authorized, then deferred by Keith’s latest instruction: “Deliver the preview and PR for now.” Deliver Preview and draft PR; merge and changes to deployment protection remain excluded. Existing public site remains the October release.
+
+**Starting evidence:** Clean main `70f5f61`; same canonical GitHub repository ID 1333604748 for legacy/new names; remote main matches; no open PRs; two recovery stashes preserved. Prior three chats accessible; their annotation tasks and old release authorizations do not govern this release. Official API/history and provenance review supports integrated saved-brief comparison rather than novelty or full-history claims.
+
+**Research decisions:** ClinicalTrials.gov already has [Record History](https://clinicaltrials.gov/study-basics/how-to-read-study-record); Atlas compares its saved brief to one capture. [W3C PROV](https://www.w3.org/TR/prov-overview/) informs explicit input/entity/transform identity. Registry timestamps differ from retrieval, registered endpoints are not outcomes, and updates do not establish progress or commercial rights. Existing SRC-CTG policy remains the only runtime source integration.
+
+**Explicit scope expansion — 19 November:** Keith authorized a materially stronger editorial workspace and three additional coherent research cases, with a bounded scientist/design/independent-quality team. Integrate cases into the existing comparison, source inspection and reproducible export flow. Prefer retained MDD/TRD records; up to six additional exact-NCT captures are permitted only if necessary. No efficacy ranking, pooled unlike populations, new literature ingestion or manufactured history. Update this record, not a new backlog. Implementation, reviewed commit, feature push and draft PR remain authorized; hosting permissions and merge remain excluded. Production is governed by the latest delivery instruction above.
+
+**Expanded acceptance:** Three 2–4-study cases each show a research question, matching rationale, source-backed comparison dimensions, unknowns, descriptive takeaways with inference labels, limitations and next questions. Case evidence and narrative travel with the same CSV/JSON/print brief. Verify desktop/320px/keyboard, live-failure and retained-replay paths, downloads and replay, print, source links and final full checks. Independent scientific/source review must check the AI scientist's implementation. Shared README/How it works and screenshots must reflect observed behavior.
+
+**Earlier validation/status (superseded by the final release evidence below):** Historical pre-expansion `pnpm check` passed 155 tests in 23 files, lint, types, migration check and build after the exact-ID pagination-metadata regression fix. Final expanded checks remain pending. Interrupted browser batch was not an application failure: prior server/tab state must be recovered and downloads tested in separate observable steps. Existing Vercel team access is unavailable through connector and CLI; this does not block local demo or draft PR.
+
+### Optimized execution brief and delivery plan — latest authorized scope
+
+**Objective:** Complete the existing Synapse Atlas implementation as a professional research MVP for a 3–5-minute hiring-manager demonstration. Research and implement a clearer visual/interaction system; expand 13 retained trials to exactly 39 distinct validated NCT records, and make the added evidence useful through coherent research collections, descriptive analysis and the three detailed cases. Preserve all existing baselines and source limits. This brief is reviewed for task fidelity, not benchmarked against another prompt.
+
+**Plan and acceptance:**
+1. Research: use primary design-system/accessibility guidance and official registry evidence. Select 26 additional MDD/TRD-relevant studies with explicit rationale; classify all 39 in discoverable collections, preserving unrelated legacy indications as separate contexts. Record exact source URLs, collection dates and hashes. No invented compound identities, outcome claims or pooled efficacy.
+2. Implement: first screen demonstrates real evidence; a clear case/collection → select → compare → inspect → export journey. Consistent typography, spacing and states; filter/search for the larger catalogue; readable side-by-side comparisons, progressive source detail, visible dates and unknowns, keyboard focus and 320px reflow. Integrate three sourced analyses into CSV/JSON/print; derive descriptive collection summaries directly from captured records.
+3. Validate: independent scientific/source and UX review, relevant regression tests then final full `pnpm check`, desktop/mobile/keyboard journeys, exact downloaded content and offline replay, print, source links and live-failure behavior. Capture finished screenshots and align shared How it works/README. No claimed check without observed evidence.
+4. Deliver: reviewed feature commit, draft PR/CI, verified Preview then publish the validated MVP to the existing live site. Keith explicitly answered “Also publish the validated MVP to the live website”; this supersedes the earlier Production gate for this scoped release. Do not change hosting permissions, bypass protection, force-push or delete user work. If Vercel access remains unavailable, finish the local/reviewable artifact and request only the platform-provided authorization needed for that existing team.
+
+**Research basis:** [GOV.UK tables](https://design-system.service.gov.uk/components/table/) supports semantic comparisons with captions and row/column headers. [WCAG reflow](https://www.w3.org/WAI/WCAG22/Understanding/reflow) supports readable 320px content without lost controls; avoid fixed UI that obscures focus. Additional design findings are integrated below after inspection. These are implementation criteria, not a claim of full accessibility certification.
+
+**Competitor/design phase (integrated after core MVP validation):** Review comparable biotech research services and best-in-tier SaaS interfaces using public, accessible evidence. Deliver a cited Markdown report in `docs/competitive-design-review.md` with observed patterns, strengths/trade-offs, screenshots or public references where permitted, and explicit distinctions between observation and inference. Translate only relevant patterns into concrete Synapse Atlas UI/UX improvements; preserve its own identity, evidence chain, accessibility and source permissions. Implement and validate these refinements after the MVP process above, rather than interrupting the active release. Do not copy proprietary assets or imply hands-on use of inaccessible product areas. Completed research and review evidence is in `docs/competitive-design-review.md`. Graphic design, UX and UI agent reviews informed the bounded refinements; no claim of human professional or clinical review.
+
+### Final release evidence — 20 November 2026
+
+- **Latest delivery scope:** Keith’s monitoring chat relayed “Deliver the preview and PR for now.” Finish that delivery; leave Production unchanged. No further Vercel-account troubleshooting is required for production in this milestone.
+- **Implemented:** 39 unique retained trials (13 preserved + 26 official exact-ID captures), seven explicitly bounded collections, three evidence-backed cases, filtered descriptive counts, CSV/JSON source exports, saved/current and historical comparisons. The catalogue is a convenience sample, not a systematic or complete clinical landscape.
+- **Design:** Public Benchling, Linear, Labguru and ClinicalTrials.gov research is documented in `docs/competitive-design-review.md`; original paper/green/blue identity retained. Graphic, UX and UI agents reviewed the implementation. Fixed tablet matrix containment, active navigation, search metadata, disabled cursors and catalogue URL filters. No third-party branding or assets copied.
+- **Automated validation:** Final `pnpm check` passed 165 tests in 25 files, lint, strict types, migration consistency and production build in the clean locked-dependency validation copy. `git diff --check` passed. No dependencies added.
+- **Observed browser evidence:** Local production build at 1440px, 768px and 320px; tablet comparison focusable and document width768, mobile document width320. All three cases opened; historical replay and a real exact-ID current capture worked. Keyboard selection, evidence disclosure and exports observed. Downloaded case CSV/JSON values/hashes and all39-record bundle replay were verified against the deterministic comparator. Final catalogue URL/reload and keyboard comparison passed. Actual39-row CSV and final JSON with7collections/26new entries were downloaded and checked; offline replay passed for all39. At390px, pageWidth390. Hosted Preview checks are recorded at closeout below.
+- **Limits:** Network failure is covered by automated adapter/route tests; a browser-level outage was not induced. Invoking print timed out; native app access is unavailable, so current print/PDF rendering is not signed off. No claim of complete WCAG conformance, scientific correctness, human clinical review or outcome comparisons.
+- **Hosting:** Existing project team `team_YKDt6rh9Hs4SZSTB3uzQaXmG` is inaccessible to current Vercel connector (403; team authorization404). Connected team `team_gQjI7LAAdSyoPQIwSzbNV76Z` has no matching project. Preserve the existing live project and protection. Use the existing Git-connected Preview if available; do not silently create a replacement production project.
 
 ---
 
@@ -768,7 +819,7 @@ The product is a career asset, not a startup fundraising exercise.
 
 ---
 
-# 15. Release definition
+# 15. Historical v0.1 release definition (superseded by G5)
 
 v0.1 is shipped when:
 
@@ -1161,7 +1212,7 @@ Use these commands in a project conversation or Codex:
 - `SHIP` — run release definition; do not waive failures silently.
 - `RETRO` — record what worked, failed and is cut next.
 
-## Current instruction to Codex
+## Historical instruction to Codex (superseded by G5 contract above)
 
 ```text
 S1-01 is Complete.

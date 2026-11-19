@@ -13,8 +13,11 @@ import {
   clinicalTrialsPolicy,
   evaluateSourceRequest,
 } from "../policies";
+import { captureForLiveResponse } from "../../snapshots/catalogue";
+import type { Capture } from "../../snapshots/model";
 
 const API_URL = "https://clinicaltrials.gov/api/v2/studies";
+const captureFieldValues = ["NCTId", "BriefTitle", "OverallStatus", "StartDate", "PrimaryCompletionDate", "CompletionDate", "LastUpdatePostDate", "LeadSponsorName", "LeadSponsorClass", "InterventionName", "InterventionType", "Phase", "EnrollmentCount", "EnrollmentType", "PrimaryOutcomeMeasure", "PrimaryOutcomeTimeFrame", "StartDateType", "PrimaryCompletionDateType", "CompletionDateType"] as const;
 const PAGE_SIZE = 10;
 const MAX_RESPONSE_BYTES = 1_048_576;
 const REQUEST_TIMEOUT_MS = 10_000;
@@ -169,10 +172,10 @@ function parseInput<T>(schema: z.ZodType<T>, input: unknown): T {
   return result.data;
 }
 
-function baseUrl(): URL {
+function baseUrl(fields: readonly string[] = clinicalTrialsFieldValues): URL {
   const url = new URL(API_URL);
   url.searchParams.set("format", "json");
-  url.searchParams.set("fields", clinicalTrialsFieldValues.join(","));
+  url.searchParams.set("fields", fields.join(","));
   url.searchParams.set("pageSize", String(PAGE_SIZE));
   return url;
 }
@@ -201,8 +204,8 @@ function searchUrl(input: z.infer<typeof searchInputSchema>): URL {
   return url;
 }
 
-function detailUrl(nctId: string): URL {
-  const url = baseUrl();
+function detailUrl(nctId: string, fields: readonly string[] = clinicalTrialsFieldValues): URL {
+  const url = baseUrl(fields);
   url.searchParams.set("query.id", nctId);
   url.searchParams.set("countTotal", "true");
   url.searchParams.set("pageSize", "1");
@@ -440,6 +443,7 @@ function decodeJson(bytes: Uint8Array): unknown {
 async function requestPage(
   url: URL,
   dependencyOverrides: ClientDependencyOverrides,
+  requestedFields: readonly string[] = clinicalTrialsFieldValues,
 ): Promise<ClinicalTrialsPage> {
   const dependencies = resolveDependencies(dependencyOverrides);
   const bytes = await fetchBytes(url, dependencies);
@@ -484,7 +488,7 @@ async function requestPage(
     throw new ClinicalTrialsClientError("INVALID_CLOCK");
   }
 
-  const requestedFields = new Set<string>(clinicalTrialsFieldValues);
+  const requestedFieldSet = new Set<string>(requestedFields);
   const contentSha256 = sha256Bytes(bytes);
   const retrievedAt = retrievedAtDate.toISOString();
   const processedAt = processedAtDate.toISOString();
@@ -496,7 +500,7 @@ async function requestPage(
         retrievedAt,
         processedAt,
         contentSha256,
-        requestedFields,
+        requestedFields: requestedFieldSet,
         studyIndex,
       }),
     ),
@@ -532,4 +536,24 @@ export async function getClinicalTrial(
   }
 
   return trial;
+}
+
+/** Captures one approved, exact-ID response once for a comparison session. It never writes a baseline. */
+export async function getClinicalTrialCapture(
+  nctId: string,
+  dependencies: ClientDependencyOverrides = {},
+): Promise<Capture | null> {
+  const parsed = parseInput(detailInputSchema, { nctId });
+  const url = detailUrl(parsed.nctId, captureFieldValues);
+  const resolved = resolveDependencies(dependencies);
+  const bytes = await fetchBytes(url, resolved);
+  const retrievedAt = resolved.now();
+  const processedAt = resolved.now();
+  if (!Number.isFinite(retrievedAt.getTime()) || !Number.isFinite(processedAt.getTime()) || processedAt < retrievedAt) throw new ClinicalTrialsClientError("INVALID_CLOCK");
+  try {
+    const capture = captureForLiveResponse(bytes, { nctId: parsed.nctId, requestUrl: url.href, retrievedAt: retrievedAt.toISOString(), processedAt: processedAt.toISOString() });
+    return capture.record.nctId === parsed.nctId ? capture : null;
+  } catch {
+    throw new ClinicalTrialsClientError("INVALID_RESPONSE");
+  }
 }

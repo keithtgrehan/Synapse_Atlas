@@ -15,13 +15,13 @@ describe("server-rendered comparison UI", () => {
   it("renders the initial accessible selection form with all thirteen accepted candidates", async () => {
     const html = await renderComparison({});
 
-    expect(html).toContain("<h1>Compare programmes</h1>");
+    expect(html).toContain("<h1>Compare studies</h1>");
     expect(html).toContain("<fieldset>");
-    expect(html).toContain("<legend>Select two to four reviewed programmes</legend>");
+    expect(html).toContain("<legend>Select two to four study contexts</legend>");
     expect(html.match(/name="programme"/g)).toHaveLength(13);
     expect(html.match(/Owner-approved inclusion · Model inference/g)).toHaveLength(10);
     expect(html.match(/Approved · Resolved/g)).toHaveLength(3);
-    expect(html).toContain("Choose programmes to compare");
+    expect(html).toContain("Choose study contexts to compare");
     expect(html).not.toContain("<table");
   });
 
@@ -34,10 +34,10 @@ describe("server-rendered comparison UI", () => {
     });
 
     expect(html).toContain("<table class=\"comparison-table\">");
-    expect(html).toContain("<caption>Evidence-bounded fields for the selected reviewed programmes</caption>");
+    expect(html).toContain("<caption>Evidence-bounded fields for the selected study contexts</caption>");
     expect(html).toContain("scope=\"col\"");
     expect(html).toContain("scope=\"row\"");
-    expect(html).toContain("2 reviewed programmes");
+    expect(html).toContain("2 study contexts");
     expect(html.indexOf("Usona psilocybin for major depressive disorder"))
       .toBeLessThan(html.indexOf("CYB003 for major depressive disorder"));
     expect(html).not.toContain("COMP360 for treatment-resistant depression</a></th>");
@@ -52,7 +52,7 @@ describe("server-rendered comparison UI", () => {
       ],
     });
 
-    expect(html).toContain("3 reviewed programmes");
+    expect(html).toContain("3 study contexts");
     expect(html).toContain("COMPLETED");
     expect(html).toContain("ACTIVE_NOT_RECRUITING");
     expect(html).toContain("ENROLLING_BY_INVITATION");
@@ -67,7 +67,7 @@ describe("server-rendered comparison UI", () => {
       programme: "comp360-treatment-resistant-depression",
     });
 
-    expect(html).toContain("Select at least two programmes");
+    expect(html).toContain("Select at least two study contexts");
     expect(html).toContain("Your valid selection has been preserved");
     expect(html).toMatch(
       /checked="" value="comp360-treatment-resistant-depression"/,
@@ -111,7 +111,7 @@ describe("server-rendered comparison UI", () => {
 
     expect(html).toContain('href="/programs/usona-psilocybin-mdd"');
     expect(html).toContain('href="/trials/NCT03866174"');
-    expect(html).toContain("Reviewed sponsor-organisation association");
+    expect(html).toContain("Contextual sponsor association");
     expect(html).toContain("Source-reported sponsor organisation");
     expect(html).toContain(
       'href="https://clinicaltrials.gov/study/NCT03866174"',

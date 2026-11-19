@@ -21,7 +21,7 @@ export default async function StudyExamplePage({ params }: { params: Promise<{ n
   const resultsPosted = supplement.protocolSection.statusModule.resultsFirstPostDateStruct;
 
   return (
-    <main className="shell">
+    <main id="main-content" className="shell">
       <header className="page-header detail-header">
         <Link className="back-link" href="/trials/examples">← All 10 study examples</Link>
         <div className="detail-kicker"><p className="nct-id">{nctId}</p><span className="status-label">Retained snapshot</span></div>

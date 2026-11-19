@@ -1,0 +1,499 @@
+{
+  "version": "1",
+  "capturedAt": "2026-11-19T22:49:09.325Z",
+  "selectionMethod": "26 exact-ID records selected from a bounded 80-record official ClinicalTrials.gov MDD convenience inventory on 2026-11-19; this is not a systematic, complete or representative sample and does not rank treatments.",
+  "fields": [
+    "NCTId",
+    "BriefTitle",
+    "OfficialTitle",
+    "OverallStatus",
+    "StartDate",
+    "PrimaryCompletionDate",
+    "CompletionDate",
+    "LastUpdatePostDate",
+    "LeadSponsorName",
+    "LeadSponsorClass",
+    "Condition",
+    "InterventionName",
+    "InterventionType",
+    "Phase",
+    "EnrollmentCount",
+    "EnrollmentType",
+    "StudyType",
+    "PrimaryOutcomeMeasure",
+    "PrimaryOutcomeTimeFrame",
+    "StartDateType",
+    "PrimaryCompletionDateType",
+    "CompletionDateType"
+  ],
+  "entries": [
+    {
+      "nctId": "NCT00420004",
+      "sourcePath": "data/research-catalogue/v1/NCT00420004.json",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT00420004&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-11-19T22:49:02.108Z",
+      "processedAt": "2026-11-19T22:49:02.745Z",
+      "rawSha256": "e9dd1db22089f084c73396d50bbd1a701f0f7d3e74ffd4e3e733e46d85956b29",
+      "groupIds": [
+        "mdd-pharmacology-endpoints"
+      ],
+      "selectionRationale": "Selected from a bounded 80-record official CTG MDD convenience inventory for a stated design-reading group; not a systematic or representative sample and not a treatment ranking."
+    },
+    {
+      "nctId": "NCT06792136",
+      "sourcePath": "data/research-catalogue/v1/NCT06792136.json",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT06792136&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-11-19T22:49:02.746Z",
+      "processedAt": "2026-11-19T22:49:03.034Z",
+      "rawSha256": "164299b46ebaee7acb3bf3f0b357e5e4efd3a081e8c78db0ea7bd64ab3ad7ec9",
+      "groupIds": [
+        "mdd-pharmacology-endpoints"
+      ],
+      "selectionRationale": "Selected from a bounded 80-record official CTG MDD convenience inventory for a stated design-reading group; not a systematic or representative sample and not a treatment ranking."
+    },
+    {
+      "nctId": "NCT06785012",
+      "sourcePath": "data/research-catalogue/v1/NCT06785012.json",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT06785012&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-11-19T22:49:03.035Z",
+      "processedAt": "2026-11-19T22:49:03.266Z",
+      "rawSha256": "4369070523c98ec9b57d8d5637fb30181fe9fe260ebae9851625cc99e9da79f8",
+      "groupIds": [
+        "mdd-pharmacology-endpoints"
+      ],
+      "selectionRationale": "Selected from a bounded 80-record official CTG MDD convenience inventory for a stated design-reading group; not a systematic or representative sample and not a treatment ranking."
+    },
+    {
+      "nctId": "NCT01473381",
+      "sourcePath": "data/research-catalogue/v1/NCT01473381.json",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT01473381&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-11-19T22:49:03.267Z",
+      "processedAt": "2026-11-19T22:49:03.571Z",
+      "rawSha256": "8f74749895ad3eebe452839e43c66f8f6775e66164fc29bc9319dd16afd85d30",
+      "groupIds": [
+        "mdd-pharmacology-endpoints"
+      ],
+      "selectionRationale": "Selected from a bounded 80-record official CTG MDD convenience inventory for a stated design-reading group; not a systematic or representative sample and not a treatment ranking."
+    },
+    {
+      "nctId": "NCT01020799",
+      "sourcePath": "data/research-catalogue/v1/NCT01020799.json",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT01020799&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-11-19T22:49:03.573Z",
+      "processedAt": "2026-11-19T22:49:03.835Z",
+      "rawSha256": "23b003af2e603a50653a05aa6d6072ae2ee22e60439bb81e67b6a1c88b4b19ae",
+      "groupIds": [
+        "mdd-pharmacology-endpoints"
+      ],
+      "selectionRationale": "Selected from a bounded 80-record official CTG MDD convenience inventory for a stated design-reading group; not a systematic or representative sample and not a treatment ranking."
+    },
+    {
+      "nctId": "NCT03093025",
+      "sourcePath": "data/research-catalogue/v1/NCT03093025.json",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT03093025&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-11-19T22:49:03.836Z",
+      "processedAt": "2026-11-19T22:49:04.082Z",
+      "rawSha256": "89e5c35ef7b55d8c7e6606b913d84f63313e61ce423e763b59a6840f7b76beb5",
+      "groupIds": [
+        "mdd-pharmacology-endpoints"
+      ],
+      "selectionRationale": "Selected from a bounded 80-record official CTG MDD convenience inventory for a stated design-reading group; not a systematic or representative sample and not a treatment ranking."
+    },
+    {
+      "nctId": "NCT02741791",
+      "sourcePath": "data/research-catalogue/v1/NCT02741791.json",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT02741791&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-11-19T22:49:04.083Z",
+      "processedAt": "2026-11-19T22:49:04.316Z",
+      "rawSha256": "f2ac26a3aaba2032b7682eba2f3d232a77bf36621d4ebaf8e7b388db4298f91a",
+      "groupIds": [
+        "mdd-pharmacology-endpoints"
+      ],
+      "selectionRationale": "Selected from a bounded 80-record official CTG MDD convenience inventory for a stated design-reading group; not a systematic or representative sample and not a treatment ranking."
+    },
+    {
+      "nctId": "NCT06796868",
+      "sourcePath": "data/research-catalogue/v1/NCT06796868.json",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT06796868&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-11-19T22:49:04.317Z",
+      "processedAt": "2026-11-19T22:49:04.609Z",
+      "rawSha256": "62df3ea36de06a764f59a350f99c79027b717f00ad01949ee38ace8cd3a8e246",
+      "groupIds": [
+        "mdd-pharmacology-endpoints"
+      ],
+      "selectionRationale": "Selected from a bounded 80-record official CTG MDD convenience inventory for a stated design-reading group; not a systematic or representative sample and not a treatment ranking."
+    },
+    {
+      "nctId": "NCT07592689",
+      "sourcePath": "data/research-catalogue/v1/NCT07592689.json",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT07592689&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-11-19T22:49:04.610Z",
+      "processedAt": "2026-11-19T22:49:04.847Z",
+      "rawSha256": "c9d2e0602a5d1c1674d4e9765b70fbe52a0c4be218c4c16d0e6d5d362cfa2a4e",
+      "groupIds": [
+        "mdd-pharmacology-endpoints"
+      ],
+      "selectionRationale": "Selected from a bounded 80-record official CTG MDD convenience inventory for a stated design-reading group; not a systematic or representative sample and not a treatment ranking."
+    },
+    {
+      "nctId": "NCT01724112",
+      "sourcePath": "data/research-catalogue/v1/NCT01724112.json",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT01724112&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-11-19T22:49:04.849Z",
+      "processedAt": "2026-11-19T22:49:05.132Z",
+      "rawSha256": "b2881c63f3a5b114b55f6c8819b7257fc786f8d1c1ca5096b502365ee198b0d5",
+      "groupIds": [
+        "mdd-pharmacology-endpoints"
+      ],
+      "selectionRationale": "Selected from a bounded 80-record official CTG MDD convenience inventory for a stated design-reading group; not a systematic or representative sample and not a treatment ranking."
+    },
+    {
+      "nctId": "NCT01421342",
+      "sourcePath": "data/research-catalogue/v1/NCT01421342.json",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT01421342&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-11-19T22:49:05.133Z",
+      "processedAt": "2026-11-19T22:49:05.369Z",
+      "rawSha256": "ed32ad1fc7b64a197e0ce1962a4346282e4173de376bbe95b2595d10651529ad",
+      "groupIds": [
+        "adjunctive-or-resistant-setting"
+      ],
+      "selectionRationale": "Selected from a bounded 80-record official CTG MDD convenience inventory for a stated design-reading group; not a systematic or representative sample and not a treatment ranking."
+    },
+    {
+      "nctId": "NCT02013531",
+      "sourcePath": "data/research-catalogue/v1/NCT02013531.json",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT02013531&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-11-19T22:49:05.370Z",
+      "processedAt": "2026-11-19T22:49:05.652Z",
+      "rawSha256": "13e96cf10563c053aecbe7c52cf0857c40f196c61e81f5d12ad06192f11fdecf",
+      "groupIds": [
+        "adjunctive-or-resistant-setting"
+      ],
+      "selectionRationale": "Selected from a bounded 80-record official CTG MDD convenience inventory for a stated design-reading group; not a systematic or representative sample and not a treatment ranking."
+    },
+    {
+      "nctId": "NCT05136755",
+      "sourcePath": "data/research-catalogue/v1/NCT05136755.json",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT05136755&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-11-19T22:49:05.653Z",
+      "processedAt": "2026-11-19T22:49:05.892Z",
+      "rawSha256": "a1c71b2be73cf348baf48540ffe25603f1495ad7ad96b8925dd7c3ad844fc830",
+      "groupIds": [
+        "adjunctive-or-resistant-setting"
+      ],
+      "selectionRationale": "Selected from a bounded 80-record official CTG MDD convenience inventory for a stated design-reading group; not a systematic or representative sample and not a treatment ranking."
+    },
+    {
+      "nctId": "NCT02522377",
+      "sourcePath": "data/research-catalogue/v1/NCT02522377.json",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT02522377&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-11-19T22:49:05.893Z",
+      "processedAt": "2026-11-19T22:49:06.177Z",
+      "rawSha256": "be47a394711d2a48b775e71a6a99a4bb379730cfbc33ebb3c4c1e6c281bb6b0f",
+      "groupIds": [
+        "adjunctive-or-resistant-setting"
+      ],
+      "selectionRationale": "Selected from a bounded 80-record official CTG MDD convenience inventory for a stated design-reading group; not a systematic or representative sample and not a treatment ranking."
+    },
+    {
+      "nctId": "NCT05809609",
+      "sourcePath": "data/research-catalogue/v1/NCT05809609.json",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT05809609&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-11-19T22:49:06.178Z",
+      "processedAt": "2026-11-19T22:49:06.408Z",
+      "rawSha256": "14b9b079fda28d6cb37205d6794995d768e9becb3ed7c84c6fd694d0a7f52939",
+      "groupIds": [
+        "adjunctive-or-resistant-setting"
+      ],
+      "selectionRationale": "Selected from a bounded 80-record official CTG MDD convenience inventory for a stated design-reading group; not a systematic or representative sample and not a treatment ranking."
+    },
+    {
+      "nctId": "NCT02279953",
+      "sourcePath": "data/research-catalogue/v1/NCT02279953.json",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT02279953&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-11-19T22:49:06.409Z",
+      "processedAt": "2026-11-19T22:49:06.707Z",
+      "rawSha256": "a4f0fa44db19bf49566f7abba114e39256e43031234d72f398f58a7deff77b3e",
+      "groupIds": [
+        "cognition-and-measurement"
+      ],
+      "selectionRationale": "Selected from a bounded 80-record official CTG MDD convenience inventory for a stated design-reading group; not a systematic or representative sample and not a treatment ranking."
+    },
+    {
+      "nctId": "NCT00655057",
+      "sourcePath": "data/research-catalogue/v1/NCT00655057.json",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT00655057&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-11-19T22:49:06.708Z",
+      "processedAt": "2026-11-19T22:49:06.948Z",
+      "rawSha256": "e72cf2976270912993588060e2bd48b7c6f969fdc4a65f0d224a9aa05aad3737",
+      "groupIds": [
+        "cognition-and-measurement"
+      ],
+      "selectionRationale": "Selected from a bounded 80-record official CTG MDD convenience inventory for a stated design-reading group; not a systematic or representative sample and not a treatment ranking."
+    },
+    {
+      "nctId": "NCT01691092",
+      "sourcePath": "data/research-catalogue/v1/NCT01691092.json",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT01691092&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-11-19T22:49:06.949Z",
+      "processedAt": "2026-11-19T22:49:07.226Z",
+      "rawSha256": "808ad62339937be7869462aeb7867aa3fb317c7e18287a55f8109c33747e7e69",
+      "groupIds": [
+        "cognition-and-measurement"
+      ],
+      "selectionRationale": "Selected from a bounded 80-record official CTG MDD convenience inventory for a stated design-reading group; not a systematic or representative sample and not a treatment ranking."
+    },
+    {
+      "nctId": "NCT01431001",
+      "sourcePath": "data/research-catalogue/v1/NCT01431001.json",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT01431001&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-11-19T22:49:07.227Z",
+      "processedAt": "2026-11-19T22:49:07.460Z",
+      "rawSha256": "96e101af70048b927746a99fd7ed879109af892d614cb56ee80b709283d26752",
+      "groupIds": [
+        "neurostimulation-comparator"
+      ],
+      "selectionRationale": "Selected from a bounded 80-record official CTG MDD convenience inventory for a stated design-reading group; not a systematic or representative sample and not a treatment ranking."
+    },
+    {
+      "nctId": "NCT04999553",
+      "sourcePath": "data/research-catalogue/v1/NCT04999553.json",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT04999553&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-11-19T22:49:07.461Z",
+      "processedAt": "2026-11-19T22:49:07.749Z",
+      "rawSha256": "47c1482fa896bd7f0de642018e25fd3f2749500b857d1443d326678d47ccfad7",
+      "groupIds": [
+        "neurostimulation-comparator"
+      ],
+      "selectionRationale": "Selected from a bounded 80-record official CTG MDD convenience inventory for a stated design-reading group; not a systematic or representative sample and not a treatment ranking."
+    },
+    {
+      "nctId": "NCT05964192",
+      "sourcePath": "data/research-catalogue/v1/NCT05964192.json",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT05964192&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-11-19T22:49:07.749Z",
+      "processedAt": "2026-11-19T22:49:07.981Z",
+      "rawSha256": "bb18a06e6d62c854ff076a3f8576c4b188e4e992428c755db183a3bb9d72832e",
+      "groupIds": [
+        "neurostimulation-comparator"
+      ],
+      "selectionRationale": "Selected from a bounded 80-record official CTG MDD convenience inventory for a stated design-reading group; not a systematic or representative sample and not a treatment ranking."
+    },
+    {
+      "nctId": "NCT04581902",
+      "sourcePath": "data/research-catalogue/v1/NCT04581902.json",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT04581902&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-11-19T22:49:07.982Z",
+      "processedAt": "2026-11-19T22:49:08.273Z",
+      "rawSha256": "e857d6be6c76b9a4d78db6b0c80d30c4b225a8a46c0b282d3c34e66d8fcaa7a0",
+      "groupIds": [
+        "neurostimulation-comparator"
+      ],
+      "selectionRationale": "Selected from a bounded 80-record official CTG MDD convenience inventory for a stated design-reading group; not a systematic or representative sample and not a treatment ranking."
+    },
+    {
+      "nctId": "NCT05976009",
+      "sourcePath": "data/research-catalogue/v1/NCT05976009.json",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT05976009&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-11-19T22:49:08.273Z",
+      "processedAt": "2026-11-19T22:49:08.507Z",
+      "rawSha256": "17ae47129c011fe4eb21a70383a2e1f8c6528d532eda30a5ac84debee2f6b0a7",
+      "groupIds": [
+        "neurostimulation-comparator"
+      ],
+      "selectionRationale": "Selected from a bounded 80-record official CTG MDD convenience inventory for a stated design-reading group; not a systematic or representative sample and not a treatment ranking."
+    },
+    {
+      "nctId": "NCT00675896",
+      "sourcePath": "data/research-catalogue/v1/NCT00675896.json",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT00675896&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-11-19T22:49:08.508Z",
+      "processedAt": "2026-11-19T22:49:08.797Z",
+      "rawSha256": "728e83959bcb780574934b5687ddb8bcd31be929e62c9c1522c205d96da6473e",
+      "groupIds": [
+        "mdd-setting-boundaries"
+      ],
+      "selectionRationale": "Selected from a bounded 80-record official CTG MDD convenience inventory for a stated design-reading group; not a systematic or representative sample and not a treatment ranking."
+    },
+    {
+      "nctId": "NCT03143075",
+      "sourcePath": "data/research-catalogue/v1/NCT03143075.json",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT03143075&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-11-19T22:49:08.797Z",
+      "processedAt": "2026-11-19T22:49:09.027Z",
+      "rawSha256": "6e7d789985747e5e17e30cfae00640964c052d4839893fe06cf575f672a4cb29",
+      "groupIds": [
+        "mdd-setting-boundaries"
+      ],
+      "selectionRationale": "Selected from a bounded 80-record official CTG MDD convenience inventory for a stated design-reading group; not a systematic or representative sample and not a treatment ranking."
+    },
+    {
+      "nctId": "NCT03715127",
+      "sourcePath": "data/research-catalogue/v1/NCT03715127.json",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT03715127&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-11-19T22:49:09.027Z",
+      "processedAt": "2026-11-19T22:49:09.324Z",
+      "rawSha256": "8e5f6dc338a8ff5954533015b03a0df0815aa8dee1ad7b5dcb147312dc62bc04",
+      "groupIds": [
+        "mdd-setting-boundaries"
+      ],
+      "selectionRationale": "Selected from a bounded 80-record official CTG MDD convenience inventory for a stated design-reading group; not a systematic or representative sample and not a treatment ranking."
+    }
+  ],
+  "groups": [
+    {
+      "id": "mdd-pharmacology-endpoints",
+      "title": "MDD pharmacology: endpoint and time-window register",
+      "question": "Which registered endpoint instruments and assessment windows appear across selected interventional MDD records?",
+      "description": "A design-reading collection of selected pharmacological MDD/TRD records; it preserves registered fields and makes no treatment comparison.",
+      "studyIds": [
+        "NCT00420004",
+        "NCT06792136",
+        "NCT06785012",
+        "NCT01473381",
+        "NCT01020799",
+        "NCT03093025",
+        "NCT02741791",
+        "NCT06796868",
+        "NCT07592689",
+        "NCT01724112",
+        "NCT03866174",
+        "NCT03672175",
+        "NCT01422213",
+        "NCT06605105"
+      ],
+      "comparisonDimensions": [
+        "registered condition",
+        "phase",
+        "interventions",
+        "primary outcome measure",
+        "primary outcome time frame",
+        "enrolment type"
+      ],
+      "limitations": "Condition labels, endpoints and enrolment do not establish comparable populations, effects, safety or superiority."
+    },
+    {
+      "id": "adjunctive-or-resistant-setting",
+      "title": "MDD context: adjunctive or resistant-setting records",
+      "question": "What treatment-context information is registered for selected inadequate-response or treatment-resistant records?",
+      "description": "A contextual collection; only retained title, condition and approved field facts are used. NCT02522377 includes an electroconvulsive-treatment context. A setting is unknown where those fields do not state it.",
+      "studyIds": [
+        "NCT01421342",
+        "NCT02013531",
+        "NCT05136755",
+        "NCT02522377",
+        "NCT05809609",
+        "NCT03559192",
+        "NCT01360645",
+        "NCT05711940"
+      ],
+      "comparisonDimensions": [
+        "registered condition",
+        "title",
+        "study type",
+        "interventions",
+        "primary outcome measure",
+        "primary outcome time frame"
+      ],
+      "limitations": "Not a shared eligibility assessment: prior-treatment threshold, severity, monotherapy/adjunctive status, safety and benefit may be unknown."
+    },
+    {
+      "id": "cognition-and-measurement",
+      "title": "MDD measurement choices: cognition and neurobiological endpoints",
+      "question": "How do selected MDD records distinguish cognitive or neurobiological primary measures from symptom measures?",
+      "description": "A small reading group for registered measure and time frame, not for clinical-effect synthesis. NCT01691092 also lists PTSD, so it is not an MDD-only population.",
+      "studyIds": [
+        "NCT02279953",
+        "NCT00655057",
+        "NCT01691092"
+      ],
+      "comparisonDimensions": [
+        "registered condition",
+        "primary outcome measure",
+        "primary outcome time frame",
+        "interventions",
+        "phase"
+      ],
+      "limitations": "Different constructs and windows cannot be converted to a common clinical-effect estimate from registry fields."
+    },
+    {
+      "id": "neurostimulation-comparator",
+      "title": "MDD/TRD neurostimulation: comparator boundary",
+      "question": "What intervention and follow-up framing is visible in selected stimulation records?",
+      "description": "A boundary group retained to make a different modality visible, never pooled with pharmacological records.",
+      "studyIds": [
+        "NCT01431001",
+        "NCT04999553",
+        "NCT05964192",
+        "NCT04581902",
+        "NCT05976009"
+      ],
+      "comparisonDimensions": [
+        "registered condition",
+        "interventions",
+        "primary outcome measure",
+        "primary outcome time frame",
+        "enrolment type"
+      ],
+      "limitations": "Narrow fields may not identify sham details, parameters, severity or full follow-up. No efficacy comparison is implied."
+    },
+    {
+      "id": "mdd-setting-boundaries",
+      "title": "MDD setting boundaries: comorbidity and related context",
+      "question": "Which registered fields make selected MDD records materially unlike a general unipolar-MDD comparison?",
+      "description": "A deliberate non-pooling group for comorbidity, inflammation-context and proof-of-concept records.",
+      "studyIds": [
+        "NCT00675896",
+        "NCT03143075",
+        "NCT03715127"
+      ],
+      "comparisonDimensions": [
+        "registered condition",
+        "title",
+        "interventions",
+        "primary outcome measure",
+        "primary outcome time frame"
+      ],
+      "limitations": "These records are not interchangeable with the other groups; fields do not supply a complete phenotype or eligibility assessment."
+    },
+    {
+      "id": "snapshot-replay",
+      "title": "Saved registry brief: capture-pair replay",
+      "question": "What does a later exact-ID capture add to a saved research brief?",
+      "description": "Three retained pairs support a record-by-record provenance demonstration; dates and change states are generated from validated capture metadata.",
+      "studyIds": [
+        "NCT03866174",
+        "NCT05711940",
+        "NCT06605105"
+      ],
+      "comparisonDimensions": [
+        "exact NCT ID",
+        "retrieval time",
+        "registry update date",
+        "field-level replay"
+      ],
+      "limitations": "This is not ClinicalTrials.gov Record History and cannot establish why a field changed or clinical/commercial meaning."
+    },
+    {
+      "id": "heterogeneous-legacy-contexts",
+      "title": "Separate legacy contexts",
+      "question": "Which retained records must remain outside an MDD/TRD pooled comparison?",
+      "description": "A deliberately heterogeneous catalogue group: postpartum depression, bipolar depression, schizophrenia, PTSD and insomnia contexts remain individually inspectable and are not a cohort.",
+      "studyIds": [
+        "NCT02942004",
+        "NCT03249376",
+        "NCT04659161",
+        "NCT02969382",
+        "NCT00532493",
+        "NCT02750306"
+      ],
+      "comparisonDimensions": [
+        "registered condition",
+        "interventions",
+        "primary outcome measure",
+        "primary outcome time frame"
+      ],
+      "limitations": "No pooled inference, treatment ranking or cross-indication conclusion is supported."
+    }
+  ]
+}

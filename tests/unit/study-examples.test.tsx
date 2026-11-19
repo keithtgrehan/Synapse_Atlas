@@ -55,7 +55,7 @@ describe("retained non-psychedelic study examples", () => {
   });
 
   it("renders all ten discovery-to-detail journeys with captured facts and source links", async () => {
-    expect(renderToStaticMarkup(<Home />)).toContain('href="/trials/examples"');
+    expect(renderToStaticMarkup(await Home())).toContain('href="/catalogue"'); // NCT-first catalogue is the discovery entry.
     const index = renderToStaticMarkup(await StudyExamplesPage());
     expect(index).toContain("not live registry data");
     for (const entry of await loadStudyExamples()) {
