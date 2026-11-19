@@ -18,6 +18,7 @@ export function CaseView({ researchCase }: { researchCase: VerifiedCase }) {
       <h2 id="case-question" className="case-question">{content.question}</h2>
       <p>{content.summary}</p></div><aside><h3>Why these studies?</h3><p>{content.whyTogether}</p>
       <p className="quiet">Registry facts with AI-assisted interpretation. No clinical outcome comparison.</p></aside></div>
+    <aside className="case-reading-context" aria-label="Comparison boundary"><p><strong>Read this comparison within its limits</strong></p><p>{content.cannotEstablish}</p></aside>
     <details className="case-matrix" open>
       <summary>Compare the evidence · {content.dimensions.length} dimensions</summary>
       <div className="case-matrix-wrap" role="region" aria-label={`${content.title}: registered study characteristics`} tabIndex={0}>

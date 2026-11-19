@@ -4,6 +4,8 @@ import Link from "next/link";
 import { MainNavigation } from "./main-navigation";
 
 import "./globals.css";
+import "./case-led.css";
+import "./studies/evidence-state.css";
 
 export const metadata: Metadata = {
   title: {

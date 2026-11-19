@@ -16,7 +16,7 @@ import { GET } from "../../src/app/api/snapshots/[nctId]/route";
 describe("NCT-first workspace", () => {
   it("leads with a sourced case and keeps programme context optional", async () => {
     const html = renderToStaticMarkup(await Home());
-    expect(html).toContain("Open the MDD endpoint case");
+    expect(html).toContain("Open a guided brief");
     expect(html).toContain("/studies?case=mdd-measurement-window");
     expect(html).not.toContain("reviewed programmes");
   });

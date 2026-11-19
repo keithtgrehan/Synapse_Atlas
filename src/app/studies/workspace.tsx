@@ -3,6 +3,8 @@
 import Link from "next/link";
 import type { VerifiedCase } from "../../lib/cases/model";
 import { CaseView } from "./case-view";
+import { EvidenceState } from "./evidence-state";
+import { evidenceSummary } from "./evidence-state-model";
 import { useEffect, useRef, useState } from "react";
 import type {
   Capture,
@@ -370,7 +372,7 @@ export function StudyWorkspace({
         ),
         "application/json",
       );
-    setMessage(`${kind === "csv" ? "CSV" : "Source bundle"} download prepared from ${selected.length} saved studies and ${comparisons.length} captured comparisons. No new registry request was made.`);
+    setMessage(`${kind === "csv" ? "CSV" : "Source bundle"} download prepared for ${currentCase?.content.title ?? "custom selection"}: ${evidenceSummary(selected, comparisons)}. Uses the evidence shown in this brief.`);
   }
   const changed =
     visiblePair?.diff.fields.filter((f) =>
@@ -402,6 +404,7 @@ export function StudyWorkspace({
           <option value="">Custom study selection</option>{researchCases.map((item) => <option key={item.content.id} value={item.content.id}>{item.content.title}</option>)}
         </select></label><a href="#saved-studies">Study records ↓</a><a href="#snapshot-heading">Snapshot comparison ↓</a><a href="#brief-export">Export brief ↓</a>
       </nav>}
+      <EvidenceState saved={selected} comparisons={comparisons} title={currentCase?.content.title} activeId={activeId} busy={busy} error={activeId ? errors[activeId] : undefined} />
       {currentCase && <CaseView researchCase={currentCase} />}
       {selectionError && (
         <p className="notice error" role="alert">
@@ -752,6 +755,7 @@ export function StudyWorkspace({
           <section className="export-bar" id="brief-export">
             <p className="eyebrow">03 / Take the evidence with you</p>
             <h2>Export this research brief</h2>
+            <EvidenceState compact saved={selected} comparisons={comparisons} title={currentCase?.content.title} />
             <p className="quiet">
               {selected.length} saved studies and {comparisons.length} displayed{" "}
               {comparisons.length === 1 ? "comparison" : "comparisons"}.

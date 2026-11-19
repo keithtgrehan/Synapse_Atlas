@@ -17,7 +17,7 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Open `http://localhost:3000`, then **Open the MDD endpoint case**, or browse the 39-trial catalogue. The catalogue groups all 39 records into explicit research contexts and describes their phase, registry status, enrolment definitions and endpoint coverage without pooling outcomes. Select up to four studies, inspect saved facts and **Check current registry**. The three original snapshot studies also offer **Replay two saved captures** using real retained evidence; this is explicitly historical, never a simulated live update. Export CSV, the JSON source bundle, or print/save PDF.
+Open `http://localhost:3000`, then **Open a guided brief**, or browse the 39-trial catalogue. The catalogue groups all 39 records into explicit research contexts and describes their phase, registry status, enrolment definitions and endpoint coverage without pooling outcomes. Select up to four studies, inspect saved facts and **Check current registry**. The three original snapshot studies also offer **Replay two saved captures** using real retained evidence; this is explicitly historical, never a simulated live update. Export CSV, the JSON source bundle, or print/save PDF.
 
 Live capture requires internet access to the already approved ClinicalTrials.gov API. Failure leaves the saved brief and replay usable. Capture once per study in the open session; reload starts another session. Exports do not make a new API request.
 
@@ -32,7 +32,7 @@ What changed since this research brief? Synapse Atlas puts selected registered s
 
 ### Try the three-minute demo
 
-Open one of three research cases, or filter the 39-trial catalogue by research collection and registry status. Compare registered study characteristics and read the sourced interpretation. Choose a study and check the current registry, or run the clearly dated retained-record replay. Inspect a field and its source evidence. Download CSV and the evidence bundle, or print the brief.
+Open one of three guided research cases, or explore seven research collections covering 39 unique trials. Collections can overlap; they are reading contexts, not pooled cohorts. Filter the catalogue by collection and registry status. Compare registered study characteristics and read the sourced interpretation. Choose a study and check the current registry, or run the clearly dated retained-record replay. Inspect a field and its source evidence. Download CSV and the evidence bundle, or print the brief.
 
 ### One captured pair
 
@@ -90,4 +90,6 @@ Production target remains the existing Vercel project `synapse-atlas` and [publi
 
 ## Screenshots and demo script
 
-The validated local production build passed 165 tests plus lint, types, migration consistency and build. See the [competitive design review](docs/competitive-design-review.md), [desktop home](docs/screenshots/home.png), [tablet research brief](docs/screenshots/research-tablet.png) and [narrow research brief](docs/screenshots/research-mobile.png). Print/PDF rendering remains unverified because the system dialog was inaccessible to the available controls. The three-minute script is the shared “Try the three-minute demo” section above. No user adoption, scientific accuracy or time-saving metrics are asserted.
+The validated local production build passed 169 tests plus lint, types, migration consistency and build. See the [competitive design review](docs/competitive-design-review.md), [desktop home](docs/screenshots/home.png), [tablet research brief](docs/screenshots/research-tablet.png) and [narrow research brief](docs/screenshots/research-mobile.png). Print/PDF rendering remains unverified because the system dialog was inaccessible to the available controls. The three-minute script is the shared “Try the three-minute demo” section above. No user adoption, scientific accuracy or time-saving metrics are asserted.
+
+The case-led iteration adds distinct measurement, trial-clock and computed replay previews; seven manifest-derived research starting points; and a shared saved/current/replay state for the brief and export. See [before](docs/screenshots/home-before-case-led.png), [after](docs/screenshots/home-case-led.png), [case previews](docs/screenshots/cases-case-led.png) and [mobile](docs/screenshots/home-case-led-mobile.png).

@@ -1,158 +1,99 @@
 import Link from "next/link";
 
+import { CasePreview, FeaturedEvidence } from "./case-preview";
+import { loadResearchManifest } from "../lib/catalogue/load";
 import { researchCases } from "../lib/cases/content";
+import { compareCaptures } from "../lib/snapshots/compare";
+import { loadResearchCases } from "../lib/cases/load";
+import { loadReplayPair } from "../lib/snapshots/catalogue";
 import { loadSnapshotCatalogue } from "../lib/snapshots/catalogue";
-import type { Capture } from "../lib/snapshots/model";
-
-function reported<T>(value: { state: string; value: T | null }): T | null {
-  return value.state === "reported" ? value.value : null;
-}
-
-function featuredEndpoint(nctId: string) {
-  const featured = researchCases[0]!;
-  const value = (key: string) =>
-    featured.dimensions
-      .find((dimension) => dimension.key === key)
-      ?.cells.find((cell) => cell.nctId === nctId)?.value;
-  const measure = value("primary-outcome");
-  const window = value("assessment-window");
-  return [measure, window].filter(Boolean).join(" · ") || "Not reported";
-}
-
-function displayDate(capture: Capture) {
-  const date = reported(capture.record.registryLastUpdatePostedDate);
-  return date?.value ?? "Not reported";
-}
 
 export default async function Home() {
-  const catalogue = await loadSnapshotCatalogue();
+  const [catalogue, manifest] = await Promise.all([
+    loadSnapshotCatalogue(),
+    loadResearchManifest(),
+  ]);
+  await loadResearchCases(catalogue);
+  const replayPairs = await Promise.all(researchCases[2]!.studyIds.map((id) => loadReplayPair(id)));
+  const replays = replayPairs.filter((pair) => pair !== null).map((pair) => compareCaptures(pair!.baseline, pair!.current));
   const featured = researchCases[0]!;
-  const featuredRecords = featured.studyIds
-    .map((nctId) => catalogue.find((item) => item.nctId === nctId))
-    .filter((item): item is Capture => Boolean(item));
+  const memberships = manifest.groups.reduce(
+    (total, collection) => total + collection.studyIds.length,
+    0,
+  );
+  const uniqueIds = new Set(manifest.groups.flatMap((collection) => collection.studyIds));
 
   return (
-    <main id="main-content" className="shell atlas-home">
-      <section className="atlas-hero atlas-hero--evidence">
-        <div className="hero-copy">
-          <p className="eyebrow">Evidence-led neuropsychiatric research</p>
-          <h1>See the study design before you compare the story.</h1>
-          <p className="lede">
-            Synapse Atlas keeps registered endpoints, assessment windows and
-            source dates beside the research question — then makes the same
-            captured evidence reusable in a brief.
+    <main id="main-content" className="atlas-home-v2">
+      <section className="atlas-intro shell">
+        <div className="atlas-intro-copy">
+          <p className="eyebrow">Traceable neuropsychiatry research.</p>
+          <h1>Turn a narrow research question into a traceable study-design brief.</h1>
+          <p className="atlas-intro-lede">
+            Read measures, timing, capture dates and limits together before you
+            compare a selected set of registered studies.
           </p>
-          <div className="button-row">
-            <Link className="button" href={`/studies?case=${featured.id}`}>
-              Open the MDD endpoint case <span aria-hidden="true">↗</span>
-            </Link>
-            <Link className="text-action" href="#research-cases">
-              Browse 3 research cases <span aria-hidden="true">↓</span>
-            </Link>
+          <Link className="button hero-primary" href={`/studies?case=${featured.id}`}>Open a guided brief <span aria-hidden="true">↗</span></Link>
+          <div className="atlas-intro-meta" aria-label="Product scope">
+            <span>{catalogue.length} retained NCT records</span>
+            <span>{researchCases.length} guided cases</span>
+            <span>{manifest.groups.length} research collections</span>
+            <span>Public registry evidence</span>
           </div>
-          <p className="hero-caption">
-            {catalogue.length} retained registry records · no account · public
-            ClinicalTrials.gov evidence
-          </p>
+          <Link className="atlas-intro-link" href="#research-collections">
+            Explore research collections <span aria-hidden="true">↓</span>
+          </Link>
         </div>
-        <section className="hero-evidence" aria-labelledby="featured-case-title">
-          <header className="evidence-head">
-            <div>
-              <p className="eyebrow">Featured case / 01</p>
-              <h2 id="featured-case-title">{featured.title}</h2>
-            </div>
-            <span className="small-tag">3 saved records</span>
-          </header>
-          <p className="evidence-question">{featured.question}</p>
-          <div
-            className="evidence-table-wrap"
-            role="region"
-            aria-label="Featured registered endpoint comparison"
-            tabIndex={0}
-          >
-            <table className="evidence-table">
-              <caption className="sr-only">
-                Registered primary endpoints in the featured MDD case
-              </caption>
-              <thead>
-                <tr>
-                  <th scope="col">Study</th>
-                  <th scope="col">Registered primary endpoint</th>
-                  <th scope="col">Record update</th>
-                </tr>
-              </thead>
-              <tbody>
-                {featuredRecords.map((capture) => (
-                  <tr key={capture.nctId}>
-                    <th scope="row">
-                      <a href={capture.record.provenance.sourceUrl}>
-                        {capture.nctId}
-                      </a>
-                      <span>{capture.record.briefTitle}</span>
-                    </th>
-                    <td>{featuredEndpoint(capture.nctId)}</td>
-                    <td>{displayDate(capture)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p className="evidence-footnote">
-            Saved ClinicalTrials.gov captures. Registered endpoints are not
-            reported outcomes.
-          </p>
-        </section>
+        <FeaturedEvidence caseStudy={featured} />
       </section>
 
-      <section className="home-path" aria-label="Research workflow">
-        <div>
-          <span className="step-number">01</span>
-          <h2>Choose a scoped question</h2>
-          <p>Start with a case whose shared context and material differences are explicit.</p>
-        </div>
-        <div>
-          <span className="step-number">02</span>
-          <h2>Inspect the registry evidence</h2>
-          <p>Open exact study identities, field locators and a dated retained capture.</p>
-        </div>
-        <div>
-          <span className="step-number">03</span>
-          <h2>Take a reproducible brief</h2>
-          <p>Use the same captured pair on screen, in CSV, print and the source bundle.</p>
-        </div>
-      </section>
-
-      <section id="research-cases" className="home-lenses" aria-labelledby="research-lenses-title">
-        <div className="section-kicker">
-          <p className="eyebrow">Research cases</p>
-          <h2 id="research-lenses-title">Three ways to read the same registry evidence with more care.</h2>
-        </div>
-        <div className="case-study-grid">
-          {researchCases.map((researchCase, index) => (
-            <article className={`case-card case-card--${index + 1}`} key={researchCase.id}>
-              <p className="case-index">{String(index + 1).padStart(2, "0")} / {researchCase.kicker}</p>
-              <h3>{researchCase.title}</h3>
-              <p>{researchCase.summary}</p>
-              <div className="case-meta" aria-label="Case scope">
-                <span>{researchCase.studyIds.length} studies</span>
-                <span>Registry evidence</span>
-              </div>
-              <Link href={`/studies?case=${researchCase.id}`}>Open the case <span aria-hidden="true">→</span></Link>
-            </article>
+      <section id="research-cases" className="shell atlas-cases" aria-labelledby="case-title">
+        <header className="atlas-section-heading">
+          <p className="eyebrow">Guided research cases</p>
+          <h2 id="case-title">Three routes through the evidence, with the limits intact.</h2>
+          <p>Each brief states the question, useful registered fields, material mismatch and the boundary on any interpretation.</p>
+        </header>
+        <div className="case-preview-grid">
+          {researchCases.map((caseStudy, index) => (
+            <CasePreview caseStudy={caseStudy} index={index} replays={index === 2 ? replays : []} key={caseStudy.id} />
           ))}
         </div>
       </section>
 
-      <section className="home-bottom">
-        <div>
-          <h2>Build your own selection</h2>
-          <p>{catalogue.length} retained registry records. NCT identity comes first; programme associations are optional context.</p>
-          <Link href="/catalogue">Browse the saved study catalogue →</Link>
+      <section id="research-collections" className="atlas-collection-band" aria-labelledby="collection-title">
+        <div className="shell">
+          <header>
+            <p className="eyebrow">Research starting points</p>
+            <h2 id="collection-title">Seven collection questions for a more focused starting point.</h2>
+            <p>The catalogue is a selected convenience inventory, not a complete landscape or a treatment ranking.</p>
+          </header>
+          <div className="collection-strip">
+            {manifest.groups.map((collection, index) => (
+              <article key={collection.id}>
+                <span>0{index + 1}</span>
+                <h3>{collection.title}</h3>
+                <p>{collection.question}</p>
+                <details><summary>Scope &amp; limits</summary><p>{collection.description}</p><p>{collection.limitations}</p></details>
+                <small>{new Set(collection.studyIds).size} unique records</small>
+                <Link href={`/catalogue?collection=${collection.id}`}>Explore collection →</Link>
+              </article>
+            ))}
+          </div>
+          <p className="collection-disclaimer">
+            {memberships} collection memberships cover {uniqueIds.size} unique retained records; some records appear in more than one context. Open a collection to inspect its stated question and limits.
+          </p>
         </div>
+      </section>
+
+      <section className="shell atlas-closing">
         <div>
-          <h2>Useful evidence. Clear limits.</h2>
-          <p>Registry changes do not establish clinical progress or treatment benefit. This is a research tool, built with AI assistance.</p>
-          <Link href="/how-it-works">How it works →</Link>
+          <p className="eyebrow">Build a focused comparison</p>
+          <h2>Choose up to four saved studies, then compare the captured evidence.</h2>
+          <p>Screen, CSV, source bundle and print output reuse the same saved or session-captured pair. Exports do not silently fetch another registry record.</p>
+        </div>
+        <div className="atlas-closing-actions">
+          <Link className="button" href={`/studies?case=${featured.id}`}>Open a guided brief <span aria-hidden="true">→</span></Link>
+          <Link href="/catalogue">Browse the catalogue <span aria-hidden="true">→</span></Link>
         </div>
       </section>
     </main>

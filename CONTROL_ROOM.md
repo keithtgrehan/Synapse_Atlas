@@ -55,6 +55,28 @@ blockers: [] # database persistence, manual annotation and clinical adjudication
 ```
 
 
+## Active iteration — case-led portfolio refinement, 20 November 2026
+
+**Baseline:** clean `097d70f`, open draft PR12; earlier165-test/Preview results are baseline evidence only. Production remains unchanged; Preview and existing PR only.
+
+**Plan (three work packages):** (1) Design owner replaces the oversized home table with compact factual previews and enriches the existing three case entries plus a manifest-derived seven-collection overview. (2) Scientist/research owner checks all cases/collections and records at most three evidence-qualified opportunities in the existing design review. (3) Lead integrates a reusable evidence-state view, matching export feedback and tests, then an independent quality/UX reviewer checks the final diff and rendered screenshots. One writer per file area; the quality review follows the research package.
+
+**Observable finish line:** All 3 detailed cases and 7 collections have functioning direct entry routes; counts derive from 39 unique records / 42 memberships with overlaps disclosed. Three distinct previews communicate measurement windows, adjunctive timing and an actual retained replay without efficacy or invented-change claims. The brief shows selected IDs, saved date, comparison mode/time and registry-update dates from the same captures used in exports; material boundaries remain visible. Validate 1440/768/390/320 layouts, keyboard/filter/empty/error/source states, measured contrast, reduced-motion rules, actual downloads/replay, and attempt supported print validation. Fresh full checks and shared-doc consistency, before/after screenshots, independent review, final CI and hosted Preview verification complete delivery. No new source integration, dependency, database or production action.
+
+### Case-led iteration validation and review
+
+The selected opportunities are case discovery, visual analytical context and persistent evidence identity; the existing design review distinguishes source observations, vendor descriptions and untested audience/value hypotheses. VP Marketing, CMO, scientific copy and GTM findings were supplied by Keith’s monitoring chat and integrated into the product: one primary guided-brief action beneath the promise, real previews before seven collection starting points, and matching evidence-state/export feedback. No marketing demand or efficacy claim was introduced.
+
+Independent scientific/source, graphic design and quality/UX reviews found no remaining material blockers after resolving the collection anchor, mobile CTA placement and semantic card/collection headings. The first check caught a replay-loader map-argument bug; it was fixed before release.
+
+Fresh final `pnpm check`: **169 tests / 27 files**, lint, strict types, migration consistency and production build passed. Local browser checks verified all three cases and all seven collection questions/counts (14/8/3/5/3/3/6), complete39-ID coverage, keyboard case entry, URL filters, empty results and selection removal across filters. Home and brief checked at1440/768/390/320 CSS pixels with no page overflow; measured DOM clientWidth confirmed each breakpoint. Mobile primary action appears at512–559px in a320×1000 viewport. Source/record state shows distinct saved, replay baseline and later capture dates; the JSON includes the same derived state. Actual downloaded CSV and JSON match all seven replay rows/dates/hashes; offline bundle replay passed.
+
+Measured rendered colour pairs: ink/paper14.88:1; muted/paper5.83:1; boundary/paper6.30:1; collection text10.46:1; collection secondary8.84:1; button8.33:1; state note7.00:1. New surfaces have no running animation/transition; reduced-motion rules inspected, OS preference not changed. This is not comprehensive accessibility certification.
+
+Print was retried with the supported browser button; the click timed out at the browser input command and no inspectable print preview/PDF was exposed. Native Codex app control was previously prohibited, so no bypass was attempted. Print CSS was constrained to page width, but rendered PDF remains unverified. Network failures remain covered by adapter/route tests and evidence-state tests; no browser outage was induced.
+
+Before/after evidence: `docs/screenshots/home-before-case-led.png`, `home-case-led.png`, `cases-case-led.png`, `home-case-led-mobile.png`, `evidence-state-mobile.png`, `brief-case-led-tablet.png`. Hosted checks and PR follow this validated implementation; production remains unchanged.
+
 ## Current release contract — 19 November 2026 (supersedes historical plans below)
 
 **G5 / S2-01: What changed since this research brief?** Keith explicitly authorized replacing the old private-v0.1 goal with a bounded, usable portfolio release. Historic goals, source decisions and review records below are retained as evidence, not active prerequisites.

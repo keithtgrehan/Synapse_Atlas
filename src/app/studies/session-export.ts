@@ -3,6 +3,7 @@ import { createSnapshotBrief } from "../../lib/snapshots/export";
 import type { Capture, SnapshotDiff } from "../../lib/snapshots/model";
 import { snapshotLimitations } from "../../lib/product/how-it-works";
 import type { VerifiedCase } from "../../lib/cases/model";
+import { evidenceRows } from "./evidence-state-model";
 export type CapturedComparison = {
   mode: "current" | "replay";
   diff: SnapshotDiff;
@@ -24,6 +25,7 @@ export function sessionManifest(
       "For each comparison, verify SHA-256 of the UTF-8 sourceProjectionJson projection against projectedSha256. Normalize it with the recorded transformation and request fields, then compare with the recorded comparator. Original response hashes identify source captures, not the projected bytes included here. The catalogue code and comparator are available in the repository.",
     scope:
       "Selected registered field groups only: status, enrolment, primary outcome measures/time frames, completion dates/types, lead sponsor and intervention names/types. Outcome descriptions, secondary endpoints and results are outside this comparator.",
+    evidenceState: evidenceRows(savedStudies, comparisons),
     savedStudies,
     comparisons: comparisons.map(({ mode, diff }) => ({
       mode,
