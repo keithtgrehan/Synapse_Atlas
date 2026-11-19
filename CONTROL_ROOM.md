@@ -75,7 +75,7 @@ Measured rendered colour pairs: ink/paper14.88:1; muted/paper5.83:1; boundary/pa
 
 Print was retried with the supported browser button; the click timed out at the browser input command and no inspectable print preview/PDF was exposed. Native Codex app control was previously prohibited, so no bypass was attempted. Print CSS was constrained to page width, but rendered PDF remains unverified. Network failures remain covered by adapter/route tests and evidence-state tests; no browser outage was induced.
 
-Before/after evidence: `docs/screenshots/home-before-case-led.png`, `home-case-led.png`, `cases-case-led.png`, `home-case-led-mobile.png`, `evidence-state-mobile.png`, `brief-case-led-tablet.png`. Hosted checks and PR follow this validated implementation; production remains unchanged.
+Before/after evidence: `docs/screenshots/home-before-case-led.png`, `home-case-led.png`, `cases-case-led.png`, `home-case-led-mobile.png`, `evidence-state-mobile.png`, `brief-case-led-tablet.png`. Hosted Preview verified for implementation `ee814e6`, deployment `dpl_HZxiyL5ApQvgeFGrv43Vh8ca4apj`: all three cases and seven collection routes passed; current NCT03866174 capture and retained replay updated both evidence-state views correctly; source disclosure worked by keyboard. The downloaded hosted bundle replayed offline and its exported current-capture identity matched `2026-11-19T23:41:54.582Z`. Browser console inspection returned no errors/warnings. GitHub validate and Vercel checks passed. PR12 is updated; production remains unchanged.
 
 ## Current release contract — 19 November 2026 (supersedes historical plans below)
 
