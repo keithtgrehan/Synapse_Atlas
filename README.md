@@ -2,9 +2,9 @@
 
 **What changed since this research brief?** Compare selected registered studies, check a saved record against a newly retrieved exact-NCT-ID response, and export the evidence you actually saw.
 
-[Existing public release](https://synapse-atlas-theta.vercel.app/) · [Source and release record](CONTROL_ROOM.md) · [Comparison implementation](src/lib/snapshots/compare.ts)
+[Validated Preview](https://synapse-atlas-git-codex-nct-snaps-dd9d7a-keith-grehans-projects.vercel.app) · [Draft PR12](https://github.com/keithtgrehan/Synapse_Atlas/pull/12) · [Existing public release](https://synapse-atlas-theta.vercel.app/) · [Source and release record](CONTROL_ROOM.md) · [Comparison implementation](src/lib/snapshots/compare.ts)
 
-**This branch prepares the NCT Snapshot Diff release. It is not yet deployed to production.** The public URL still serves the October 2026 release while this delivery is scoped to Preview and PR.
+**The 39-trial MVP is deployed to the verified Preview above. It is not deployed to production.** The public URL still serves the October 2026 release while this delivery is scoped to Preview and PR.
 
 The core journey uses 39 immutable saved NCT records independently of programme mappings. Optional programme context retains its original review status. No annotation, clinical adjudication, model training, database or account is required.
 

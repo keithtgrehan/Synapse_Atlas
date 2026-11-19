@@ -19,7 +19,7 @@ active_goal:
   id: G5
   name: Evidence-led research workspace and NCT Snapshot Diff portfolio release
   target_date: 2026-11-19
-  status: in_progress
+  status: ready_for_review
 active_sprint:
   id: S2
   dates: 2026-11-19/2026-12-02
@@ -49,7 +49,7 @@ last_completed:
   - PR #8 merged security maintenance at ae1e4d564cc728d14072f623cf4b374e3628ded8 on 2026-09-09; post-merge local checks, main CI, clean production audit, and Preview-only deployment verification passed. S1-05 is Complete.
 next_action:
   task: S2-01
-  instruction: Deliver the validated 39-trial, three-case MVP as a working Preview and feature-branch draft PR. Latest user instruction defers Production; do not merge or alter the existing live deployment.
+  instruction: Preview and draft PR12 delivered and browser-verified. Await Keith’s review; Production and main remain unchanged. Print/PDF rendering remains a documented validation limitation.
 blockers: [] # database persistence, manual annotation and clinical adjudication are outside this release
 
 ```
@@ -98,11 +98,16 @@ blockers: [] # database persistence, manual annotation and clinical adjudication
 
 ### Final release evidence — 20 November 2026
 
+**Delivered:** [working Preview](https://synapse-atlas-git-codex-nct-snaps-dd9d7a-keith-grehans-projects.vercel.app) · [draft PR12](https://github.com/keithtgrehan/Synapse_Atlas/pull/12). Feature commit `fc299502f351ae12a89c13d0fe1242961fa86653`; GitHub validate and Vercel checks passed. Preview deployment `66gYyk6R5v872JxychqAXExaXuXT` belongs to the existing `synapse-atlas` project. A documentation-only closeout records these results.
+
+**Hosted verification:** Home and39-trial catalogue render; all three case selections work; search/filter URL reload works. Actual hosted NCT03866174 current capture retrieved19Nov23:08:54UTC (seven unchanged fields); historical replay returned1unchanged/6uncompared with accurate absent-field warnings. The downloaded hosted live source bundle passed offline replay. Browser console inspection reported no errors/warnings. Hosted desktop1440px and mobile320px had no document overflow; final screenshots are `docs/screenshots/home.png` and `research-mobile.png`. No production action or main merge occurred.
+
+
 - **Latest delivery scope:** Keith’s monitoring chat relayed “Deliver the preview and PR for now.” Finish that delivery; leave Production unchanged. No further Vercel-account troubleshooting is required for production in this milestone.
 - **Implemented:** 39 unique retained trials (13 preserved + 26 official exact-ID captures), seven explicitly bounded collections, three evidence-backed cases, filtered descriptive counts, CSV/JSON source exports, saved/current and historical comparisons. The catalogue is a convenience sample, not a systematic or complete clinical landscape.
 - **Design:** Public Benchling, Linear, Labguru and ClinicalTrials.gov research is documented in `docs/competitive-design-review.md`; original paper/green/blue identity retained. Graphic, UX and UI agents reviewed the implementation. Fixed tablet matrix containment, active navigation, search metadata, disabled cursors and catalogue URL filters. No third-party branding or assets copied.
 - **Automated validation:** Final `pnpm check` passed 165 tests in 25 files, lint, strict types, migration consistency and production build in the clean locked-dependency validation copy. `git diff --check` passed. No dependencies added.
-- **Observed browser evidence:** Local production build at 1440px, 768px and 320px; tablet comparison focusable and document width768, mobile document width320. All three cases opened; historical replay and a real exact-ID current capture worked. Keyboard selection, evidence disclosure and exports observed. Downloaded case CSV/JSON values/hashes and all39-record bundle replay were verified against the deterministic comparator. Final catalogue URL/reload and keyboard comparison passed. Actual39-row CSV and final JSON with7collections/26new entries were downloaded and checked; offline replay passed for all39. At390px, pageWidth390. Hosted Preview checks are recorded at closeout below.
+- **Observed browser evidence:** Local production build at 1440px, 768px and 320px; tablet comparison focusable and document width768, mobile document width320. All three cases opened; historical replay and a real exact-ID current capture worked. Keyboard selection, evidence disclosure and exports observed. Downloaded case CSV/JSON values/hashes and all39-record bundle replay were verified against the deterministic comparator. Final catalogue URL/reload and keyboard comparison passed. Actual39-row CSV and final JSON with7collections/26new entries were downloaded and checked; offline replay passed for all39. At390px, pageWidth390. Hosted Preview checks are recorded above.
 - **Limits:** Network failure is covered by automated adapter/route tests; a browser-level outage was not induced. Invoking print timed out; native app access is unavailable, so current print/PDF rendering is not signed off. No claim of complete WCAG conformance, scientific correctness, human clinical review or outcome comparisons.
 - **Hosting:** Existing project team `team_YKDt6rh9Hs4SZSTB3uzQaXmG` is inaccessible to current Vercel connector (403; team authorization404). Connected team `team_gQjI7LAAdSyoPQIwSzbNV76Z` has no matching project. Preserve the existing live project and protection. Use the existing Git-connected Preview if available; do not silently create a replacement production project.
 
