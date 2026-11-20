@@ -21,7 +21,7 @@ describe("capture state shared by screen and export", () => {
     expect(html).toContain("Retained replay · not a current check");
     expect(html).toContain("Replay baseline capture");
     expect(html).toContain("Case interpretation uses saved evidence");
-    expect(evidenceSummary(selected, comparisons)).toBe("0 saved only · 0 current captures · 1 retained replays");
+    expect(evidenceSummary(selected, comparisons)).toBe("0 saved only · 0 current captures · 1 retained replay");
   });
   it("keeps failed and pending requests distinct from completed current captures", async () => {
     const saved = (await loadSnapshotCatalogue()).slice(0, 2);

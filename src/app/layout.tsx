@@ -6,6 +6,7 @@ import { MainNavigation } from "./main-navigation";
 import "./globals.css";
 import "./case-led.css";
 import "./studies/evidence-state.css";
+import "./workstation.css";
 
 export const metadata: Metadata = {
   title: {

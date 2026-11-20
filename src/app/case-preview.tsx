@@ -72,16 +72,21 @@ export function FeaturedEvidence({ caseStudy }: { caseStudy: ResearchCase }) {
       </div>
       <h2 id="featured-evidence-title">{caseStudy.title}</h2>
       <p>{caseStudy.summary}</p>
-      <div className="evidence-ribbon" aria-label="Registered endpoint and assessment window by study">
+      <div className="evidence-ribbon" role="table" aria-label="Registered endpoint and assessment window by study">
+        <div className="evidence-column-labels" role="row">
+          <span role="columnheader">Record</span>
+          <span role="columnheader">Registered primary measure</span>
+          <span role="columnheader">Assessment window</span>
+        </div>
         {caseStudy.studyIds.map((nctId, index) => {
           const measure = endpoint?.cells.find((cell) => cell.nctId === nctId)?.value ?? "Not reported";
           const time = window?.cells.find((cell) => cell.nctId === nctId)?.value ?? "Not reported";
           return (
-            <div className="evidence-marker" key={nctId}>
-              <span className="evidence-index">0{index + 1}</span>
-              <strong>{nctId}</strong>
-              <p>{measure}</p>
-              <small>{time}</small>
+            <div className="evidence-marker" role="row" key={nctId}>
+              <span className="evidence-index" aria-hidden="true">0{index + 1}</span>
+              <a href={`https://clinicaltrials.gov/study/${nctId}`} target="_blank" rel="noreferrer" role="cell">{nctId}<span className="sr-only">, official ClinicalTrials.gov record</span></a>
+              <p role="cell">{measure}</p>
+              <small role="cell">{time}</small>
             </div>
           );
         })}

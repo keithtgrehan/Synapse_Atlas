@@ -52,7 +52,7 @@ function value(capture: Capture, key: keyof typeof fieldLabels) {
       ? "Not captured"
       : "Not reported";
 }
-function download(name: string, content: string, type: string) {
+function download(name: string, content: BlobPart, type: string) {
   const url = URL.createObjectURL(new Blob([content], { type }));
   const anchor = document.createElement("a");
   anchor.href = url;
@@ -209,6 +209,7 @@ export function StudyWorkspace({
   const [caseId, setCaseId] = useState(initialCaseId);
   const currentCase = researchCases.find((item) => item.content.id === caseId);
   const [query, setQuery] = useState("");
+  const [selectionOpen, setSelectionOpen] = useState(initialIds.length === 0);
   const [active, setActive] = useState(initialIds[0] ?? "");
   const [captures, setCaptures] = useState<Record<string, CapturedComparison>>(
     {},
@@ -221,6 +222,8 @@ export function StudyWorkspace({
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [message, setMessage] = useState("");
   const [exportedAt, setExportedAt] = useState("");
+  const [pdfBusy, setPdfBusy] = useState(false);
+  const [pdfError, setPdfError] = useState("");
   const inflight = useRef(false);
   const panel = useRef<HTMLElement>(null);
   const selected = ids.map((id) => catalogue.find((c) => c.nctId === id)!);
@@ -268,9 +271,11 @@ export function StudyWorkspace({
     };
   }, []);
   function select(next: string[]) {
+    if (next.length === 0) setSelectionOpen(true);
     setCaseId(undefined);
     setIds(next);
     setMessage("");
+    setPdfError("");
     setExportedAt("");
     const params = new URLSearchParams();
     next.forEach((id) => params.append("nct", id));
@@ -284,6 +289,8 @@ export function StudyWorkspace({
     const nextCase = researchCases.find((item) => item.content.id === id);
     if (!nextCase) { select([]); return; }
     setCaseId(id);
+    setSelectionOpen(false);
+    setPdfError("");
     setIds(nextCase.content.studyIds);
     setActive(nextCase.content.studyIds[0]);
     setExportedAt("");
@@ -313,6 +320,7 @@ export function StudyWorkspace({
       (mode === "replay" && replays[nctId])
     ) {
       setShown((previous) => ({ ...previous, [nctId]: mode }));
+      setExportedAt("");
       return;
     }
     inflight.current = true;
@@ -374,6 +382,25 @@ export function StudyWorkspace({
       );
     setMessage(`${kind === "csv" ? "CSV" : "Source bundle"} download prepared for ${currentCase?.content.title ?? "custom selection"}: ${evidenceSummary(selected, comparisons)}. Uses the evidence shown in this brief.`);
   }
+  async function exportPdf() {
+    if (pdfBusy || selected.length === 0) return;
+    const timestamp = exportedAt || new Date().toISOString();
+    setExportedAt(timestamp);
+    setPdfBusy(true);
+    setPdfError("");
+    try {
+      // Capture this render's selection and pairs before loading the PDF renderer.
+      // Exporting never refreshes registry evidence or changes saved baselines.
+      const { sessionPdf } = await import("./session-pdf");
+      const bytes = await sessionPdf(selected, comparisons, timestamp, currentCase);
+      download(`synapse-atlas-brief-${timestamp.slice(0, 10)}.pdf`, new Uint8Array(bytes).buffer, "application/pdf");
+      setMessage(`PDF download prepared for ${currentCase?.content.title ?? "custom selection"}: ${selected.map((item) => item.nctId).join(", ")}. ${evidenceSummary(selected, comparisons)}. Uses the evidence selected when you requested the download.`);
+    } catch {
+      setPdfError("The PDF could not be prepared. Your evidence is unchanged. Retry, or download the CSV and source bundle below.");
+    } finally {
+      setPdfBusy(false);
+    }
+  }
   const changed =
     visiblePair?.diff.fields.filter((f) =>
       ["changed", "added", "removed"].includes(f.state),
@@ -386,23 +413,26 @@ export function StudyWorkspace({
     ) ?? [];
   return (
     <main id="main-content" className="shell workspace">
-      <header className="workspace-intro">
+      <header className="workspace-intro workspace-context">
         <div>
-          <p className="eyebrow">01 / Research brief</p>
-          <h1>{currentCase?.content.title ?? "Your evidence, with a point of comparison."}</h1>
-          <p>
-            Compare saved study designs, then inspect what changed in a specific
-            registry record.
+          <p className="eyebrow workspace-context__label">Research workspace / Brief</p>
+          <h1 className="workspace-context__title">{currentCase?.content.title ?? "Custom research brief"}</h1>
+          <p className="workspace-context__meta">
+            {selected.length} of 4 studies selected · {evidenceSummary(selected, comparisons)}
           </p>
         </div>
-        <Link className="quiet no-print" href="/how-it-works">
-          How this brief works ↗
-        </Link>
+        <div className="workspace-context__next no-print">
+          <button className="button" onClick={exportPdf} disabled={pdfBusy || selected.length === 0} aria-busy={pdfBusy}>
+            {pdfBusy ? "Preparing PDF…" : "Download PDF"}
+          </button>
+          <Link className="quiet" href="/how-it-works">How this brief works ↗</Link>
+        </div>
       </header>
-      {researchCases.length > 0 && <nav className="brief-toolbar no-print" aria-label="Research workspace">
+      {pdfError && <p className="notice error" role="alert">{pdfError}</p>}
+      {researchCases.length > 0 && <nav className="brief-toolbar workspace-toolbar no-print" aria-label="Research workspace">
         <label htmlFor="case-switch">Research case<select id="case-switch" value={caseId ?? ""} onChange={(event) => chooseCase(event.target.value)}>
           <option value="">Custom study selection</option>{researchCases.map((item) => <option key={item.content.id} value={item.content.id}>{item.content.title}</option>)}
-        </select></label><a href="#saved-studies">Study records ↓</a><a href="#snapshot-heading">Snapshot comparison ↓</a><a href="#brief-export">Export brief ↓</a>
+        </select></label>{selected.length > 0 && <><a href="#saved-studies">Study records ↓</a><a href="#snapshot-heading">Snapshot comparison ↓</a><a href="#brief-export">Export brief ↓</a></>}
       </nav>}
       <EvidenceState saved={selected} comparisons={comparisons} title={currentCase?.content.title} activeId={activeId} busy={busy} error={activeId ? errors[activeId] : undefined} />
       {currentCase && <CaseView researchCase={currentCase} />}
@@ -414,7 +444,8 @@ export function StudyWorkspace({
       )}
       <details
         className="catalogue-disclosure"
-        open={ids.length === 0 || undefined}
+        open={selectionOpen}
+        onToggle={(event) => setSelectionOpen(event.currentTarget.open)}
       >
         <summary>Choose studies · {ids.length} of 4 selected</summary>
         <div className="catalogue-controls">
@@ -763,7 +794,10 @@ export function StudyWorkspace({
               replayable evidence.
             </p>
             <div className="button-row">
-              <button className="button" onClick={() => exportBrief("csv")}>
+              <button className="button" onClick={exportPdf} disabled={pdfBusy} aria-busy={pdfBusy}>
+                {pdfBusy ? "Preparing PDF…" : "Download PDF"}
+              </button>
+              <button className="button button-secondary" onClick={() => exportBrief("csv")}>
                 Download CSV
               </button>
               <button
@@ -776,7 +810,7 @@ export function StudyWorkspace({
                 className="button button-secondary"
                 onClick={() => window.print()}
               >
-                Print / save PDF
+                Print brief
               </button>
             </div>
             <p className="quiet">{snapshotLimitations}</p>

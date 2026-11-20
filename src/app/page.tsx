@@ -25,24 +25,24 @@ export default async function Home() {
 
   return (
     <main id="main-content" className="atlas-home-v2">
-      <section className="atlas-intro shell">
+      <section className="atlas-intro shell" aria-labelledby="home-title">
         <div className="atlas-intro-copy">
-          <p className="eyebrow">Traceable neuropsychiatry research.</p>
-          <h1>Turn a narrow research question into a traceable study-design brief.</h1>
+          <p className="eyebrow">Traceable neuropsychiatry research</p>
+          <h1 id="home-title">Compare study designs with traceable evidence.</h1>
           <p className="atlas-intro-lede">
             Read measures, timing, capture dates and limits together before you
             compare a selected set of registered studies.
           </p>
-          <Link className="button hero-primary" href={`/studies?case=${featured.id}`}>Open a guided brief <span aria-hidden="true">↗</span></Link>
+          <div className="hero-actions">
+            <Link className="button hero-primary" href={`/studies?case=${featured.id}`}>Open a guided brief <span aria-hidden="true">↗</span></Link>
+            <Link className="atlas-intro-link" href="#research-collections">Browse research collections <span aria-hidden="true">↓</span></Link>
+          </div>
           <div className="atlas-intro-meta" aria-label="Product scope">
             <span>{catalogue.length} retained NCT records</span>
             <span>{researchCases.length} guided cases</span>
             <span>{manifest.groups.length} research collections</span>
             <span>Public registry evidence</span>
           </div>
-          <Link className="atlas-intro-link" href="#research-collections">
-            Explore research collections <span aria-hidden="true">↓</span>
-          </Link>
         </div>
         <FeaturedEvidence caseStudy={featured} />
       </section>
@@ -73,6 +73,7 @@ export default async function Home() {
                 <span>0{index + 1}</span>
                 <h3>{collection.title}</h3>
                 <p>{collection.question}</p>
+                <p className="collection-dimensions">Compare: {collection.comparisonDimensions.join(" · ")}</p>
                 <details><summary>Scope &amp; limits</summary><p>{collection.description}</p><p>{collection.limitations}</p></details>
                 <small>{new Set(collection.studyIds).size} unique records</small>
                 <Link href={`/catalogue?collection=${collection.id}`}>Explore collection →</Link>

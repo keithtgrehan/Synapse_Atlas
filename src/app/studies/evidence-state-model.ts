@@ -6,7 +6,7 @@ export function evidenceRows(saved: Capture[], comparisons: CapturedComparison[]
     const pair = comparisons.find((item) => item.diff.nctId === capture.nctId);
     return {
       nctId: capture.nctId,
-      mode: pair?.mode ?? "saved",
+      mode: pair?.mode ?? ("saved" as const),
       savedAt: capture.retrievedAt,
       savedRegistryUpdate: capture.record.provenance.registryLastUpdatePostedDate ?? null,
       comparisonBaselineAt: pair?.diff.baseline.retrievedAt ?? null,
@@ -17,5 +17,7 @@ export function evidenceRows(saved: Capture[], comparisons: CapturedComparison[]
 }
 export function evidenceSummary(saved: Capture[], comparisons: CapturedComparison[]) {
   const rows = evidenceRows(saved, comparisons);
-  return `${rows.filter((row) => row.mode === "saved").length} saved only · ${rows.filter((row) => row.mode === "current").length} current captures · ${rows.filter((row) => row.mode === "replay").length} retained replays`;
+  const current = rows.filter((row) => row.mode === "current").length;
+  const replay = rows.filter((row) => row.mode === "replay").length;
+  return `${rows.filter((row) => row.mode === "saved").length} saved only · ${current} current ${current === 1 ? "capture" : "captures"} · ${replay} retained ${replay === 1 ? "replay" : "replays"}`;
 }

@@ -19,7 +19,7 @@ active_goal:
   id: G5
   name: Evidence-led research workspace and NCT Snapshot Diff portfolio release
   target_date: 2026-11-19
-  status: ready_for_review
+  status: in_progress
 active_sprint:
   id: S2
   dates: 2026-11-19/2026-12-02
@@ -49,11 +49,33 @@ last_completed:
   - PR #8 merged security maintenance at ae1e4d564cc728d14072f623cf4b374e3628ded8 on 2026-09-09; post-merge local checks, main CI, clean production audit, and Preview-only deployment verification passed. S1-05 is Complete.
 next_action:
   task: S2-01
-  instruction: Preview and draft PR12 delivered and browser-verified. Await Keith’s review; Production and main remain unchanged. Print/PDF rendering remains a documented validation limitation.
+  instruction: Complete the authorized professional workspace and direct PDF iteration, validate final head, merge PR12 and publish the tested merged revision to the existing public production alias.
 blockers: [] # database persistence, manual annotation and clinical adjudication are outside this release
 
 ```
 
+
+## Active iteration — professional workspace, direct PDF and public release, 20 November 2026
+
+**Authority:** Keith explicitly authorized publishing the validated MVP to the live website. The latest coordinated instruction authorizes a direct downloadable PDF, a reviewed scientific SaaS composition, marking PR12 ready, merging the exact reviewed revision through normal controls, and explicitly deploying the merged revision to the existing production project. This supersedes the historical Preview-only delivery gates below; preserve Preview protection and unrelated project settings.
+
+**Optimized execution brief:** Preserve 39 unique trials, seven collections (42 memberships), three evidence-backed cases and all provenance boundaries. Apply at most three coherent design improvements from current competitor research without copying branding. Build a direct PDF from the same in-memory selections, case and comparisons as CSV/JSON; never refetch registry evidence or change baselines during export. Preserve source/inference labels, saved/current/replay identity, exact IDs, dates, missing values, precision, enrolment types, limits and source links, including long multipage content.
+
+**Bounded ownership:** Lead integrates UI/export and release; PDF implementation owner handles the renderer/dependency/font and focused tests; design owner handles only agreed visual files after the incoming read-only design research. Independent rendered/source/accessibility review follows implementation. Incoming research agents are reviewers, not duplicate build owners.
+
+**Finish line:** Inspect actual downloaded saved-only, replay, current and custom-selection PDFs using extracted text and rendered pages; verify CSV/JSON identity, full tests, shared-doc consistency, responsive 1440/768/390/320 layouts, keyboard/focus/headings, measured contrast and error/empty/reduced-motion behavior. Record public-data review, final-head CI and screenshots. Merge the reviewed head, preserve a verified production rollback deployment, deploy the merged revision in the production environment, and verify anonymous public routes and actual exports without an auth bypass. Only then mark release complete.
+
+**Release preparation:** The existing public alias resolves to READY production `dpl_k7K2gWwKZqBvg1ZkDYhNtxejP575`, retained as rollback candidate. Standard Protection remains `prod_deployment_urls_and_all_previews`; no access-setting change is required. The connected Vercel deployment tool is available. CLI staging was investigated, but CLI has no signed-in session; do not retrieve tokens or weaken protection to work around that. Prefer connected deployment operations and record any staging limitation truthfully.
+
+**Dependency findings:** Fresh production audit identified existing Next.js and Zod advisories. Patched Next.js/eslint-config-next16.4.5 and Zod4.6.6 now pass the production audit. Sources: [Next.js critical advisory](https://github.com/advisories/GHSA-2464-fhr4-w9xw), [Next.js later cache fix](https://github.com/advisories/GHSA-mrhx-c7xc-m3w5), [Zod collection validation advisory](https://github.com/advisories/GHSA-mrhx-c7xc-m3w5). jsPDF4.2.1 and licensed embedded Noto Sans meet the direct-PDF acceptance test. Static public-data directory boundaries in the two retained-data loaders remove broad server-bundle tracing warnings; traversal paths are rejected before reading.
+
+**Observed validation:** The current layout passes desktop1440, tablet768 and mobile390/320 width checks on home and brief; all three case routes and seven collection routes return the correct context/counts (14/8/3/5/3/3/6). The320px home primary action ends at488px. Keyboard focus is a visible3px outline; keyboard multi-selection now keeps the picker open, empty-search recovery works, and invalid selections show a recoverable alert with no dead workspace anchors. Browser error/warning inspection is clear. Rendered contrast: heading14.58:1, metadata5.35:1, primary button7.48:1, evidence note7.00:1. Reduced-motion rules are present; no OS preference was changed.
+
+Actual downloaded PDF/CSV/JSON sets for saved, replay, current and custom selections passed266/192/187/41 text-and-source checks respectively, all-page text bounds and clickable source-link checks. Independent review found a heading-chain/closing-paragraph orphan; the renderer now keeps those groups together. A fresh actual-case renderer artifact and500-repeat long-field artifact passed independent visual/scientific review. Fresh final `pnpm check` passed178 tests across28 files, lint, types, migration consistency and production build without tracing warnings. Shared-doc consistency and diff whitespace checks passed. Hosted browser parity and final-head CI remain required before merge. The PDF glyph preflight rejects unsupported characters without silently stripping evidence; CSV/JSON stay available.
+
+Independent final rendered UI review passed the new desktop/tablet/320px screenshots. Scientific review confirms case analysis remains saved evidence, current/replay comparisons are distinct, and dates, precision/types, missing states, hashes and field citations remain traceable. No human clinical or accessibility certification is claimed. Production dependency audit after the scoped updates reports no known vulnerabilities.
+
+**Baseline:** clean `983b334`, 169 tests / 27 files, PR12 draft and protected Preview validated. Earlier visual/PDF statements below describe previous iterations, not acceptance evidence for this release.
 
 ## Active iteration — case-led portfolio refinement, 20 November 2026
 

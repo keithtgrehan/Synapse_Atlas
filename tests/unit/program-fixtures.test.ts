@@ -26,6 +26,13 @@ async function fixtureInputs(index = 0) {
 }
 
 describe("programme ClinicalTrials.gov snapshots", () => {
+  it.each(["../README.md", "data/../README.md", "data\\..\\README.md"])("rejects fixture or metadata paths outside public data: %s", async (unsafePath) => {
+    const snapshot = programmeMappingDataset.sourceSnapshots[0]!;
+    for (const field of ["fixturePath", "metadataPath"] as const) {
+      await expect(readAndValidateProgrammeFixture({ ...snapshot, [field]: unsafePath }))
+        .rejects.toThrow("PROGRAMME_SOURCE_PATH_OUTSIDE_PUBLIC_DATA");
+    }
+  });
   it("cross-validates every exact fixture, metadata envelope, locator, and raw value", async () => {
     for (const snapshot of programmeMappingDataset.sourceSnapshots) {
       const validated = await readAndValidateProgrammeFixture(snapshot);

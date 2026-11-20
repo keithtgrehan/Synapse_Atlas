@@ -18,7 +18,10 @@ export async function loadResearchCases(catalogue: Capture[], root = process.cwd
         item.sourceUrl !== capture.record.provenance.sourceUrl || !publicField.test(item.locator))
       throw new Error("CASE_EVIDENCE_IDENTITY_MISMATCH");
     if (!documents.has(item.sourcePath)) {
-      const bytes = await readFile(path.join(root, item.sourcePath));
+      if (!item.sourcePath.startsWith("data/") || item.sourcePath.split("/").includes("..") || item.sourcePath.includes("\\"))
+        throw new Error("CASE_SOURCE_PATH_OUTSIDE_PUBLIC_DATA");
+      // A static data-directory boundary also keeps unrelated project files out of server bundles.
+      const bytes = await readFile(path.join(root, "data", item.sourcePath.slice(5)));
       if (hash(bytes) !== capture.rawSha256) throw new Error("CASE_SOURCE_HASH_MISMATCH");
       documents.set(item.sourcePath, JSON.parse(bytes.toString("utf8")));
     }
