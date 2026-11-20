@@ -2,7 +2,7 @@
 
 **What changed since this research brief?** Compare selected registered studies, check a saved record against a newly retrieved exact-NCT-ID response, and export the evidence you actually saw.
 
-[Validated Preview](https://synapse-atlas-git-codex-nct-snaps-dd9d7a-keith-grehans-projects.vercel.app) · [Release PR12](https://github.com/keithtgrehan/Synapse_Atlas/pull/12) · [Public site](https://synapse-atlas-theta.vercel.app/) · [Source and release record](CONTROL_ROOM.md) · [Comparison implementation](src/lib/snapshots/compare.ts)
+[Validated Preview](https://synapse-atlas-git-codex-maps-design-case-keith-grehans-projects.vercel.app) · [Release PR14](https://github.com/keithtgrehan/Synapse_Atlas/pull/14) · [Public site](https://synapse-atlas-theta.vercel.app/) · [Source and release record](CONTROL_ROOM.md) · [Comparison implementation](src/lib/snapshots/compare.ts)
 
 **The MVP contains 41 retained trials, eight research collections and four guided cases.** The release adds a compact scientific workspace, complete saved primary-outcome inspection and direct PDF downloads. A separately captured MAPP1/MAPP2 PTSD design case adds source-linked external reading without pooling outcomes. Publication is authorized; exact validation and deployment revisions are recorded in the control room.
 
@@ -92,7 +92,7 @@ Production target remains the existing Vercel project `synapse-atlas` and [publi
 
 ## Screenshots and demo script
 
-Current test counts and the final checked revision are recorded in the control room. See the [competitive design review](docs/competitive-design-review.md), [desktop home](docs/screenshots/home.png), [tablet research brief](docs/screenshots/research-tablet.png) and [narrow research brief](docs/screenshots/research-mobile.png). Direct PDF downloads are validated by text/source comparison and page rendering; browser printing remains a separate optional control. The three-minute script is the shared “Try the three-minute demo” section above. No user adoption, scientific accuracy or time-saving metrics are asserted.
+Current test counts and the final checked revision are recorded in the control room. See the [competitive design review](docs/competitive-design-review.md), [desktop home](docs/screenshots/home.png), [tablet research brief](docs/screenshots/research-tablet.png) and [narrow research brief](docs/screenshots/research-mobile.png). Direct PDF downloads are validated by text/source comparison and page rendering; browser printing remains a separate optional control. The [current home](docs/screenshots/home-mapp-desktop.png), [MAPP case](docs/screenshots/mapp-case-desktop.png) and [320px source inspection](docs/screenshots/mapp-outcome-mobile.png) show the final additive case. The three-minute script is the shared “Try the three-minute demo” section above. No user adoption, scientific accuracy or time-saving metrics are asserted.
 
 The case-led iteration adds distinct measurement, trial-clock and computed replay previews; seven manifest-derived research starting points; and a shared saved/current/replay state for the brief and export. See [before](docs/screenshots/home-before-case-led.png), [after](docs/screenshots/home-case-led.png), [case previews](docs/screenshots/cases-case-led.png) and [mobile](docs/screenshots/home-case-led-mobile.png).
 
