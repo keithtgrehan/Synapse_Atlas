@@ -86,7 +86,7 @@ function SourceFields({
     <div>
       <h5>{label}</h5>
       {locators.length === 0 ? (
-        <p>No reported field locator in this capture.</p>
+        <p>No source location was reported for this saved copy.</p>
       ) : (
         locators.map((locator) => (
           <div key={locator}>
@@ -96,8 +96,8 @@ function SourceFields({
         ))
       )}
       <p>
-        <a href={capture.requestUrl} target="_blank" rel="noreferrer">Open registry API request ↗</a> ·
-        Retrieved {date(capture.retrievedAt)}
+        <a href={capture.requestUrl} target="_blank" rel="noreferrer">Open the public source data ↗</a> ·
+        Retrieved {date(capture.retrievedAt)}. The linked public source may contain newer information.
       </p>
     </div>
   );
@@ -117,11 +117,11 @@ function FieldChange({
       </header>
       <div className="diff-values">
         <div>
-          <h5>Baseline</h5>
+          <h5>Earlier saved copy</h5>
           <p>{field.before}</p>
         </div>
         <div>
-          <h5>Comparison capture</h5>
+          <h5>Version being compared</h5>
           <p>{field.after}</p>
         </div>
       </div>
@@ -131,21 +131,21 @@ function FieldChange({
         {field.currentLocators.join("; ") || "not captured"}
       </p>
       <details className="source-disclosure">
-        <summary>Inspect {field.label.toLowerCase()} source fields</summary>
+        <summary>See the saved source details for {field.label.toLowerCase()}</summary>
         <p>
-          These are the captured values used here. Opening the API link makes a
-          new external request and may show newer evidence.
+          These are the exact saved values used here. The API link opens the
+          public data source again and may show newer information.
         </p>
         <div className="diff-values">
           <SourceFields
             capture={diff.baseline}
             locators={field.baselineLocators}
-            label="Baseline source"
+            label="Earlier saved source"
           />
           <SourceFields
             capture={diff.current}
             locators={field.currentLocators}
-            label="Comparison source"
+            label="Source being compared"
           />
         </div>
       </details>
@@ -169,7 +169,7 @@ function CaptureHeader({
           "Not reported"}
       </p>
       <details className="source-disclosure">
-        <summary>Capture identity &amp; hashes</summary>
+        <summary>Technical details and checksums</summary>
         <p>
           Original response SHA-256: <code>{capture.rawSha256}</code>
         </p>
@@ -296,7 +296,7 @@ export function StudyWorkspace({
     setIds(nextCase.content.studyIds);
     setActive(nextCase.content.studyIds[0]);
     setExportedAt("");
-    setMessage(`Opened ${nextCase.content.title}. Saved evidence is ready.`);
+    setMessage(`Opened ${nextCase.content.title}. The saved records are ready.`);
     window.history.replaceState(null, "", `/studies?case=${id}`);
   }
   function toggle(id: string) {
@@ -337,7 +337,7 @@ export function StudyWorkspace({
       if (!response.ok)
         throw new Error(
           payload.error ??
-            "The record is unavailable. Saved evidence is unchanged.",
+            "The public record is unavailable. Your saved copy is unchanged.",
         );
       const diff =
         mode === "replay"
@@ -355,7 +355,7 @@ export function StudyWorkspace({
         [nctId]:
           error instanceof Error
             ? error.message
-            : "The registry could not be reached. Your saved evidence is still available.",
+            : "We could not reach ClinicalTrials.gov. Your saved records are still available.",
       }));
     } finally {
       inflight.current = false;
@@ -382,7 +382,7 @@ export function StudyWorkspace({
         ),
         "application/json",
       );
-    setMessage(`${kind === "csv" ? "CSV" : "Source bundle"} download prepared for ${currentCase?.content.title ?? "custom selection"}: ${evidenceSummary(selected, comparisons)}. Uses the evidence shown in this brief.`);
+    setMessage(`${kind === "csv" ? "CSV" : "Source data"} download prepared for ${currentCase?.content.title ?? "custom selection"}: ${evidenceSummary(selected, comparisons)}. Uses the records and checks shown in this brief.`);
   }
   async function exportPdf() {
     if (pdfBusy || selected.length === 0) return;
@@ -396,9 +396,9 @@ export function StudyWorkspace({
       const { sessionPdf } = await import("./session-pdf");
       const bytes = await sessionPdf(selected, comparisons, timestamp, currentCase);
       download(`synapse-atlas-brief-${timestamp.slice(0, 10)}.pdf`, new Uint8Array(bytes).buffer, "application/pdf");
-      setMessage(`PDF download prepared for ${currentCase?.content.title ?? "custom selection"}: ${selected.map((item) => item.nctId).join(", ")}. ${evidenceSummary(selected, comparisons)}. Uses the evidence selected when you requested the download.`);
+      setMessage(`PDF download prepared for ${currentCase?.content.title ?? "custom selection"}: ${selected.map((item) => item.nctId).join(", ")}. ${evidenceSummary(selected, comparisons)}. Uses the records and checks selected when you requested the download.`);
     } catch {
-      setPdfError("The PDF could not be prepared. Your evidence is unchanged. Retry, or download the CSV and source bundle below.");
+      setPdfError("We could not prepare the PDF. Your records are unchanged. Try again, or download the CSV table and JSON source data below.");
     } finally {
       setPdfBusy(false);
     }
@@ -417,10 +417,10 @@ export function StudyWorkspace({
     <main id="main-content" tabIndex={-1} className="shell workspace">
       <header className="workspace-intro workspace-context">
         <div>
-          <p className="eyebrow workspace-context__label">Research workspace / Brief</p>
+          <p className="eyebrow workspace-context__label">Study comparison</p>
           <h1 className="workspace-context__title">{currentCase?.content.title ?? "Custom research brief"}</h1>
           <p className="workspace-context__meta">
-            {selected.length} of 4 studies selected · Source-linked research brief
+            {selected.length} of 4 studies selected · A brief built from saved study records
           </p>
         </div>
         <div className="workspace-context__next no-print">
@@ -431,17 +431,17 @@ export function StudyWorkspace({
         </div>
       </header>
       {pdfError && <p className="notice error" role="alert">{pdfError}</p>}
-      {researchCases.length > 0 && <nav className="brief-toolbar workspace-toolbar no-print" aria-label="Research workspace">
-        <label htmlFor="case-switch">Research case<select id="case-switch" value={caseId ?? ""} onChange={(event) => chooseCase(event.target.value)}>
-          <option value="">Custom study selection</option>{researchCases.map((item) => <option key={item.content.id} value={item.content.id}>{item.content.title}</option>)}
-        </select></label>{selected.length > 0 && <><a href="#saved-studies">Study records ↓</a><a href="#snapshot-heading">Snapshot comparison ↓</a><a href="#brief-export">Export brief ↓</a></>}
+      {researchCases.length > 0 && <nav className="brief-toolbar workspace-toolbar no-print" aria-label="Study comparison">
+        <label htmlFor="case-switch">Guided example<select id="case-switch" value={caseId ?? ""} onChange={(event) => chooseCase(event.target.value)}>
+          <option value="">Choose your own studies</option>{researchCases.map((item) => <option key={item.content.id} value={item.content.id}>{item.content.title}</option>)}
+        </select></label>{selected.length > 0 && <><a href="#saved-studies">Study records ↓</a><a href="#snapshot-heading">Compare versions ↓</a><a href="#brief-export">Downloads ↓</a></>}
       </nav>}
       <EvidenceState saved={selected} comparisons={comparisons} title={currentCase?.content.title} activeId={activeId} busy={busy} error={activeId ? errors[activeId] : undefined} />
       {currentCase && <CaseView researchCase={currentCase} />}
       {selectionError && (
         <p className="notice error" role="alert">
-          The link contained an invalid selection. Choose one to four saved NCT
-          records below.
+          This link does not contain a valid study selection. Choose one to four
+          saved study records below.
         </p>
       )}
       <details
@@ -452,7 +452,7 @@ export function StudyWorkspace({
         <summary>Choose studies · {ids.length} of 4 selected</summary>
         <div className="catalogue-controls">
           <label htmlFor="study-search">
-            Find a saved study by NCT ID, title or intervention
+            Find a study by its ID, title or treatment
           </label>
           <input
             id="study-search"
@@ -502,7 +502,7 @@ export function StudyWorkspace({
             className="button button-secondary"
             onClick={() => select(prepared)}
           >
-            Use prepared depression brief
+            Use the three-study example
           </button>
           <button
             className="button button-secondary"
@@ -519,29 +519,29 @@ export function StudyWorkspace({
         <section className="empty-selection">
           <h2>Start with a research question</h2>
           <p>
-            Select one to four saved studies, or open the prepared three-study
-            brief.
+            Choose one to four saved study records, or open the three-study
+            example.
           </p>
           <button className="button" onClick={() => select(prepared)}>
-            Open prepared brief
+            Open the three-study example
           </button>
         </section>
       ) : (
         <>
           <div className="section-title">
-            <h2 id="saved-studies">Selected registered studies</h2>
+            <h2 id="saved-studies">Selected study records</h2>
             <span className="quiet">
-              {selected.length} NCT records · saved evidence, not live results
+              {selected.length} saved records · not study results
             </span>
           </div>
           <p className="notice">
-            Dated snapshots: saved{" "}
+            Copies saved{" "}
             {selected
               .map((c) => c.retrievedAt.slice(0, 10))
               .filter((v, i, a) => a.indexOf(v) === i)
               .join(" / ")}
-            . Records older than 48 hours may be stale. Use “Inspect changes” to
-            capture the current registry.
+            . These dated copies may not include later changes. Select “Check for updates”
+            to compare a saved copy with a new check of the public record.
           </p>
           <div className="study-grid">
             {selected.map((c) => (
@@ -575,7 +575,7 @@ export function StudyWorkspace({
                 </dl>
                 <details>
                   <summary>
-                    Endpoints, interventions &amp; study completion
+                    Planned measurements, interventions &amp; completion
                   </summary>
                   <dl>
                     {(
@@ -603,7 +603,7 @@ export function StudyWorkspace({
                   className="button button-secondary"
                   onClick={() => inspect(c.nctId)}
                 >
-                  Inspect changes{" "}
+                  Check for updates{" "}
                   <span className="sr-only"> for {c.nctId}</span>
                 </button>
               </article>
@@ -617,7 +617,7 @@ export function StudyWorkspace({
               tabIndex={-1}
               aria-labelledby="snapshot-heading"
             >
-              <p className="eyebrow">02 / NCT Snapshot Diff</p>
+              <p className="eyebrow">Compare record versions</p>
               <div className="snapshot-heading">
                 <h2 id="snapshot-heading">What changed in {activeId}?</h2>
                 <a
@@ -625,7 +625,7 @@ export function StudyWorkspace({
                   href={activeCapture.record.provenance.sourceUrl}
                   target="_blank" rel="noreferrer"
                 >
-                  Open official study record ↗
+                  Open the public study record ↗
                 </a>
               </div>
               <p className="quiet">{activeCapture.record.briefTitle}</p>
@@ -636,10 +636,10 @@ export function StudyWorkspace({
                   onClick={() => capture("current")}
                 >
                   {busy === `${activeId}:current`
-                    ? "Retrieving and validating…"
+                    ? "Checking the public record…"
                     : captures[activeId!]
-                      ? "Show captured current record"
-                      : "Check current registry"}
+                      ? "Show this visit’s check"
+                      : "Check for updates"}
                 </button>
                 {prepared.includes(activeId!) && (
                   <button
@@ -648,29 +648,29 @@ export function StudyWorkspace({
                     onClick={() => capture("replay")}
                   >
                     {busy === `${activeId}:replay`
-                      ? "Opening retained replay…"
-                      : "Replay two saved captures"}
+                      ? "Opening saved versions…"
+                      : "Compare two saved versions"}
                   </button>
                 )}
               </div>
               <p role="status" className="quiet">
                 {busy
-                  ? "Your saved baseline stays available while the capture is checked."
+                  ? "Your saved copy stays available while we check the public record."
                   : visiblePair
-                    ? "Comparison ready. Exports reuse this captured evidence."
-                    : "No new lookup yet. The comparison captures one response in this session and never replaces your saved baseline."}
+                    ? "The comparison is ready. Downloads use these same records."
+                    : "No update check yet. We keep one new check per study during this visit. Your original saved copy stays unchanged."}
               </p>
               {activeId && errors[activeId] && (
                 <p role="alert" className="notice error">
-                  Refresh unavailable. {errors[activeId]}
+                  Check unavailable. {errors[activeId]}
                 </p>
               )}
               {!visiblePair && (
                 <div className="notice">
-                  Check the registry to compare seven registered field groups.
-                  If access is unavailable, the three prepared studies have a
-                  deterministic replay from two retained captures. A replay is
-                  historical evidence, not a live refresh.
+                  Check for updates to compare seven groups of study details.
+                  The three-study example also lets you compare two copies saved
+                  earlier. That comparison works without a new registry check
+                  and is not a live update.
                 </div>
               )}
               {visiblePair && (
@@ -678,31 +678,31 @@ export function StudyWorkspace({
                   {visiblePair.mode === "replay" && (
                     <p className="notice warning">
                       <strong>
-                        Retained-record replay — not a current lookup.
+                        Two saved versions — not a live update.
                       </strong>{" "}
-                      Two real saved captures are compared below. Fields absent
-                      from an older request cannot be compared. No historical
-                      changes have been invented.
+                      This compares two copies saved earlier. Information that was
+                      not saved in an older copy cannot be compared. The comparison
+                      does not fill in missing history.
                     </p>
                   )}
                   <div className="pair-header">
                     <CaptureHeader
                       capture={visiblePair.diff.baseline}
-                      title="Saved baseline"
+                      title="Earlier saved copy"
                     />
                     <CaptureHeader
                       capture={visiblePair.diff.current}
                       title={
                         visiblePair.mode === "replay"
-                          ? "Later retained capture"
-                          : "Current session capture"
+                          ? "Later saved version"
+                          : "New check in this visit"
                       }
                     />
                   </div>
                   <p className="diff-summary">
                     {changed.length === 0
-                      ? "No changes detected in comparable fields."
-                      : `${changed.length} field ${changed.length === 1 ? "group has" : "groups have"} changed.`}
+                      ? "No changes found in the details we could compare."
+                      : `${changed.length} ${changed.length === 1 ? "group of details has" : "groups of details have"} changed.`}
                   </p>
                   <p className="quiet">
                     {unchanged.length} unchanged · {uncompared.length} could not
@@ -721,7 +721,7 @@ export function StudyWorkspace({
                       className="unchanged-group"
                       open={changed.length === 0}
                     >
-                      <summary>Unchanged facts ({unchanged.length})</summary>
+                      <summary>Details that stayed the same ({unchanged.length})</summary>
                       {unchanged.map((field) => (
                         <FieldChange
                           key={field.key}
@@ -734,7 +734,7 @@ export function StudyWorkspace({
                   {uncompared.length > 0 && (
                     <details className="uncompared-group" open>
                       <summary>
-                        Unknown or uncompared ({uncompared.length})
+                        Details we could not compare ({uncompared.length})
                       </summary>
                       {uncompared.map((field) => (
                         <FieldChange
@@ -768,17 +768,17 @@ export function StudyWorkspace({
                 <h2>
                   {pair.diff.nctId} —{" "}
                   {pair.mode === "replay"
-                    ? "Retained-record replay"
-                    : "Current session capture"}
+                    ? "Comparison of two saved versions"
+                    : "New check in this visit"}
                 </h2>
                 <div className="pair-header">
                   <CaptureHeader
                     capture={pair.diff.baseline}
-                    title="Baseline"
+                    title="Earlier saved copy"
                   />
                   <CaptureHeader
                     capture={pair.diff.current}
-                    title="Comparison capture"
+                    title="Version being compared"
                   />
                 </div>
                 {pair.diff.fields.map((field) => (
@@ -787,27 +787,28 @@ export function StudyWorkspace({
               </section>
             ))}
           <section className="export-bar" id="brief-export">
-            <p className="eyebrow">03 / Take the evidence with you</p>
-            <h2>Export this research brief</h2>
+            <p className="eyebrow">Download what you reviewed</p>
+            <h2>Keep a copy of this brief</h2>
             <EvidenceState compact saved={selected} comparisons={comparisons} title={currentCase?.content.title} />
             <p className="quiet">
               {selected.length} saved studies and {comparisons.length} displayed{" "}
               {comparisons.length === 1 ? "comparison" : "comparisons"}.
-              Downloads never refetch. The JSON source manifest includes
-              replayable evidence.
+              Downloads use the records and checks already shown. They do not
+              contact ClinicalTrials.gov again. The JSON source data lets you
+              reconstruct this comparison.
             </p>
             <div className="button-row">
               <button className="button" onClick={exportPdf} disabled={pdfBusy} aria-busy={pdfBusy}>
                 {pdfBusy ? "Preparing PDF…" : "Download PDF"}
               </button>
               <button className="button button-secondary" onClick={() => exportBrief("csv")}>
-                Download CSV
+                Download CSV table
               </button>
               <button
                 className="button button-secondary"
                 onClick={() => exportBrief("json")}
               >
-                Download source bundle
+                Download source data (JSON)
               </button>
               <button
                 className="button button-secondary"
@@ -818,21 +819,22 @@ export function StudyWorkspace({
             </div>
             <p className="quiet">{snapshotLimitations}</p>
             <details className="source-disclosure">
-              <summary>What is in the source bundle?</summary>
+              <summary>What is in the JSON source data?</summary>
               <p>
-                Selected saved captures, each displayed evidence pair, full
-                source-field projections, original and projected hashes,
-                normalized hashes, retrieval/registry dates and comparator
-                versions. It excludes unused contact fields. The
-                original-response hash identifies the retained source; use the
-                projection hash to verify the bytes included here.
+                It includes the selected saved records, the two versions used for
+                each comparison, their dates and the source details needed to
+                reconstruct the view. Unused contact fields are excluded.
+                Technical details include source locations, processing versions
+                and SHA-256 checksums. The original-response checksum identifies
+                the saved source. The projection checksum verifies the source
+                fields included in this download.
               </p>
               {comparisons.map((pair) => (
                 <p key={pair.diff.nctId}>
                   {pair.diff.nctId}: {createSnapshotBrief(pair.diff).format} (
                   {pair.mode === "replay"
-                    ? "retained replay"
-                    : "current capture"}
+                    ? "two saved versions"
+                    : "new check in this visit"}
                   )
                 </p>
               ))}

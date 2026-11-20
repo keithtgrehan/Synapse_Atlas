@@ -6,11 +6,11 @@ export default function ProgrammesError({ reset }: { reset: () => void }) {
   return (
     <main className="shell">
       <section className="state-panel state-error" role="alert">
-        <p className="eyebrow">Mapping data unavailable</p>
-        <h1>The programme candidates could not be loaded</h1>
+        <p className="eyebrow">Programme records unavailable</p>
+        <h1>We could not open the programme records</h1>
         <p>
-          No generated or unvalidated substitute is shown. Retry the checked-in
-          dataset or return to the programme search.
+          We have not replaced the records with generated or unchecked information.
+          Try again, or return to the programme search.
         </p>
         <div className="button-row">
           <button className="button" type="button" onClick={reset}>Try again</button>

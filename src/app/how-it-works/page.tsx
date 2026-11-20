@@ -11,14 +11,14 @@ export default function HowItWorks() {
         <p className="eyebrow">Behind the brief</p>
         <h1>How Synapse Atlas works</h1>
         <p className="lede">
-          A small, inspectable research workflow — from a saved record to a
-          reproducible change brief.
+          Explore saved public study records, check for updates and download a
+          summary that keeps its sources.
         </p>
         <Link
           className="button"
           href="/studies?nct=NCT03866174&nct=NCT05711940&nct=NCT06605105"
         >
-          Try the prepared brief
+          Try the three-study example
         </Link>
       </header>
       {howItWorks.map((section) => (
@@ -39,7 +39,7 @@ export default function HowItWorks() {
           <a href="https://clinicaltrials.gov/about-site/terms-conditions">
             source terms
           </a>{" "}
-          and <Link href="/methodology">detailed methodology</Link>.
+          and <Link href="/methodology">source and technical details</Link>.
         </p>
       </section>
     </main>

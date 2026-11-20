@@ -53,15 +53,15 @@ const conditions = `${protocol}/conditionsModule/conditions`;
 export const researchCases: ResearchCase[] = [
   {
     id: "mdd-measurement-window",
-    title: "MDD studies: the endpoint is part of the question",
+    title: "Depression studies: why the measure and timing matter",
     kicker: "Why the measure and timing matter",
     question:
-      "For three studies of major depressive disorder (MDD), what should we check before treating different primary measures and time frames as answers to the same question?",
+      "These depression studies planned to measure different things at different times. What should we check before comparing them?",
     summary:
-      "These completed MDD studies share a broad condition label, but their registered primary outcomes use different measures at Day 15, Week 8 and post-dose Day 43.",
+      "The three records describe completed studies of major depressive disorder (MDD). Their main planned measurements differ, as does the timing: Day 15, Week 8 and Day 43 after dosing.",
     studyIds: ["NCT03866174", "NCT03672175", "NCT01422213"],
     whyTogether:
-      "All three retained records identify MDD and a completed interventional study. They make a useful comparison of how a study defines what it measures, not a comparison of treatments.",
+      "All three saved records describe completed studies of MDD that involved an intervention. This example compares what they planned to measure. It does not compare treatment results.",
     dimensions: [
       {
         key: "registered-status-design",
@@ -118,18 +118,18 @@ export const researchCases: ResearchCase[] = [
       { text: "SOURCE_FACT: The three registered primary outcomes use the Montgomery-Asberg Depression Rating Scale (MADRS), HAM-D and a DSST/RAVLT composite, respectively.", evidenceClass: "SOURCE_FACT", evidence: [evidence(sources.nct038, `${outcomes}/0/measure`, "Change in Central Rater Montgomery-Asberg Depression Rating Scale (MADRS) Total Score From Baseline to Post-dose Day 43"), evidence(sources.nct036, `${outcomes}/0/measure`, "Change From Baseline in the 17-item HAM-D Total Score at Day 15"), evidence(sources.nct014, `${outcomes}/0/measure`, "Change From Baseline to Week 8 in DSST (Number of Correct Symbols) and RAVLT (Acquisition and Delayed Recall) Using the Composite Z-score Defined as the Weighted Sum of the Individual Patient Z-scores")] },
       { text: "MODEL_INFERENCE: Before results are considered, a careful comparison keeps the differences in measure and timing visible instead of treating these as one MDD efficacy question.", evidenceClass: "MODEL_INFERENCE", evidence: [evidence(sources.nct038, `${outcomes}/0/measure`, "Change in Central Rater Montgomery-Asberg Depression Rating Scale (MADRS) Total Score From Baseline to Post-dose Day 43"), evidence(sources.nct038, `${outcomes}/0/timeFrame`, "Baseline; Day 43 post-dose"), evidence(sources.nct036, `${outcomes}/0/measure`, "Change From Baseline in the 17-item HAM-D Total Score at Day 15"), evidence(sources.nct036, `${outcomes}/0/timeFrame`, "Baseline (BL), Day 15"), evidence(sources.nct014, `${outcomes}/0/measure`, "Change From Baseline to Week 8 in DSST (Number of Correct Symbols) and RAVLT (Acquisition and Delayed Recall) Using the Composite Z-score Defined as the Weighted Sum of the Individual Patient Z-scores"), evidence(sources.nct014, `${outcomes}/0/timeFrame`, "Baseline and Week 8")] },
     ],
-    cannotEstablish: "This case cannot tell us about efficacy, safety, durability, relative clinical benefit, or whether the study populations can be treated as interchangeable. Baseline severity, prior-treatment criteria, monotherapy setting and follow-up comparability remain unknown unless they are inspected directly in the retained record. Registered endpoints are not reported outcomes.",
+    cannotEstablish: "This comparison cannot tell us whether a treatment works, is safe, has lasting effects or provides more benefit than another. It cannot show whether the participant groups can be treated as equivalent. Starting symptom severity, previous-treatment requirements, whether treatment was used on its own, and comparable follow-up remain unknown unless checked directly in the saved record. Planned measurements are not study results.",
     nextQuestions: ["What do the full eligibility criteria and randomisation records say about baseline severity and prior treatment?", "Are results posted or publications available under the project’s source policy, and do their analysis populations match the registry enrolment definitions?"],
     selectionRationale: "Ranked first because three retained MDD records make a meaningful comparability limit visible without relying on compound or company claims.",
   },
   {
     id: "adjunctive-inadequate-response",
-    title: "Adjunctive MDD: same scale, different trial clock",
+    title: "Add-on depression studies: same scale, different timeline",
     kicker: "Same measure, different starting points",
-    question: "How much can we compare when two add-on studies in major depressive disorder (MDD) register MADRS change but define baseline and treatment windows differently?",
-    summary: "Both retained records describe add-on antidepressant settings and change on the Montgomery Asberg Depression Rating Scale (MADRS). Their phase, lead-in structure and registered timing differ.",
+    question: "Both studies planned to use the same depression rating scale. How do their different starting points and treatment periods affect a comparison?",
+    summary: "Both saved records describe treatment added to antidepressant therapy. They planned to track change on the Montgomery Asberg Depression Rating Scale (MADRS). Their study phases, introductory periods and planned timing differ.",
     studyIds: ["NCT03559192", "NCT01360645"],
-    whyTogether: "These are the closest retained add-on MDD pair. They show why a shared endpoint still needs its study-period context before it can be compared.",
+    whyTogether: "These two records describe add-on treatment for major depressive disorder (MDD). They show why using the same measure is not enough: the starting point and treatment stages also matter.",
     dimensions: [
       { key: "setting", label: "Registered adjunctive setting", cells: [
         { nctId: "NCT03559192", value: "Adjunctive treatment in partially SSRI/SNRI-responsive MDD; placebo lead-in", evidence: [evidence(sources.nct035, `${protocol}/descriptionModule/briefSummary`, "The purpose of this study is to evaluate the efficacy of JNJ-67953964 compared to placebo when administered as adjunctive treatment in participants with Major Depressive Disorder (MDD) partially responsive to selective serotonin reuptake inhibitor/ serotonin-norepinephrine reuptake inhibitor (SSRI/SNRI) treatment in terms of reduction of symptoms of depression, as assessed by the change from baseline on the Montgomery Asberg Depression Rating Scale (MADRS) in non-responders during the placebo lead-in period."), evidence(sources.nct035, `${protocol}/armsInterventionsModule/armGroups/0/label`, "Lead-in Period: Placebo")] },
@@ -148,24 +148,24 @@ export const researchCases: ResearchCase[] = [
       { text: "SOURCE_FACT: Both records register MADRS total-score change as a primary outcome, but describe the baseline and timing differently.", evidenceClass: "SOURCE_FACT", evidence: [evidence(sources.nct035, `${outcomes}/0/measure`, "Change From Treatment Baseline in Montgomery Asberg Depression Rating Scale (MADRS) Total Score at Treatment Week 6 in Participants Who Were Non-Responders During Placebo Lead-in Period"), evidence(sources.nct035, `${outcomes}/0/timeFrame`, "Treatment Baseline up to Week 6 of DB-treatment period"), evidence(sources.nct013, `${outcomes}/0/measure`, "Change From Baseline (End of Phase A [Week 8]) to Week 14 in Montgomery-Asberg Depression Rating Scale (MADRS) Total Score for the Efficacy Sample."), evidence(sources.nct013, `${outcomes}/0/timeFrame`, "Baseline and Week 14")] },
       { text: "MODEL_INFERENCE: A shared MADRS label supports a focused design comparison, but not a direct comparison of effects without aligned population, baseline and analysis definitions.", evidenceClass: "MODEL_INFERENCE", evidence: [evidence(sources.nct035, `${outcomes}/0/measure`, "Change From Treatment Baseline in Montgomery Asberg Depression Rating Scale (MADRS) Total Score at Treatment Week 6 in Participants Who Were Non-Responders During Placebo Lead-in Period"), evidence(sources.nct035, `${outcomes}/0/timeFrame`, "Treatment Baseline up to Week 6 of DB-treatment period"), evidence(sources.nct013, `${outcomes}/0/measure`, "Change From Baseline (End of Phase A [Week 8]) to Week 14 in Montgomery-Asberg Depression Rating Scale (MADRS) Total Score for the Efficacy Sample."), evidence(sources.nct013, `${outcomes}/0/timeFrame`, "Baseline and Week 14")] },
     ],
-    cannotEstablish: "This case cannot tell us which add-on intervention performs better, or whether enrolment, analysis populations, baseline severity, prior-treatment criteria, treatment duration, follow-up, safety or benefit are comparable.",
+    cannotEstablish: "This comparison cannot tell us which add-on treatment works better. It cannot show whether the enrolled groups, people included in the analysis, starting symptom severity, previous-treatment requirements, treatment length, follow-up, safety or benefit are comparable.",
     nextQuestions: ["Which eligibility and lead-in criteria define inadequate response in each protocol?", "Which randomised/treated/analysis populations are reported in results sources, if they are admissible under the source policy?"],
     selectionRationale: "Ranked second because it is the strongest retained pair in this setting while keeping the different study timing and analysis population in view.",
   },
   {
     id: "registry-change-brief",
-    title: "Saved registry brief: evidence changes versus clinical conclusions",
-    kicker: "What a saved registry replay can and cannot show",
-    question: "What does a later registry capture add to a saved research brief, and what remains outside the evidence?",
-    summary: "This case links three major depressive disorder (MDD) or treatment-resistant depression (TRD) records to two retained captures each. Open the dated replay below: it generates field-level differences from the verified pairs without claiming a change in advance.",
+    title: "Comparing two saved versions of a study record",
+    kicker: "What comparing two saved versions can tell you",
+    question: "What changed between two saved versions of a public study record, and what can those changes tell us?",
+    summary: "Explore two saved versions of each of three records on major depressive disorder (MDD) or treatment-resistant depression (TRD). The comparison checks which details changed between those copies. It does not assume that a change occurred.",
     studyIds: ["NCT03866174", "NCT05711940", "NCT06605105"],
-    whyTogether: "Each selected NCT ID has two retained, hash-verified captures. This is about the life of a registry record, not a pooled clinical group.",
+    whyTogether: "Each study has two saved copies whose integrity has been checked. This example follows changes to public records. It does not combine participant groups or treatment results.",
     dimensions: [
       { key: "registered-condition", label: "Registered condition", cells: [
         { nctId: "NCT03866174", value: "Depressive Disorder, Major", evidence: [evidence(sources.nct038, conditions, ["Depressive Disorder, Major"])] },
         { nctId: "NCT05711940", value: "Treatment Resistant Depression", evidence: [evidence(sources.nct057, conditions, ["Treatment Resistant Depression"])] },
         { nctId: "NCT06605105", value: "Major Depressive Disorder", evidence: [evidence(sources.nct066, conditions, ["Major Depressive Disorder"])] },
-      ], interpretation: "These labels should not be treated as one clinical population. They define the scope of this record-by-record provenance exercise." },
+      ], interpretation: "These condition labels do not describe one shared participant group. Each record is compared only with another saved version of the same record." },
       { key: "current-capture-status", label: "Later-capture registered status", cells: [
         { nctId: "NCT03866174", value: "Completed", evidence: [evidence(sources.nct038, `${status}/overallStatus`, "COMPLETED")] },
         { nctId: "NCT05711940", value: "Active, not recruiting", evidence: [evidence(sources.nct057, `${status}/overallStatus`, "ACTIVE_NOT_RECRUITING")] },
@@ -174,9 +174,9 @@ export const researchCases: ResearchCase[] = [
     ],
     takeaways: [
       { text: "SOURCE_FACT: The retained later captures identify three different registered statuses across the three NCT IDs.", evidenceClass: "SOURCE_FACT", evidence: [evidence(sources.nct038, `${status}/overallStatus`, "COMPLETED"), evidence(sources.nct057, `${status}/overallStatus`, "ACTIVE_NOT_RECRUITING"), evidence(sources.nct066, `${status}/overallStatus`, "ENROLLING_BY_INVITATION")] },
-      { text: "MODEL_INFERENCE: Replaying a limited set of captured fields creates a reproducible audit trail for a saved brief. It does not replace ClinicalTrials.gov Record History or clinical interpretation.", evidenceClass: "MODEL_INFERENCE", evidence: [evidence(sources.nct038, `${id}/nctId`, "NCT03866174"), evidence(sources.nct057, `${id}/nctId`, "NCT05711940"), evidence(sources.nct066, `${id}/nctId`, "NCT06605105")] },
+      { text: "MODEL_INFERENCE: Comparing the same saved details lets someone else reconstruct the comparison. It does not replace ClinicalTrials.gov Record History or clinical interpretation.", evidenceClass: "MODEL_INFERENCE", evidence: [evidence(sources.nct038, `${id}/nctId`, "NCT03866174"), evidence(sources.nct057, `${id}/nctId`, "NCT05711940"), evidence(sources.nct066, `${id}/nctId`, "NCT06605105")] },
     ],
-    cannotEstablish: "This case cannot tell us why a record changed, whether all historical registry versions are represented, or anything about current study conduct, outcomes, safety or commercial implications.",
+    cannotEstablish: "These copies cannot tell us why a record changed or show its complete history. They do not establish how a study is being run now, its results, treatment safety or business implications.",
     nextQuestions: ["Does ClinicalTrials.gov Record History provide a fuller official chronology for a specific field?", "Which additional public fields are necessary for the research question without broadening the safe export scope?"],
     selectionRationale: "Ranked third because the retained capture pairs make provenance visible while keeping a registry update separate from a clinical conclusion.",
   },

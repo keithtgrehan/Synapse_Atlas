@@ -22,10 +22,10 @@ describe("NCT-first workspace", () => {
     try {
       const view = savedPrimaryOutcomes(selected);
       const html = renderToStaticMarkup(<PrimaryOutcomeInspector view={view} />);
-      expect(html).toContain("2 studies / 3 registered primary-outcome entries");
+      expect(html).toContain("2 studies / 3 main measurement entries");
       expect(html).toContain("Final Protocol");
-      expect(html.match(/Inspect saved capture fields/g)).toHaveLength(3);
-      expect(html).toContain("Open current official record");
+      expect(html.match(/See the saved source details/g)).toHaveLength(3);
+      expect(html).toContain("Open the public study record");
       const manifest = sessionManifest(selected, [], "2026-11-20T12:00:00Z");
       expect(manifest.savedPrimaryOutcomes).toEqual(view);
       const csv = sessionCsv(selected, [], manifest.exportedAt);
@@ -40,7 +40,7 @@ describe("NCT-first workspace", () => {
   });
   it("leads with a sourced case and keeps programme context optional", async () => {
     const html = renderToStaticMarkup(await Home());
-    expect(html).toContain("Open a guided brief");
+    expect(html).toContain("Open an example");
     expect(html).toContain("/studies?case=mdd-measurement-window");
     expect(html).not.toContain("reviewed programmes");
   });
@@ -53,10 +53,10 @@ describe("NCT-first workspace", () => {
         selectionError={false}
       />,
     );
-    expect(html).toContain("Check current registry");
-    expect(html).toContain("Download source bundle");
+    expect(html).toContain("Check for updates");
+    expect(html).toContain("Download source data (JSON)");
     expect(html).toContain("41 saved records");
-    expect(html).toContain("No new lookup yet");
+    expect(html).toContain("No update check yet");
     expect(html).not.toContain("MODEL_INFERENCE");
     expect(html).not.toContain("Not captured</dd>");
   });

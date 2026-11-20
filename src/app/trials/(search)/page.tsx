@@ -153,17 +153,18 @@ export default async function TrialsPage({ searchParams }: TrialsPageProps) {
     <main id="main-content" className="shell">
       <header className="page-header">
         <Link className="back-link" href="/">← Synapse Atlas</Link>
-        <p className="eyebrow">Official registered evidence</p>
+        <p className="eyebrow">Public study records</p>
         <h1>Clinical trial explorer</h1>
         <p className="lede">
-          Search a bounded live view of ClinicalTrials.gov. Every result keeps
-          its source link, retrieval time, registry update date, and response hash.
+          Search public ClinicalTrials.gov records. Each search returns a limited
+          page of results, with source links and dates. These may differ from
+          the dated copies in the saved study list.
         </p>
       </header>
 
       <p className="boundary-note">
         <Link href="/trials/examples">Browse 10 non-psychedelic study examples</Link>
-        {" — retained snapshots retrieved 13 October 2026, with publications and source notes."}
+        {" — copies saved on 13 October 2026, with publication links and source notes."}
       </p>
 
       <form className="search-panel" action="/trials" method="get" role="search">

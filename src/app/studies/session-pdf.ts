@@ -3,6 +3,7 @@ import { compareCaptures } from "../../lib/snapshots/compare";
 import type { Capture } from "../../lib/snapshots/model";
 import type { CaseEvidence, VerifiedCase } from "../../lib/cases/model";
 import { sessionManifest, type CapturedComparison } from "./session-export";
+import { evidenceModeLabels as stateLabel } from "./evidence-state-model";
 import { outcomeFieldText } from "../../lib/snapshots/primary-outcomes";
 import { readingBoundary, readingMetadata } from "../../lib/cases/reading-references";
 
@@ -12,7 +13,6 @@ const PAGE_WIDTH = 595.28;
 const PAGE_HEIGHT = 841.89;
 const MARGIN = 46;
 const CONTENT_BOTTOM = PAGE_HEIGHT - 58;
-const stateLabel = { saved: "Saved only / not checked in this session", current: "Current session capture", replay: "Retained-record replay / not a current check" };
 const present = (value: string | null | undefined) => value ?? "Not reported";
 
 function documentBlocks(manifest: Manifest): Block[] {
@@ -31,31 +31,31 @@ function documentBlocks(manifest: Manifest): Block[] {
   add(`${manifest.savedStudies.length} selected studies / ${manifest.comparisons.length} displayed comparisons`, "meta");
   add(`Selected records: ${manifest.savedStudies.map((capture) => capture.nctId).join(", ")}`);
   if (researchCase) {
-    add("Research question", "heading");
+    add("The question", "heading");
     add(researchCase.content.question);
     add(researchCase.content.summary);
-    add(`MODEL_INFERENCE / Selection rationale: ${researchCase.content.whyTogether}`);
+    add(`AI-assisted interpretation (MODEL_INFERENCE) / Why these studies: ${researchCase.content.whyTogether}`);
     add(researchCase.content.cannotEstablish, "boundary");
   }
   add("Evidence in this brief", "heading");
-  add("Case interpretation stays tied to saved evidence. A current capture or replay updates the comparison only.", "boundary");
+  add("The example explanation uses the saved records. Checking for updates or comparing saved versions changes only the comparison below.", "boundary");
   for (const row of manifest.evidenceState) {
     add(`${row.nctId} / ${stateLabel[row.mode]}`);
-    add(`Saved capture: ${row.savedAt}\nRegistry update in saved record: ${present(row.savedRegistryUpdate)}`, "meta");
-    if (row.comparisonAt) add(`Comparison baseline capture: ${present(row.comparisonBaselineAt)}\n${row.mode === "replay" ? "Later retained capture" : "Current check captured"}: ${row.comparisonAt}\nRegistry update in comparison: ${present(row.comparisonRegistryUpdate)}`, "meta");
+    add(`Saved copy: ${row.savedAt}\nRegistry update in saved record: ${present(row.savedRegistryUpdate)}`, "meta");
+    if (row.comparisonAt) add(`Saved copy used for comparison: ${present(row.comparisonBaselineAt)}\n${row.mode === "replay" ? "Later saved copy" : "New check made"}: ${row.comparisonAt}\nRegistry update in comparison: ${present(row.comparisonRegistryUpdate)}`, "meta");
   }
   add(manifest.limitations, "boundary");
   if (researchCase) {
-    add("Case analysis / saved evidence", "heading");
+    add("Example notes / saved study records", "heading");
     for (const dimension of researchCase.content.dimensions) {
       add(dimension.label, "heading");
       for (const cell of dimension.cells) {
         add(`${cell.nctId}: ${cell.value}`);
         add(`${cell.evidence.length ? "STRUCTURED_EXTRACTION" : "UNVERIFIED"} / ${cell.evidence.map(reference).join(", ") || "No supporting field supplied"}`, "meta");
       }
-      add(`MODEL_INFERENCE: ${dimension.interpretation}`, "boundary");
+      add(`AI-assisted interpretation (MODEL_INFERENCE): ${dimension.interpretation}`, "boundary");
     }
-    add("Discussion takeaways", "heading");
+    add("What the records suggest", "heading");
     for (const claim of researchCase.content.takeaways) {
       add(`${claim.evidenceClass}: ${claim.text.replace(/^(SOURCE_FACT|MODEL_INFERENCE):\s*/, "")}`);
       if (claim.evidence.length) add(`Supporting fields: ${claim.evidence.map(reference).join(", ")}`, "meta");
@@ -65,7 +65,7 @@ function documentBlocks(manifest: Manifest): Block[] {
     researchCase.content.nextQuestions.forEach((question, index) => add(`${index + 1}. ${question}`));
     add(`MODEL_INFERENCE / Case selection: ${researchCase.content.selectionRationale}`, "meta");
     if (researchCase.content.readingReferences?.length) {
-      add("External reading / separate from registry evidence", "heading");
+      add("Further reading / separate from the saved study records", "heading");
       add(readingBoundary, "boundary");
       for (const reference of researchCase.content.readingReferences) {
         add(reference.title, "heading");
@@ -84,25 +84,25 @@ function documentBlocks(manifest: Manifest): Block[] {
     }
   }
   add("Saved study records", "heading");
-  add("These values are from the saved catalogue. They are not a fresh registry check.");
+  add("These values come from the saved study records. They are not a new check of the public record.");
   for (const capture of manifest.savedStudies) {
     add(`${capture.nctId} / saved record`, "heading");
     add(capture.record.briefTitle);
     add(`Captured: ${capture.retrievedAt} / registry update: ${present(capture.record.provenance.registryLastUpdatePostedDate)}`, "meta");
     for (const field of compareCaptures(capture, capture).fields) {
       add(`${field.label}: ${field.before}`);
-      add(`Saved only / not refreshed. Source field: ${field.baselineLocators.join("; ") || "Not captured"}`, "meta");
+      add(`Saved copy / not checked again. Source field: ${field.baselineLocators.join("; ") || "Not captured"}`, "meta");
     }
   }
   if (manifest.savedPrimaryOutcomes) {
     const view = manifest.savedPrimaryOutcomes;
-    add("Saved primary measures and timing", "heading");
+    add("What each study planned to measure", "heading");
     add(`${view.studyCount} studies / ${view.entryCount} registered primary-outcome entries`);
     add(view.label, "boundary");
-    add(`${view.limitation} Current checks and replays do not change this saved view.`, "boundary");
+    add(`${view.limitation} Checking for updates or comparing saved versions does not change this saved view.`, "boundary");
     for (const study of view.studies) {
       add(`${study.nctId} / saved outcome fields`, "heading");
-      add(`Saved capture: ${study.retrievedAt}\nRegistry update: ${present(study.registryLastUpdate)}`, "meta");
+      add(`Saved copy: ${study.retrievedAt}\nRegistry update: ${present(study.registryLastUpdate)}`, "meta");
       const missing = (status: string) => status === "not_captured" ? "Not captured" : "Not reported in this captured response";
       add(`Registered conditions: ${study.context.conditions.join("; ") || missing(study.contextStatus.conditions)}`);
       add(`Interventions: ${study.context.interventions.map(item => `${item.name}${item.type ? ` (${item.type})` : ""}`).join("; ") || missing(study.contextStatus.interventions)}`);
@@ -120,7 +120,7 @@ function documentBlocks(manifest: Manifest): Block[] {
     add("Child pointers are derived and verified within each saved capture. Entry numbers identify array positions, not identities across registry versions.", "meta");
   }
   add("Displayed comparisons", "heading");
-  if (!manifest.comparisons.length) add("No current lookup or retained replay has been added to this brief.");
+  if (!manifest.comparisons.length) add("No new check or comparison of saved versions has been added to this brief.");
   for (const pair of manifest.comparisons) {
     add(`${pair.nctId} / ${stateLabel[pair.mode]}`, "heading");
     add(`Baseline capture: ${pair.baseline.retrievedAt}\nComparison capture: ${pair.current.retrievedAt}\nComparator: ${pair.comparatorVersion}`, "meta");
@@ -132,7 +132,7 @@ function documentBlocks(manifest: Manifest): Block[] {
       add(`Baseline locator: ${field.baselineLocators.join("; ") || "Not captured"}\nComparison locator: ${field.currentLocators.join("; ") || "Not captured"}`, "meta");
     }
   }
-  add("Source and provenance appendix", "heading");
+  add("Source details and technical checks", "heading");
   add(manifest.source);
   link("Source terms", manifest.sourceTerms);
   add(manifest.scope);
@@ -182,7 +182,7 @@ export async function sessionPdf(savedStudies: Capture[], comparisons: CapturedC
     doc.addFileToVFS(`${style}.ttf`, bytes);
     doc.addFont(`${style}.ttf`, "NotoSans", style);
   }
-  doc.setProperties({ title: researchCase?.content.title ?? "Synapse Atlas research brief", author: "Synapse Atlas", subject: "Captured registry evidence and explicitly labelled interpretation" });
+  doc.setProperties({ title: researchCase?.content.title ?? "Synapse Atlas research brief", author: "Synapse Atlas", subject: "Saved public study records and labelled interpretation" });
 
   // jsPDF uses the font's cmap for Unicode encoding. Reject absent glyphs before
   // producing a misleading document; the CSV/JSON remain available in the UI.

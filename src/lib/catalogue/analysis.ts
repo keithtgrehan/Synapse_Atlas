@@ -12,6 +12,6 @@ export function summarizeCatalogue(captures: Capture[]) {
     retrievalDates: [...new Set(captures.map((item) => item.retrievedAt.slice(0, 10)))].sort(),
     inputs: captures.map((item) => ({ nctId: item.nctId, projectedSha256: item.projectedSha256, fields: ["overallStatus", "phases", "enrollment", "primaryOutcomes"], locators: item.record.provenance.fieldLocators })),
     method: "Count each retained NCT record once in each descriptive category. Combined phases stay a combined category. Missing types are explicit. Endpoint coverage counts reported primary-outcome fields, not results. No enrolment totals or clinical outcomes are pooled.",
-    limitations: "A selected, dated research catalogue, not a systematic review or representative sample. Different populations, designs and capture dates prevent clinical or market conclusions from these counts.",
+    limitations: "This is a selected set of dated study records, not a systematic review or a representative sample. The records describe different study populations and designs and were saved on different dates. These counts cannot show treatment effects or market opportunity.",
   };
 }
