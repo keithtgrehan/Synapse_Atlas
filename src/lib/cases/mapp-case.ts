@@ -59,15 +59,15 @@ const mapp2Title =
 export const mappCase: ResearchCase = {
   id: "mdma-ptsd-design-context",
   title: "MDMA-assisted therapy: what changes between the trials?",
-  kicker: "PTSD design context and external reading trail",
+  kicker: "What the registry and external reading can each tell us",
   question:
-    "MAPP1 and MAPP2 study a similar treatment model. Which population, measurement and therapy-context details must be checked before interpreting their findings together?",
+    "MAPP1 and MAPP2 study a similar treatment model for posttraumatic stress disorder (PTSD). Which population, measurement and therapy details need checking before their findings are read together?",
   summary:
-    "This guided case keeps two exact-ID PTSD registry records separate from linked reports, a public protocol and regulatory reading context.",
+    "This guided case keeps two exact-ID PTSD registry records separate from linked reports, a public protocol and regulatory reading.",
   studyIds: ["NCT03537014", "NCT04077437"],
   includePrimaryOutcomes: true,
   whyTogether:
-    "The two retained records support a focused design-reading exercise: their official titles, registered primary measure/time-frame pairs and record-level intervention lists can be inspected without treating them as a pooled result.",
+    "The two retained records support a focused design-reading exercise. Their official titles, registered primary measure/time-frame pairs and record-level intervention lists can be inspected without treating them as one pooled result.",
   dimensions: [
     {
       key: "registered-population",
@@ -97,7 +97,7 @@ export const mappCase: ResearchCase = {
         },
       ],
       interpretation:
-        "The official titles use different severity wording. They do not establish matching eligibility criteria, enrolled populations or analysis populations.",
+        "The official titles use different severity wording. They do not establish matching eligibility criteria, registry enrolment or analysis populations.",
     },
     {
       key: "phase-enrollment",
@@ -127,7 +127,7 @@ export const mappCase: ResearchCase = {
         },
       ],
       interpretation:
-        "Registered actual enrolment is not necessarily a randomized, treated, completed or analysis population, and does not make the reports directly comparable.",
+        "The registry lists actual enrolment of 100 and 121. Those figures are not necessarily randomised, treated, completed or analysis populations, and do not make the reports directly comparable.",
     },
     {
       key: "registered-interventions",
@@ -159,7 +159,7 @@ export const mappCase: ResearchCase = {
   takeaways: [
     {
       text:
-        "SOURCE_FACT: Both official titles describe randomized, double-blind, placebo-controlled, multi-site Phase 3 studies, while their severity wording differs.",
+        "SOURCE_FACT: Both official titles describe randomised, double-blind, placebo-controlled, multi-site Phase 3 studies, while their severity wording differs.",
       evidenceClass: "SOURCE_FACT",
       evidence: [
         evidence(sources.mapp1, `${identification}/officialTitle`, mapp1Title),
@@ -168,7 +168,7 @@ export const mappCase: ResearchCase = {
     },
     {
       text:
-        "MODEL_INFERENCE: The saved registry fields support a design-context comparison, not a pooled efficacy, safety, approval or comparability conclusion.",
+        "MODEL_INFERENCE: The saved registry fields support a design-context comparison, not a pooled conclusion about efficacy, safety, approval or comparability.",
       evidenceClass: "MODEL_INFERENCE",
       evidence: [
         evidence(sources.mapp1, `${design}/enrollmentInfo`, {
@@ -193,13 +193,13 @@ export const mappCase: ResearchCase = {
     },
   ],
   cannotEstablish:
-    "This case cannot establish comparable eligibility, randomized or analysis populations, masking performance, psychotherapy contribution, follow-up, safety, benefit, approval status or a combined result.",
+    "This case cannot tell us whether eligibility, randomised or analysis populations, masking performance, psychotherapy contribution, follow-up, safety, benefit or approval status are comparable. It cannot provide a combined result.",
   nextQuestions: [
-    "What do the linked reports and protocol say about the population definitions, analysis sets and assessment time origins?",
-    "Which trial-design and safety questions in the FDA documents remain outside the retained registry projection?",
+    "What do the linked reports and protocol say about population definitions, analysis sets and when assessments began?",
+    "Which trial-design and safety questions in the FDA documents sit outside the retained registry fields?",
   ],
   selectionRationale:
-    "Selected as a separate PTSD design-reading pair because the retained exact-ID records and compact external reading trail show why registry, report, protocol and regulatory materials should not be conflated.",
+    "Selected as a separate PTSD design-reading pair because the retained exact-ID records and compact external reading trail show why registry, report, protocol and regulatory materials need to stay distinct.",
   readingReferences: [
     {
       id: "mapp1-report",
