@@ -75,6 +75,8 @@ Actual downloaded PDF/CSV/JSON sets for saved, replay, current and custom select
 
 Independent final rendered UI review passed the new desktop/tablet/320px screenshots. Scientific review confirms case analysis remains saved evidence, current/replay comparisons are distinct, and dates, precision/types, missing states, hashes and field citations remain traceable. No human clinical or accessibility certification is claimed. Production dependency audit after the scoped updates reports no known vulnerabilities.
 
+**Hosted release review:** Implementation `ab1d78e08e854eb14a63e2fa15be9cf8890fc443` passed GitHub validate and Vercel Preview checks; deployment `dpl_5b7d5DZcRiLWNWfog4DgBfHGv1o9` is READY. Fresh hosted PDF/CSV/JSON downloads passed saved/replay/current/custom parity (266/192/187/41 checks, 13/9/9/3 pages), exact source links and all-page bounds. Independent rendering of saved-case pages1/2/13 confirms the pagination repair. Custom selection recovers from an invalid URL; browser warning/error log is empty. Build tracing includes no environment or Git files across19 manifests. Final read-only security/source review found no blocker. PR12 is ready for the authorized merge after the documentation head passes normal checks.
+
 **Baseline:** clean `983b334`, 169 tests / 27 files, PR12 draft and protected Preview validated. Earlier visual/PDF statements below describe previous iterations, not acceptance evidence for this release.
 
 ## Active iteration — case-led portfolio refinement, 20 November 2026
