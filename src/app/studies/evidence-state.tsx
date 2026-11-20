@@ -10,7 +10,7 @@ export function EvidenceState({ saved, comparisons, title, activeId, busy, error
 }) {
   const rows = evidenceRows(saved, comparisons);
   return <section className={`evidence-state${compact ? " evidence-state-compact" : ""}`} aria-label={compact ? "Export evidence state" : "Research evidence state"}>
-    <header><div><p className="eyebrow">{compact ? "Included in your export" : "Evidence in this brief"}</p><strong>{title ?? "Custom study selection"}</strong></div><span className="evidence-count">{saved.length} {saved.length === 1 ? "study" : "studies"}</span></header>
+    <header><div><p className="eyebrow">{compact ? "Included in your export" : "Session evidence"}</p>{compact && <strong>{title ?? "Custom study selection"}</strong>}</div><span className="evidence-count">{saved.length} {saved.length === 1 ? "study" : "studies"}</span></header>
     <p className="state-summary">{evidenceSummary(saved, comparisons)}</p>
     {!compact && <><p className="state-note">Case interpretation uses saved evidence. A current check or replay updates the comparison only.</p>
       <details><summary>Capture dates and record state · {rows.map((row) => row.nctId).join(" / ") || "No studies selected"}</summary>

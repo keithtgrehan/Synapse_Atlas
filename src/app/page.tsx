@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 
 import { CasePreview, FeaturedEvidence } from "./case-preview";
 import { loadCatalogueManifest } from "../lib/catalogue/load";
@@ -25,8 +24,9 @@ export default async function Home() {
   const uniqueIds = new Set(manifest.groups.flatMap((collection) => collection.studyIds));
 
   return (
-    <main id="main-content" className="atlas-home-v2">
-      <section className="atlas-intro shell" aria-labelledby="home-title">
+    <main id="main-content" tabIndex={-1} className="atlas-home-v2">
+      <section className="atlas-hero-band" aria-labelledby="home-title">
+      <div className="atlas-intro shell">
         <div className="atlas-intro-copy">
           <p className="eyebrow">Registered study evidence</p>
           <h1 id="home-title">Trial design, in focus.</h1>
@@ -36,21 +36,20 @@ export default async function Home() {
           </p>
           <div className="hero-actions">
             <Link className="button hero-primary" href={`/studies?case=${featured.id}`}>Explore the MDD case <span aria-hidden="true">↗</span></Link>
-            <Link className="atlas-intro-link" href="#research-collections">Browse collections <span aria-hidden="true">↓</span></Link>
+            <Link className="atlas-intro-link" href="/catalogue">Browse {catalogue.length} studies <span aria-hidden="true">→</span></Link>
           </div>
           <p className="atlas-intro-scope">{catalogue.length} retained NCT records · {researchCases.length} guided cases · {manifest.groups.length} collections</p>
+          <p className="atlas-intro-qualifier">A selected research inventory. Every brief keeps its sources and limits in view.</p>
         </div>
         <div className="atlas-evidence-preview">
-          <figure className="brand-art" aria-hidden="true">
-            <Image src="/brand/evidence-layers.png" alt="" width={1536} height={1024} priority sizes="(max-width: 72rem) 0px, 560px" />
-          </figure>
           <FeaturedEvidence caseStudy={featured} />
         </div>
+      </div>
       </section>
 
       <section id="research-cases" className="shell atlas-cases" aria-labelledby="case-title">
         <header className="atlas-section-heading">
-          <p className="eyebrow">Guided research cases</p>
+          <p className="eyebrow">01 / Guided research cases</p>
           <h2 id="case-title">Start with a question. Follow the evidence.</h2>
           <p>Inspect the registered fields, see the differences, and keep the limits in view.</p>
         </header>
@@ -64,8 +63,8 @@ export default async function Home() {
       <section id="research-collections" className="atlas-collection-band" aria-labelledby="collection-title">
         <div className="shell">
           <header>
-            <p className="eyebrow">Research starting points</p>
-            <h2 id="collection-title">Research questions for a more focused starting point.</h2>
+            <p className="eyebrow">02 / Research collections</p>
+            <h2 id="collection-title">Choose a research lens.</h2>
             <p>The catalogue is a selected convenience inventory, not a complete landscape or a treatment ranking.</p>
           </header>
           <div className="collection-strip">
@@ -74,8 +73,7 @@ export default async function Home() {
                 <span>0{index + 1}</span>
                 <h3>{collection.title}</h3>
                 <p>{collection.question}</p>
-                <p className="collection-dimensions">Compare: {collection.comparisonDimensions.join(" · ")}</p>
-                <details><summary>Scope &amp; limits</summary><p>{collection.description}</p><p>{collection.limitations}</p></details>
+                <details><summary>Scope &amp; limits</summary><p>{collection.description}</p><p>Compare: {collection.comparisonDimensions.join(" · ")}</p><p>{collection.limitations}</p></details>
                 <small>{new Set(collection.studyIds).size} unique records</small>
                 <Link href={`/catalogue?collection=${collection.id}`}>Open collection →</Link>
               </article>
@@ -89,7 +87,7 @@ export default async function Home() {
 
       <section className="shell atlas-closing">
         <div>
-          <p className="eyebrow">Build a focused comparison</p>
+          <p className="eyebrow">03 / Your research brief</p>
           <h2>Choose up to four saved studies, then compare the captured evidence.</h2>
           <p>Download the same captured evidence as a PDF brief, CSV or source bundle.</p>
         </div>
