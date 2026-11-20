@@ -19,6 +19,10 @@ Before doing any work, read:
 
 Do not rely on chat history when the repository says otherwise. `CONTROL_ROOM.md` is the persistent project memory.
 
+## Current authorized release
+
+G5 / S2-01 in `CONTROL_ROOM.md` supersedes the historical sprint/gold-review gates in this file. Build the NCT-first snapshot comparison portfolio journey through tests, independent review and a draft PR. No manual annotation, clinical adjudication, mapping approval, database or custom-model training is required. Preserve existing review statuses; the deterministic NCT catalogue must not depend on mappings. Retain all source/privacy boundaries and the explicit Production release gate. The user authorized completing all necessary milestones, so do not stop after a single historical task.
+
 ## 2. Mission
 
 Ship a private, credible, evidence-governed neuropsychiatric drug-development intelligence product quickly enough to support Keith's career transition.

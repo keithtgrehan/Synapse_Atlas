@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "Study examples · Synapse Atlas" };
 export default async function StudyExamplesPage() {
   const studies = await loadStudyExamples();
   return (
-    <main className="shell">
+    <main id="main-content" className="shell">
       <header className="page-header">
         <Link className="back-link" href="/">← Synapse Atlas</Link>
         <p className="eyebrow">Retained registry snapshots · 13 October 2026</p>

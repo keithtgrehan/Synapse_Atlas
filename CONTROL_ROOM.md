@@ -11,25 +11,25 @@ project:
   owner: Keith Grehan
   location: Berlin, Germany
   started: 2026-08-14
-  last_updated: 2026-10-14
+  last_updated: 2026-11-20
 mission:
   career_goal: Move into CNS, neuropsychiatric or psychedelic biotech through partnerships, business development, strategy, research operations, or AI/data product work.
-  product_goal: Prove scientific, product, engineering and commercial capability with a trustworthy private drug-development intelligence tool.
+  product_goal: Deliver a useful, reproducible NCT-first research brief and saved-versus-current snapshot comparison as credible portfolio evidence.
 active_goal:
-  id: G1
-  name: Ship private v0.1
-  target_date: 2026-08-27
+  id: G5
+  name: Evidence-led research workspace and NCT Snapshot Diff portfolio release
+  target_date: 2026-11-19
   status: in_progress
 active_sprint:
-  id: S1
-  dates: 2026-08-14/2026-08-27
+  id: S2
+  dates: 2026-11-19/2026-12-02
   wip_limit: 3
-  current_task: S1-14
+  current_task: S2-01
 operating_rules:
   one_active_goal: true
   new_scope_requires_tradeoff: true
   source_registry_deny_by_default: true
-  human_review_required: true
+  human_review_required: false # deterministic registry transformations; historical mapping review states remain unchanged
   no_medical_advice: true
   no_custom_model_training_v0_1: true
 last_completed:
@@ -48,12 +48,114 @@ last_completed:
   - PR #7 merged S1-05 at 3cb39fcb4d11abf38d3c77db44c307f0b184611f on 2026-08-19.
   - PR #8 merged security maintenance at ae1e4d564cc728d14072f623cf4b374e3628ded8 on 2026-09-09; post-merge local checks, main CI, clean production audit, and Preview-only deployment verification passed. S1-05 is Complete.
 next_action:
-  task: S1-14
-  instruction: The 13-entry mapping release and updated README are published on main (release commit 4842037), and the verified Vercel site remains live. Use the non-psychedelic depression comparison for a source-backed research discussion. The ten additions retain MODEL_INFERENCE with owner-approved inclusion; independent scientific review remains separate. Main Git auto-deployment remains disabled.
-blockers:
-  - No approved Postgres connection is configured, so the S1-02 migration remains unapplied and S1-03 live normalized records are not persisted.
-  - S1-06 remains unstarted pending explicit human scope approval/planning.
+  task: S2-01
+  instruction: Complete the authorized professional workspace and direct PDF iteration, validate final head, merge PR12 and publish the tested merged revision to the existing public production alias.
+blockers: [] # database persistence, manual annotation and clinical adjudication are outside this release
+
 ```
+
+
+## Active iteration — professional workspace, direct PDF and public release, 20 November 2026
+
+**Authority:** Keith explicitly authorized publishing the validated MVP to the live website. The latest coordinated instruction authorizes a direct downloadable PDF, a reviewed scientific SaaS composition, marking PR12 ready, merging the exact reviewed revision through normal controls, and explicitly deploying the merged revision to the existing production project. This supersedes the historical Preview-only delivery gates below; preserve Preview protection and unrelated project settings.
+
+**Optimized execution brief:** Preserve 39 unique trials, seven collections (42 memberships), three evidence-backed cases and all provenance boundaries. Apply at most three coherent design improvements from current competitor research without copying branding. Build a direct PDF from the same in-memory selections, case and comparisons as CSV/JSON; never refetch registry evidence or change baselines during export. Preserve source/inference labels, saved/current/replay identity, exact IDs, dates, missing values, precision, enrolment types, limits and source links, including long multipage content.
+
+**Bounded ownership:** Lead integrates UI/export and release; PDF implementation owner handles the renderer/dependency/font and focused tests; design owner handles only agreed visual files after the incoming read-only design research. Independent rendered/source/accessibility review follows implementation. Incoming research agents are reviewers, not duplicate build owners.
+
+**Finish line:** Inspect actual downloaded saved-only, replay, current and custom-selection PDFs using extracted text and rendered pages; verify CSV/JSON identity, full tests, shared-doc consistency, responsive 1440/768/390/320 layouts, keyboard/focus/headings, measured contrast and error/empty/reduced-motion behavior. Record public-data review, final-head CI and screenshots. Merge the reviewed head, preserve a verified production rollback deployment, deploy the merged revision in the production environment, and verify anonymous public routes and actual exports without an auth bypass. Only then mark release complete.
+
+**Release preparation:** The existing public alias resolves to READY production `dpl_k7K2gWwKZqBvg1ZkDYhNtxejP575`, retained as rollback candidate. Standard Protection remains `prod_deployment_urls_and_all_previews`; no access-setting change is required. The connected Vercel deployment tool is available. CLI staging was investigated, but CLI has no signed-in session; do not retrieve tokens or weaken protection to work around that. Prefer connected deployment operations and record any staging limitation truthfully.
+
+**Dependency findings:** Fresh production audit identified existing Next.js and Zod advisories. Patched Next.js/eslint-config-next16.4.5 and Zod4.6.6 now pass the production audit. Sources: [Next.js critical advisory](https://github.com/advisories/GHSA-2464-fhr4-w9xw), [Next.js later cache fix](https://github.com/advisories/GHSA-mrhx-c7xc-m3w5), [Zod collection validation advisory](https://github.com/advisories/GHSA-mrhx-c7xc-m3w5). jsPDF4.2.1 and licensed embedded Noto Sans meet the direct-PDF acceptance test. Static public-data directory boundaries in the two retained-data loaders remove broad server-bundle tracing warnings; traversal paths are rejected before reading.
+
+**Observed validation:** The current layout passes desktop1440, tablet768 and mobile390/320 width checks on home and brief; all three case routes and seven collection routes return the correct context/counts (14/8/3/5/3/3/6). The320px home primary action ends at488px. Keyboard focus is a visible3px outline; keyboard multi-selection now keeps the picker open, empty-search recovery works, and invalid selections show a recoverable alert with no dead workspace anchors. Browser error/warning inspection is clear. Rendered contrast: heading14.58:1, metadata5.35:1, primary button7.48:1, evidence note7.00:1. Reduced-motion rules are present; no OS preference was changed.
+
+Actual downloaded PDF/CSV/JSON sets for saved, replay, current and custom selections passed266/192/187/41 text-and-source checks respectively, all-page text bounds and clickable source-link checks. Independent review found a heading-chain/closing-paragraph orphan; the renderer now keeps those groups together. A fresh actual-case renderer artifact and500-repeat long-field artifact passed independent visual/scientific review. Fresh final `pnpm check` passed178 tests across28 files, lint, types, migration consistency and production build without tracing warnings. Shared-doc consistency and diff whitespace checks passed. Hosted browser parity and final-head CI remain required before merge. The PDF glyph preflight rejects unsupported characters without silently stripping evidence; CSV/JSON stay available.
+
+Independent final rendered UI review passed the new desktop/tablet/320px screenshots. Scientific review confirms case analysis remains saved evidence, current/replay comparisons are distinct, and dates, precision/types, missing states, hashes and field citations remain traceable. No human clinical or accessibility certification is claimed. Production dependency audit after the scoped updates reports no known vulnerabilities.
+
+**Hosted release review:** Implementation `ab1d78e08e854eb14a63e2fa15be9cf8890fc443` passed GitHub validate and Vercel Preview checks; deployment `dpl_5b7d5DZcRiLWNWfog4DgBfHGv1o9` is READY. Fresh hosted PDF/CSV/JSON downloads passed saved/replay/current/custom parity (266/192/187/41 checks, 13/9/9/3 pages), exact source links and all-page bounds. Independent rendering of saved-case pages1/2/13 confirms the pagination repair. Custom selection recovers from an invalid URL; browser warning/error log is empty. Build tracing includes no environment or Git files across19 manifests. Final read-only security/source review found no blocker. PR12 is ready for the authorized merge after the documentation head passes normal checks.
+
+**Baseline:** clean `983b334`, 169 tests / 27 files, PR12 draft and protected Preview validated. Earlier visual/PDF statements below describe previous iterations, not acceptance evidence for this release.
+
+## Active iteration — case-led portfolio refinement, 20 November 2026
+
+**Baseline:** clean `097d70f`, open draft PR12; earlier165-test/Preview results are baseline evidence only. Production remains unchanged; Preview and existing PR only.
+
+**Plan (three work packages):** (1) Design owner replaces the oversized home table with compact factual previews and enriches the existing three case entries plus a manifest-derived seven-collection overview. (2) Scientist/research owner checks all cases/collections and records at most three evidence-qualified opportunities in the existing design review. (3) Lead integrates a reusable evidence-state view, matching export feedback and tests, then an independent quality/UX reviewer checks the final diff and rendered screenshots. One writer per file area; the quality review follows the research package.
+
+**Observable finish line:** All 3 detailed cases and 7 collections have functioning direct entry routes; counts derive from 39 unique records / 42 memberships with overlaps disclosed. Three distinct previews communicate measurement windows, adjunctive timing and an actual retained replay without efficacy or invented-change claims. The brief shows selected IDs, saved date, comparison mode/time and registry-update dates from the same captures used in exports; material boundaries remain visible. Validate 1440/768/390/320 layouts, keyboard/filter/empty/error/source states, measured contrast, reduced-motion rules, actual downloads/replay, and attempt supported print validation. Fresh full checks and shared-doc consistency, before/after screenshots, independent review, final CI and hosted Preview verification complete delivery. No new source integration, dependency, database or production action.
+
+### Case-led iteration validation and review
+
+The selected opportunities are case discovery, visual analytical context and persistent evidence identity; the existing design review distinguishes source observations, vendor descriptions and untested audience/value hypotheses. VP Marketing, CMO, scientific copy and GTM findings were supplied by Keith’s monitoring chat and integrated into the product: one primary guided-brief action beneath the promise, real previews before seven collection starting points, and matching evidence-state/export feedback. No marketing demand or efficacy claim was introduced.
+
+Independent scientific/source, graphic design and quality/UX reviews found no remaining material blockers after resolving the collection anchor, mobile CTA placement and semantic card/collection headings. The first check caught a replay-loader map-argument bug; it was fixed before release.
+
+Fresh final `pnpm check`: **169 tests / 27 files**, lint, strict types, migration consistency and production build passed. Local browser checks verified all three cases and all seven collection questions/counts (14/8/3/5/3/3/6), complete39-ID coverage, keyboard case entry, URL filters, empty results and selection removal across filters. Home and brief checked at1440/768/390/320 CSS pixels with no page overflow; measured DOM clientWidth confirmed each breakpoint. Mobile primary action appears at512–559px in a320×1000 viewport. Source/record state shows distinct saved, replay baseline and later capture dates; the JSON includes the same derived state. Actual downloaded CSV and JSON match all seven replay rows/dates/hashes; offline bundle replay passed.
+
+Measured rendered colour pairs: ink/paper14.88:1; muted/paper5.83:1; boundary/paper6.30:1; collection text10.46:1; collection secondary8.84:1; button8.33:1; state note7.00:1. New surfaces have no running animation/transition; reduced-motion rules inspected, OS preference not changed. This is not comprehensive accessibility certification.
+
+Print was retried with the supported browser button; the click timed out at the browser input command and no inspectable print preview/PDF was exposed. Native Codex app control was previously prohibited, so no bypass was attempted. Print CSS was constrained to page width, but rendered PDF remains unverified. Network failures remain covered by adapter/route tests and evidence-state tests; no browser outage was induced.
+
+Before/after evidence: `docs/screenshots/home-before-case-led.png`, `home-case-led.png`, `cases-case-led.png`, `home-case-led-mobile.png`, `evidence-state-mobile.png`, `brief-case-led-tablet.png`. Hosted Preview verified for implementation `ee814e6`, deployment `dpl_HZxiyL5ApQvgeFGrv43Vh8ca4apj`: all three cases and seven collection routes passed; current NCT03866174 capture and retained replay updated both evidence-state views correctly; source disclosure worked by keyboard. The downloaded hosted bundle replayed offline and its exported current-capture identity matched `2026-11-19T23:41:54.582Z`. Browser console inspection returned no errors/warnings. GitHub validate and Vercel checks passed. PR12 is updated; production remains unchanged.
+
+## Current release contract — 19 November 2026 (supersedes historical plans below)
+
+**G5 / S2-01: What changed since this research brief?** Keith explicitly authorized replacing the old private-v0.1 goal with a bounded, usable portfolio release. Historic goals, source decisions and review records below are retained as evidence, not active prerequisites.
+
+**Finish line:** A visitor opens a prepared NCT-first study comparison, inspects saved versus newly retrieved exact-ID fields, opens evidence and exports the same captured pair as CSV, printable brief and replayable source bundle. Retained records work without any programme mapping, approval, resolution or compound assertion. Current responses stay in session memory; no database writes or baseline replacement.
+
+**Active work (three bounded packages):**
+1. Deterministic capture/catalogue/diff/export with source and edge-case tests (data owner).
+2. Integrated product journey, truthful legacy copy, shared How it works and release preparation (lead).
+3. Independent UX/accessibility and final diff review (reviewer).
+
+**Acceptance:** 39 independently validated saved NCT records; status/enrolment/endpoints/completion/sponsor/intervention comparison; raw-source and normalized hashes, transformation/comparator version, field locators, capture and registry dates; explicit missing/removed/ambiguous states; exact ID and bounded response validation; safe rendering/formula-safe CSV; no contact fields. Same pair drives screen and exports, without export-time requests. Real retained replay and honest unchanged/network-failure paths. Fresh `pnpm check`; complete desktop/320px keyboard/source/export/print browser checks; independent review and draft PR.
+
+**Retired as release prerequisites:** manual gold annotation, individual clinical adjudication, custom models, model-judge agreement, dataset-size targets, database provisioning and S1-06 enrichment. Historical MODEL_INFERENCE/PENDING labels are preserved. No literature integration, alerts, accounts, broad crawl, chat or efficacy ranking is added.
+
+**Authority and release gate:** Scoped implementation, checks, commit, feature push and draft PR are approved. Existing protected Preview is permitted with cleared public data; `vercel.json` continues disabling automatic main Production deployment. Production was explicitly authorized, then deferred by Keith’s latest instruction: “Deliver the preview and PR for now.” Deliver Preview and draft PR; merge and changes to deployment protection remain excluded. Existing public site remains the October release.
+
+**Starting evidence:** Clean main `70f5f61`; same canonical GitHub repository ID 1333604748 for legacy/new names; remote main matches; no open PRs; two recovery stashes preserved. Prior three chats accessible; their annotation tasks and old release authorizations do not govern this release. Official API/history and provenance review supports integrated saved-brief comparison rather than novelty or full-history claims.
+
+**Research decisions:** ClinicalTrials.gov already has [Record History](https://clinicaltrials.gov/study-basics/how-to-read-study-record); Atlas compares its saved brief to one capture. [W3C PROV](https://www.w3.org/TR/prov-overview/) informs explicit input/entity/transform identity. Registry timestamps differ from retrieval, registered endpoints are not outcomes, and updates do not establish progress or commercial rights. Existing SRC-CTG policy remains the only runtime source integration.
+
+**Explicit scope expansion — 19 November:** Keith authorized a materially stronger editorial workspace and three additional coherent research cases, with a bounded scientist/design/independent-quality team. Integrate cases into the existing comparison, source inspection and reproducible export flow. Prefer retained MDD/TRD records; up to six additional exact-NCT captures are permitted only if necessary. No efficacy ranking, pooled unlike populations, new literature ingestion or manufactured history. Update this record, not a new backlog. Implementation, reviewed commit, feature push and draft PR remain authorized; hosting permissions and merge remain excluded. Production is governed by the latest delivery instruction above.
+
+**Expanded acceptance:** Three 2–4-study cases each show a research question, matching rationale, source-backed comparison dimensions, unknowns, descriptive takeaways with inference labels, limitations and next questions. Case evidence and narrative travel with the same CSV/JSON/print brief. Verify desktop/320px/keyboard, live-failure and retained-replay paths, downloads and replay, print, source links and final full checks. Independent scientific/source review must check the AI scientist's implementation. Shared README/How it works and screenshots must reflect observed behavior.
+
+**Earlier validation/status (superseded by the final release evidence below):** Historical pre-expansion `pnpm check` passed 155 tests in 23 files, lint, types, migration check and build after the exact-ID pagination-metadata regression fix. Final expanded checks remain pending. Interrupted browser batch was not an application failure: prior server/tab state must be recovered and downloads tested in separate observable steps. Existing Vercel team access is unavailable through connector and CLI; this does not block local demo or draft PR.
+
+### Optimized execution brief and delivery plan — latest authorized scope
+
+**Objective:** Complete the existing Synapse Atlas implementation as a professional research MVP for a 3–5-minute hiring-manager demonstration. Research and implement a clearer visual/interaction system; expand 13 retained trials to exactly 39 distinct validated NCT records, and make the added evidence useful through coherent research collections, descriptive analysis and the three detailed cases. Preserve all existing baselines and source limits. This brief is reviewed for task fidelity, not benchmarked against another prompt.
+
+**Plan and acceptance:**
+1. Research: use primary design-system/accessibility guidance and official registry evidence. Select 26 additional MDD/TRD-relevant studies with explicit rationale; classify all 39 in discoverable collections, preserving unrelated legacy indications as separate contexts. Record exact source URLs, collection dates and hashes. No invented compound identities, outcome claims or pooled efficacy.
+2. Implement: first screen demonstrates real evidence; a clear case/collection → select → compare → inspect → export journey. Consistent typography, spacing and states; filter/search for the larger catalogue; readable side-by-side comparisons, progressive source detail, visible dates and unknowns, keyboard focus and 320px reflow. Integrate three sourced analyses into CSV/JSON/print; derive descriptive collection summaries directly from captured records.
+3. Validate: independent scientific/source and UX review, relevant regression tests then final full `pnpm check`, desktop/mobile/keyboard journeys, exact downloaded content and offline replay, print, source links and live-failure behavior. Capture finished screenshots and align shared How it works/README. No claimed check without observed evidence.
+4. Deliver: reviewed feature commit, draft PR/CI, verified Preview then publish the validated MVP to the existing live site. Keith explicitly answered “Also publish the validated MVP to the live website”; this supersedes the earlier Production gate for this scoped release. Do not change hosting permissions, bypass protection, force-push or delete user work. If Vercel access remains unavailable, finish the local/reviewable artifact and request only the platform-provided authorization needed for that existing team.
+
+**Research basis:** [GOV.UK tables](https://design-system.service.gov.uk/components/table/) supports semantic comparisons with captions and row/column headers. [WCAG reflow](https://www.w3.org/WAI/WCAG22/Understanding/reflow) supports readable 320px content without lost controls; avoid fixed UI that obscures focus. Additional design findings are integrated below after inspection. These are implementation criteria, not a claim of full accessibility certification.
+
+**Competitor/design phase (integrated after core MVP validation):** Review comparable biotech research services and best-in-tier SaaS interfaces using public, accessible evidence. Deliver a cited Markdown report in `docs/competitive-design-review.md` with observed patterns, strengths/trade-offs, screenshots or public references where permitted, and explicit distinctions between observation and inference. Translate only relevant patterns into concrete Synapse Atlas UI/UX improvements; preserve its own identity, evidence chain, accessibility and source permissions. Implement and validate these refinements after the MVP process above, rather than interrupting the active release. Do not copy proprietary assets or imply hands-on use of inaccessible product areas. Completed research and review evidence is in `docs/competitive-design-review.md`. Graphic design, UX and UI agent reviews informed the bounded refinements; no claim of human professional or clinical review.
+
+### Final release evidence — 20 November 2026
+
+**Delivered:** [working Preview](https://synapse-atlas-git-codex-nct-snaps-dd9d7a-keith-grehans-projects.vercel.app) · [draft PR12](https://github.com/keithtgrehan/Synapse_Atlas/pull/12). Feature commit `fc299502f351ae12a89c13d0fe1242961fa86653`; GitHub validate and Vercel checks passed. Preview deployment `66gYyk6R5v872JxychqAXExaXuXT` belongs to the existing `synapse-atlas` project. A documentation-only closeout records these results.
+
+**Hosted verification:** Home and39-trial catalogue render; all three case selections work; search/filter URL reload works. Actual hosted NCT03866174 current capture retrieved19Nov23:08:54UTC (seven unchanged fields); historical replay returned1unchanged/6uncompared with accurate absent-field warnings. The downloaded hosted live source bundle passed offline replay. Browser console inspection reported no errors/warnings. Hosted desktop1440px and mobile320px had no document overflow; final screenshots are `docs/screenshots/home.png` and `research-mobile.png`. No production action or main merge occurred.
+
+
+- **Latest delivery scope:** Keith’s monitoring chat relayed “Deliver the preview and PR for now.” Finish that delivery; leave Production unchanged. No further Vercel-account troubleshooting is required for production in this milestone.
+- **Implemented:** 39 unique retained trials (13 preserved + 26 official exact-ID captures), seven explicitly bounded collections, three evidence-backed cases, filtered descriptive counts, CSV/JSON source exports, saved/current and historical comparisons. The catalogue is a convenience sample, not a systematic or complete clinical landscape.
+- **Design:** Public Benchling, Linear, Labguru and ClinicalTrials.gov research is documented in `docs/competitive-design-review.md`; original paper/green/blue identity retained. Graphic, UX and UI agents reviewed the implementation. Fixed tablet matrix containment, active navigation, search metadata, disabled cursors and catalogue URL filters. No third-party branding or assets copied.
+- **Automated validation:** Final `pnpm check` passed 165 tests in 25 files, lint, strict types, migration consistency and production build in the clean locked-dependency validation copy. `git diff --check` passed. No dependencies added.
+- **Observed browser evidence:** Local production build at 1440px, 768px and 320px; tablet comparison focusable and document width768, mobile document width320. All three cases opened; historical replay and a real exact-ID current capture worked. Keyboard selection, evidence disclosure and exports observed. Downloaded case CSV/JSON values/hashes and all39-record bundle replay were verified against the deterministic comparator. Final catalogue URL/reload and keyboard comparison passed. Actual39-row CSV and final JSON with7collections/26new entries were downloaded and checked; offline replay passed for all39. At390px, pageWidth390. Hosted Preview checks are recorded above.
+- **Limits:** Network failure is covered by automated adapter/route tests; a browser-level outage was not induced. Invoking print timed out; native app access is unavailable, so current print/PDF rendering is not signed off. No claim of complete WCAG conformance, scientific correctness, human clinical review or outcome comparisons.
+- **Hosting resolved:** Keith reconnected the owning account and granted the existing team access. The lead verified `get_project` succeeds for `team_YKDt6rh9Hs4SZSTB3uzQaXmG` / `prj_H3NqvCuEieWmPm8EXbKJiaNTIRzs`; Preview deployment `dpl_GvWCWKuQdpiBvVJQGxjesw1m9skd` is READY. The Preview retains the project’s existing Vercel sign-in protection. No access blocker remains. Keith’s latest delivery scope still defers Production.
 
 ---
 
@@ -768,7 +870,7 @@ The product is a career asset, not a startup fundraising exercise.
 
 ---
 
-# 15. Release definition
+# 15. Historical v0.1 release definition (superseded by G5)
 
 v0.1 is shipped when:
 
@@ -1161,7 +1263,7 @@ Use these commands in a project conversation or Codex:
 - `SHIP` — run release definition; do not waive failures silently.
 - `RETRO` — record what worked, failed and is cut next.
 
-## Current instruction to Codex
+## Historical instruction to Codex (superseded by G5 contract above)
 
 ```text
 S1-01 is Complete.

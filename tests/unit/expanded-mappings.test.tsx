@@ -72,7 +72,22 @@ describe("ten scoped model-proposed mapping additions", () => {
     }
   });
 
-  it("carries all ten trials and caveats consistently through comparison, CSV, manifest and print", async () => {
+  it("replaces the copied Usona uncertainty with record-specific unknowns", async () => {
+    const copiedUsonaUnknown = "The precise programme roles of Psilocybin, Niacin, and Set and Setting (SaS) Protocol, and whether Psilocybin is an exclusive programme compound";
+
+    for (const programme of dataset.programmes.slice(3)) {
+      expect(programme.explicitUnknowns).not.toContain(copiedUsonaUnknown);
+    }
+
+    const comparison = buildComparison(
+      await loadComparisonCatalog(),
+      ["study-nct03672175", "study-nct00532493"],
+    );
+    expect(comparison.programmes.flatMap((programme) => programme.explicitUnknowns.map((unknown) => unknown.statement)))
+      .not.toContain(copiedUsonaUnknown);
+  });
+
+  it("carries all ten trials and scope notes consistently through comparison, CSV, manifest and print", async () => {
     const catalog = await loadComparisonCatalog();
     const additions = catalog.candidates.slice(3);
     for (let i = 0; i < additions.length; i += 2) {
@@ -95,5 +110,13 @@ describe("ten scoped model-proposed mapping additions", () => {
     expect(missingDate.programmes[1].trials[0].primaryOutcomes.value).toHaveLength(3);
     const mixed = buildComparison(catalog, [catalog.candidates[0].slug, additions[0].slug]);
     expect(mixed.programmes.map((p) => p.mapping.evidenceClass)).toEqual(["HUMAN_INFERENCE", "MODEL_INFERENCE"]);
+  });
+
+  it("does not label source discrepancies as conflicts in programme detail", async () => {
+    const html = renderToStaticMarkup(await ProgrammePage({ params: Promise.resolve({ slug: "study-nct00532493" }) }));
+
+    expect(html).toContain("Scope notes and recorded discrepancies");
+    expect(html).toContain("healthyVolunteers=true");
+    expect(html).not.toContain(">Conflicts<");
   });
 });

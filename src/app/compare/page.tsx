@@ -16,9 +16,9 @@ import {
 } from "./comparison-ui";
 
 export const metadata: Metadata = {
-  title: "Compare reviewed programmes · Synapse Atlas",
+  title: "Compare study contexts · Synapse Atlas",
   description:
-    "Compare two to four approved programme mappings using retained ClinicalTrials.gov snapshots.",
+    "Compare two to four retained ClinicalTrials.gov study snapshots with their evidence-bound contexts.",
 };
 
 type ComparePageProps = {
@@ -57,14 +57,14 @@ export default async function ComparePage({ searchParams }: ComparePageProps) {
   }
 
   return (
-    <main className="shell brief-page">
+    <main id="main-content" className="shell brief-page">
       <header className="page-header">
         <Link className="back-link" href="/">← Synapse Atlas</Link>
-        <p className="eyebrow">Reviewed registry snapshot comparison</p>
-        <h1>Compare programmes</h1>
+        <p className="eyebrow">Saved registry snapshot comparison</p>
+        <h1>Compare studies</h1>
         <p className="lede">
-          Compare selected registered studies in their reviewed programme contexts,
-          check the evidence and take away a dated research brief.
+          Compare selected registered studies, inspect the evidence behind each
+          contextual grouping, and take away a dated research brief.
         </p>
       </header>
 
@@ -72,10 +72,10 @@ export default async function ComparePage({ searchParams }: ComparePageProps) {
 
       {selection.state === "too_few" ? (
         <section className="state-panel comparison-state" role="status" aria-live="polite">
-          <h2>Select at least two programmes</h2>
+          <h2>Select at least two study contexts</h2>
           <p>
             Your valid selection has been preserved. Choose one to three more
-            reviewed programmes, then submit the form again.
+            study contexts, then submit the form again.
           </p>
         </section>
       ) : selection.state === "invalid" ? (
@@ -92,9 +92,11 @@ export default async function ComparePage({ searchParams }: ComparePageProps) {
         </section>
       ) : comparison === null ? (
         <section className="state-panel comparison-state" aria-labelledby="comparison-start-heading">
-          <h2 id="comparison-start-heading">Choose programmes to compare</h2>
+          <h2 id="comparison-start-heading">Choose study contexts to compare</h2>
           <p>
-            All {catalog.candidates.length} available candidates are accepted for inclusion. Select two to four; each retains its evidence class and decision scope.
+            All {catalog.candidates.length} available contexts are included in this
+            bounded set. Select two to four; each retains its own evidence class and
+            decision scope.
           </p>
         </section>
       ) : (
@@ -124,7 +126,7 @@ function isSanitizedInvalidSelection(
 
 function ComparisonUnavailable() {
   return (
-    <main className="shell brief-page">
+    <main id="main-content" className="shell brief-page">
       <header className="page-header">
         <Link className="back-link" href="/">← Synapse Atlas</Link>
         <p className="eyebrow">Deterministic comparison</p>

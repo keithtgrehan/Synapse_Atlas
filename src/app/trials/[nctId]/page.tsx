@@ -38,7 +38,7 @@ export default async function TrialDetailPage({ params }: TrialDetailPageProps) 
   const asOf = new Date();
 
   return (
-    <main className="shell">
+    <main id="main-content" className="shell">
       <header className="page-header detail-header">
         <Link className="back-link" href="/trials">← Back to trial search</Link>
         <div className="detail-kicker">

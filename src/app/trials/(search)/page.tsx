@@ -150,7 +150,7 @@ export default async function TrialsPage({ searchParams }: TrialsPageProps) {
   const asOf = new Date();
 
   return (
-    <main className="shell">
+    <main id="main-content" className="shell">
       <header className="page-header">
         <Link className="back-link" href="/">← Synapse Atlas</Link>
         <p className="eyebrow">Official registered evidence</p>

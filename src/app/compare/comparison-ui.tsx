@@ -26,10 +26,10 @@ export function ComparisonSelectionForm({
       method="get"
     >
       <fieldset>
-        <legend>Select two to four reviewed programmes</legend>
+        <legend>Select two to four study contexts</legend>
         <p>
-          Choose the programme contexts you want to explore. Each includes a
-          selected study with a reviewed association.
+          Choose the registered studies you want to explore. Each context retains
+          the evidence status of its programme association.
         </p>
         <div className="comparison-options">
           {catalog.candidates.map((candidate) => (
@@ -69,7 +69,7 @@ export function ComparisonView({ result }: { result: ComparisonResult }) {
         <div>
           <p className="eyebrow">Deterministic snapshot comparison</p>
           <h2 id="comparison-heading">
-            {result.programmes.length} reviewed programmes
+            {result.programmes.length} study contexts
           </h2>
         </div>
         <div className="comparison-actions" aria-label="Comparison actions">
@@ -93,7 +93,7 @@ export function ComparisonView({ result }: { result: ComparisonResult }) {
       >
         <table className="comparison-table">
           <caption>
-            Evidence-bounded fields for the selected reviewed programmes
+            Evidence-bounded fields for the selected study contexts
           </caption>
           <thead>
             <tr>
@@ -108,21 +108,21 @@ export function ComparisonView({ result }: { result: ComparisonResult }) {
             </tr>
           </thead>
           <tbody>
-            <ComparisonRow label="Mapping review status" programmes={result.programmes}>
+            <ComparisonRow label="Context association evidence" programmes={result.programmes}>
               {(programme) => (
                 <FactWithEvidence evidenceClass={programme.mapping.evidenceClass}>
                   {programme.mapping.evidenceClass === "MODEL_INFERENCE" ? "Approved for inclusion; no independent human scientific review" : "Approved"}
                 </FactWithEvidence>
               )}
             </ComparisonRow>
-            <ComparisonRow label="Resolution status" programmes={result.programmes}>
+            <ComparisonRow label="Context grouping status" programmes={result.programmes}>
               {(programme) => (
                 <FactWithEvidence evidenceClass={programme.mapping.evidenceClass}>
-                  Resolved within the reviewed programme namespace
+                  Resolved within this bounded internal grouping
                 </FactWithEvidence>
               )}
             </ComparisonRow>
-            <ComparisonRow label="Reviewed sponsor-organisation association" programmes={result.programmes}>
+            <ComparisonRow label="Contextual sponsor association" programmes={result.programmes}>
               {(programme) => (
                 <FactWithEvidence evidenceClass={programme.mapping.evidenceClass}>
                   {programme.mapping.reportedSponsorOrganisation}
@@ -433,13 +433,13 @@ function Unknowns({ programme }: { programme: ComparisonProgramme }) {
 function MobileComparisonCard({ programme }: { programme: ComparisonProgramme }) {
   return (
     <article className="comparison-card">
-      <p className="eyebrow">Reviewed programme</p>
+      <p className="eyebrow">Study context</p>
       <h3><Link href={programme.programmeHref}>{programme.canonicalLabel}</Link></h3>
       <dl className="stacked-facts">
         <MobileFact label="Mapping state">
           <FactWithEvidence evidenceClass={programme.mapping.evidenceClass}>{programme.mapping.evidenceClass === "MODEL_INFERENCE" ? "Owner-approved inclusion · Resolved grouping" : "Approved · Resolved"}</FactWithEvidence>
         </MobileFact>
-        <MobileFact label="Reviewed sponsor-organisation association">
+        <MobileFact label="Contextual sponsor association">
           <FactWithEvidence evidenceClass={programme.mapping.evidenceClass}>{programme.mapping.reportedSponsorOrganisation}</FactWithEvidence>
         </MobileFact>
         <MobileFact label="Source-reported sponsor organisation">

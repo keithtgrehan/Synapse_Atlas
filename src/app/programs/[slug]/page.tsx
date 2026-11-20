@@ -57,7 +57,7 @@ export default async function ProgrammeDetailPage({
   const study = mapping.evidenceClass === "MODEL_INFERENCE" ? (await loadStudyExamples()).find((entry) => mapping.nctIds.includes(entry.nctId)) : undefined;
 
   return (
-    <main className="shell">
+    <main id="main-content" className="shell">
       <header className="page-header detail-header">
         <Link className="back-link" href="/programs">← Back to Programmes</Link>
         <p className="eyebrow">Version-controlled registry snapshot</p>
@@ -74,10 +74,10 @@ export default async function ProgrammeDetailPage({
       </header>
 
       <section className="detail-section" aria-labelledby="mapping-facts-heading">
-        <p className="eyebrow">Candidate relationships</p>
-        <h2 id="mapping-facts-heading">Mapping state</h2>
+        <p className="eyebrow">Contextual grouping</p>
+        <h2 id="mapping-facts-heading">Association evidence</h2>
         <dl className="facts-grid">
-          <ProgrammeFact label="Review state">
+          <ProgrammeFact label="Inclusion or review state">
             {reviewStatusLabel(mapping.reviewStatus)}
           </ProgrammeFact>
           <ProgrammeFact label="Resolution state">
@@ -90,7 +90,7 @@ export default async function ProgrammeDetailPage({
           <ProgrammeFact label="Company identity">
             Unknown — {programme.companyIdentity.rationale}
           </ProgrammeFact>
-          <ProgrammeFact label="Candidate compound association">
+          <ProgrammeFact label="Contextual compound association">
             {compound.canonicalLabel} · {reviewStatusLabel(mapping.reviewStatus)} · {resolutionStateLabel(mapping.resolutionState)}
           </ProgrammeFact>
           <ProgrammeFact label="Registry observations">Structured extraction</ProgrammeFact>
@@ -185,7 +185,7 @@ export default async function ProgrammeDetailPage({
               {programme.explicitUnknowns.map((unknown) => <li key={unknown}>{unknown}</li>)}
             </ul>
           </ProgrammeFact>
-          <ProgrammeFact label="Conflicts">
+          <ProgrammeFact label="Scope notes and recorded discrepancies">
             {programme.conflicts.length === 0 ? (
               noRecordedConflictDescription(mapping.resolutionState)
             ) : (

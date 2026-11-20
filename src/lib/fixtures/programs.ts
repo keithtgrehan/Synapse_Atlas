@@ -176,9 +176,13 @@ export async function readAndValidateProgrammeFixture(
   snapshot: ProgrammeSourceSnapshot,
   repositoryRoot = process.cwd(),
 ): Promise<ValidatedProgrammeFixture> {
+  for (const sourcePath of [snapshot.fixturePath, snapshot.metadataPath]) {
+    if (!sourcePath.startsWith("data/") || sourcePath.split("/").includes("..") || sourcePath.includes("\\"))
+      throw new Error("PROGRAMME_SOURCE_PATH_OUTSIDE_PUBLIC_DATA");
+  }
   const [fixtureBytes, metadataText] = await Promise.all([
-    readFile(path.join(repositoryRoot, snapshot.fixturePath)),
-    readFile(path.join(repositoryRoot, snapshot.metadataPath), "utf8"),
+    readFile(path.join(repositoryRoot, "data", snapshot.fixturePath.slice(5))),
+    readFile(path.join(repositoryRoot, "data", snapshot.metadataPath.slice(5)), "utf8"),
   ]);
 
   return validateProgrammeFixture(
