@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import { CasePreview, FeaturedEvidence } from "./case-preview";
 import { loadResearchManifest } from "../lib/catalogue/load";
@@ -27,31 +28,31 @@ export default async function Home() {
     <main id="main-content" className="atlas-home-v2">
       <section className="atlas-intro shell" aria-labelledby="home-title">
         <div className="atlas-intro-copy">
-          <p className="eyebrow">Traceable neuropsychiatry research</p>
-          <h1 id="home-title">Compare study designs with traceable evidence.</h1>
+          <p className="eyebrow">Registered study evidence</p>
+          <h1 id="home-title">Trial design, in focus.</h1>
           <p className="atlas-intro-lede">
-            Read measures, timing, capture dates and limits together before you
-            compare a selected set of registered studies.
+            Explore registered measures, timing and record changes in source-linked
+            research briefs.
           </p>
           <div className="hero-actions">
-            <Link className="button hero-primary" href={`/studies?case=${featured.id}`}>Open a guided brief <span aria-hidden="true">↗</span></Link>
-            <Link className="atlas-intro-link" href="#research-collections">Browse research collections <span aria-hidden="true">↓</span></Link>
+            <Link className="button hero-primary" href={`/studies?case=${featured.id}`}>Explore the MDD case <span aria-hidden="true">↗</span></Link>
+            <Link className="atlas-intro-link" href="#research-collections">Browse collections <span aria-hidden="true">↓</span></Link>
           </div>
-          <div className="atlas-intro-meta" aria-label="Product scope">
-            <span>{catalogue.length} retained NCT records</span>
-            <span>{researchCases.length} guided cases</span>
-            <span>{manifest.groups.length} research collections</span>
-            <span>Public registry evidence</span>
-          </div>
+          <p className="atlas-intro-scope">{catalogue.length} retained NCT records · {researchCases.length} guided cases · {manifest.groups.length} collections</p>
         </div>
-        <FeaturedEvidence caseStudy={featured} />
+        <div className="atlas-evidence-preview">
+          <figure className="brand-art" aria-hidden="true">
+            <Image src="/brand/evidence-layers.png" alt="" width={1536} height={1024} priority sizes="(max-width: 72rem) 0px, 560px" />
+          </figure>
+          <FeaturedEvidence caseStudy={featured} />
+        </div>
       </section>
 
       <section id="research-cases" className="shell atlas-cases" aria-labelledby="case-title">
         <header className="atlas-section-heading">
           <p className="eyebrow">Guided research cases</p>
-          <h2 id="case-title">Three routes through the evidence, with the limits intact.</h2>
-          <p>Each brief states the question, useful registered fields, material mismatch and the boundary on any interpretation.</p>
+          <h2 id="case-title">Start with a question. Follow the evidence.</h2>
+          <p>Inspect the registered fields, see the differences, and keep the limits in view.</p>
         </header>
         <div className="case-preview-grid">
           {researchCases.map((caseStudy, index) => (
@@ -76,7 +77,7 @@ export default async function Home() {
                 <p className="collection-dimensions">Compare: {collection.comparisonDimensions.join(" · ")}</p>
                 <details><summary>Scope &amp; limits</summary><p>{collection.description}</p><p>{collection.limitations}</p></details>
                 <small>{new Set(collection.studyIds).size} unique records</small>
-                <Link href={`/catalogue?collection=${collection.id}`}>Explore collection →</Link>
+                <Link href={`/catalogue?collection=${collection.id}`}>Open collection →</Link>
               </article>
             ))}
           </div>
