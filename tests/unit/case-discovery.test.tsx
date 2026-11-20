@@ -6,7 +6,7 @@ import Home from "../../src/app/page";
 import { CasePreview } from "../../src/app/case-preview";
 import { researchCases } from "../../src/lib/cases/content";
 import { loadResearchCases } from "../../src/lib/cases/load";
-import { loadResearchManifest } from "../../src/lib/catalogue/load";
+import { loadCatalogueManifest } from "../../src/lib/catalogue/load";
 import { compareCaptures } from "../../src/lib/snapshots/compare";
 import {
   loadReplayPair,
@@ -17,19 +17,19 @@ describe("case-led discovery", () => {
   it("makes every retained case and collection directly reachable without overstating the catalogue count", async () => {
     const [home, manifest, catalogue] = await Promise.all([
       Home(),
-      loadResearchManifest(),
+      loadCatalogueManifest(),
       loadSnapshotCatalogue(),
     ]);
     const html = renderToStaticMarkup(home);
     const memberships = manifest.groups.flatMap((group) => group.studyIds);
 
-    expect(catalogue).toHaveLength(39);
-    expect(new Set(catalogue.map((capture) => capture.nctId))).toHaveLength(39);
-    expect(memberships).toHaveLength(42);
-    expect(new Set(memberships)).toHaveLength(39);
-    expect(html).toContain("39 retained NCT records");
+    expect(catalogue).toHaveLength(41);
+    expect(new Set(catalogue.map((capture) => capture.nctId))).toHaveLength(41);
+    expect(memberships).toHaveLength(44);
+    expect(new Set(memberships)).toHaveLength(41);
+    expect(html).toContain("41 retained NCT records");
     expect(html).toContain(
-      "42 collection memberships cover 39 unique retained records",
+      "44 collection memberships cover 41 unique retained records",
     );
     expect(html).toContain('id="research-collections"');
 
@@ -68,7 +68,7 @@ describe("case-led discovery", () => {
     }
   });
 
-  it("renders source-verified measurement, timing and replay facts in the three distinct previews", async () => {
+  it("renders source-verified measurement, timing and replay facts in the four distinct previews", async () => {
     const catalogue = await loadSnapshotCatalogue();
     const verified = new Map(
       (await loadResearchCases(catalogue)).map((item) => [item.content.id, item]),
@@ -81,6 +81,10 @@ describe("case-led discovery", () => {
       "adjunctive-inadequate-response": [
         "MADRS baseline and primary window",
         "Registered adjunctive setting",
+      ],
+      "mdma-ptsd-design-context": [
+        "Registered population wording",
+        "Phase and registered enrolment",
       ],
       "registry-change-brief": [
         "Later-capture registered status",

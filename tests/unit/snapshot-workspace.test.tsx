@@ -55,7 +55,7 @@ describe("NCT-first workspace", () => {
     );
     expect(html).toContain("Check current registry");
     expect(html).toContain("Download source bundle");
-    expect(html).toContain("39 saved records");
+    expect(html).toContain("41 saved records");
     expect(html).toContain("No new lookup yet");
     expect(html).not.toContain("MODEL_INFERENCE");
     expect(html).not.toContain("Not captured</dd>");

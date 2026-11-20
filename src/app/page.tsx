@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { CasePreview, FeaturedEvidence } from "./case-preview";
-import { loadResearchManifest } from "../lib/catalogue/load";
+import { loadCatalogueManifest } from "../lib/catalogue/load";
 import { researchCases } from "../lib/cases/content";
 import { compareCaptures } from "../lib/snapshots/compare";
 import { loadResearchCases } from "../lib/cases/load";
@@ -12,7 +12,7 @@ import { loadSnapshotCatalogue } from "../lib/snapshots/catalogue";
 export default async function Home() {
   const [catalogue, manifest] = await Promise.all([
     loadSnapshotCatalogue(),
-    loadResearchManifest(),
+    loadCatalogueManifest(),
   ]);
   await loadResearchCases(catalogue);
   const replayPairs = await Promise.all(researchCases[2]!.studyIds.map((id) => loadReplayPair(id)));
@@ -56,7 +56,7 @@ export default async function Home() {
         </header>
         <div className="case-preview-grid">
           {researchCases.map((caseStudy, index) => (
-            <CasePreview caseStudy={caseStudy} index={index} replays={index === 2 ? replays : []} key={caseStudy.id} />
+            <CasePreview caseStudy={caseStudy} index={index} replays={caseStudy.id === "registry-change-brief" ? replays : []} key={caseStudy.id} />
           ))}
         </div>
       </section>
@@ -65,7 +65,7 @@ export default async function Home() {
         <div className="shell">
           <header>
             <p className="eyebrow">Research starting points</p>
-            <h2 id="collection-title">Seven collection questions for a more focused starting point.</h2>
+            <h2 id="collection-title">Research questions for a more focused starting point.</h2>
             <p>The catalogue is a selected convenience inventory, not a complete landscape or a treatment ranking.</p>
           </header>
           <div className="collection-strip">

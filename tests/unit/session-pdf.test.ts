@@ -19,6 +19,21 @@ async function fonts<T>(run: (calls: string[]) => Promise<T>) {
 const pages = (pdf: Uint8Array) => (new TextDecoder("latin1").decode(pdf).match(/\/Type \/Page\b/g) ?? []).length;
 
 describe("session PDF", () => {
+  it("exports the MAPP case and its external reading without retrieving linked documents", async () => fonts(async calls => {
+    const catalogue = await loadSnapshotCatalogue();
+    const researchCase = (await loadResearchCases(catalogue)).find(item => item.content.id === "mdma-ptsd-design-context")!;
+    const selected = catalogue.filter(item => researchCase.content.studyIds.includes(item.nctId));
+    const exportedAt = "2026-11-20T12:00:00Z";
+    const pdf = await sessionPdf(selected, [], exportedAt, researchCase);
+    expect(calls).toEqual(["/fonts/NotoSans-Regular.ttf", "/fonts/NotoSans-Bold.ttf"]);
+    expect(pages(pdf)).toBeGreaterThan(3);
+    if (process.env.SYNAPSE_PDF_MAPP_OUTPUT) {
+      const output = process.env.SYNAPSE_PDF_MAPP_OUTPUT;
+      await writeFile(output, pdf);
+      await writeFile(`${output}.json`, JSON.stringify(sessionManifest(selected, [], exportedAt, researchCase)));
+      await writeFile(`${output}.csv`, sessionCsv(selected, [], exportedAt, researchCase));
+    }
+  }));
   it("renders a complete guided case with all selected saved evidence", async () => fonts(async () => {
     const catalogue = await loadSnapshotCatalogue();
     const researchCase = (await loadResearchCases(catalogue))[0]!;

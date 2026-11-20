@@ -13,7 +13,9 @@ function previewDimensions(caseStudy: ResearchCase) {
       ? ["primary-outcome", "assessment-window"]
       : caseStudy.id === "adjunctive-inadequate-response"
         ? ["madrs-window", "setting"]
-        : ["current-capture-status", "registered-condition"];
+        : caseStudy.id === "mdma-ptsd-design-context"
+          ? ["registered-population", "phase-enrollment"]
+          : ["current-capture-status", "registered-condition"];
   return preferred
     .map((key) => dimension(caseStudy, key))
     .filter((item): item is NonNullable<typeof item> => Boolean(item));
@@ -31,10 +33,11 @@ export function CasePreview({ caseStudy, index, replays = [] }: { caseStudy: Res
       </header>
       <h3>{caseStudy.title}</h3>
       <p className="case-preview-question">{caseStudy.question}</p>
-      <div className="case-visual" aria-label={`${caseStudy.title}: evidence preview`}>
-        {index === 0 ? <div className="measure-preview">{caseStudy.studyIds.map((id) => <div key={id}><span>{id}</span><strong>{dimension(caseStudy, "primary-outcome")?.cells.find((cell) => cell.nctId === id)?.value}</strong><time>{dimension(caseStudy, "assessment-window")?.cells.find((cell) => cell.nctId === id)?.value}</time></div>)}</div>
-        : index === 1 ? <div className="clock-preview"><p>Separate trial clocks · MADRS</p>{dimension(caseStudy, "madrs-window")?.cells.map((cell) => <div key={cell.nctId}><span>{cell.nctId}</span><div className="clock-track" aria-hidden="true"><i />→<i /></div><strong>{cell.value}</strong></div>)}<small>Different baselines; no shared efficacy axis.</small></div>
-        : <div className="replay-preview"><p>Retained capture pairs · computed field states</p>{replays.map((diff) => <div key={diff.nctId}><strong>{diff.nctId}</strong><span>{diff.baseline.retrievedAt.slice(0,10)} → {diff.current.retrievedAt.slice(0,10)}</span><div className="replay-counts"><b>{diff.fields.filter(f => ["changed","added","removed"].includes(f.state)).length} changed</b><b>{diff.fields.filter(f => f.state === "unchanged").length} unchanged</b><b>{diff.fields.filter(f => ["ambiguous","not_compared"].includes(f.state)).length} uncompared</b></div></div>)}<small>Capture sequence, not clinical progress. Missing older fields remain uncompared.</small></div>}
+      <div className="case-visual" role="group" aria-label={`${caseStudy.title}: evidence preview`}>
+        {caseStudy.id === "mdd-measurement-window" ? <div className="measure-preview">{caseStudy.studyIds.map((id) => <div key={id}><span>{id}</span><strong>{dimension(caseStudy, "primary-outcome")?.cells.find((cell) => cell.nctId === id)?.value}</strong><time>{dimension(caseStudy, "assessment-window")?.cells.find((cell) => cell.nctId === id)?.value}</time></div>)}</div>
+        : caseStudy.id === "adjunctive-inadequate-response" ? <div className="clock-preview"><p>Separate trial clocks · MADRS</p>{dimension(caseStudy, "madrs-window")?.cells.map((cell) => <div key={cell.nctId}><span>{cell.nctId}</span><div className="clock-track" aria-hidden="true"><i />→<i /></div><strong>{cell.value}</strong></div>)}<small>Different baselines; no shared efficacy axis.</small></div>
+        : caseStudy.id === "registry-change-brief" ? <div className="replay-preview"><p>Retained capture pairs · computed field states</p>{replays.map((diff) => <div key={diff.nctId}><strong>{diff.nctId}</strong><span>{diff.baseline.retrievedAt.slice(0,10)} → {diff.current.retrievedAt.slice(0,10)}</span><div className="replay-counts"><b>{diff.fields.filter(f => ["changed","added","removed"].includes(f.state)).length} changed</b><b>{diff.fields.filter(f => f.state === "unchanged").length} unchanged</b><b>{diff.fields.filter(f => ["ambiguous","not_compared"].includes(f.state)).length} uncompared</b></div></div>)}<small>Capture sequence, not clinical progress. Missing older fields remain uncompared.</small></div>
+        : <div className="measure-preview"><p>PTSD · registered design context</p>{dimension(caseStudy, "phase-enrollment")?.cells.map(cell => <div key={cell.nctId}><span>{cell.nctId}</span><strong>{cell.value}</strong></div>)}<small>Registered enrolment is not necessarily the randomized or analyzed population. No pooled result.</small></div>}
       </div>
       <details className="preview-source-values"><summary>Supporting registered fields</summary><dl>
         {facts.map((fact) => (

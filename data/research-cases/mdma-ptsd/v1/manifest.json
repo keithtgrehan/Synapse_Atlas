@@ -1,0 +1,62 @@
+{
+  "version": "1",
+  "capturedAt": "2026-11-20T01:09:34.541Z",
+  "selectionMethod": "Two exact-ID MAPP phase-3 PTSD records captured on 2026-11-20 for a separate registered-design reading case. This is not a systematic, complete or representative sample, a treatment ranking or pooled outcome analysis.",
+  "fields": [
+    "NCTId",
+    "BriefTitle",
+    "OfficialTitle",
+    "OverallStatus",
+    "StartDate",
+    "PrimaryCompletionDate",
+    "CompletionDate",
+    "LastUpdatePostDate",
+    "LeadSponsorName",
+    "LeadSponsorClass",
+    "Condition",
+    "InterventionName",
+    "InterventionType",
+    "Phase",
+    "EnrollmentCount",
+    "EnrollmentType",
+    "StudyType",
+    "PrimaryOutcomeMeasure",
+    "PrimaryOutcomeTimeFrame",
+    "StartDateType",
+    "PrimaryCompletionDateType",
+    "CompletionDateType"
+  ],
+  "entries": [
+    {
+      "nctId": "NCT03537014",
+      "sourcePath": "data/research-cases/mdma-ptsd/v1/NCT03537014.json",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT03537014&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-11-20T01:09:33.746Z",
+      "processedAt": "2026-11-20T01:09:34.292Z",
+      "rawSha256": "3d050b60c9c81c7d513de40faca33fec36113ea12fa28d7c45b0797e3be6d99c",
+      "groupIds": ["ptsd-mdma-design-context"],
+      "selectionRationale": "Two exact-NCT MAPP phase-3 records selected for a separate PTSD study-design reading case; not part of the MDD inventory, a pooled result or a treatment ranking."
+    },
+    {
+      "nctId": "NCT04077437",
+      "sourcePath": "data/research-cases/mdma-ptsd/v1/NCT04077437.json",
+      "requestUrl": "https://clinicaltrials.gov/api/v2/studies?query.id=NCT04077437&pageSize=1&countTotal=true&format=json&fields=NCTId%2CBriefTitle%2COfficialTitle%2COverallStatus%2CStartDate%2CPrimaryCompletionDate%2CCompletionDate%2CLastUpdatePostDate%2CLeadSponsorName%2CLeadSponsorClass%2CCondition%2CInterventionName%2CInterventionType%2CPhase%2CEnrollmentCount%2CEnrollmentType%2CStudyType%2CPrimaryOutcomeMeasure%2CPrimaryOutcomeTimeFrame%2CStartDateType%2CPrimaryCompletionDateType%2CCompletionDateType",
+      "retrievedAt": "2026-11-20T01:09:34.292Z",
+      "processedAt": "2026-11-20T01:09:34.541Z",
+      "rawSha256": "3bfe7dc8b3d651bc5427b1277309d17ed91d90f7cad0d943b4f7c6e05c0926b2",
+      "groupIds": ["ptsd-mdma-design-context"],
+      "selectionRationale": "Two exact-NCT MAPP phase-3 records selected for a separate PTSD study-design reading case; not part of the MDD inventory, a pooled result or a treatment ranking."
+    }
+  ],
+  "groups": [
+    {
+      "id": "ptsd-mdma-design-context",
+      "title": "PTSD: MAPP1/MAPP2 design context",
+      "question": "What registered measures, timing and treatment context need inspection before reading MAPP1 and MAPP2 together?",
+      "description": "Two phase-3 PTSD records retained for a design-reading case. This context is separate from the MDD collections; linked publications, protocol and FDA documents are external reading, not registry results.",
+      "studyIds": ["NCT03537014", "NCT04077437"],
+      "comparisonDimensions": ["registered title and condition", "primary measure", "assessment window", "intervention names", "phase and enrolment type"],
+      "limitations": "A common measure does not establish comparable populations, successful blinding, efficacy, safety or approval. Eligibility, arm assignments, results and regulatory conclusions are outside the retained field projection."
+    }
+  ]
+}

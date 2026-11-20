@@ -609,7 +609,7 @@ export function StudyWorkspace({
               </article>
             ))}
           </div>
-          {!currentCase && <PrimaryOutcomeInspector view={savedPrimaryOutcomes(selected)} />}
+          {(!currentCase || currentCase.content.includePrimaryOutcomes) && <PrimaryOutcomeInspector view={savedPrimaryOutcomes(selected)} />}
           {activeCapture && (
             <section
               className="snapshot-panel"

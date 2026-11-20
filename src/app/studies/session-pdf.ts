@@ -4,6 +4,7 @@ import type { Capture } from "../../lib/snapshots/model";
 import type { CaseEvidence, VerifiedCase } from "../../lib/cases/model";
 import { sessionManifest, type CapturedComparison } from "./session-export";
 import { outcomeFieldText } from "../../lib/snapshots/primary-outcomes";
+import { readingBoundary, readingMetadata } from "../../lib/cases/reading-references";
 
 type Block = { text: string; kind: "title" | "heading" | "body" | "meta" | "boundary" | "link"; url?: string; keepWithNext?: number };
 type Manifest = ReturnType<typeof sessionManifest>;
@@ -63,6 +64,24 @@ function documentBlocks(manifest: Manifest): Block[] {
     add(researchCase.content.cannotEstablish, "boundary");
     researchCase.content.nextQuestions.forEach((question, index) => add(`${index + 1}. ${question}`));
     add(`MODEL_INFERENCE / Case selection: ${researchCase.content.selectionRationale}`, "meta");
+    if (researchCase.content.readingReferences?.length) {
+      add("External reading / separate from registry evidence", "heading");
+      add(readingBoundary, "boundary");
+      for (const reference of researchCase.content.readingReferences) {
+        add(reference.title, "heading");
+        add(readingMetadata(reference), "meta");
+        add(`${reference.citation}${reference.doi ? ` / DOI ${reference.doi}` : ""}`);
+        add(reference.note);
+        add(`Availability: ${reference.availabilityNote}`, "meta");
+        if (reference.url) link("External document", reference.url);
+        else if (reference.checkedUrl) add(`Unavailable checked link (not an active document link): ${reference.checkedUrl}`, "meta");
+        if (reference.notice) {
+          add(`${reference.notice.kind === "correction" ? "Author correction" : "Retraction notice"} / ${reference.notice.date}`, "heading");
+          add(reference.notice.note, "boundary");
+          link(reference.notice.title, reference.notice.url);
+        }
+      }
+    }
   }
   add("Saved study records", "heading");
   add("These values are from the saved catalogue. They are not a fresh registry check.");

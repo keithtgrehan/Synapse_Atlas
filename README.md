@@ -2,13 +2,13 @@
 
 **What changed since this research brief?** Compare selected registered studies, check a saved record against a newly retrieved exact-NCT-ID response, and export the evidence you actually saw.
 
-[Validated Preview](https://synapse-atlas-git-codex-nct-snaps-dd9d7a-keith-grehans-projects.vercel.app) · [Release PR12](https://github.com/keithtgrehan/Synapse_Atlas/pull/12) · [Public site](https://synapse-atlas-theta.vercel.app/) · [Source and release record](CONTROL_ROOM.md) · [Comparison implementation](src/lib/snapshots/compare.ts)
+[Validated Preview](https://synapse-atlas-git-codex-maps-design-case-keith-grehans-projects.vercel.app) · [Release PR14](https://github.com/keithtgrehan/Synapse_Atlas/pull/14) · [Public site](https://synapse-atlas-theta.vercel.app/) · [Source and release record](CONTROL_ROOM.md) · [Comparison implementation](src/lib/snapshots/compare.ts)
 
-**The MVP contains 39 retained trials, seven research collections and three guided cases.** The current release adds a compact scientific workspace and direct PDF downloads. Publication is authorized; exact validation and deployment revisions are recorded in the control room.
+**The MVP contains 41 retained trials, eight research collections and four guided cases.** The release adds a compact scientific workspace, complete saved primary-outcome inspection and direct PDF downloads. A separately captured MAPP1/MAPP2 PTSD design case adds source-linked external reading without pooling outcomes. Publication is authorized; exact validation and deployment revisions are recorded in the control room.
 
 Custom briefs expose every saved primary measure and time frame, grouped by study, with local source inspection before a current lookup. Repeated entries remain separate; missing and unrequested fields are labelled. The same saved view is included in PDF, CSV and JSON. The original Atlas logo/artwork and concise homepage keep the real evidence preview visible; imagery is decorative.
 
-The core journey uses 39 immutable saved NCT records independently of programme mappings. Optional programme context retains its original review status. No annotation, clinical adjudication, model training, database or account is required.
+The core journey uses 41 immutable saved NCT records independently of programme mappings. Optional programme context retains its original review status. No annotation, clinical adjudication, model training, database or account is required.
 
 ## Run the demo
 
@@ -19,7 +19,7 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Open `http://localhost:3000`, then **Explore the MDD case**, or browse the 39-trial catalogue. The catalogue groups all 39 records into explicit research contexts and describes their phase, registry status, enrolment definitions and endpoint coverage without pooling outcomes. Select up to four studies, inspect saved facts and **Check current registry**. The three original snapshot studies also offer **Replay two saved captures** using real retained evidence; this is explicitly historical, never a simulated live update. Download the PDF brief, CSV or JSON source bundle. The PDF includes the selected records, case interpretation, capture state and complete source appendix.
+Open `http://localhost:3000`, then **Explore the MDD case**, or browse the 41-trial catalogue. The catalogue groups all 41 records into explicit research contexts and describes their phase, registry status, enrolment definitions and endpoint coverage without pooling outcomes. Select up to four studies, inspect saved facts and **Check current registry**. The three original snapshot studies also offer **Replay two saved captures** using real retained evidence; this is explicitly historical, never a simulated live update. Download the PDF brief, CSV or JSON source bundle. The PDF includes the selected records, case interpretation, capture state and complete source appendix.
 
 Live capture requires internet access to the already approved ClinicalTrials.gov API. Failure leaves the saved brief and replay usable. Capture once per study in the open session; reload starts another session. Exports do not make a new API request.
 
@@ -34,7 +34,7 @@ What changed since this research brief? Synapse Atlas puts selected registered s
 
 ### Try the three-minute demo
 
-Open one of three guided research cases, or explore seven research collections covering 39 unique trials. Collections can overlap; they are reading contexts, not pooled cohorts. Filter the catalogue by collection and registry status. Custom briefs show every saved primary measure and time frame, grouped by study, with local source disclosure before any current lookup. Compare registered study characteristics and read the sourced interpretation. Choose a study and check the current registry, or run the clearly dated retained-record replay. Download the PDF brief, CSV and evidence bundle.
+Open a guided research case, or explore the saved research collections. Collections can overlap; they are reading contexts, not pooled cohorts. Filter the catalogue by collection and registry status. Custom briefs and the MAPP design case show every saved primary measure and time frame, grouped by study, with local source disclosure before any current lookup. Compare registered study characteristics and read the sourced interpretation. Choose a study and check the current registry, or run the clearly dated retained-record replay. Download the PDF brief, CSV and evidence bundle.
 
 ### One captured pair
 
@@ -42,7 +42,7 @@ The saved catalogue is validated directly from retained ClinicalTrials.gov recor
 
 ### Source transformations you can inspect
 
-Exact identifier checks, bounded requests, field validation and SHA-256 hashes protect the evidence chain. Original response hashes, exported field-projection hashes, normalized hashes, field locators and transformation/comparator versions distinguish each step. Retrieval time is separate from the registry update date. The downloadable bundle contains the field-limited evidence needed to replay the view; contact fields are omitted. Case bundles also include the specific retained public protocol fields cited by their analysis, including bounded study-purpose text where needed.
+Exact identifier checks, bounded requests, field validation and SHA-256 hashes protect the evidence chain. Original response hashes, exported field-projection hashes, normalized hashes, field locators and transformation/comparator versions distinguish each step. Retrieval time is separate from the registry update date. The downloadable bundle contains the field-limited evidence needed to replay the view; contact fields are omitted. Case bundles also include the specific retained public protocol fields cited by their analysis, including bounded study-purpose text where needed. External reading is separate bibliographic metadata, links and original notes; the linked full documents are not captured or replayable.
 
 ### Conservative comparison
 
@@ -92,7 +92,7 @@ Production target remains the existing Vercel project `synapse-atlas` and [publi
 
 ## Screenshots and demo script
 
-Current test counts and the final checked revision are recorded in the control room. See the [competitive design review](docs/competitive-design-review.md), [desktop home](docs/screenshots/home.png), [tablet research brief](docs/screenshots/research-tablet.png) and [narrow research brief](docs/screenshots/research-mobile.png). Direct PDF downloads are validated by text/source comparison and page rendering; browser printing remains a separate optional control. The three-minute script is the shared “Try the three-minute demo” section above. No user adoption, scientific accuracy or time-saving metrics are asserted.
+Current test counts and the final checked revision are recorded in the control room. See the [competitive design review](docs/competitive-design-review.md), [desktop home](docs/screenshots/home.png), [tablet research brief](docs/screenshots/research-tablet.png) and [narrow research brief](docs/screenshots/research-mobile.png). Direct PDF downloads are validated by text/source comparison and page rendering; browser printing remains a separate optional control. The [current home](docs/screenshots/home-mapp-desktop.png), [MAPP case](docs/screenshots/mapp-case-desktop.png) and [320px source inspection](docs/screenshots/mapp-outcome-mobile.png) show the final additive case. The three-minute script is the shared “Try the three-minute demo” section above. No user adoption, scientific accuracy or time-saving metrics are asserted.
 
 The case-led iteration adds distinct measurement, trial-clock and computed replay previews; seven manifest-derived research starting points; and a shared saved/current/replay state for the brief and export. See [before](docs/screenshots/home-before-case-led.png), [after](docs/screenshots/home-case-led.png), [case previews](docs/screenshots/cases-case-led.png) and [mobile](docs/screenshots/home-case-led-mobile.png).
 

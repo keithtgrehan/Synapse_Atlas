@@ -13,7 +13,7 @@ import { clinicalTrialsFixtureMetadataSchema } from "../fixtures/clinicaltrials"
 import { evaluateSourceRequest } from "../sources/policies";
 import { studyExampleCatalog } from "../studies/examples";
 import type { Capture } from "./model";
-import { loadResearchManifest } from "../catalogue/load";
+import { loadCatalogueManifest } from "../catalogue/load";
 
 const TRANSFORMATION = "nct-snapshot-catalogue/v1";
 const exportedProjectionFields = [
@@ -272,14 +272,17 @@ async function exampleCaptures(root: string): Promise<Capture[]> {
 }
 
 async function researchCaptures(root: string): Promise<Capture[]> {
-  const manifest = await loadResearchManifest(root);
+  const manifest = await loadCatalogueManifest(root);
   return Promise.all(manifest.entries.map((entry) => {
-    if (entry.sourcePath !== `data/research-catalogue/v1/${entry.nctId}.json`) throw new Error("RESEARCH_CAPTURE_PATH_MISMATCH");
+    const expectedResearchPath = `data/research-catalogue/v1/${entry.nctId}.json`;
+    const expectedMappPath = `data/research-cases/mdma-ptsd/v1/${entry.nctId}.json`;
+    if (entry.sourcePath !== expectedResearchPath && entry.sourcePath !== expectedMappPath)
+      throw new Error("RESEARCH_CAPTURE_PATH_MISMATCH");
     return readCapture(root, entry.sourcePath, entry);
   }));
 }
 
-/** Thirty-nine retained, validated captures. Programme mappings are intentionally not consulted. */
+/** Retained, validated captures. Programme mappings are intentionally not consulted. */
 export async function loadSnapshotCatalogue(
   repositoryRoot = process.cwd(),
 ): Promise<Capture[]> {
