@@ -70,10 +70,11 @@ export function FeaturedEvidence({ caseStudy }: { caseStudy: ResearchCase }) {
   return (
     <section className="featured-evidence" aria-labelledby="featured-evidence-title">
       <div className="featured-evidence-head">
-        <p className="eyebrow">Featured evidence / saved records</p>
+        <p className="eyebrow">Inside the Atlas / 01</p>
         <span>Source facts</span>
       </div>
       <h2 id="featured-evidence-title">{caseStudy.title}</h2>
+      <p className="featured-capture">ClinicalTrials.gov · saved {endpoint?.cells[0]?.evidence[0]?.retrievedAt.slice(0, 10) ?? "capture"}</p>
       <p>{caseStudy.summary}</p>
       <div className="evidence-ribbon" role="table" aria-label="Registered endpoint and assessment window by study">
         <div className="evidence-column-labels" role="row">

@@ -414,13 +414,13 @@ export function StudyWorkspace({
       ["ambiguous", "not_compared"].includes(f.state),
     ) ?? [];
   return (
-    <main id="main-content" className="shell workspace">
+    <main id="main-content" tabIndex={-1} className="shell workspace">
       <header className="workspace-intro workspace-context">
         <div>
           <p className="eyebrow workspace-context__label">Research workspace / Brief</p>
           <h1 className="workspace-context__title">{currentCase?.content.title ?? "Custom research brief"}</h1>
           <p className="workspace-context__meta">
-            {selected.length} of 4 studies selected · {evidenceSummary(selected, comparisons)}
+            {selected.length} of 4 studies selected · Source-linked research brief
           </p>
         </div>
         <div className="workspace-context__next no-print">
