@@ -1,4 +1,33 @@
 /* Shared light scientific-workstation frame. Imported after existing page styles. */
+.outcome-inspector { margin: 2rem 0; padding-top: 1.4rem; border-top: 1px solid #cbd5ce; }
+.outcome-boundary { color: #68440f; font-weight: 650; }
+.outcome-study { padding: 1.4rem 0; border-bottom: 1px solid #d9dfdb; }
+.outcome-study-heading { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem 1.2rem; }
+.outcome-study-heading h3, .outcome-study-heading p { margin: 0 0 .6rem; }
+.outcome-context { display: grid; grid-template-columns: 1fr 1.2fr .5fr; gap: .8rem 1.2rem; margin: .5rem 0 1rem; }
+.outcome-context dt, .outcome-source dt { color: #526059; font-size: .8125rem; font-weight: 650; }
+.outcome-context dd, .outcome-source dd { margin: .2rem 0 .65rem; overflow-wrap: anywhere; }
+.outcome-table { width: 100%; table-layout: fixed; border-collapse: collapse; background: #fff; }
+.outcome-table th:first-child { width: 66%; }
+.outcome-table :is(th, td) { padding: .85rem 1rem; text-align: left; vertical-align: top; border-bottom: 1px solid #d9dfdb; overflow-wrap: anywhere; }
+.outcome-table th { color: #526059; font-size: .8125rem; background: #eef2ee; }
+.outcome-table td p { margin: 0 0 .7rem; white-space: pre-wrap; }
+.outcome-entry-label { display: block; color: #526059; font-size: .8125rem; margin-bottom: .4rem; }
+.outcome-source { margin-top: .8rem; font-size: .875rem; }
+.outcome-source summary { color: #17604a; font-weight: 650; cursor: pointer; }
+.outcome-source[open] summary { margin-bottom: .8rem; }
+.outcome-source pre { max-width: 100%; padding: .8rem; background: #f1f4f1; white-space: pre-wrap; overflow-wrap: anywhere; }
+.outcome-source code { font-size: .8125rem; overflow-wrap: anywhere; }
+.outcome-official-link { margin: .8rem 0 0; font-size: .875rem; }
+@media (max-width: 640px) {
+  .outcome-context { grid-template-columns: 1fr; gap: 0; }
+  .outcome-table, .outcome-table tbody, .outcome-table tr, .outcome-table td { display: block; }
+  .outcome-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .outcome-table tr { border-bottom: 2px solid #cbd5ce; }
+  .outcome-table td { border: 0; }
+  .outcome-table td::before { content: attr(data-label); display: block; color: #526059; font-size: .8125rem; font-weight: 700; margin-bottom: .5rem; }
+  .outcome-table td + td { padding-top: 0; }
+}
 .workspace-context {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(17rem, .45fr);

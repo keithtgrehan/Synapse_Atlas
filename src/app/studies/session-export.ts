@@ -4,6 +4,7 @@ import type { Capture, SnapshotDiff } from "../../lib/snapshots/model";
 import { snapshotLimitations } from "../../lib/product/how-it-works";
 import type { VerifiedCase } from "../../lib/cases/model";
 import { evidenceRows } from "./evidence-state-model";
+import { savedPrimaryOutcomes, outcomeFieldText } from "../../lib/snapshots/primary-outcomes";
 export type CapturedComparison = {
   mode: "current" | "replay";
   diff: SnapshotDiff;
@@ -26,6 +27,7 @@ export function sessionManifest(
     scope:
       "Selected registered field groups only: status, enrolment, primary outcome measures/time frames, completion dates/types, lead sponsor and intervention names/types. Outcome descriptions, secondary endpoints and results are outside this comparator.",
     evidenceState: evidenceRows(savedStudies, comparisons),
+    savedPrimaryOutcomes: researchCase ? undefined : savedPrimaryOutcomes(savedStudies),
     savedStudies,
     comparisons: comparisons.map(({ mode, diff }) => ({
       mode,
@@ -70,6 +72,12 @@ export function sessionCsv(
       "Note",
       "Exported at",
       "Limitations",
+      "Outcome entry (capture position)",
+      "Registered primary measure",
+      "Registered time frame",
+      "Measure availability",
+      "Time frame availability",
+      "Saved study context",
     ],
   ];
   for (const capture of savedStudies) {
@@ -100,6 +108,21 @@ export function sessionCsv(
         exportedAt,
         snapshotLimitations,
       ]);
+  }
+  if (!researchCase) {
+    const view = savedPrimaryOutcomes(savedStudies);
+    for (const study of view.studies) {
+      const context = JSON.stringify({ ...study.context, availability: study.contextStatus });
+      const addOutcomeRow = (entry: (typeof study.entries)[number] | undefined) => rows.push([
+        study.nctId, "saved primary-outcome fields", "Registered primary outcome", entry?.evidenceClass ?? study.status,
+        entry ? `${outcomeFieldText(entry.measure)}\nTime frame: ${outcomeFieldText(entry.timeFrame)}` : study.status === "not_captured" ? "Not captured" : "Not reported in this captured response",
+        "", study.retrievedAt, "", study.registryLastUpdate ?? "", "", study.sourceUrl, "", study.rawSha256, "", study.projectedSha256, "", view.version,
+        entry ? [entry.parentLocator, entry.measureLocator, entry.timeFrameLocator].filter(Boolean).join("; ") : "", "",
+        `${view.label} Child pointers are derived within this capture; array positions are not cross-version identities.`, exportedAt, view.limitation,
+        entry ? String(entry.index + 1) : "", entry ? outcomeFieldText(entry.measure) : "", entry ? outcomeFieldText(entry.timeFrame) : "", entry?.measure.status ?? study.status, entry?.timeFrame.status ?? study.status, context,
+      ]);
+      if (study.entries.length) study.entries.forEach(addOutcomeRow); else addOutcomeRow(undefined);
+    }
   }
   for (const { mode, diff } of comparisons)
     for (const field of diff.fields)
@@ -149,6 +172,6 @@ export function sessionCsv(
     addCaseRow(content.studyIds.join("; "), "Next research questions", content.nextQuestions.join("\n"), "MODEL_INFERENCE", []);
   }
   return (
-    "\uFEFF" + rows.map((row) => row.map(cell).join(",")).join("\r\n") + "\r\n"
+    "\uFEFF" + rows.map((row) => [...row, ...Array(Math.max(0, rows[0].length - row.length)).fill("")].map(cell).join(",")).join("\r\n") + "\r\n"
   );
 }

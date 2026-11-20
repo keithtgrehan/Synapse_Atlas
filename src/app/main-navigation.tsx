@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const links = [["/catalogue", "Catalogue"], ["/studies", "Research brief"], ["/how-it-works", "How it works"]] as const;
+const links = [["/#research-cases", "Cases"], ["/catalogue", "Studies"], ["/how-it-works", "Method"]] as const;
 
 export function MainNavigation() {
   const pathname = usePathname();

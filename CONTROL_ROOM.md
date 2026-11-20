@@ -49,13 +49,29 @@ last_completed:
   - PR #8 merged security maintenance at ae1e4d564cc728d14072f623cf4b374e3628ded8 on 2026-09-09; post-merge local checks, main CI, clean production audit, and Preview-only deployment verification passed. S1-05 is Complete.
 next_action:
   task: S2-01
-  instruction: Complete the authorized professional workspace and direct PDF iteration, validate final head, merge PR12 and publish the tested merged revision to the existing public production alias.
+  instruction: Complete the accepted saved primary-outcome inspector and minimal original brand iteration on a new branch/PR, validate and publish; then implement the separately authorized bounded MAPP1/MAPP2 design case.
 blockers: [] # database persistence, manual annotation and clinical adjudication are outside this release
 
 ```
 
 
-## Active iteration — professional workspace, direct PDF and public release, 20 November 2026
+## Active iteration — saved outcome inspection and minimal original identity, 20 November 2026
+
+**Authority and baseline:** Keith authorized implementation, normal commits/merges, fresh Preview and public publication after validation. PR12 merged as `ab6ac8167b678407cc8cf5b1850f164b2cc66716`; its exact final head `d98599c` passed CI/Vercel. Production `dpl_D2DfCexH7VVKewDW3vdJcGV96dPj` is READY on the existing public alias and is the next release's rollback target. Anonymous checks returned200 for home/catalogue, all three cases and seven collection URLs, methodology, fonts and retained-replay API. Actual public saved/replay/current/custom PDF/CSV/JSON downloads passed266/192/187/41 checks and all-page bounds; browser and production error logs were clear. The first release is complete.
+
+**Optimized brief and finish line:** On `codex/saved-outcome-inspector`, implement accepted research milestone#1/A1–A8: every retained primary measure/time-frame pair for1–4 custom-selected studies, exact saved source disclosure, explicit requested/missing states, verified capture-scoped child pointers, and the same deterministic view in screen/PDF/CSV/JSON. Preserve39 records, seven collections, three guided cases and separate current/replay comparisons. Add the supplied original logo/artwork and short approved copy (“Trial design, in focus.”) without hiding real evidence or scientific limits. No new source integration, harmonization, scoring, dependency, account or database. Defer collection-context propagation.
+
+**Three bounded packages:** Lead owns inspector UI, exports, integration and release; isolated data owner owns the pure outcome model/tests; isolated design owner owns homepage/navigation/brand assets. Independent scientific/source and rendered UX review follows integration. Research and approved prompts are retained outside the public checkout; the existing design review records the public-source rationale.
+
+**Validation/release:** Real two-study/three-entry and four-entry examples; synthetic missingness; local source fidelity; capture isolation and asynchronous PDF selection consistency; safe CSV; unchanged offline replay; actual downloaded text and rendered multipage PDF. Check1440/768/390/320 layouts, keyboard/source disclosures, logo/image loading, focus/contrast and error states. Fresh full checks, exact-head CI, normal new PR merge, explicit production deployment, fresh Preview and anonymous/public export verification. No claim of clinical or market validation.
+
+**Observed implementation checks:** Fresh full `pnpm check` passes186 tests/29 files, lint, strict types, migration consistency and production build. The real downloaded four-study replay bundle also passes offline reconstruction. Synthetic tests distinguish each unrequested/absent subfield, reject NCT/parent/value/count mismatches, preserve escaped hostile strings and formula-safe CSV, and keep original selection through delayed font loading. The capture loader owns SHA-256 verification; the inspector verifies pointer/value agreement without claiming to rehash on the client.
+
+Browser checks show2studies/3entries and4studies/8entries, including all four NCT04581902 entries and both NCT01360645 entries. Saved inspector text is unchanged after current capture and retained replay. Downloaded custom/current/replay PDFs pass90/233/238 text/source checks, every page's bounds, exact CSV pairing and child-pointer resolution. Independent rendered PDF/source review passes. Those downloads precede the final plain-language limitation sentence; fresh hosted parity for that sentence remains pending. Brand and inspector reflow at1440/768/390/320; the320px primary action ends at413px. Both original images load; the36px logo is legible and desktop artwork is128px high/hidden on mobile. Keyboard source disclosure and visible focus work; measured boundary/metadata contrast7.95:1/6.61:1. Independent graphic/UI/UX review passes. No browser warning/error observed. Network-failure behavior is covered by existing route tests and state inspection; no browser outage was induced.
+
+**Later authorized bounded addition:** After this iteration reaches its finish line, use the supplied MAPS research packet to add one separately contextualized MAPP1/MAPP2 design case (NCT03537014/NCT04077437), with real exact-ID captures and compact external reading. It does not reopen the completed release or enter MDD cohorts. Check current source notices, keep publication context separate from registry evidence, and reuse the approved design/export paths. No duplicate build chat or research platform.
+
+## Completed iteration — professional workspace, direct PDF and public release, 20 November 2026
 
 **Authority:** Keith explicitly authorized publishing the validated MVP to the live website. The latest coordinated instruction authorizes a direct downloadable PDF, a reviewed scientific SaaS composition, marking PR12 ready, merging the exact reviewed revision through normal controls, and explicitly deploying the merged revision to the existing production project. This supersedes the historical Preview-only delivery gates below; preserve Preview protection and unrelated project settings.
 
