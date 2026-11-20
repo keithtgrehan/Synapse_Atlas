@@ -1,4 +1,5 @@
 import type { CaseEvidence, VerifiedCase } from "../../lib/cases/model";
+import { ReadingPanel } from "./reading-panel";
 
 function Evidence({ evidence }: { evidence: CaseEvidence[] }) {
   return <details className="source-disclosure"><summary>Inspect supporting fields ({evidence.length})</summary>
@@ -34,6 +35,7 @@ export function CaseView({ researchCase }: { researchCase: VerifiedCase }) {
       <span className="eyebrow">{claim.evidenceClass === "SOURCE_FACT" ? "Registry fact" : "AI-assisted interpretation"}</span>
       <p>{claim.text.replace(/^(SOURCE_FACT|MODEL_INFERENCE):\s*/, "")}</p><Evidence evidence={claim.evidence} />
     </article>)}</div><aside><div className="case-limits"><h3>What this cannot establish</h3><p>{content.cannotEstablish}</p></div><h3>Next research questions</h3><ul>{content.nextQuestions.map((question) => <li key={question}>{question}</li>)}</ul></aside></div>
+    {content.readingReferences?.length ? <ReadingPanel references={content.readingReferences} /> : null}
     <p className="quiet">This analysis stays tied to the saved records. A current capture below does not silently rewrite it.</p>
     <p className="print-only quiet">Case content SHA-256: {researchCase.contentSha256}. Field values, source locators and hashes are included in the source bundle.</p>
   </section>;

@@ -1,3 +1,5 @@
+import type { ExternalReadingReference } from "./reading-references";
+
 export type CaseEvidence = {
   nctId: string;
   /** JSON pointer into the immutable retained registry response. */
@@ -34,6 +36,8 @@ export type ResearchCase = {
   cannotEstablish: string;
   nextQuestions: string[];
   selectionRationale: string;
+  includePrimaryOutcomes?: boolean;
+  readingReferences?: ExternalReadingReference[];
 };
 
 export type VerifiedCase = {

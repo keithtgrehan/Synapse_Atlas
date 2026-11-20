@@ -49,13 +49,27 @@ last_completed:
   - PR #8 merged security maintenance at ae1e4d564cc728d14072f623cf4b374e3628ded8 on 2026-09-09; post-merge local checks, main CI, clean production audit, and Preview-only deployment verification passed. S1-05 is Complete.
 next_action:
   task: S2-01
-  instruction: Complete the accepted saved primary-outcome inspector and minimal original brand iteration on a new branch/PR, validate and publish; then implement the separately authorized bounded MAPP1/MAPP2 design case.
+  instruction: Complete the separately authorized bounded MAPP1/MAPP2 registered-design case with distinct PTSD context, verified exact-ID captures and external reading references; validate, merge and publish.
 blockers: [] # database persistence, manual annotation and clinical adjudication are outside this release
 
 ```
 
 
-## Active iteration — saved outcome inspection and minimal original identity, 20 November 2026
+## Active iteration — MAPP1/MAPP2 registered-design case, 20 November 2026
+
+**Authority/sequence:** Keith requested MAPS research followed by bounded implementation and chose the existing build chat for integration. The two earlier releases are complete. PR13 merged as `1ee2c848f5ea82e452791217b767095680f3a957`; final head `be6017e` passed CI and hosted Preview `dpl_HDJ6DjpFwVQhfxvXSh3JQSJgk7JD`. Production `dpl_CDLhS8C5i8aNq5McP4VvDhKvYEun` is READY at the existing public alias and is the next rollback target. Anonymous routes/assets/replay return200; actual public outcome PDF/CSV/JSON passes90 text/source checks and all-page bounds with the final plain-language copy. Browser and production error logs are clear.
+
+**Optimized brief/finish line:** Add only `mdma-ptsd-design-context`, with real exact-ID NCT03537014/NCT04077437 captures through existing SRC-CTG fields and a distinct PTSD collection. Preserve all original captures and contexts. Explain registered design versus separately attributed published/protocol/regulatory reading; no numerical efficacy comparison, approval badge, patient data or copied MAPS branding. Use a small validated external-reference shape for bibliographic metadata, source/version/check dates, availability, notices and original notes. Full external documents are neither ingested nor represented as registry-pointer evidence. Preserve existing custom inspector, guided cases and all export/replay behavior.
+
+**Three packages:** Lead owns bounded capture, case, reference UI/export and integration; scientific reviewer rechecks primary reports/notices/protocol/regulatory sources; quality reviewer checks source-policy/data contracts. Independent scientific and rendered UX review follows implementation. No additional build owner or research platform.
+
+**Source review decision:** Keep the historical MDD v1 manifest and all39 capture bytes unchanged. The two exact-ID MAPP responses are retained separately in `data/research-cases/mdma-ptsd/v1/`; the combined catalogue is a derived view. Fresh checks found registry enrolment100/121 (ACTUAL), which is not interchangeable with randomized/analysis population counts. Retain the captured wording, including the repeated phrase in MAPP2's time frame. External reading stores citation metadata, original notes and links only; MAPP2's2024 notice is an author correction for that paper, and the unavailable MAPP1 protocol has no active link. This does not enable a new runtime source.
+
+**Validation/release:** Exact IDs/hashes/locators, duplicate/missing/failed-source cases, safe references and truthful unavailable links, separate PTSD context, all primary entries through screen/PDF/CSV/JSON, no export-time retrieval, offline replay, responsive/keyboard and actual downloaded PDF text/rendering. Fresh full checks and normal exact-head PR/CI/merge/deploy; fresh Preview plus anonymous public route/export verification. Existing authorization covers publication; protections stay unchanged.
+
+**Observed integration validation:** `pnpm check` passes 195 tests across 31 files, lint, strict types, migration consistency and production build. Failed/malformed/wrong-ID second-response tests prove no partial MAPP package is published. Shared-doc consistency and diff checks pass. Independent source review confirms exact raw facts, separate external-reference validation and no export-time registry/document fetch. Independent graphic/UI/UX review passes the four-case composition and reading panel. Desktop 1440 / tablet 768 / mobile 390 / 320 have no page overflow; Enter opens source/reading disclosures with a 3px focus outline. The 320px home action ends at 413px. The separate collection renders 2 of 41, with 2 Phase 3 / Completed / Actual records and no pooled enrolment. Browser warnings/errors are clear. Actual downloaded MAPP PDF/CSV/JSON passes 256 text/source checks, 11 clickable destinations and all 12 pages' bounds; its saved projection reconstructs offline. Independent PDF render review passes. Exact-head hosted Preview, CI and public deployment verification remain pending.
+
+## Completed iteration — saved outcome inspection and minimal original identity, 20 November 2026
 
 **Authority and baseline:** Keith authorized implementation, normal commits/merges, fresh Preview and public publication after validation. PR12 merged as `ab6ac8167b678407cc8cf5b1850f164b2cc66716`; its exact final head `d98599c` passed CI/Vercel. Production `dpl_D2DfCexH7VVKewDW3vdJcGV96dPj` is READY on the existing public alias and is the next release's rollback target. Anonymous checks returned200 for home/catalogue, all three cases and seven collection URLs, methodology, fonts and retained-replay API. Actual public saved/replay/current/custom PDF/CSV/JSON downloads passed266/192/187/41 checks and all-page bounds; browser and production error logs were clear. The first release is complete.
 

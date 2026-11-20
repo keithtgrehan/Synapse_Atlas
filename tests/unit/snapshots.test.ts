@@ -12,10 +12,10 @@ import { getClinicalTrialCapture } from "../../src/lib/sources/clinicaltrials/cl
 import { sha256Bytes } from "../../src/lib/evidence/provenance";
 
 describe("NCT-first retained snapshot catalogue", () => {
-  it("loads 39 standalone captures without consulting programme mappings", async () => {
+  it("loads 41 standalone captures without consulting programme mappings", async () => {
     const captures = await loadSnapshotCatalogue();
-    expect(captures).toHaveLength(39);
-    expect(new Set(captures.map((capture) => capture.nctId)).size).toBe(39);
+    expect(captures).toHaveLength(41);
+    expect(new Set(captures.map((capture) => capture.nctId)).size).toBe(41);
     expect(
       captures.every(
         (capture) => capture.rawSha256 !== capture.projectedSha256,

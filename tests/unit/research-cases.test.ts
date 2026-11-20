@@ -39,12 +39,12 @@ function allEvidence(researchCase: ResearchCase): CaseEvidence[] {
 }
 
 describe("research cases", () => {
-  it("keeps three bounded, distinct cases on retained studies", async () => {
+  it("keeps four bounded, distinct cases on retained studies", async () => {
     const catalogue = await loadSnapshotCatalogue();
     const retainedIds = new Set(catalogue.map((capture) => capture.nctId));
 
-    expect(researchCases).toHaveLength(3);
-    expect(new Set(researchCases.map((researchCase) => researchCase.id)).size).toBe(3);
+    expect(researchCases).toHaveLength(4);
+    expect(new Set(researchCases.map((researchCase) => researchCase.id)).size).toBe(4);
     for (const researchCase of researchCases) {
       expect(researchCase.studyIds.length).toBeGreaterThanOrEqual(2);
       expect(researchCase.studyIds.length).toBeLessThanOrEqual(4);
@@ -59,7 +59,7 @@ describe("research cases", () => {
     const catalogue = await loadSnapshotCatalogue();
     const verified = await loadResearchCases(catalogue);
 
-    expect(verified).toHaveLength(3);
+    expect(verified).toHaveLength(4);
     for (const researchCase of verified) {
       expect(researchCase.verificationVersion).toBe("research-case-evidence/v1");
       expect(researchCase.evidence.length).toBeGreaterThan(0);
@@ -117,7 +117,7 @@ describe("research cases", () => {
     );
     const documents = new Map<string, { json: unknown; sha256: string }>();
     for (const item of researchCases.flatMap(allEvidence)) {
-      expect(item.sourcePath).toMatch(/^data\/(comparison\/2026-10-13|study-examples\/v1)\/NCT\d{8}\.json$/);
+      expect(item.sourcePath).toMatch(/^data\/(comparison\/2026-10-13|study-examples\/v1|research-cases\/mdma-ptsd\/v1)\/NCT\d{8}\.json$/);
       expect(path.basename(item.sourcePath, ".json")).toBe(item.nctId);
       expect(item.sourceUrl).toBe(`https://clinicaltrials.gov/study/${item.nctId}`);
       if (!documents.has(item.sourcePath)) {

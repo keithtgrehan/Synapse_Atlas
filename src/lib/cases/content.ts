@@ -1,4 +1,5 @@
 import type { CaseEvidence, ResearchCase } from "./model";
+import { mappCase } from "./mapp-case";
 
 type Source = {
   nctId: string;
@@ -179,4 +180,5 @@ export const researchCases: ResearchCase[] = [
     nextQuestions: ["Does ClinicalTrials.gov Record History provide a fuller official chronology for a specific field?", "Which additional public fields are necessary for the research question without broadening the safe export scope?"],
     selectionRationale: "Ranked third because the retained paired captures make provenance visible while preserving the distinction between a registry update and a clinical conclusion.",
   },
+  mappCase,
 ];

@@ -5,6 +5,7 @@ import { snapshotLimitations } from "../../lib/product/how-it-works";
 import type { VerifiedCase } from "../../lib/cases/model";
 import { evidenceRows } from "./evidence-state-model";
 import { savedPrimaryOutcomes, outcomeFieldText } from "../../lib/snapshots/primary-outcomes";
+import { readingBoundary, readingMetadata } from "../../lib/cases/reading-references";
 export type CapturedComparison = {
   mode: "current" | "replay";
   diff: SnapshotDiff;
@@ -27,7 +28,7 @@ export function sessionManifest(
     scope:
       "Selected registered field groups only: status, enrolment, primary outcome measures/time frames, completion dates/types, lead sponsor and intervention names/types. Outcome descriptions, secondary endpoints and results are outside this comparator.",
     evidenceState: evidenceRows(savedStudies, comparisons),
-    savedPrimaryOutcomes: researchCase ? undefined : savedPrimaryOutcomes(savedStudies),
+    savedPrimaryOutcomes: !researchCase || researchCase.content.includePrimaryOutcomes ? savedPrimaryOutcomes(savedStudies) : undefined,
     savedStudies,
     comparisons: comparisons.map(({ mode, diff }) => ({
       mode,
@@ -109,7 +110,7 @@ export function sessionCsv(
         snapshotLimitations,
       ]);
   }
-  if (!researchCase) {
+  if (!researchCase || researchCase.content.includePrimaryOutcomes) {
     const view = savedPrimaryOutcomes(savedStudies);
     for (const study of view.studies) {
       const context = JSON.stringify({ ...study.context, availability: study.contextStatus });
@@ -170,6 +171,11 @@ export function sessionCsv(
     for (const claim of content.takeaways) addCaseRow(content.studyIds.join("; "), "Takeaway", claim.text, claim.evidenceClass,
       researchCase.evidence.filter((entry) => claim.evidence.some((ref) => ref.sourcePath === entry.sourcePath && ref.locator === entry.locator)));
     addCaseRow(content.studyIds.join("; "), "Next research questions", content.nextQuestions.join("\n"), "MODEL_INFERENCE", []);
+    for (const reference of content.readingReferences ?? []) {
+      rows.push(["", "external reading reference", reference.title, reference.status,
+        JSON.stringify(reference), "", "", "", "", "", reference.url ?? "", "", "", "", "", "", "", "", "",
+        `${readingMetadata(reference)}. ${readingBoundary}`, exportedAt, readingBoundary]);
+    }
   }
   return (
     "\uFEFF" + rows.map((row) => [...row, ...Array(Math.max(0, rows[0].length - row.length)).fill("")].map(cell).join(",")).join("\r\n") + "\r\n"

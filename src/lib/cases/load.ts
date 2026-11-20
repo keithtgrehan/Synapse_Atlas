@@ -5,6 +5,7 @@ import { isDeepStrictEqual } from "node:util";
 import type { Capture } from "../snapshots/model";
 import { researchCases } from "./content";
 import type { CaseEvidence, VerifiedCase } from "./model";
+import { validateReadingReferences } from "./reading-references";
 
 const hash = (value: string | Uint8Array) => createHash("sha256").update(value).digest("hex");
 // Only named public protocol fields used by the editorial cases may leave the server.
@@ -33,6 +34,7 @@ export async function loadResearchCases(catalogue: Capture[], root = process.cwd
     return { ...item, rawSha256: capture.rawSha256, valueSha256: hash(JSON.stringify(actual)) };
   }
   return Promise.all(researchCases.map(async (content) => {
+    validateReadingReferences(content.readingReferences);
     const inputs = [...content.dimensions.flatMap((row) => row.cells.flatMap((cell) => cell.evidence)),
       ...content.takeaways.flatMap((claim) => claim.evidence)];
     const unique = [...new Map(inputs.map((item) => [`${item.sourcePath}:${item.locator}`, item])).values()];
