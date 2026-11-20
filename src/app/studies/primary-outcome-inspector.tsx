@@ -5,11 +5,11 @@ const absent = (status: string) => status === "not_captured" ? "Not captured" : 
 export function PrimaryOutcomeInspector({ view }: { view: SavedPrimaryOutcomes }) {
   return <section className="outcome-inspector" aria-labelledby="outcome-heading">
     <div className="section-title">
-      <h2 id="outcome-heading">Primary measures &amp; timing</h2>
-      <span className="quiet">{view.studyCount} {view.studyCount === 1 ? "study" : "studies"} / {view.entryCount} registered primary-outcome {view.entryCount === 1 ? "entry" : "entries"}</span>
+      <h2 id="outcome-heading">What each study planned to measure</h2>
+      <span className="quiet">{view.studyCount} {view.studyCount === 1 ? "study" : "studies"} / {view.entryCount} main measurement {view.entryCount === 1 ? "entry" : "entries"}</span>
     </div>
-    <p className="outcome-boundary">{view.label}</p>
-    <p className="quiet">{view.limitation} Current checks and replays do not change this saved view.</p>
+    <p className="outcome-boundary">Planned measurements, not study results.</p>
+    <p className="quiet">{view.limitation} Checking for updates or comparing saved versions does not change this saved view.</p>
     {view.studies.map(study => <div className="outcome-study" key={study.nctId}>
       <div className="outcome-study-heading">
         <h3>{study.nctId}</h3>
@@ -28,11 +28,11 @@ export function PrimaryOutcomeInspector({ view }: { view: SavedPrimaryOutcomes }
             <span className="outcome-entry-label">Entry {entry.index + 1}</span>
             <p>{outcomeFieldText(entry.measure)}</p>
             <details className="outcome-source">
-              <summary>Inspect saved capture fields<span className="sr-only"> for {study.nctId}, entry {entry.index + 1}</span></summary>
-              <p>{entry.evidenceClass} · retained values shown below</p>
+              <summary>See the saved source details<span className="sr-only"> for {study.nctId}, entry {entry.index + 1}</span></summary>
+              <p>{entry.evidenceClass} · exact saved values shown below</p>
               <pre>{JSON.stringify(entry.sourceValue, null, 2)}</pre>
               <dl>
-                <div><dt>Saved capture</dt><dd>{study.retrievedAt}</dd></div>
+                <div><dt>Saved copy</dt><dd>{study.retrievedAt}</dd></div>
                 <div><dt>Parent source locator</dt><dd><code>{entry.parentLocator}</code></dd></div>
                 <div><dt>Derived measure pointer</dt><dd><code>{entry.measureLocator ?? outcomeFieldText(entry.measure)}</code></dd></div>
                 <div><dt>Derived time-frame pointer</dt><dd><code>{entry.timeFrameLocator ?? outcomeFieldText(entry.timeFrame)}</code></dd></div>
@@ -45,7 +45,7 @@ export function PrimaryOutcomeInspector({ view }: { view: SavedPrimaryOutcomes }
           <td role="cell" data-label="Registered time frame"><p>{outcomeFieldText(entry.timeFrame)}</p></td>
         </tr>)}</tbody>
       </table> : <p>{absent(study.status)}</p>}
-      <p className="outcome-official-link"><a href={study.sourceUrl} target="_blank" rel="noreferrer">Open current official record ↗</a><span className="quiet"> May contain newer information.</span></p>
+      <p className="outcome-official-link"><a href={study.sourceUrl} target="_blank" rel="noreferrer">Open the public study record ↗</a><span className="quiet"> May contain newer information.</span></p>
     </div>)}
   </section>;
 }

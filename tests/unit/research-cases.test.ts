@@ -50,7 +50,7 @@ describe("research cases", () => {
       expect(researchCase.studyIds.length).toBeLessThanOrEqual(4);
       expect(new Set(researchCase.studyIds).size).toBe(researchCase.studyIds.length);
       expect(researchCase.studyIds.every((id) => retainedIds.has(id))).toBe(true);
-      expect(researchCase.cannotEstablish).toMatch(/cannot establish/i);
+      expect(researchCase.cannotEstablish).toMatch(/cannot (establish|tell)/i);
       expect(researchCase.nextQuestions.length).toBeGreaterThan(0);
     }
   });
@@ -149,7 +149,7 @@ describe("research cases", () => {
     const replay = researchCases.find(
       (researchCase) => researchCase.id === "registry-change-brief",
     )!;
-    expect(replay.summary).toMatch(/does not pre-state a change/i);
+    expect(replay.summary).toMatch(/does not assume that a change occurred/i);
     expect(replay.cannotEstablish).toMatch(/why a record changed/i);
   });
 });

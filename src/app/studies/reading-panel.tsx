@@ -1,8 +1,8 @@
 import { readingAvailability, readingBoundary, readingMetadata, type ExternalReadingReference } from "../../lib/cases/reading-references";
 
 export function ReadingPanel({ references }: { references: ExternalReadingReference[] }) {
-  return <section aria-labelledby="external-reading-title" className="external-reading"><h3 id="external-reading-title">External reading</h3><details>
-    <summary>Read beyond the registry · {references.length} references</summary>
+  return <section aria-labelledby="external-reading-title" className="external-reading"><h3 id="external-reading-title">Further reading</h3><details>
+    <summary>Open links and notes · {references.length} references</summary>
     <p className="quiet">{readingBoundary}</p>
     <ol>{references.map(reference => <li key={reference.id}>
       <p className="eyebrow">{reference.documentType}</p>

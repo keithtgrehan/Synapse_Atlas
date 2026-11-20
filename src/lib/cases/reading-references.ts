@@ -42,7 +42,7 @@ export const readingReferenceSchema = z.object({
 });
 
 export type ExternalReadingReference = z.infer<typeof readingReferenceSchema>;
-export const readingBoundary = "External reading: metadata, links and original notes only. Full documents are not stored in this brief or included in registry replay. Availability was checked on the stated date and may change.";
+export const readingBoundary = "Further reading contains citation details, links and Atlas notes. The full documents are not stored in this brief or included in its saved-record comparison. Links were checked on the stated date and may become unavailable.";
 export const readingAvailability = { available: "Available when checked", metadata_only: "Metadata checked; full-text access intermittent", unavailable: "Unavailable at checked link" } as const;
 
 export function validateReadingReferences(references: ExternalReadingReference[] = []) {

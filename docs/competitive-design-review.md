@@ -188,3 +188,25 @@ Implement **The Precision Atlas** in the existing Synapse Atlas application: an 
 ### Implementation decisions
 
 The existing shared styles are edited in place: `globals.css` owns shared tokens/structural and legacy rules, `case-led.css` owns the shared identity and discovery composition, `workstation.css` owns the quieter working surfaces, and `evidence-state.css` keeps its component responsibility. No additional stylesheet or font dependency is introduced. The catalogue distribution remains available in a disclosure; the session state remains visible without repeating the case title. Gold is a boundary rule; its text uses a darker accessible brown. Actual rendered verification and independent review are recorded in CONTROL_ROOM when performed.
+
+
+## Plain-language wording — 20 November 2026
+
+Keith requested a prompt-engineered copy pass for curious non-specialists, preserving the published Precision Atlas design. The coordinator supplied independent product-copy, lay-reader UX and scientific-accuracy perspectives. A separate case editor checked the authored scientific explanations; the lead integrated the wording and a quality reviewer mapped shared export labels versus exact source contracts. This is editorial judgment, not measured reader comprehension.
+
+**Optimized implementation prompt:** Make Synapse Atlas understandable to an interested reader without clinical-research or software expertise. Use calm, natural, concrete language across the homepage, four examples, study list, source disclosures, update/saved-version states, recovery messages, downloads and How it works. Explain ClinicalTrials.gov and necessary terms at first use. Make the next action clear. Distinguish a dated saved copy, one new check during this visit and a comparison of two earlier saved versions. Keep planned measurements separate from results, source facts separate from AI-assisted reading notes, and every material scientific limitation. Preserve the existing design and all exact source values, dates, counts, identifiers, citations, notices, source locations and hashes. Keep schemas, machine enums and capture/comparison behavior unchanged. Use shared copy consistently in screen, PDF, CSV and JSON where applicable. Retain technical details behind source disclosures. Check narrow layouts, accessible names, actual saved/current/saved-version downloads and original-source fidelity; obtain independent copy/scientific review, run full checks and shared-doc sync, then use the existing authorized release path.
+
+| Before | Revised reader-facing wording | Meaning retained |
+| --- | --- | --- |
+| Cases / Method | Examples / How it works | Existing routes and navigation semantics. |
+| Retained NCT records | Saved study records | Dated copies with exact NCT IDs available. |
+| Find the right comparison | Find studies to compare | The same selection and filters. |
+| Inspect changes / Check current registry | Check for updates | One new timestamped check per study during this visit. |
+| Replay two saved captures | Compare two saved versions | Earlier saved copies, explicitly not a live update. |
+| Session evidence | Evidence in this brief | The actual saved/current/saved-version state. |
+| Primary measures & timing | What each study planned to measure | Planned measurements and timing, not performed measurements or results. |
+| Source facts | From saved study records | Source/interpretation categories remain exact internally. |
+| Inspect supporting fields | See the saved source details | Exact source values, locations and hashes remain inspectable. |
+| Download source bundle | Download source data (JSON) | Identical machine-readable structure and evidence content. |
+
+The four example titles now explain measurement/timing, add-on study timelines, dated record versions and the questions needed before comparing the MDMA-assisted therapy studies. MDD/PTSD context and MADRS wording are explained from retained evidence. Clinical claims and numbers are not made simpler by changing them. A shared presentation-only map gives all eight collections plain titles and questions on the homepage and study list. Original collection names, questions, selection metadata and scientific limits remain available in disclosures and unchanged export metadata. The independent scientific reviewer checked the wording against all eight collection scopes. Final review also removed any presumption of change from the saved-version example title and replaced the arbitrary 48-hour notice with the actual saved dates and a clear dated-copy warning. Final review and observed verification belong in CONTROL_ROOM.

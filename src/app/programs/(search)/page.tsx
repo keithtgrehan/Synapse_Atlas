@@ -29,13 +29,12 @@ export default async function ProgrammesPage({
     <main id="main-content" className="shell">
       <header className="page-header">
         <Link className="back-link" href="/">← Synapse Atlas</Link>
-        <p className="eyebrow">Version-controlled programme mappings</p>
+        <p className="eyebrow">Saved programme context</p>
         <h1>Programmes</h1>
         <p className="lede">
-          Search checked-in ClinicalTrials.gov snapshots and evidence-bounded
-          programme, reported sponsor-organisation, and compound relationships.
-          Review and resolution state is shown on every record; none is live
-          programme data.
+          Explore how selected study records have been linked to drug-development
+          programmes, reported sponsors and compounds. Each entry shows how that
+          link was reviewed. These dated records are not live programme updates.
         </p>
       </header>
 
