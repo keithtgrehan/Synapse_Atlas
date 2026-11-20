@@ -6,6 +6,8 @@
 
 **The MVP contains 39 retained trials, seven research collections and three guided cases.** The current release adds a compact scientific workspace and direct PDF downloads. Publication is authorized; exact validation and deployment revisions are recorded in the control room.
 
+Custom briefs expose every saved primary measure and time frame, grouped by study, with local source inspection before a current lookup. Repeated entries remain separate; missing and unrequested fields are labelled. The same saved view is included in PDF, CSV and JSON. The original Atlas logo/artwork and concise homepage keep the real evidence preview visible; imagery is decorative.
+
 The core journey uses 39 immutable saved NCT records independently of programme mappings. Optional programme context retains its original review status. No annotation, clinical adjudication, model training, database or account is required.
 
 ## Run the demo
@@ -17,7 +19,7 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Open `http://localhost:3000`, then **Open a guided brief**, or browse the 39-trial catalogue. The catalogue groups all 39 records into explicit research contexts and describes their phase, registry status, enrolment definitions and endpoint coverage without pooling outcomes. Select up to four studies, inspect saved facts and **Check current registry**. The three original snapshot studies also offer **Replay two saved captures** using real retained evidence; this is explicitly historical, never a simulated live update. Download the PDF brief, CSV or JSON source bundle. The PDF includes the selected records, case interpretation, capture state and complete source appendix.
+Open `http://localhost:3000`, then **Explore the MDD case**, or browse the 39-trial catalogue. The catalogue groups all 39 records into explicit research contexts and describes their phase, registry status, enrolment definitions and endpoint coverage without pooling outcomes. Select up to four studies, inspect saved facts and **Check current registry**. The three original snapshot studies also offer **Replay two saved captures** using real retained evidence; this is explicitly historical, never a simulated live update. Download the PDF brief, CSV or JSON source bundle. The PDF includes the selected records, case interpretation, capture state and complete source appendix.
 
 Live capture requires internet access to the already approved ClinicalTrials.gov API. Failure leaves the saved brief and replay usable. Capture once per study in the open session; reload starts another session. Exports do not make a new API request.
 
@@ -32,7 +34,7 @@ What changed since this research brief? Synapse Atlas puts selected registered s
 
 ### Try the three-minute demo
 
-Open one of three guided research cases, or explore seven research collections covering 39 unique trials. Collections can overlap; they are reading contexts, not pooled cohorts. Filter the catalogue by collection and registry status. Compare registered study characteristics and read the sourced interpretation. Choose a study and check the current registry, or run the clearly dated retained-record replay. Inspect a field and its source evidence. Download the PDF brief, CSV and evidence bundle.
+Open one of three guided research cases, or explore seven research collections covering 39 unique trials. Collections can overlap; they are reading contexts, not pooled cohorts. Filter the catalogue by collection and registry status. Custom briefs show every saved primary measure and time frame, grouped by study, with local source disclosure before any current lookup. Compare registered study characteristics and read the sourced interpretation. Choose a study and check the current registry, or run the clearly dated retained-record replay. Download the PDF brief, CSV and evidence bundle.
 
 ### One captured pair
 

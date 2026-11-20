@@ -91,7 +91,7 @@ export default async function Home() {
         <div>
           <p className="eyebrow">Build a focused comparison</p>
           <h2>Choose up to four saved studies, then compare the captured evidence.</h2>
-          <p>Screen, CSV, source bundle and print output reuse the same saved or session-captured pair. Exports do not silently fetch another registry record.</p>
+          <p>Download the same captured evidence as a PDF brief, CSV or source bundle.</p>
         </div>
         <div className="atlas-closing-actions">
           <Link className="button" href={`/studies?case=${featured.id}`}>Open a guided brief <span aria-hidden="true">→</span></Link>

@@ -12,8 +12,32 @@ import {
   sessionManifest,
 } from "../../src/app/studies/session-export";
 import { GET } from "../../src/app/api/snapshots/[nctId]/route";
+import { PrimaryOutcomeInspector } from "../../src/app/studies/primary-outcome-inspector";
+import { savedPrimaryOutcomes } from "../../src/lib/snapshots/primary-outcomes";
 
 describe("NCT-first workspace", () => {
+  it("shows every saved primary entry and local evidence in a custom selection without fetching", async () => {
+    const selected = (await loadSnapshotCatalogue()).filter(c => ["NCT03559192", "NCT01360645"].includes(c.nctId));
+    const spy = vi.spyOn(globalThis, "fetch").mockRejectedValue(new Error("No registry request"));
+    try {
+      const view = savedPrimaryOutcomes(selected);
+      const html = renderToStaticMarkup(<PrimaryOutcomeInspector view={view} />);
+      expect(html).toContain("2 studies / 3 registered primary-outcome entries");
+      expect(html).toContain("Final Protocol");
+      expect(html.match(/Inspect saved capture fields/g)).toHaveLength(3);
+      expect(html).toContain("Open current official record");
+      const manifest = sessionManifest(selected, [], "2026-11-20T12:00:00Z");
+      expect(manifest.savedPrimaryOutcomes).toEqual(view);
+      const csv = sessionCsv(selected, [], manifest.exportedAt);
+      expect(csv.match(/"saved primary-outcome fields"/g)).toHaveLength(3);
+      for (const study of view.studies) for (const entry of study.entries) {
+        expect(csv).toContain(entry.measure.value.replaceAll('"', '""'));
+        expect(csv).toContain(entry.timeFrame.value.replaceAll('"', '""'));
+        expect(csv).toContain(entry.measureLocator);
+      }
+      expect(spy).not.toHaveBeenCalled();
+    } finally { spy.mockRestore(); }
+  });
   it("leads with a sourced case and keeps programme context optional", async () => {
     const html = renderToStaticMarkup(await Home());
     expect(html).toContain("Open a guided brief");

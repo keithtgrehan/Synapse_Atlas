@@ -4,6 +4,8 @@ import Link from "next/link";
 import type { VerifiedCase } from "../../lib/cases/model";
 import { CaseView } from "./case-view";
 import { EvidenceState } from "./evidence-state";
+import { PrimaryOutcomeInspector } from "./primary-outcome-inspector";
+import { savedPrimaryOutcomes } from "../../lib/snapshots/primary-outcomes";
 import { evidenceSummary } from "./evidence-state-model";
 import { useEffect, useRef, useState } from "react";
 import type {
@@ -607,6 +609,7 @@ export function StudyWorkspace({
               </article>
             ))}
           </div>
+          {!currentCase && <PrimaryOutcomeInspector view={savedPrimaryOutcomes(selected)} />}
           {activeCapture && (
             <section
               className="snapshot-panel"

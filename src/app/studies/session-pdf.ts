@@ -3,6 +3,7 @@ import { compareCaptures } from "../../lib/snapshots/compare";
 import type { Capture } from "../../lib/snapshots/model";
 import type { CaseEvidence, VerifiedCase } from "../../lib/cases/model";
 import { sessionManifest, type CapturedComparison } from "./session-export";
+import { outcomeFieldText } from "../../lib/snapshots/primary-outcomes";
 
 type Block = { text: string; kind: "title" | "heading" | "body" | "meta" | "boundary" | "link"; url?: string; keepWithNext?: number };
 type Manifest = ReturnType<typeof sessionManifest>;
@@ -73,6 +74,31 @@ function documentBlocks(manifest: Manifest): Block[] {
       add(`${field.label}: ${field.before}`);
       add(`Saved only / not refreshed. Source field: ${field.baselineLocators.join("; ") || "Not captured"}`, "meta");
     }
+  }
+  if (manifest.savedPrimaryOutcomes) {
+    const view = manifest.savedPrimaryOutcomes;
+    add("Saved primary measures and timing", "heading");
+    add(`${view.studyCount} studies / ${view.entryCount} registered primary-outcome entries`);
+    add(view.label, "boundary");
+    add(`${view.limitation} Current checks and replays do not change this saved view.`, "boundary");
+    for (const study of view.studies) {
+      add(`${study.nctId} / saved outcome fields`, "heading");
+      add(`Saved capture: ${study.retrievedAt}\nRegistry update: ${present(study.registryLastUpdate)}`, "meta");
+      const missing = (status: string) => status === "not_captured" ? "Not captured" : "Not reported in this captured response";
+      add(`Registered conditions: ${study.context.conditions.join("; ") || missing(study.contextStatus.conditions)}`);
+      add(`Interventions: ${study.context.interventions.map(item => `${item.name}${item.type ? ` (${item.type})` : ""}`).join("; ") || missing(study.contextStatus.interventions)}`);
+      add(`Phase: ${study.context.phases.join("; ") || missing(study.contextStatus.phases)}`);
+      if (!study.entries.length) add(missing(study.status));
+      for (const entry of study.entries) {
+        add(`Entry ${entry.index + 1} / ${entry.evidenceClass}`, "heading");
+        add(`Registered primary measure: ${outcomeFieldText(entry.measure)}`);
+        add(`Registered time frame: ${outcomeFieldText(entry.timeFrame)}`);
+        add(`Measure availability: ${entry.measure.status}\nTime-frame availability: ${entry.timeFrame.status}\nParent source locator: ${entry.parentLocator}\nDerived measure pointer: ${entry.measureLocator ?? outcomeFieldText(entry.measure)}\nDerived time-frame pointer: ${entry.timeFrameLocator ?? outcomeFieldText(entry.timeFrame)}`, "meta");
+      }
+      add(`Original response SHA-256: ${study.rawSha256}\nSaved projection SHA-256: ${study.projectedSha256}`, "meta");
+      link("Open current official record (may contain newer information)", study.sourceUrl);
+    }
+    add("Child pointers are derived and verified within each saved capture. Entry numbers identify array positions, not identities across registry versions.", "meta");
   }
   add("Displayed comparisons", "heading");
   if (!manifest.comparisons.length) add("No current lookup or retained replay has been added to this brief.");
