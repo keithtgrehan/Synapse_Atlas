@@ -4,9 +4,12 @@ import path from "node:path";
 import { describe, expect, it } from "vitest";
 
 import {
+  loadCatalogueManifest,
+  loadMappManifest,
   loadResearchManifest,
   validateCollectionMembership,
 } from "../../src/lib/catalogue/load";
+import { mappManifestSchema } from "../../src/lib/catalogue/model";
 import { summarizeCatalogue } from "../../src/lib/catalogue/analysis";
 import { loadSnapshotCatalogue } from "../../src/lib/snapshots/catalogue";
 import { evaluateSourceRequest } from "../../src/lib/sources/policies";
@@ -67,12 +70,15 @@ describe("retained research catalogue", () => {
       loadResearchManifest(),
       loadSnapshotCatalogue(),
     ]);
-    expect(catalogue).toHaveLength(39);
-    expect(new Set(catalogue.map((capture) => capture.nctId)).size).toBe(39);
-    expect(() => validateCollectionMembership(manifest, catalogue)).not.toThrow();
+    const historicalCatalogue = catalogue.filter(
+      (capture) => !["NCT03537014", "NCT04077437"].includes(capture.nctId),
+    );
+    expect(historicalCatalogue).toHaveLength(39);
+    expect(new Set(historicalCatalogue.map((capture) => capture.nctId)).size).toBe(39);
+    expect(() => validateCollectionMembership(manifest, historicalCatalogue)).not.toThrow();
 
     const assigned = new Set(manifest.groups.flatMap((group) => group.studyIds));
-    expect(assigned).toEqual(new Set(catalogue.map((capture) => capture.nctId)));
+    expect(assigned).toEqual(new Set(historicalCatalogue.map((capture) => capture.nctId)));
     for (const group of manifest.groups) {
       expect(group.comparisonDimensions.length).toBeGreaterThan(0);
       expect(group.limitations).toMatch(
@@ -93,7 +99,11 @@ describe("retained research catalogue", () => {
   });
 
   it("derives descriptive, non-pooled counts from the same 39 retained captures", async () => {
-    const summary = summarizeCatalogue(await loadSnapshotCatalogue());
+    const summary = summarizeCatalogue(
+      (await loadSnapshotCatalogue()).filter(
+        (capture) => !["NCT03537014", "NCT04077437"].includes(capture.nctId),
+      ),
+    );
     const sum = (items: Record<string, number>) =>
       Object.values(items).reduce((total, count) => total + count, 0);
 
@@ -113,9 +123,12 @@ describe("retained research catalogue", () => {
       loadResearchManifest(),
       loadSnapshotCatalogue(),
     ]);
-    const summary = summarizeCatalogue(catalogue);
+    const historicalCatalogue = catalogue.filter(
+      (capture) => !["NCT03537014", "NCT04077437"].includes(capture.nctId),
+    );
+    const summary = summarizeCatalogue(historicalCatalogue);
     const csv = catalogueCsv(
-      catalogue,
+      historicalCatalogue,
       manifest,
       { query: "", groupId: "", status: "" },
       "2026-11-19T23:00:00Z",
@@ -125,12 +138,12 @@ describe("retained research catalogue", () => {
     expect(rows).toHaveLength(40);
     expect(
       new Set(
-        catalogue.filter((capture) => csv.includes(`\"${capture.nctId}\"`)).map(
+        historicalCatalogue.filter((capture) => csv.includes(`\"${capture.nctId}\"`)).map(
           (capture) => capture.nctId,
         ),
       ).size,
     ).toBe(39);
-    const sample = catalogue.find((capture) => capture.nctId === "NCT03866174")!;
+    const sample = historicalCatalogue.find((capture) => capture.nctId === "NCT03866174")!;
     expect(csv).toContain(sample.record.briefTitle.replaceAll('"', '""'));
     expect(csv).toContain(sample.rawSha256);
     expect(csv).toContain(sample.projectedSha256);
@@ -138,7 +151,7 @@ describe("retained research catalogue", () => {
     expect(csv).toContain(summary.method);
     expect(csv).toContain(summary.limitations);
 
-    const hostile = structuredClone(catalogue);
+    const hostile = structuredClone(historicalCatalogue);
     hostile[0]!.record.briefTitle = "=HYPERLINK(\"https://example.test\")";
     expect(
       catalogueCsv(
@@ -148,5 +161,69 @@ describe("retained research catalogue", () => {
         "2026-11-19T23:00:00Z",
       ),
     ).toContain("'=HYPERLINK");
+  });
+
+  it("adds two hash-verified MAPP records only through a separate PTSD context", async () => {
+    const [mapp, aggregate, catalogue, historical] = await Promise.all([
+      loadMappManifest(),
+      loadCatalogueManifest(),
+      loadSnapshotCatalogue(),
+      loadResearchManifest(),
+    ]);
+    const mappIds = ["NCT03537014", "NCT04077437"];
+
+    expect(mapp.entries.map((entry) => entry.nctId)).toEqual(mappIds);
+    expect(mapp.groups).toHaveLength(1);
+    expect(mapp.groups[0]!.id).toBe("ptsd-mdma-design-context");
+    expect(mapp.groups[0]!.studyIds).toEqual(mappIds);
+    expect(historical.groups.flatMap((group) => group.studyIds)).not.toEqual(
+      expect.arrayContaining(mappIds),
+    );
+    for (const entry of mapp.entries) {
+      expect(entry.sourcePath).toBe(
+        `data/research-cases/mdma-ptsd/v1/${entry.nctId}.json`,
+      );
+      expect(sha256(await readFile(path.join(process.cwd(), entry.sourcePath)))).toBe(
+        entry.rawSha256,
+      );
+      const source = JSON.parse(
+        await readFile(path.join(process.cwd(), entry.sourcePath), "utf8"),
+      );
+      expect(source.totalCount).toBe(1);
+      expect(source.studies).toHaveLength(1);
+      expect(source.studies[0].protocolSection.identificationModule.nctId).toBe(
+        entry.nctId,
+      );
+    }
+    expect(catalogue).toHaveLength(41);
+    expect(aggregate.groups).toHaveLength(8);
+    expect(() => validateCollectionMembership(aggregate, catalogue)).not.toThrow();
+
+    const pathMismatch = structuredClone(mapp);
+    pathMismatch.entries[0]!.sourcePath =
+      "data/research-cases/mdma-ptsd/v1/NCT04077437.json";
+    expect(() => mappManifestSchema.parse(pathMismatch)).toThrow();
+
+    const idMismatch = structuredClone(mapp);
+    idMismatch.entries[0]!.nctId = "NCT00000000";
+    idMismatch.entries[0]!.sourcePath =
+      "data/research-cases/mdma-ptsd/v1/NCT00000000.json";
+    expect(() => mappManifestSchema.parse(idMismatch)).toThrow();
+
+    const membershipMismatch = structuredClone(aggregate);
+    membershipMismatch.entries.find(
+      (entry) => entry.nctId === "NCT03537014",
+    )!.groupIds = ["mdd-pharmacology-endpoints"];
+    expect(() => validateCollectionMembership(membershipMismatch, catalogue)).toThrow(
+      "CATALOGUE_ENTRY_GROUP_MISMATCH",
+    );
+
+    const mixedContext = structuredClone(aggregate);
+    mixedContext.groups.find(
+      (group) => group.id === "mdd-pharmacology-endpoints",
+    )!.studyIds.push("NCT03537014");
+    expect(() => validateCollectionMembership(mixedContext, catalogue)).toThrow(
+      "CATALOGUE_MAPP_CONTEXT_MIXED",
+    );
   });
 });
