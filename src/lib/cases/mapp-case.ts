@@ -35,6 +35,18 @@ const identification = `${protocol}/identificationModule`;
 const design = `${protocol}/designModule`;
 const interventions = `${protocol}/armsInterventionsModule/interventions`;
 
+type RegisteredIntervention = { type: string; name: string };
+
+function interventionEvidence(
+  source: Source,
+  values: readonly RegisteredIntervention[],
+): CaseEvidence[] {
+  return values.flatMap((item, index) => [
+    evidence(source, `${interventions}/${index}/name`, item.name),
+    evidence(source, `${interventions}/${index}/type`, item.type),
+  ]);
+}
+
 const mapp1Title =
   "A Randomized, Double-Blind, Placebo-Controlled, Multi-Site Phase 3 Study of the Efficacy and Safety of Manualized MDMA-Assisted Psychotherapy for the Treatment of Severe Posttraumatic Stress Disorder";
 const mapp2Title =
@@ -124,24 +136,20 @@ export const mappCase: ResearchCase = {
         {
           nctId: "NCT03537014",
           value: "BEHAVIORAL: Therapy; DRUG: midomafetamine HCl; DRUG: Placebo",
-          evidence: [
-            evidence(sources.mapp1, interventions, [
-              { type: "BEHAVIORAL", name: "Therapy" },
-              { type: "DRUG", name: "midomafetamine HCl" },
-              { type: "DRUG", name: "Placebo" },
-            ]),
-          ],
+          evidence: interventionEvidence(sources.mapp1, [
+            { type: "BEHAVIORAL", name: "Therapy" },
+            { type: "DRUG", name: "midomafetamine HCl" },
+            { type: "DRUG", name: "Placebo" },
+          ]),
         },
         {
           nctId: "NCT04077437",
           value: "BEHAVIORAL: Therapy; DRUG: Midomafetamine; DRUG: Placebo",
-          evidence: [
-            evidence(sources.mapp2, interventions, [
-              { type: "BEHAVIORAL", name: "Therapy" },
-              { type: "DRUG", name: "Midomafetamine" },
-              { type: "DRUG", name: "Placebo" },
-            ]),
-          ],
+          evidence: interventionEvidence(sources.mapp2, [
+            { type: "BEHAVIORAL", name: "Therapy" },
+            { type: "DRUG", name: "Midomafetamine" },
+            { type: "DRUG", name: "Placebo" },
+          ]),
         },
       ],
       interpretation:
@@ -171,12 +179,12 @@ export const mappCase: ResearchCase = {
           count: 121,
           type: "ACTUAL",
         }),
-        evidence(sources.mapp1, interventions, [
+        ...interventionEvidence(sources.mapp1, [
           { type: "BEHAVIORAL", name: "Therapy" },
           { type: "DRUG", name: "midomafetamine HCl" },
           { type: "DRUG", name: "Placebo" },
         ]),
-        evidence(sources.mapp2, interventions, [
+        ...interventionEvidence(sources.mapp2, [
           { type: "BEHAVIORAL", name: "Therapy" },
           { type: "DRUG", name: "Midomafetamine" },
           { type: "DRUG", name: "Placebo" },
