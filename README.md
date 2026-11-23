@@ -1,10 +1,10 @@
 # Synapse Atlas
 
-**What changed since this research brief?** Compare selected registered studies, check a saved record against a newly retrieved exact-NCT-ID response, and export the evidence you actually saw.
+**What changed in the study record?** Explore saved public records, compare them with a new check, and download a summary with its sources.
 
-[Validated Preview](https://synapse-atlas-git-codex-maps-design-case-keith-grehans-projects.vercel.app) · [Release PR14](https://github.com/keithtgrehan/Synapse_Atlas/pull/14) · [Public site](https://synapse-atlas-theta.vercel.app/) · [Source and release record](CONTROL_ROOM.md) · [Comparison implementation](src/lib/snapshots/compare.ts)
+[Public site](https://synapse-atlas-theta.vercel.app/) · [Source and release record](CONTROL_ROOM.md) · [Reviewed visual release PR15](https://github.com/keithtgrehan/Synapse_Atlas/pull/15) · [Comparison implementation](src/lib/snapshots/compare.ts)
 
-**The MVP contains 41 retained trials, eight research collections and four guided cases.** The release pairs a dark evergreen editorial entry with warm, readable scientific workspaces, complete saved primary-outcome inspection and direct PDF downloads. A separately captured MAPP1/MAPP2 PTSD design case adds source-linked external reading without pooling outcomes. Publication is authorized; exact validation and deployment revisions are recorded in the control room.
+**The MVP contains 41 saved study records, eight study collections and four guided examples.** The release pairs a dark evergreen editorial entry with warm, readable scientific workspaces, complete saved primary-outcome inspection and direct PDF downloads. A separately captured MAPP1/MAPP2 PTSD design case adds source-linked external reading without pooling outcomes. Publication is authorized; exact validation and deployment revisions are recorded in the control room.
 
 Custom briefs expose every saved primary measure and time frame, grouped by study, with local source inspection before a current lookup. Repeated entries remain separate; missing and unrequested fields are labelled. The same saved view is included in PDF, CSV and JSON. The original Atlas logo/artwork and concise homepage keep the real evidence preview visible; imagery is decorative.
 
@@ -19,46 +19,46 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Open `http://localhost:3000`, then **Explore the MDD case**, or browse the 41-trial catalogue. The catalogue groups all 41 records into explicit research contexts and describes their phase, registry status, enrolment definitions and endpoint coverage without pooling outcomes. Select up to four studies, inspect saved facts and **Check current registry**. The three original snapshot studies also offer **Replay two saved captures** using real retained evidence; this is explicitly historical, never a simulated live update. Download the PDF brief, CSV or JSON source bundle. The PDF includes the selected records, case interpretation, capture state and complete source appendix.
+Open `http://localhost:3000`, then **Explore an example**, or browse the 41 saved studies. Collections group records by question and describe their study phase, status, enrolment type and planned measurements without combining treatment results. Select up to four studies and open the saved source details. Choose **Check for updates** to compare a saved record with one new public-record check during this visit. The three original studies also offer **Compare two saved versions** using real dated copies; this is not a live update. Download the PDF summary, CSV table or JSON source data. They contain the selected records, labelled interpretation, version state and source details.
 
-Live capture requires internet access to the already approved ClinicalTrials.gov API. Failure leaves the saved brief and replay usable. Capture once per study in the open session; reload starts another session. Exports do not make a new API request.
+Update checks need internet access to the approved ClinicalTrials.gov API. If a check fails, saved records and saved-version comparisons remain available. One new check per study is kept during the visit; reloading starts another visit. Downloads do not request new registry data.
 
 ## How it works
 
 This section is generated from the same content used by the in-product `/how-it-works` page. Run `node scripts/sync-how-it-works.mjs` after editing it; `--check` verifies consistency.
 
 <!-- HOW_IT_WORKS:START -->
-### The question
+### Start with the study records
 
-What changed since this research brief? Synapse Atlas puts selected registered studies, their saved evidence and a fresh exact-NCT-ID lookup into one research workflow. It helps prepare a source-backed discussion; it does not rank treatments or establish commercial opportunity.
+Synapse Atlas helps you explore how selected clinical studies were designed and what they planned to measure. It uses dated copies from ClinicalTrials.gov, a public database of clinical study records. Each record has an NCT ID, a unique study identifier. A record is not automatically a research paper or a report of results. Use Atlas to prepare questions and keep the sources with your summary, not to rank treatments or judge a business opportunity.
 
-### Try the three-minute demo
+### Try the three-minute example
 
-Open a guided research case, or explore the saved research collections. Collections can overlap; they are reading contexts, not pooled cohorts. Filter the catalogue by collection and registry status. Custom briefs and the MAPP design case show every saved primary measure and time frame, grouped by study, with local source disclosure before any current lookup. Compare registered study characteristics and read the sourced interpretation. Choose a study and check the current registry, or run the clearly dated retained-record replay. Download the PDF brief, CSV and evidence bundle.
+Open a guided example, or browse the study collections. Filter the list by collection and study status, then choose up to four studies. Collections can overlap; they are ways to explore a question, not groups whose results should be combined. Read the saved study details and the labelled AI-assisted notes. Open the source details to check the wording. Choose Check for updates, or Compare two saved versions where available. Then download a PDF summary, a CSV table and the JSON source data.
 
-### One captured pair
+### Understand saved copies and update checks
 
-The saved catalogue is validated directly from retained ClinicalTrials.gov records by NCT ID. It needs no programme mapping or review decision. A current lookup is captured once per study in the open session; screen, PDF, CSV and source bundle reuse that pair. Reloading starts a new session. Baselines are never overwritten and live captures are not stored in a database.
+A saved copy is the dated record Atlas starts with. Check for updates gets one new response for the selected NCT ID and keeps it during this visit. It does not continuously monitor the record. Compare two saved versions uses two copies saved earlier; it is not a live update. The page and downloads use the same records and checks. Reloading starts a new visit. The original saved records are never replaced, and new checks are not stored in a database. Study records can be compared without relying on the separate programme-to-study associations.
 
-### Source transformations you can inspect
+### Know what a comparison can tell you
 
-Exact identifier checks, bounded requests, field validation and SHA-256 hashes protect the evidence chain. Original response hashes, exported field-projection hashes, normalized hashes, field locators and transformation/comparator versions distinguish each step. Retrieval time is separate from the registry update date. The downloadable bundle contains the field-limited evidence needed to replay the view; contact fields are omitted. Case bundles also include the specific retained public protocol fields cited by their analysis, including bounded study-purpose text where needed. External reading is separate bibliographic metadata, links and original notes; the linked full documents are not captured or replayable.
+A change in a public record does not show that a treatment works or that a study has made clinical progress. Main planned measurements, also called primary outcomes or endpoints, are not results. Missing information stays missing. If repeated entries cannot be matched reliably, Atlas shows both sources and marks the comparison as uncertain. Dates keep their reported level of detail and their Actual or Estimated labels. ClinicalTrials.gov has its own Record History; Atlas compares the selected saved versions, not the complete history.
 
-### Conservative comparison
+### Check where the information came from
 
-Comparison preserves reported date precision and Actual/Estimated types, missing fields and unknown values. Repeated entries that cannot be aligned reliably are marked ambiguous with both sources. Registered primary endpoints describe planned measurements, not reported findings. ClinicalTrials.gov already provides Record History; this tool is a comparison with an Atlas brief, not a complete official history.
+Source details show the saved wording, the study ID, where each field came from and when the copy was made. That saved date is separate from the public record’s last-update date. Technical checks validate IDs and fields and use SHA-256 checksums to identify the original response, the exported selection of fields and the normalized values separately. Source locations and processing/comparison versions are included. The JSON download contains the fields needed to reconstruct the comparison, including the public protocol fields cited by an example and bounded study-purpose text where needed. Unused contact fields are excluded. Further reading contains separate citation details, links and original notes. The full linked documents are not stored in the brief or included in its saved-record comparison.
 
-### Validation and its limits
+### What has been checked
 
-Automated checks cover retained-record integrity, deterministic transformations, changed and unchanged fields, missing data, partial dates, array ambiguity, mismatched IDs, failed requests and safe exports. Retained official records supply regression evidence; synthetic mutations are test cases, not human gold labels. Observed browser checks cover case navigation, narrow-screen reflow, keyboard controls and downloads. Direct PDF downloads are checked against the matching CSV/source bundle and rendered pages, including saved, replay, current and custom selections. Long fields paginate; unsupported font characters fail explicitly rather than being discarded. These checks do not establish scientific truth or full WCAG conformance.
+Automated tests check saved-record integrity, repeatable processing, changed and unchanged fields, missing information, partial dates, uncertain repeated entries, wrong IDs, failed requests and safe downloads. Tests use retained official records and deliberately altered test cases; these are not human clinical review labels. Browser checks cover example navigation, narrow screens, keyboard controls and downloads. Actual PDFs are compared with their matching CSV and JSON files and inspected as rendered pages for saved records, update checks, saved-version comparisons and custom selections. Long fields continue onto later pages. Unsupported font characters cause an explicit error rather than being discarded. These checks do not establish scientific truth or full accessibility conformance.
 
-### Architecture and trade-offs
+### Inside the application
 
-Next.js, React and TypeScript serve a small immutable catalogue and a bounded ClinicalTrials.gov API adapter. Deterministic comparison runs on a captured evidence pair. No runtime model call, account, vector search or database is required. Case commentary is explicitly labelled AI-assisted interpretation. Catalogue counts describe the selected records and do not pool clinical outcomes. Limiting the scope to selected registered fields makes changes reproducible; it cannot resolve clinical significance or supply a complete pipeline.
+Next.js, React and TypeScript serve the saved study list and a limited ClinicalTrials.gov API connection. Fixed comparison rules run on the two selected record versions. No account, database, vector search or live AI model call is needed. AI-assisted interpretation means Atlas reading notes written with AI assistance, not study findings. Counts describe the selected records; clinical results are not combined. Comparing a limited set of source fields makes the view reproducible, but cannot establish clinical significance or provide a complete drug-development pipeline.
 
 ### Keith’s contribution
 
-Keith Grehan set the research problem, audience and product direction, authorized the scope and reviewed the original three programme associations. The implementation, research support and testing were developed with AI assistance. Ten later programme associations remain model-proposed and approved for inclusion, without a claim of independent scientific review. No adoption, accuracy or time-saving impact is claimed.
+Keith Grehan set the research question, audience and product direction, authorized the scope and reviewed the original three programme-to-study associations. The implementation, research support and testing were developed with AI assistance. Ten later associations remain model-proposed and approved for inclusion; they are not presented as independently reviewed scientific conclusions. No user adoption, accuracy improvement or time saving has been measured.
 <!-- HOW_IT_WORKS:END -->
 
 ## Review the evidence chain

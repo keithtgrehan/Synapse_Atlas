@@ -27,9 +27,9 @@ describe("case-led discovery", () => {
     expect(new Set(catalogue.map((capture) => capture.nctId))).toHaveLength(41);
     expect(memberships).toHaveLength(44);
     expect(new Set(memberships)).toHaveLength(41);
-    expect(html).toContain("41 retained NCT records");
+    expect(html).toContain("41 saved study records");
     expect(html).toContain(
-      "44 collection memberships cover 41 unique retained records",
+      "44 collection entries cover 41 different study records",
     );
     expect(html).toContain('id="research-collections"');
 
@@ -63,7 +63,7 @@ describe("case-led discovery", () => {
       );
       expect(html).toContain(`${count(["unchanged"])} unchanged`);
       expect(html).toContain(
-        `${count(["ambiguous", "not_compared"])} uncompared`,
+        `${count(["ambiguous", "not_compared"])} not compared`,
       );
     }
   });

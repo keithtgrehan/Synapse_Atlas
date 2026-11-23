@@ -28,18 +28,18 @@ export function CasePreview({ caseStudy, index, replays = [] }: { caseStudy: Res
   return (
     <article className={`case-preview case-preview--${index + 1} case-preview--${caseStudy.id}`}>
       <header>
-        <p className="eyebrow">Case {String(index + 1).padStart(2, "0")}</p>
-        <span>{caseStudy.studyIds.length} NCT records · saved {capturedAt}</span>
+        <p className="eyebrow">Example {String(index + 1).padStart(2, "0")}</p>
+        <span>{caseStudy.studyIds.length} study records · saved {capturedAt}</span>
       </header>
       <h3>{caseStudy.title}</h3>
       <p className="case-preview-question">{caseStudy.question}</p>
       <div className="case-visual" role="group" aria-label={`${caseStudy.title}: evidence preview`}>
         {caseStudy.id === "mdd-measurement-window" ? <div className="measure-preview">{caseStudy.studyIds.map((id) => <div key={id}><span>{id}</span><strong>{dimension(caseStudy, "primary-outcome")?.cells.find((cell) => cell.nctId === id)?.value}</strong><time>{dimension(caseStudy, "assessment-window")?.cells.find((cell) => cell.nctId === id)?.value}</time></div>)}</div>
-        : caseStudy.id === "adjunctive-inadequate-response" ? <div className="clock-preview"><p>Separate trial clocks · MADRS</p>{dimension(caseStudy, "madrs-window")?.cells.map((cell) => <div key={cell.nctId}><span>{cell.nctId}</span><div className="clock-track" aria-hidden="true"><i />→<i /></div><strong>{cell.value}</strong></div>)}<small>Different baselines; no shared efficacy axis.</small></div>
-        : caseStudy.id === "registry-change-brief" ? <div className="replay-preview"><p>Retained capture pairs · computed field states</p>{replays.map((diff) => <div key={diff.nctId}><strong>{diff.nctId}</strong><span>{diff.baseline.retrievedAt.slice(0,10)} → {diff.current.retrievedAt.slice(0,10)}</span><div className="replay-counts"><b>{diff.fields.filter(f => ["changed","added","removed"].includes(f.state)).length} changed</b><b>{diff.fields.filter(f => f.state === "unchanged").length} unchanged</b><b>{diff.fields.filter(f => ["ambiguous","not_compared"].includes(f.state)).length} uncompared</b></div></div>)}<small>Capture sequence, not clinical progress. Missing older fields remain uncompared.</small></div>
-        : <div className="measure-preview"><p>PTSD · registered design context</p>{dimension(caseStudy, "phase-enrollment")?.cells.map(cell => <div key={cell.nctId}><span>{cell.nctId}</span><strong>{cell.value}</strong></div>)}<small>Registered enrolment is not necessarily the randomized or analyzed population. No pooled result.</small></div>}
+        : caseStudy.id === "adjunctive-inadequate-response" ? <div className="clock-preview"><p>Different study timelines · MADRS</p>{dimension(caseStudy, "madrs-window")?.cells.map((cell) => <div key={cell.nctId}><span>{cell.nctId}</span><div className="clock-track" aria-hidden="true"><i />→<i /></div><strong>{cell.value}</strong></div>)}<small>The starting points differ. This is not a comparison of treatment effects.</small></div>
+        : caseStudy.id === "registry-change-brief" ? <div className="replay-preview"><p>Two saved versions · record changes</p>{replays.map((diff) => <div key={diff.nctId}><strong>{diff.nctId}</strong><span>{diff.baseline.retrievedAt.slice(0,10)} → {diff.current.retrievedAt.slice(0,10)}</span><div className="replay-counts"><b>{diff.fields.filter(f => ["changed","added","removed"].includes(f.state)).length} changed</b><b>{diff.fields.filter(f => f.state === "unchanged").length} unchanged</b><b>{diff.fields.filter(f => ["ambiguous","not_compared"].includes(f.state)).length} not compared</b></div></div>)}<small>These are record dates, not signs of clinical progress. Information missing from an older copy cannot be compared.</small></div>
+        : <div className="measure-preview"><p>PTSD · study design details</p>{dimension(caseStudy, "phase-enrollment")?.cells.map(cell => <div key={cell.nctId}><span>{cell.nctId}</span><strong>{cell.value}</strong></div>)}<small>The recorded enrolment count may differ from the number assigned to groups or included in the analysis. Results are not combined here.</small></div>}
       </div>
-      <details className="preview-source-values"><summary>Supporting registered fields</summary><dl>
+      <details className="preview-source-values"><summary>See the saved source details</summary><dl>
         {facts.map((fact) => (
           <div key={fact.key}>
             <dt>{fact.label}</dt>
@@ -54,10 +54,10 @@ export function CasePreview({ caseStudy, index, replays = [] }: { caseStudy: Res
         ))}
       </dl></details>
       <p className="case-preview-boundary">
-        <b>Boundary</b> {boundary}.
+        <b>What this comparison cannot tell you</b> {boundary}.
       </p>
       <footer>
-        <Link href={`/studies?case=${caseStudy.id}`} aria-label={`Open case brief: ${caseStudy.title}`}>Open case brief <span aria-hidden="true">→</span></Link>
+        <Link href={`/studies?case=${caseStudy.id}`} aria-label={`Open example: ${caseStudy.title}`}>Open example <span aria-hidden="true">→</span></Link>
         <span>{caseStudy.kicker}</span>
       </footer>
     </article>
@@ -70,8 +70,8 @@ export function FeaturedEvidence({ caseStudy }: { caseStudy: ResearchCase }) {
   return (
     <section className="featured-evidence" aria-labelledby="featured-evidence-title">
       <div className="featured-evidence-head">
-        <p className="eyebrow">Inside the Atlas / 01</p>
-        <span>Source facts</span>
+        <p className="eyebrow">An example / 01</p>
+        <span>From saved study records</span>
       </div>
       <h2 id="featured-evidence-title">{caseStudy.title}</h2>
       <p className="featured-capture">ClinicalTrials.gov · saved {endpoint?.cells[0]?.evidence[0]?.retrievedAt.slice(0, 10) ?? "capture"}</p>
@@ -79,8 +79,8 @@ export function FeaturedEvidence({ caseStudy }: { caseStudy: ResearchCase }) {
       <div className="evidence-ribbon" role="table" aria-label="Registered endpoint and assessment window by study">
         <div className="evidence-column-labels" role="row">
           <span role="columnheader">Record</span>
-          <span role="columnheader">Registered primary measure</span>
-          <span role="columnheader">Assessment window</span>
+          <span role="columnheader">Main planned measurement</span>
+          <span role="columnheader">Planned timing</span>
         </div>
         {caseStudy.studyIds.map((nctId, index) => {
           const measure = endpoint?.cells.find((cell) => cell.nctId === nctId)?.value ?? "Not reported";
@@ -95,7 +95,7 @@ export function FeaturedEvidence({ caseStudy }: { caseStudy: ResearchCase }) {
           );
         })}
       </div>
-      <p className="featured-boundary">Registered endpoints are not reported outcomes. The full case keeps the exact field text and source locators.</p>
+      <p className="featured-boundary">Planned measurements are not study results. Open the example to see the exact source details and what they can tell you.</p>
 
     </section>
   );

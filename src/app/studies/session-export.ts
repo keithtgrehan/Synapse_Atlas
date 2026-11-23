@@ -105,7 +105,7 @@ export function sessionCsv(
         pair.comparatorVersion,
         field.baselineLocators.join("; "),
         "",
-        "Saved evidence only; no current lookup implied.",
+        "Saved copy; not checked again for this row.",
         exportedAt,
         snapshotLimitations,
       ]);

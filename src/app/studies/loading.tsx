@@ -1,10 +1,10 @@
 export default function Loading() {
   return (
     <main id="main-content" className="shell">
-      <p className="eyebrow">Research brief</p>
-      <h1>Opening saved evidence…</h1>
+      <p className="eyebrow">Study comparison</p>
+      <h1>Opening your study records…</h1>
       <p role="status">
-        Validating the retained records and their source hashes.
+        Checking that the saved records match their sources.
       </p>
     </main>
   );

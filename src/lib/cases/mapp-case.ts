@@ -58,16 +58,16 @@ const mapp2Title =
  */
 export const mappCase: ResearchCase = {
   id: "mdma-ptsd-design-context",
-  title: "MDMA-assisted therapy: what changes between the trials?",
-  kicker: "PTSD design context and external reading trail",
+  title: "MDMA-assisted therapy studies: what to check before comparing them",
+  kicker: "Keep the study records and further reading in context",
   question:
-    "MAPP1 and MAPP2 study a similar treatment model. Which population, measurement and therapy-context details must be checked before interpreting their findings together?",
+    "MAPP1 and MAPP2 study a similar treatment model for post-traumatic stress disorder (PTSD). What should we check about the participants, measurements and therapy before reading their findings together?",
   summary:
-    "This guided case keeps two exact-ID PTSD registry records separate from linked reports, a public protocol and regulatory reading context.",
+    "This example compares two saved PTSD study records. Published reports, a public study protocol and regulatory documents appear separately as further reading.",
   studyIds: ["NCT03537014", "NCT04077437"],
   includePrimaryOutcomes: true,
   whyTogether:
-    "The two retained records support a focused design-reading exercise: their official titles, registered primary measure/time-frame pairs and record-level intervention lists can be inspected without treating them as a pooled result.",
+    "The two records let us inspect the study titles, planned measurements and timing, and listed interventions. These details help frame questions about study design; they are not a combined result.",
   dimensions: [
     {
       key: "registered-population",
@@ -97,7 +97,7 @@ export const mappCase: ResearchCase = {
         },
       ],
       interpretation:
-        "The official titles use different severity wording. They do not establish matching eligibility criteria, enrolled populations or analysis populations.",
+        "The official titles describe symptom severity differently. They do not show that the studies used the same entry criteria or that the enrolled groups or analysis groups can be compared.",
     },
     {
       key: "phase-enrollment",
@@ -127,7 +127,7 @@ export const mappCase: ResearchCase = {
         },
       ],
       interpretation:
-        "Registered actual enrolment is not necessarily a randomized, treated, completed or analysis population, and does not make the reports directly comparable.",
+        "The registry lists actual enrolment of 100 and 121. These are not necessarily the counts assigned to treatment groups, treated, completing the study or included in the analysis. They do not make the reports directly comparable.",
     },
     {
       key: "registered-interventions",
@@ -153,13 +153,13 @@ export const mappCase: ResearchCase = {
         },
       ],
       interpretation:
-        "These are record-level intervention lists in retained source order. They do not assign an intervention to an arm, define therapy delivery, or establish a dose, safety profile or treatment effect.",
+        "These are the interventions listed in each record, in their saved order. The lists do not show which group received each intervention, how therapy was delivered, the dose, safety or treatment effects.",
     },
   ],
   takeaways: [
     {
       text:
-        "SOURCE_FACT: Both official titles describe randomized, double-blind, placebo-controlled, multi-site Phase 3 studies, while their severity wording differs.",
+        "SOURCE_FACT: Both official titles describe randomised, double-blind, placebo-controlled, multi-site Phase 3 studies, while their severity wording differs.",
       evidenceClass: "SOURCE_FACT",
       evidence: [
         evidence(sources.mapp1, `${identification}/officialTitle`, mapp1Title),
@@ -168,7 +168,7 @@ export const mappCase: ResearchCase = {
     },
     {
       text:
-        "MODEL_INFERENCE: The saved registry fields support a design-context comparison, not a pooled efficacy, safety, approval or comparability conclusion.",
+        "MODEL_INFERENCE: The saved records help us compare study design. They do not support a combined conclusion about whether treatment works, is safe, is approved or can be compared across the studies.",
       evidenceClass: "MODEL_INFERENCE",
       evidence: [
         evidence(sources.mapp1, `${design}/enrollmentInfo`, {
@@ -193,13 +193,13 @@ export const mappCase: ResearchCase = {
     },
   ],
   cannotEstablish:
-    "This case cannot establish comparable eligibility, randomized or analysis populations, masking performance, psychotherapy contribution, follow-up, safety, benefit, approval status or a combined result.",
+    "These records cannot establish matching entry criteria or comparable groups assigned to treatment or included in the analysis. They do not show how well blinding worked, how much psychotherapy contributed, comparable follow-up, treatment safety or benefit, or approval status. They cannot support a combined result.",
   nextQuestions: [
-    "What do the linked reports and protocol say about the population definitions, analysis sets and assessment time origins?",
-    "Which trial-design and safety questions in the FDA documents remain outside the retained registry projection?",
+    "What do the linked reports and protocol say about population definitions, analysis sets and when assessments began?",
+    "Which trial-design and safety questions in the FDA documents sit outside the retained registry fields?",
   ],
   selectionRationale:
-    "Selected as a separate PTSD design-reading pair because the retained exact-ID records and compact external reading trail show why registry, report, protocol and regulatory materials should not be conflated.",
+    "Selected as a separate PTSD design-reading pair because the retained exact-ID records and compact external reading trail show why registry, report, protocol and regulatory materials need to stay distinct.",
   readingReferences: [
     {
       id: "mapp1-report",
