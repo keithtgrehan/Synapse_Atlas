@@ -10,7 +10,7 @@ Custom briefs expose every saved primary measure and time frame, grouped by stud
 
 The core journey uses 41 immutable saved NCT records independently of programme mappings. Optional programme context retains its original review status. No annotation, clinical adjudication, model training, database or account is required.
 
-Each guided example offers **Explore the comparison**: choose a study detail, compare its study-labelled Atlas summaries, and open the exact saved source fields. Topic selection changes only the view. The complete study matrix remains available through **View all study details**, and every PDF, CSV and JSON brief retains the full case. The print layout is designed to include the full matrix when its screen disclosure is closed; actual print inspection is recorded in the release record. This interaction is a portfolio product hypothesis, not a measured usability improvement.
+Each guided example offers **Explore the comparison**: choose a study detail, compare its study-labelled Atlas summaries, and open the exact saved source fields. Topic selection changes only the view. The complete study matrix remains available through **View all study details**, and every PDF, CSV and JSON brief retains the full case. Browser printing was verified on the three-study MDD example with the screen matrix closed: all five topics remain in the printed brief. Actual print inspection is recorded in the release record. This interaction is a portfolio product hypothesis, not a measured usability improvement.
 
 ## Run the demo
 
