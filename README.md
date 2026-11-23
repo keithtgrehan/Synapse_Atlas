@@ -2,13 +2,15 @@
 
 **What changed in the study record?** Explore saved public records, compare them with a new check, and download a summary with its sources.
 
-[Public site](https://synapse-atlas-theta.vercel.app/) · [Source and release record](CONTROL_ROOM.md) · [Reviewed visual release PR15](https://github.com/keithtgrehan/Synapse_Atlas/pull/15) · [Comparison implementation](src/lib/snapshots/compare.ts)
+[Public site](https://synapse-atlas-theta.vercel.app/) · [Source and release record](CONTROL_ROOM.md) · [Reviewed wording release PR16](https://github.com/keithtgrehan/Synapse_Atlas/pull/16) · [Comparison implementation](src/lib/snapshots/compare.ts)
 
 **The MVP contains 41 saved study records, eight study collections and four guided examples.** The release pairs a dark evergreen editorial entry with warm, readable scientific workspaces, complete saved primary-outcome inspection and direct PDF downloads. A separately captured MAPP1/MAPP2 PTSD design case adds source-linked external reading without pooling outcomes. Publication is authorized; exact validation and deployment revisions are recorded in the control room.
 
 Custom briefs expose every saved primary measure and time frame, grouped by study, with local source inspection before a current lookup. Repeated entries remain separate; missing and unrequested fields are labelled. The same saved view is included in PDF, CSV and JSON. The original Atlas logo/artwork and concise homepage keep the real evidence preview visible; imagery is decorative.
 
 The core journey uses 41 immutable saved NCT records independently of programme mappings. Optional programme context retains its original review status. No annotation, clinical adjudication, model training, database or account is required.
+
+Each guided example offers **Explore the comparison**: choose a study detail, compare its study-labelled Atlas summaries, and open the exact saved source fields. Topic selection changes only the view. The complete study matrix remains available through **View all study details**, and every PDF, CSV and JSON brief retains the full case. Browser printing was verified on the three-study MDD example with the screen matrix closed: all five topics remain in the printed brief. Actual print inspection is recorded in the release record. This interaction is a portfolio product hypothesis, not a measured usability improvement.
 
 ## Run the demo
 
