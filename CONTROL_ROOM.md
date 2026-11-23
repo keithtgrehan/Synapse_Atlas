@@ -19,7 +19,7 @@ active_goal:
   id: G5
   name: Evidence-led research workspace and NCT Snapshot Diff portfolio release
   target_date: 2026-11-19
-  status: in_progress
+  status: completed
 active_sprint:
   id: S2
   dates: 2026-11-19/2026-12-02
@@ -49,13 +49,32 @@ last_completed:
   - PR #8 merged security maintenance at ae1e4d564cc728d14072f623cf4b374e3628ded8 on 2026-09-09; post-merge local checks, main CI, clean production audit, and Preview-only deployment verification passed. S1-05 is Complete.
 next_action:
   task: S2-01
-  instruction: Complete final exact-head checks for PR17 after recording the verified browser print, then normally merge and explicitly publish; verify anonymous access and retain PR16 rollback.
+  instruction: The authorized MVP is published and verified. Use the live MDD example for a three-minute portfolio demonstration; no implementation or release blocker remains.
 blockers: [] # database persistence, manual annotation and clinical adjudication are outside this release
 
 ```
 
 
-## Active iteration — Explore the comparison, 23 November 2026
+## Repository documentation update — 23 November 2026
+
+Keith requested an updated repository and README after the published MVP. The isolated `codex/readme-release-summary` branch starts from current main `53ecde2e112fdf17b1c7ec04753db1afb52efffc`; canonical and prior-worktree changes remain preserved. Scope is README presentation and the existing control-room release record only. The README now leads with the live comparison, current reviewed screenshots, four-case guide, local setup and evidence limits; the generated How it works block is preserved verbatim and remains synchronized. The completed PR17 evidence below is promoted from the existing local record, without unrelated canonical changes.
+
+Documentation validation covers relative links/images, generated-block identity and synchronization, Markdown/diff review and normal PR CI. Existing product evidence is explicitly dated and is not presented as newly repeated browser/PDF testing. Independent README/release-truth review is required before merge. A documentation-only merge leaves the live product at PR17 revision `53ecde2e112fdf17b1c7ec04753db1afb52efffc`; no new production deployment is needed.
+
+## Completed release — Explore the comparison, 23 November 2026
+
+**Goal:** G5 / S2-01 — complete the authorized original-design, expanded-catalogue and interactive-comparison MVP through live publication.
+**Completed:** [PR17](https://github.com/keithtgrehan/Synapse_Atlas/pull/17) merged normally as `53ecde2e112fdf17b1c7ec04753db1afb52efffc` from reviewed head `421dac7550bd91195b5bdded15a21b0cab9bee6d`. Explicit production `dpl_AHMWaQ4V3NvwyEsF4r2H6a2tFGDT` is READY at [the public site](https://synapse-atlas-theta.vercel.app/) with that exact merged revision. The four guided examples now support 13 focused topics, saved-source inspection and a separately complete print matrix. All 41 studies, eight collections and full exports remain available.
+**Files changed:** Six comparison/evidence/matrix/style/test files, README, existing design-review MD, control room and three reviewed screenshots. The final commit changed documentation only; data, case content and hashes, capture/comparison/export models, dependencies and original design identity remain unchanged.
+**Tests/checks:** Full check passes 198 tests / 32 files, lint, types, Drizzle and production build. Independent science/export, graphic/UI/UX and rendered responsive reviews pass. All 13 topics across four cases, defaults/reset, exact source expansion, keyboard, custom selection and 1440/768/390/320px reflow were observed. Exact-head CI and protected Preview `dpl_5UjVSbEzEfARz8R2nQN7ZQg9CQRv` pass. Actual browser Print brief is seven pages with all five MDD topics and three NCT columns despite a closed screen matrix and a non-default topic. It passes 115 value/source/identity checks and independent all-page visual inspection. The initially reported page-6 overlap was explicitly retracted after direct reinspection; no code fix was warranted. Actual current JSON reconstructs offline on the integration; prior saved/current/replay PDF/CSV/JSON checks remain valid for unchanged export modules. All 17 anonymous portfolio routes return 200 and all four serve the new focus view. Published MDD topic change/source expansion preserve the URL; no captured browser warning/error or production error/fatal log in the verification window.
+**Source/legal evidence:** Previously approved dated ClinicalTrials.gov records and original cited research synthesis only. No competitor branding, proprietary assets, private career files, new source ingestion or treatment-effect claims were introduced.
+**Decisions:** Finished the accepted bounded MVP; no new feature backlog. User-assisted saving resolved native print access. Preview protection remains `prod_deployment_urls_and_all_previews`; automatic main production deployment remains disabled. The preceding READY PR16 deployment `dpl_GVF218WiFJ1J1DrZGmr4qkw8UBj9`, source `62d7a5e081f065d63acc56a7564fbe05294aa0f6`, is rollback; use the Vercel rollback action for that deployment if a release regression requires restoration.
+**Known risks:** Dated convenience sample, not complete coverage or pooled results. Agent review is not clinical adjudication or full accessibility certification. Actual printing was sampled on the widest five-topic MDD case in Chrome, not every browser/printer. Optional database health still reports missing configuration; the demonstrated MVP has no database dependency.
+**Blocked:** None.
+**Next highest-impact task:** Use the published MDD example for the three-minute portfolio demonstration. No further implementation or release permission is pending.
+**Control-room update:** Complete locally after public verification; this post-release evidence record does not change the deployed revision. Canonical dirty records and unrelated duplicate files remain preserved. Delivery ZIP: `../output/synapse-atlas-comparison-mvp-2026-11-23.zip` (739,251 bytes; SHA256 `fac79dceccb85351408458f322808c9a39188a6c58e8c611bfcc2b2721f958a2`) with cited research/optimized prompts, screenshots, actual print, current MAPP exports and exact release/rollback metadata.
+
+## Implementation record — Explore the comparison, 23 November 2026
 
 **Authority/finish line:** Keith authorized the research-led comparison upgrade and live publication, reaffirmed on 23 November. Lead worktree `../worktrees/comparison-focus-release`, branch `codex/comparison-focus`, starts from published PR16 merge `62d7a5e081f065d63acc56a7564fbe05294aa0f6`. Integrate the independently reviewed six-file preparation, preserve all saved records and exports, validate actual interactions and printing, pass full checks/exact-head CI/protected Preview, then normally merge and explicitly publish. Current production `dpl_GVF218WiFJ1J1DrZGmr4qkw8UBj9` is the rollback target. No additional release consent is missing.
 

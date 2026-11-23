@@ -1,33 +1,89 @@
 # Synapse Atlas
 
-**What changed in the study record?** Explore saved public records, compare them with a new check, and download a summary with its sources.
+Explore how selected clinical studies were designed, inspect their saved source fields, and check what changed between record versions. Synapse Atlas turns those observations into a downloadable research brief with its evidence attached.
 
-[Public site](https://synapse-atlas-theta.vercel.app/) · [Source and release record](CONTROL_ROOM.md) · [Reviewed wording release PR16](https://github.com/keithtgrehan/Synapse_Atlas/pull/16) · [Comparison implementation](src/lib/snapshots/compare.ts)
+[Live site](https://synapse-atlas-theta.vercel.app/) · [Try the guided comparison](https://synapse-atlas-theta.vercel.app/studies?case=mdd-measurement-window) · [Latest product release: PR17](https://github.com/keithtgrehan/Synapse_Atlas/pull/17) · [Release record](CONTROL_ROOM.md)
 
-**The MVP contains 41 saved study records, eight study collections and four guided examples.** The release pairs a dark evergreen editorial entry with warm, readable scientific workspaces, complete saved primary-outcome inspection and direct PDF downloads. A separately captured MAPP1/MAPP2 PTSD design case adds source-linked external reading without pooling outcomes. Publication is authorized; exact validation and deployment revisions are recorded in the control room.
+**41 saved study records · 8 collections · 4 guided examples · 13 comparison topics**
 
-Custom briefs expose every saved primary measure and time frame, grouped by study, with local source inspection before a current lookup. Repeated entries remain separate; missing and unrequested fields are labelled. The same saved view is included in PDF, CSV and JSON. The original Atlas logo/artwork and concise homepage keep the real evidence preview visible; imagery is decorative.
+![Desktop comparison showing study-detail controls, dated study cards and saved-source inspection](docs/screenshots/comparison-focus/comparison-desktop-final.jpg)
 
-The core journey uses 41 immutable saved NCT records independently of programme mappings. Optional programme context retains its original review status. No annotation, clinical adjudication, model training, database or account is required.
+## Try it in three minutes
 
-Each guided example offers **Explore the comparison**: choose a study detail, compare its study-labelled Atlas summaries, and open the exact saved source fields. Topic selection changes only the view. The complete study matrix remains available through **View all study details**, and every PDF, CSV and JSON brief retains the full case. Browser printing was verified on the three-study MDD example with the screen matrix closed: all five topics remain in the printed brief. Actual print inspection is recorded in the release record. This interaction is a portfolio product hypothesis, not a measured usability improvement.
+1. Open the [depression-study example](https://synapse-atlas-theta.vercel.app/studies?case=mdd-measurement-window). Under **Explore the comparison**, choose a study detail such as the planned measurement or its time frame.
+2. Compare the study-labelled cards, then open **See the saved source details** for the exact wording, saved date and official record link. Cards are authored Atlas summaries; the reading note is labelled AI-assisted.
+3. Open **View all study details**, or keep the complete brief as a PDF, CSV table or JSON source bundle. Changing the selected topic changes only the view; the downloads retain the full case.
 
-## Run the demo
+For a custom brief, [browse the catalogue](https://synapse-atlas-theta.vercel.app/catalogue), filter by collection or status and select up to four studies. **Check for updates** compares a saved record with one fresh ClinicalTrials.gov check per study during the visit. The three original records also support **Compare two saved versions**, which works from retained copies without a new registry request.
 
-Use Node.js 22 and pnpm 10.18.3:
+## Guided examples
+
+| Example | Question to explore |
+| --- | --- |
+| [Depression: measure and timing](https://synapse-atlas-theta.vercel.app/studies?case=mdd-measurement-window) | How do the registered primary measurements and assessment windows differ? |
+| [Add-on depression studies](https://synapse-atlas-theta.vercel.app/studies?case=adjunctive-inadequate-response) | What changes when studies use the same scale but define baseline and timing differently? |
+| [Two saved record versions](https://synapse-atlas-theta.vercel.app/studies?case=registry-change-brief) | What can a comparison of two dated copies establish, and what remains unknown? |
+| [MDMA-assisted therapy / PTSD](https://synapse-atlas-theta.vercel.app/studies?case=mdma-ptsd-design-context) | Which population and study-design details should be checked before comparing MAPP1 and MAPP2? |
+
+[320px comparison](docs/screenshots/comparison-focus/comparison-mobile-320.jpg) · [390px MAPP example](docs/screenshots/comparison-focus/comparison-mapp-mobile-390.jpg)
+
+## Evidence and limits
+
+The catalogue is a selected, dated sample of official ClinicalTrials.gov records. The expansion preserved the original 13 records, added 26, then added two separately contextualized PTSD records. Collections can overlap; their counts do not represent complete market coverage or pooled results.
+
+Saved copies remain immutable. Source disclosures retain exact field wording, NCT identifiers, capture dates and field locations; JSON bundles preserve source projections and integrity hashes for offline reconstruction. Official links may show later information. A live check stays in the current visit, and downloads make no additional registry request. Missing or ambiguous fields remain explicit.
+
+Registered plans are not treatment results. Atlas supports research questions, not clinical decisions, treatment rankings or a complete record history. No patient data, account, database or live AI model call is needed for the demonstrated workflow.
+
+## What was verified
+
+For the product release on **23 November 2026**:
+
+- **198 tests across 32 files**, lint, strict types, migration consistency and production build passed, followed by exact-head CI and protected Preview checks.
+- All **13 topics across four examples** were exercised, including case reset, keyboard selection, source disclosure, custom study selection and layouts at 1440, 768, 390 and 320 pixels.
+- The actual **seven-page Chrome print** of the widest MDD example passed **115 content/identity checks** and visual review: all five topics and three study columns print with the on-screen matrix closed. Saved/current/replay exports retain their validated evidence, and an actual current JSON bundle reconstructs offline.
+- **17 anonymous public routes** passed after publication. No browser warning/error or production error/fatal log was captured during that verification window.
+
+Scientific, graphic-design, UI and UX reviews were agent-assisted. They are not clinical adjudication or full accessibility certification. Print inspection covers the observed MDD/Chrome sample; user adoption, accuracy improvement and time savings have not been measured. Exact revisions, deployment evidence and rollback are in [CONTROL_ROOM.md](CONTROL_ROOM.md).
+
+## Run locally
+
+Use **Node.js 22** and **pnpm 10.18.3** from a repository checkout:
 
 ```sh
 pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-Open `http://localhost:3000`, then **Explore an example**, or browse the 41 saved studies. Collections group records by question and describe their study phase, status, enrolment type and planned measurements without combining treatment results. Select up to four studies and open the saved source details. Choose **Check for updates** to compare a saved record with one new public-record check during this visit. The three original studies also offer **Compare two saved versions** using real dated copies; this is not a live update. Download the PDF summary, CSV table or JSON source data. They contain the selected records, labelled interpretation, version state and source details.
+Open [localhost:3000](http://localhost:3000). Saved records and retained-version comparisons need no credentials or database setup. Fresh update checks require internet access to the approved ClinicalTrials.gov API; a failed check leaves saved records available. The optional database-health endpoint reports missing configuration when no database is configured.
 
-Update checks need internet access to the approved ClinicalTrials.gov API. If a check fails, saved records and saved-version comparisons remain available. One new check per study is kept during the visit; reloading starts another visit. Downloads do not request new registry data.
+```sh
+pnpm check
+node scripts/sync-how-it-works.mjs --check
+```
 
-## How it works
+`pnpm check` runs lint, types, tests, Drizzle consistency and the production build. The separate shared-document check keeps this README's detailed explanation aligned with the app.
 
-This section is generated from the same content used by the in-product `/how-it-works` page. Run `node scripts/sync-how-it-works.mjs` after editing it; `--check` verifies consistency.
+## Explore the implementation
+
+Next.js, React and TypeScript serve the catalogue and interactive brief. Deterministic comparison rules produce the version differences; jsPDF generates the downloadable PDF from the same selected records and case used by CSV/JSON.
+
+- [Catalogue and captures](src/lib/snapshots/catalogue.ts) · [comparison rules](src/lib/snapshots/compare.ts) · [bounded ClinicalTrials.gov client](src/lib/sources/clinicaltrials/client.ts)
+- [Focused comparison](src/app/studies/comparison-focus.tsx) · [case evidence](src/lib/cases/load.ts) · [session exports](src/app/studies/session-export.ts)
+- [Research, original design rationale and optimized prompts](docs/competitive-design-review.md) · [release and design history](CONTROL_ROOM.md)
+
+The public product is the PR17 release, revision `53ecde2e112fdf17b1c7ec04753db1afb52efffc`. Preview protection remains enabled, and [repository policy](vercel.json) disables automatic production deployment from `main`. Documentation-only updates do not require a product redeploy.
+
+## Contribution
+
+Keith Grehan set the research question, audience and product direction, authorized the scope, and reviewed the original three programme-to-study associations. Implementation, research support, testing and specialist reviews were developed with AI assistance. Ten later programme associations retain their model-proposed status; the NCT-first study workflow does not depend on those associations.
+
+## Detailed product explanation
+
+The following section is generated from [the app's shared content](src/lib/product/how-it-works.ts). Edit that source, then run `node scripts/sync-how-it-works.mjs`; use `--check` to verify synchronization.
+
+<details>
+<summary>Read how records, update checks, evidence and exports work</summary>
 
 <!-- HOW_IT_WORKS:START -->
 ### Start with the study records
@@ -63,41 +119,4 @@ Next.js, React and TypeScript serve the saved study list and a limited ClinicalT
 Keith Grehan set the research question, audience and product direction, authorized the scope and reviewed the original three programme-to-study associations. The implementation, research support and testing were developed with AI assistance. Ten later associations remain model-proposed and approved for inclusion; they are not presented as independently reviewed scientific conclusions. No user adoption, accuracy improvement or time saving has been measured.
 <!-- HOW_IT_WORKS:END -->
 
-## Review the evidence chain
-
-```text
-Immutable retained NCT snapshots ─┐
-                                 ├─ Captured pair → semantic comparison → screen / PDF / CSV
-One bounded exact-ID API capture ─┘                                     └→ replayable source bundle
-```
-
-- [Catalogue and capture validation](src/lib/snapshots/catalogue.ts) — exact IDs, source policy, preserved source hashes and safe field projections; no programme dependency.
-- [Comparator](src/lib/snapshots/compare.ts) — missing/removed/unchanged/ambiguous fields, date precision and type, conservative repeated entries.
-- [Session exports](src/app/studies/session-export.ts) — all selected saved studies and displayed evidence pairs, with safe CSV cells.
-- [Client](src/lib/sources/clinicaltrials/client.ts) — host/path restrictions, bounded response, timeout, bounded retry and redirect denial.
-- [Retained baseline sources](data/comparison/2026-10-13/manifest.json) and [ten further registry captures](data/study-examples/v1/catalog.json).
-
-The original-response hash identifies the source capture. The field-projection hash verifies the evidence included in the bundle. Normalized values and comparator versions describe subsequent transformations. Hashes establish integrity, not scientific correctness. Registry strings render as text; potentially executable CSV cells receive a leading apostrophe.
-
-## Validation and release
-
-```sh
-pnpm check
-node scripts/sync-how-it-works.mjs --check
-```
-
-`pnpm check` runs lint, strict types, unit/integration tests, migration consistency and production build. Current observed results and browser evidence are recorded in [CONTROL_ROOM.md](CONTROL_ROOM.md); historical counts are not fresh validation.
-
-The existing Drizzle schema is optional future infrastructure; no database is needed for the demonstrated workflow. Direct PDF export dynamically loads jsPDF4.2.1 (MIT) and bundled Noto Sans fonts (SIL OFL1.1); it makes no registry request. The source integration remains unchanged.
-
-Production target remains the existing Vercel project `synapse-atlas` and [public alias](https://synapse-atlas-theta.vercel.app/). [Version-controlled policy](vercel.json) disables automatic production deployment from `main`. Keith authorized the reviewed PR merge and explicit public deployment. Preview protection remains enabled. The verified prior production deployment is the rollback target, recorded in the control room.
-
-## Screenshots and demo script
-
-Current test counts and the final checked revision are recorded in the control room. See the [competitive design review](docs/competitive-design-review.md), [desktop home](docs/screenshots/home.png), [tablet research brief](docs/screenshots/research-tablet.png) and [narrow research brief](docs/screenshots/research-mobile.png). Direct PDF downloads are validated by text/source comparison and page rendering; browser printing remains a separate optional control. The [current home](docs/screenshots/home-mapp-desktop.png), [MAPP case](docs/screenshots/mapp-case-desktop.png) and [320px source inspection](docs/screenshots/mapp-outcome-mobile.png) show the final additive case. The three-minute script is the shared “Try the three-minute demo” section above. No user adoption, scientific accuracy or time-saving metrics are asserted.
-
-The case-led iteration adds distinct measurement, trial-clock and computed replay previews; seven manifest-derived research starting points; and a shared saved/current/replay state for the brief and export. See [before](docs/screenshots/home-before-case-led.png), [after](docs/screenshots/home-case-led.png), [case previews](docs/screenshots/cases-case-led.png) and [mobile](docs/screenshots/home-case-led-mobile.png).
-
-The Light Scientific Workstation iteration uses the [research and optimized implementation brief](docs/competitive-design-review.md), with [desktop](docs/screenshots/home-workstation.png), [mobile](docs/screenshots/home-workstation-mobile.png) and [research workspace](docs/screenshots/brief-workstation-tablet.png) evidence. It learns from public scientific/data-tool interface patterns while retaining original Atlas identity. Reviews are agent-assisted, not human certification.
-
-The Precision Atlas redesign applies original composition learned from public SaaS and biomed references: [research and optimized brief](docs/competitive-design-review.md), [desktop home](docs/screenshots/precision-atlas/home-desktop.png), [mobile home](docs/screenshots/precision-atlas/home-mobile.png), [research brief](docs/screenshots/precision-atlas/brief-desktop.png) and [catalogue](docs/screenshots/precision-atlas/catalogue-desktop.png). Independent art-direction, UI and frontend agent reviews passed; actual release checks are recorded in CONTROL_ROOM.
+</details>
